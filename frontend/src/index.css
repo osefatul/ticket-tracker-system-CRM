@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* If we want to apply tailwind on to the body of the app */
+@layer base {
+  /* body {
+    @apply bg-slate-800
+  } */
+}
