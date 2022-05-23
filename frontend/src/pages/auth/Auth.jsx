@@ -14,9 +14,11 @@ const initialState = {
 function Auth() {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(true);
+  const [ResetPassword, setResetPassword] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
+    // console.log(form);
   };
 
   const handleSubmit = async (e) => {
@@ -43,15 +45,24 @@ function Auth() {
     // window.location.reload();
   };
 
-  const switchMode = () => {
+  const SignUpSwitchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
+  };
+  const ResetPasswordSwitchMode = () => {
+    // setResetPassword((prevResetPassword) => !prevResetPassword);
+    setResetPassword(true);
+  };
+
+  const BacktoLogin = () => {
+    setResetPassword(false);
+    setIsSignup(true);
   };
 
   return (
     <div className="h-screen flex items-center justify-center">
       <div className="space-y-3">
         <p className="text-green-800 font-bold text-[35px] flex items-center justify-center">
-          {isSignup ? "Sign up" : "Sign in"}
+          {ResetPassword ? "Reset Password" : isSignup ? "Sign up" : "Sign in"}
         </p>
         <form
           className="space-y-4 flex flex-col justify-center items-center"
@@ -69,7 +80,9 @@ function Auth() {
             />
           </div>
 
-          {isSignup && (
+          {ResetPassword ? (
+            ""
+          ) : isSignup ? (
             <div className="">
               <label htmlFor="username">Username</label>
               <input
@@ -81,53 +94,82 @@ function Auth() {
                 required
               />
             </div>
+          ) : (
+            ""
           )}
-          <div className="">
-            <label htmlFor="password">Password</label>
-            <input
-              className=" placeholder:italic placeholder:pl-1 placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-              name="password"
-              type="password"
-              placeholder="Password"
-              onChange={handleChange}
-              required
-            />
-          </div>
-          {isSignup && (
+
+          {ResetPassword ? (
+            ""
+          ) : (
             <div className="">
-              <label htmlFor="confirmPassword">Confirm Password</label>
+              <label htmlFor="password">Password</label>
               <input
-                className="placeholder:italic placeholder:pl-1 placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-                name="confirmPassword"
+                className=" placeholder:italic placeholder:pl-1 placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                name="password"
                 type="password"
-                placeholder="Confirm Password"
+                placeholder="Password"
                 onChange={handleChange}
                 required
               />
             </div>
           )}
+
+          {ResetPassword
+            ? ""
+            : isSignup && (
+                <div className="">
+                  <label htmlFor="confirmPassword">Confirm Password</label>
+                  <input
+                    className="placeholder:italic placeholder:pl-1 placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                    name="confirmPassword"
+                    type="password"
+                    placeholder="Confirm Password"
+                    onChange={handleChange}
+                    required
+                  />
+                </div>
+              )}
+
           <div className="border rounded-lg w-32 bg-green-900">
             <button className="mx-auto flex items-center justify-center">
-              {isSignup ? "Sign Up" : "Sign In"}
+              {ResetPassword
+                ? "Reset Password"
+                : isSignup
+                ? "Sign Up"
+                : "Sign In"}
             </button>
           </div>
         </form>
-        {isSignup ? (
+
+        {ResetPassword ? (
+          <div className="text-[12px] text-sky-500 flex items-center justify-center">
+            <a href="#!" onclick={BacktoLogin}>
+              Login Now
+            </a>
+          </div>
+        ) : isSignup ? (
           ""
         ) : (
           <div className="text-[12px] text-sky-500 flex items-center justify-center">
-            <a href="#!">Forget Password?</a>
+            <a href="#!" onClick={ResetPasswordSwitchMode}>
+              Forget Password?
+            </a>
           </div>
         )}
 
-        <div className="">
-          <p>
-            {isSignup ? "Already have an account?" : "Don't have an account?"}
-            <span className="text-sky-500 cursor-pointer" onClick={switchMode}>
-              {isSignup ? " Sign in" : " Sign up"}
-            </span>
-          </p>
-        </div>
+        {!ResetPassword && (
+          <div className="">
+            <p>
+              {isSignup ? "Already have an account?" : "Don't have an account?"}
+              <span
+                className="text-sky-500 cursor-pointer"
+                onClick={SignUpSwitchMode}
+              >
+                {isSignup ? "Sign in" : " Sign up"}
+              </span>
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
