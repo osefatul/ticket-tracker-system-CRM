@@ -51,7 +51,7 @@ function Auth() {
     <div className="h-screen flex items-center justify-center">
       <div className="space-y-3">
         <p className="text-green-800 font-bold text-[35px] flex items-center justify-center">
-          {isSignup ? "Sign Up" : "Sign In"}
+          {isSignup ? "Sign up" : "Sign in"}
         </p>
         <form
           className="space-y-4 flex flex-col justify-center items-center"
@@ -62,7 +62,7 @@ function Auth() {
             <input
               className="placeholder:italic placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm placeholder:pl-1 "
               name="email"
-              type="text"
+              type="email"
               placeholder="Email@gmail.com"
               onChange={handleChange}
               required
@@ -123,8 +123,8 @@ function Auth() {
         <div className="">
           <p>
             {isSignup ? "Already have an account?" : "Don't have an account?"}
-            <span className="text-blue-900 cursor-pointer" onClick={switchMode}>
-              {isSignup ? " Sign In" : " Sign Up"}
+            <span className="text-sky-500 cursor-pointer" onClick={switchMode}>
+              {isSignup ? " Sign in" : " Sign up"}
             </span>
           </p>
         </div>
