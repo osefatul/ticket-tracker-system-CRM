@@ -5,12 +5,10 @@ import React, { useState } from "react";
 // const cookies = new Cookies();
 
 const initialState = {
-  fullName: "",
+  email: "",
   username: "",
   password: "",
   confirmPassword: "",
-  phoneNumber: "",
-  avatarURL: "",
 };
 
 function Auth() {
@@ -23,7 +21,8 @@ function Auth() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { username, password, phoneNumber, avatarURL } = form;
+    const { email, username, password } = form;
+    console.log(email, username, password);
 
     //  const {
     //   data: { token, userId, hashedPassword, fullName },
@@ -41,7 +40,7 @@ function Auth() {
     //   cookies.set("avatarURL", avatarURL);
     //   cookies.set("hashedPassword", hashedPassword);
     // }
-    window.location.reload();
+    // window.location.reload();
   };
 
   const switchMode = () => {
@@ -50,7 +49,7 @@ function Auth() {
 
   return (
     <div className="h-screen flex items-center justify-center">
-      <div className="space-y-4">
+      <div className="space-y-3">
         <p className="text-green-800 font-bold text-[35px] flex items-center justify-center">
           {isSignup ? "Sign Up" : "Sign In"}
         </p>
@@ -58,35 +57,35 @@ function Auth() {
           className="space-y-4 flex flex-col justify-center items-center"
           onSubmit={handleSubmit}
         >
+          <div className=" ">
+            <label htmlFor="fullName">Email</label>
+            <input
+              className="placeholder:italic placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm placeholder:pl-1 "
+              name="email"
+              type="text"
+              placeholder="Email@gmail.com"
+              onChange={handleChange}
+              required
+            />
+          </div>
+
           {isSignup && (
-            <div className=" ">
-              <label htmlFor="fullName">Full Name</label>
+            <div className="">
+              <label htmlFor="username">Username</label>
               <input
-                className="border-1 placeholder:italic placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-                name="fullName"
+                className=" placeholder:italic placeholder:text-slate-400  text-slate-700 block bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm placeholder:pl-1"
+                name="username"
                 type="text"
-                placeholder="Full Name"
+                placeholder="Username"
                 onChange={handleChange}
                 required
               />
             </div>
           )}
           <div className="">
-            <label htmlFor="username">Username</label>
-            <input
-              className="border-1 placeholder:italic placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
-              name="username"
-              type="text"
-              placeholder="Username"
-              onChange={handleChange}
-              required
-            />
-          </div>
-
-          <div className="">
             <label htmlFor="password">Password</label>
             <input
-              className="border-1 placeholder:italic placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+              className=" placeholder:italic placeholder:pl-1 placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
               name="password"
               type="password"
               placeholder="Password"
@@ -98,7 +97,7 @@ function Auth() {
             <div className="">
               <label htmlFor="confirmPassword">Confirm Password</label>
               <input
-                className="border-1 placeholder:italic placeholder:text-slate-400 block bg-white border border-slate-300 rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                className="placeholder:italic placeholder:pl-1 placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
                 name="confirmPassword"
                 type="password"
                 placeholder="Confirm Password"
@@ -113,10 +112,18 @@ function Auth() {
             </button>
           </div>
         </form>
+        {isSignup ? (
+          ""
+        ) : (
+          <div className="text-[12px] text-sky-500 flex items-center justify-center">
+            <a href="#!">Forget Password?</a>
+          </div>
+        )}
+
         <div className="">
           <p>
             {isSignup ? "Already have an account?" : "Don't have an account?"}
-            <span className="text-blue-900" onClick={switchMode}>
+            <span className="text-blue-900 cursor-pointer" onClick={switchMode}>
               {isSignup ? " Sign In" : " Sign Up"}
             </span>
           </p>
