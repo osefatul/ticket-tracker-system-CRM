@@ -57,7 +57,7 @@ function Auth() {
   //this will bring user back to signup page
   const BacktoLogin = () => {
     setResetPassword(false);
-    setIsSignup(true);
+    setIsSignup(false);
     // window.location.reload();
   };
 
@@ -77,10 +77,17 @@ function Auth() {
           }`}
           onSubmit={handleSubmit}
         >
-          <div className=" ">
-            <label htmlFor="fullName">Email</label>
+          <div>
+            <label
+              className={`${resetPassword ? "mb-2" : ""}`}
+              htmlFor="fullName"
+            >
+              Email
+            </label>
             <input
-              className="placeholder:italic placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm placeholder:pl-1 "
+              className={`placeholder:italic placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm placeholder:pl-1 ${
+                resetPassword ? "mt-2" : ""
+              }`}
               name="email"
               type="email"
               placeholder="Email@gmail.com"
