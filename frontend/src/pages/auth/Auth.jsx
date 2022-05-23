@@ -14,7 +14,7 @@ const initialState = {
 function Auth() {
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(true);
-  const [ResetPassword, setResetPassword] = useState(false);
+  const [resetPassword, setResetPassword] = useState(false);
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -45,6 +45,7 @@ function Auth() {
     // window.location.reload();
   };
 
+  // SWITCH FUNCTION
   const SignUpSwitchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
   };
@@ -53,19 +54,27 @@ function Auth() {
     setResetPassword(true);
   };
 
+  //this will bring user back to signup page
   const BacktoLogin = () => {
     setResetPassword(false);
     setIsSignup(true);
+    // window.location.reload();
   };
 
   return (
     <div className="h-screen flex items-center justify-center">
       <div className="space-y-3">
-        <p className="text-green-800 font-bold text-[35px] flex items-center justify-center">
-          {ResetPassword ? "Reset Password" : isSignup ? "Sign up" : "Sign in"}
+        <p
+          className={`text-green-800 font-bold text-[35px] flex items-center justify-center ${
+            resetPassword ? "mb-2" : " "
+          }`}
+        >
+          {resetPassword ? "Reset Password" : isSignup ? "Sign up" : "Sign in"}
         </p>
         <form
-          className="space-y-4 flex flex-col justify-center items-center"
+          className={`space-y-4 ${
+            resetPassword ? "" : "flex flex-col justify-center items-center"
+          }`}
           onSubmit={handleSubmit}
         >
           <div className=" ">
@@ -80,7 +89,7 @@ function Auth() {
             />
           </div>
 
-          {ResetPassword ? (
+          {resetPassword ? (
             ""
           ) : isSignup ? (
             <div className="">
@@ -98,7 +107,7 @@ function Auth() {
             ""
           )}
 
-          {ResetPassword ? (
+          {resetPassword ? (
             ""
           ) : (
             <div className="">
@@ -114,7 +123,7 @@ function Auth() {
             </div>
           )}
 
-          {ResetPassword
+          {resetPassword
             ? ""
             : isSignup && (
                 <div className="">
@@ -132,7 +141,7 @@ function Auth() {
 
           <div className="border rounded-lg w-32 bg-green-900">
             <button className="mx-auto flex items-center justify-center">
-              {ResetPassword
+              {resetPassword
                 ? "Reset Password"
                 : isSignup
                 ? "Sign Up"
@@ -141,9 +150,9 @@ function Auth() {
           </div>
         </form>
 
-        {ResetPassword ? (
-          <div className="text-[12px] text-sky-500 flex items-center justify-center">
-            <a href="#!" onclick={BacktoLogin}>
+        {resetPassword ? (
+          <div className="text-[12px] text-sky-500 ">
+            <a href="#!" onClick={BacktoLogin}>
               Login Now
             </a>
           </div>
@@ -157,7 +166,7 @@ function Auth() {
           </div>
         )}
 
-        {!ResetPassword && (
+        {!resetPassword && (
           <div className="">
             <p>
               {isSignup ? "Already have an account?" : "Don't have an account?"}
@@ -165,7 +174,7 @@ function Auth() {
                 className="text-sky-500 cursor-pointer"
                 onClick={SignUpSwitchMode}
               >
-                {isSignup ? "Sign in" : " Sign up"}
+                {isSignup ? " Sign in" : " Sign up"}
               </span>
             </p>
           </div>
