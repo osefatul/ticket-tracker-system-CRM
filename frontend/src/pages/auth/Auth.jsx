@@ -45,7 +45,7 @@ function Auth() {
     // window.location.reload();
   };
 
-  // SWITCH FUNCTION
+  //########## SWITCH FUNCTIONS ##################################################################
   const SignUpSwitchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
   };
@@ -60,6 +60,7 @@ function Auth() {
     setIsSignup(false);
     // window.location.reload();
   };
+  //###############################################################################################
 
   return (
     <div className="h-screen flex items-center justify-center">
@@ -85,7 +86,9 @@ function Auth() {
               Email
             </label>
             <input
-              className={`placeholder:italic placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm placeholder:pl-1 ${
+              className={`placeholder:italic placeholder:text-slate-400 placeholder:pl-1
+              block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+              focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1   ${
                 resetPassword ? "mt-2" : ""
               }`}
               name="email"
@@ -102,7 +105,9 @@ function Auth() {
             <div className="">
               <label htmlFor="username">Username</label>
               <input
-                className=" placeholder:italic placeholder:text-slate-400  text-slate-700 block bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm placeholder:pl-1"
+                className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-1
+                block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+                focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
                 name="username"
                 type="text"
                 placeholder="Username"
@@ -120,7 +125,9 @@ function Auth() {
             <div className="">
               <label htmlFor="password">Password</label>
               <input
-                className=" placeholder:italic placeholder:pl-1 placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-1
+                block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+                focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
                 name="password"
                 type="password"
                 placeholder="Password"
@@ -136,7 +143,9 @@ function Auth() {
                 <div className="">
                   <label htmlFor="confirmPassword">Confirm Password</label>
                   <input
-                    className="placeholder:italic placeholder:pl-1 placeholder:text-slate-400 block text-slate-700 bg-white rounded-md shadow-sm focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 sm:text-sm"
+                    className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-1
+                    block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+                    focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
                     name="confirmPassword"
                     type="password"
                     placeholder="Confirm Password"
