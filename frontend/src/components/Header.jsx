@@ -5,16 +5,13 @@ function Header() {
   const [toggle, setToggle] = useState(false);
 
   return (
-    <div className=" bg-violet-900 flex items-center justify-between px-8 h-[50px] z-40">
-      <div className="font-bold text-lg">WDK-CRM</div>
+    <div className=" bg-slate-900 flex items-center justify-between px-8 h-[50px] z-40">
+      <div className="font-bold text-[15px]">WDK-CRM</div>
 
       <div className="">
-        <ul className="hidden sm:flex items-center justify-center text-white space-x-5 md: text-base lg:text-lg 2xl:text-xl  px-12 ">
+        <ul className="hidden sm:flex items-center justify-center text-white space-x-5 md: text-[12px] lg:text-[15px] 2xl:text-[23px]  px-12 ">
           {["Dashboard", "Tickets", "Logout"].map((item) => (
-            <li
-              className="px-1 font-comorants font-bold hoverText"
-              key={`link-${item}`}
-            >
+            <li className="px-1 font-comorants hoverText" key={`link-${item}`}>
               <div className=" hover:border" />
               <div className="flex items-center jsutify-center">
                 <a href={`#${item}`}>{item}</a>
@@ -26,7 +23,7 @@ function Header() {
         <div className=" sm:hidden h-[40px] relative flex items-center justify-center ]">
           {!toggle ? (
             <HiMenuAlt4
-              className=" text-[#2b0922] hover:text-[#519f8d] cursor-pointer mr-8 h-8 w-8"
+              className=" text-[#dde1e7] hover:text-[#519f8d] cursor-pointer mr-8 h-8 w-8"
               onClick={() => setToggle(!toggle)}
             />
           ) : (
@@ -41,7 +38,7 @@ function Header() {
           <div
             className={`fixed top-0 right-0 z-10 h-screen w-[50vw] 
             flex flex-col justify-end items-end 
-            bg-[#2b0922] ${
+            bg-[#0e214b] ${
               toggle ? "translate-x-0" : "translate-x-full"
             } ease-out duration-700  shadow-2xl`}
           >

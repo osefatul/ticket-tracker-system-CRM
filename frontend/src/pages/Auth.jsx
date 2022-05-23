@@ -63,7 +63,7 @@ function Auth() {
   //###############################################################################################
 
   return (
-    <div className="h-screen flex items-center justify-center">
+    <div className="h-screen flex items-center justify-center bg-slate-800 ">
       <div className="space-y-3">
         <p
           className={`text-green-800 font-bold text-[35px] flex items-center justify-center ${
