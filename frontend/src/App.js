@@ -5,6 +5,7 @@ import { Routes, Route, Link } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import AddTicket from "./pages/AddTicket";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
         <Route path="login" element={<Auth />} />
         <Route path="/" element={<Home>Home page</Home>} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="new_ticket" element={<AddTicket />} />
       </Routes>
       <Footer />
     </div>
