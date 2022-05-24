@@ -112,7 +112,6 @@ function TicketsTable() {
       // style={{ display: "flex", height: "", color: "white" }}
     >
       <DataGrid
-        // style={{ color: "white" }}
         rows={data}
         disableSelectionOnClick
         columns={columns}
