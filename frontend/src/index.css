@@ -6,7 +6,7 @@
 /* If we want to apply tailwind on to the body of the app */
 @layer base {
   body {
-    @apply bg-slate-800
+    /* @apply bg-slate-800 text-white */
   }
 }
 
@@ -14,7 +14,7 @@
 
 @layer components {
   .layout {
-    @apply h-main flex items-center justify-center mx-auto w-[80%];
+    @apply h-main  mx-auto w-[80%];
   }
   
 }
