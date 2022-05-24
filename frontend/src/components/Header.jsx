@@ -9,7 +9,7 @@ function Header() {
       <div className="font-bold text-[15px]">WDK-CRM</div>
 
       <div className="">
-        <ul className="hidden sm:flex items-center justify-center text-white space-x-5 text-[15px] px-12 ">
+        <ul className="hidden sm:flex items-center justify-center text-white space-x-5 text-[12px] px-12 ">
           {["Dashboard", "Tickets", "Logout"].map((item) => (
             <li className="px-1 font-comorants hoverText" key={`link-${item}`}>
               <div className=" hover:border" />

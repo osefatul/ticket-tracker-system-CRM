@@ -25,24 +25,6 @@ function Auth() {
     e.preventDefault();
     const { email, username, password } = form;
     console.log(email, username, password);
-
-    //  const {
-    //   data: { token, userId, hashedPassword, fullName },
-
-    // } = await axios.post(`${URL}/${isSignup ? "signup" : "login"}`, {
-    //   username,
-    //   password,
-    //   fullName: form.fullName,
-    //   phoneNumber,
-    //   avatarURL,
-    // });
-
-    // if (isSignup) {
-    //   cookies.set("phoneNumber", phoneNumber);
-    //   cookies.set("avatarURL", avatarURL);
-    //   cookies.set("hashedPassword", hashedPassword);
-    // }
-    // window.location.reload();
   };
 
   //########## SWITCH FUNCTIONS ##################################################################

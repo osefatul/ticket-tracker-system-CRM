@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import AddTicketForm from "../components/AddTicketForm";
 import PageBreadCrumbs from "../components/PageBreadCrumbs";
 
 function AddTicket() {
@@ -6,6 +7,10 @@ function AddTicket() {
     <div className="layout pt-4">
       <div>
         <PageBreadCrumbs page="New Ticket" />
+      </div>
+
+      <div>
+        <AddTicketForm />
       </div>
     </div>
   );

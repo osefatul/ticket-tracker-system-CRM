@@ -5,10 +5,12 @@ import Link from "@mui/material/Link";
 function PageBreadCrumbs({ page }) {
   return (
     <Breadcrumbs aria-label="breadcrumb">
-      <Link underline="hover" color="inherit" href="/">
+      <Link className="text-[12px]" underline="hover" color="inherit" href="/">
         Home
       </Link>
-      <Typography color="text.primary">{page}</Typography>
+      <Typography style={{ fontSize: "12px" }} color="text.primary">
+        {page}
+      </Typography>
     </Breadcrumbs>
   );
 }
