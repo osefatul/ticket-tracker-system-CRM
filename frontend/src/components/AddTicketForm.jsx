@@ -3,7 +3,7 @@ import SevDropDown from "./SevDropDown";
 
 const initialFormData = {
   title: "",
-  foundIssue: "",
+  sev: "",
   createdDate: "",
   description: "",
 };
@@ -12,7 +12,7 @@ function AddTicketForm() {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
-
+    console.log(name, value);
     setFormData({
       ...formData,
       [name]: value,
@@ -62,18 +62,23 @@ function AddTicketForm() {
           >
             Severity
           </label>
-          {/* <input
+
+          <select
             className={`pl-1 border-stone-400  border border-1 w-[60%] sm:w-[80%]
             bg-white rounded-sm shadow-sm sm:text-sm
               focus:outline-none focus:ring-1 mt-2
               }`}
-            name="foundIssue"
-            type="text"
-            value={formData.foundIssue}
+            name="sev"
             onChange={handleOnChange}
-            required
-          /> */}
-          <SevDropDown />
+          >
+            <option value="1">Sev-1: Critical function down</option>
+            <option value="2">Sev-2: Critical function imapired</option>
+            <option value="3">Sev-3: Group productivity imapired</option>
+            <option value="4">Sev-4: Individual productivity affected</option>
+            <option value="5">
+              Sev-5: productivity not immediately affected
+            </option>
+          </select>
         </div>
         <div className="flex justify-end sm:justify-between sm:w-[80%] space-x-5">
           <label
