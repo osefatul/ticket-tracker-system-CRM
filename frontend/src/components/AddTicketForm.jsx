@@ -1,14 +1,25 @@
 import React, { useEffect, useState } from "react";
-import SevDropDown from "./SevDropDown";
+import { validationText } from "../utils/validation";
 
+//for Data submission
 const initialFormData = {
   title: "",
   sev: "",
   createdDate: "",
   description: "",
 };
+
+//for validation error messages
+const initialFormDataError = {
+  title: false,
+  sev: false,
+  createdDate: false,
+  description: false,
+};
+
 function AddTicketForm() {
   const [formData, setFormData] = useState(initialFormData);
+  const [formDataError, setFormDataError] = useState(initialFormDataError);
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
@@ -19,23 +30,29 @@ function AddTicketForm() {
     });
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = async (e) => {
     e.preventDefault();
-    console.log("Form is submitted", formData);
 
+    //validation check
+    setFormDataError(initialFormDataError);
+    const isTitleValid = await validationText(formData.title); // if this is true then the warning should disapear
+    setFormDataError({ ...initialFormData, title: !isTitleValid });
     setFormData(initialFormData);
   };
 
   //Everytime formData change run this component
-  useEffect(() => {}, [formData]);
+  useEffect(() => {}, [formData, formDataError]);
 
   return (
-    <div className="pt-12 sm:w-[80%] mx-auto ">
+    <div className="pt-5 sm:w-[80%] mx-auto ">
       <form
         action=""
-        className="text-black space-y-5 flex flex-col sm:items-center justify-end sm:justify-center"
+        className="text-black space-y-2 flex flex-col sm:items-center justify-center sm:justify-center boxShadow p-2 pb-5  rounded-lg"
         onSubmit={handleOnSubmit}
       >
+        <div className="flex items-center justify-center text-[20px]">
+          <h1>Create a Ticket</h1>
+        </div>
         <div className="flex justify-end sm:justify-between sm:w-[80%] space-x-5">
           <label
             className="flex justify-start w-[20%] text-[12px]"
@@ -55,6 +72,11 @@ function AddTicketForm() {
             required
           />
         </div>
+        {formDataError.title && (
+          <p className="flex items-center justify-center text-red-500 text-[9px] mt">
+            Title is not compliant with the policy.
+          </p>
+        )}
         <div className="flex justify-end sm:justify-between  sm:w-[80%] space-x-5">
           <label
             className=" flex justify-start w-[20%] text-[12px]"
@@ -123,7 +145,7 @@ function AddTicketForm() {
             className=" text-[15px] w-[60%] sm:w-[80%] rounded-sm mt-3 border border-1 bg-green-900 text-white"
             type="submit"
           >
-            Create Ticket
+            Create
           </button>
         </div>
       </form>
