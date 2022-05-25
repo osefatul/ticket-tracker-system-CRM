@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import SevDropDown from "./SevDropDown";
 
 const initialFormData = {
   title: "",
@@ -10,7 +11,6 @@ function AddTicketForm() {
   const [formData, setFormData] = useState(initialFormData);
 
   const handleOnChange = (e) => {
-    e.preventDefault();
     const { name, value } = e.target;
 
     setFormData({
@@ -21,15 +21,22 @@ function AddTicketForm() {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    console.log("Form is submitted", formData);
+
+    setFormData(initialFormData);
   };
+
+  //Everytime formData change run this component
+  useEffect(() => {}, [formData]);
+
   return (
-    <div className="pt-8 w-[70%] mx-auto ">
+    <div className="pt-12 sm:w-[80%] mx-auto ">
       <form
         action=""
-        className="text-black space-y-5 flex flex-col justify-end"
+        className="text-black space-y-5 flex flex-col sm:items-center justify-end sm:justify-center"
         onSubmit={handleOnSubmit}
       >
-        <div className="flex justify-end w-[60%] space-x-10">
+        <div className="flex justify-end sm:justify-between sm:w-[80%] space-x-5">
           <label
             className="flex justify-start w-[20%] text-[12px]"
             htmlFor="title"
@@ -37,7 +44,7 @@ function AddTicketForm() {
             Title
           </label>
           <input
-            className={`pl-1 border-stone-400  border border-1 w-[60%]
+            className={`pl-1 border-stone-400  border border-1 w-[60%] sm:w-[80%]
             bg-white rounded-sm shadow-sm sm:text-sm
               focus:outline-none focus:ring-1
               }`}
@@ -48,15 +55,15 @@ function AddTicketForm() {
             required
           />
         </div>
-        <div className="flex justify-end w-[60%] space-x-10">
+        <div className="flex justify-end sm:justify-between  sm:w-[80%] space-x-5">
           <label
             className=" flex justify-start w-[20%] text-[12px]"
             htmlFor="title"
           >
-            Issue Found At
+            Severity
           </label>
-          <input
-            className={`pl-1 border-stone-400  border border-1 w-[60%]
+          {/* <input
+            className={`pl-1 border-stone-400  border border-1 w-[60%] sm:w-[80%]
             bg-white rounded-sm shadow-sm sm:text-sm
               focus:outline-none focus:ring-1 mt-2
               }`}
@@ -65,9 +72,10 @@ function AddTicketForm() {
             value={formData.foundIssue}
             onChange={handleOnChange}
             required
-          />
+          /> */}
+          <SevDropDown />
         </div>
-        <div className="flex justify-end w-[60%] space-x-10">
+        <div className="flex justify-end sm:justify-between sm:w-[80%] space-x-5">
           <label
             className=" flex justify-start w-[20%] text-[12px]"
             htmlFor="title"
@@ -75,7 +83,7 @@ function AddTicketForm() {
             Create Date
           </label>
           <input
-            className={`pl-1 border-stone-400  border border-1 w-[60%] bg-white rounded-sm shadow-sm sm:text-sm
+            className={`pl-1 border-stone-400  border border-1 w-[60%] sm:w-[80%] bg-white rounded-sm shadow-sm sm:text-sm
               focus:outline-none focus:ring-1 mt-2
               `}
             name="createdDate"
@@ -85,7 +93,7 @@ function AddTicketForm() {
             required
           />
         </div>
-        <div className="flex justify-end w-[60%] space-x-10">
+        <div className="flex justify-end sm:justify-between  sm:w-[80%] space-x-5">
           <label
             className=" flex justify-start w-[20%] text-[12px]"
             htmlFor="title"
@@ -94,7 +102,7 @@ function AddTicketForm() {
           </label>
           <textarea
             rows="7"
-            className={`pl-1 border border-1 w-[60%] border-stone-400  bg-white rounded-sm shadow-sm sm:text-sm
+            className={`pl-1 border border-1 w-[60%] sm:w-[80%] border-stone-400  bg-white rounded-sm shadow-sm sm:text-sm
               focus:outline-none  focus:ring-1
               }`}
             name="description"
@@ -104,13 +112,16 @@ function AddTicketForm() {
             required
           />
         </div>
+        <div className="flex justify-end sm:justify-between  sm:w-[80%] space-x-5">
+          <div className="flex justify-start w-[20%]"></div>
+          <button
+            className=" text-[15px] w-[60%] sm:w-[80%] rounded-sm mt-3 border border-1 bg-green-900 text-white"
+            type="submit"
+          >
+            Create Ticket
+          </button>
+        </div>
       </form>
-
-      <div className="flex  justify-end w-[60%]">
-        <button className=" text-[15px] w-[60%] rounded-sm mt-8 border border-1 bg-green-900 text-white">
-          Create Ticket
-        </button>
-      </div>
     </div>
   );
 }

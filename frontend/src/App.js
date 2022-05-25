@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AddTicket from "./pages/AddTicket";
+import SevDropDown from "./components/SevDropDown";
 
 function App() {
   return (
@@ -13,7 +14,14 @@ function App() {
       <Header />
       <Routes>
         <Route path="login" element={<Auth />} />
-        <Route path="/" element={<Home>Home page</Home>} />
+        <Route
+          path="/"
+          element={
+            <Home>
+              <SevDropDown />
+            </Home>
+          }
+        />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="new_ticket" element={<AddTicket />} />
       </Routes>
