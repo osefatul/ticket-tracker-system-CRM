@@ -6,9 +6,14 @@ import Auth from "./Auth";
 
 function Home({ children }) {
   return (
-    <main className="h-main text-black flex items-center justify-center mx-auto w-[80%]">
-      {children}
-    </main>
+    <>
+      <Header />
+
+      <main className="h-main text-black flex items-center justify-center mx-auto w-[80%]">
+        {children}
+      </main>
+      <Footer />
+    </>
   );
 }
 

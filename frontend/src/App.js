@@ -6,18 +6,18 @@ import Dashboard from "./pages/Dashboard";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AddTicket from "./pages/AddTicket";
+import TicketLists from "./pages/TicketLists";
 
 function App() {
   return (
     <div className="App text-white">
-      <Header />
       <Routes>
         <Route path="login" element={<Auth />} />
         <Route path="/" element={<Home>Home Page</Home>} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="new_ticket" element={<AddTicket />} />
+        <Route path="ticket-lists" element={<TicketLists />} />
       </Routes>
-      <Footer />
     </div>
   );
 }

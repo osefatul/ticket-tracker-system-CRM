@@ -1,18 +1,25 @@
 import React, { useState } from "react";
 import AddTicketForm from "../components/AddTicketForm";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
 import PageBreadCrumbs from "../components/PageBreadCrumbs";
 
 function AddTicket() {
   return (
-    <div className="layout pt-4">
-      <div>
-        <PageBreadCrumbs page="New Ticket" />
-      </div>
+    <>
+      <Header />
 
-      <div>
-        <AddTicketForm />
+      <div className="layout pt-4">
+        <div>
+          <PageBreadCrumbs page="New Ticket" />
+        </div>
+
+        <div>
+          <AddTicketForm />
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 }
 
