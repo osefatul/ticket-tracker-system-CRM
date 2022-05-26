@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AddTicket from "./pages/AddTicket";
 import TicketLists from "./pages/TicketLists";
+import TicketPage from "./pages/TicketPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="new_ticket" element={<AddTicket />} />
         <Route path="ticket-lists" element={<TicketLists />} />
+        <Route path="ticket-communication" element={<TicketPage />} />
       </Routes>
     </div>
   );
