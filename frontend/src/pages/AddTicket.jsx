@@ -9,7 +9,7 @@ function AddTicket() {
     <>
       <Header />
 
-      <div className="layout pt-4">
+      <div className="layout ">
         <div>
           <PageBreadCrumbs page="New Ticket" />
         </div>

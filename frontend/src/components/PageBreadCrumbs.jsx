@@ -4,7 +4,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 function PageBreadCrumbs({ page }) {
   return (
-    <Breadcrumbs aria-label="breadcrumb">
+    <Breadcrumbs aria-label="breadcrumb" className="pb-1">
       <Link className="text-[12px]" underline="hover" color="inherit" href="/">
         Home
       </Link>

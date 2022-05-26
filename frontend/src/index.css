@@ -14,7 +14,7 @@
 
 @layer components {
   .layout {
-    @apply h-main  mx-auto w-[80%];
+    @apply h-main  mx-auto w-[80%] pt-14;
   }
   
 

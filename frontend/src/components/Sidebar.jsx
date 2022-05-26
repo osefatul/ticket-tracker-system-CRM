@@ -2,8 +2,8 @@ import React from "react";
 
 function Sidebar() {
   return (
-    <div className="text-black flex flex-col justify-center mx-auto w-[80%]">
-      <div className="text-sm flex items-start sm:items-center justify-start sm:justify-center overflow-x-auto ">
+    <div className="text-black flex flex-col justify-center w-[80%]">
+      <div className="text-sm flex items-start justify-start overflow-x-auto ">
         {/* <h1 className=" h-11 w-[150px] font-bold text-sm flex items-center justify-center">
           Ticket Summary
         </h1> */}

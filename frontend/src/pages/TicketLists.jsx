@@ -31,7 +31,7 @@ function TicketLists() {
   return (
     <>
       <Header />
-      <div className="layout pt-4">
+      <div className="layout ">
         <PageBreadCrumbs page="Ticket Lists" />
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 pt-3">
           <button className="  text-[14px] border border-1 h-8 px-3 rounded-lg bg-green-800 ">

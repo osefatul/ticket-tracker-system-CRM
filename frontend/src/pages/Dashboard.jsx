@@ -11,7 +11,7 @@ function Dashboard() {
   return (
     <>
       <Header />
-      <div className="layout pt-4">
+      <div className="layout">
         <div className="text-[12px]">
           <PageBreadCrumbs page="Dashboard" />
         </div>
