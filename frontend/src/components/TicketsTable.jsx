@@ -1,86 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-const userRows = [
-  {
-    id: 1,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-  {
-    id: 2,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-  {
-    id: 3,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-  {
-    id: 4,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-  {
-    id: 5,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-  {
-    id: 6,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-  {
-    id: 7,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-  {
-    id: 8,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-  {
-    id: 9,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-  {
-    id: 10,
-    severity: 5,
-    title: "SSL issue",
-    status: "pening",
-    createdDate: "2022-03-13",
-  },
-];
 
-function TicketsTable() {
+function TicketsTable({ tickets }) {
   //using state hook in order to comply with changing as we are deleteing rows
-  const [data, setData] = useState(userRows);
-  const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id)); //map all those that are not equal to the selected row id
-  };
+  const [data, setData] = useState(tickets);
+
+  // Everytime Tickets list get changed, then change Data as well.
+  useEffect(() => {
+    setData(tickets);
+  }, [tickets]);
 
   const columns = [
     { field: "id", headerName: "ID", width: 120 },

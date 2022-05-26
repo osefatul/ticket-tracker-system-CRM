@@ -4,6 +4,9 @@ import TicketsTable from "../components/TicketsTable";
 import PageBreadCrumbs from "../components/PageBreadCrumbs";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
+// Dummy tickets
+import { userRows } from "../dummyTickets";
 function Dashboard() {
   return (
     <>
@@ -31,7 +34,7 @@ function Dashboard() {
         </div>
 
         {/* Tickets Table */}
-        <TicketsTable />
+        <TicketsTable tickets={userRows} />
       </div>
       <Footer />
     </>
