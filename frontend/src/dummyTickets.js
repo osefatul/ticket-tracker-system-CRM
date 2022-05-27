@@ -70,3 +70,15 @@ export const userRows = [
     createdDate: "2022-03-13",
   },
 ];
+
+export const data = [
+  "Hello, This is Jimmy working at HHM at your service",
+  "HI Jimmy how are you doing",
+  "I am doing great bob",
+];
+
+export const data2 = [
+  "Hello, This is kim working at HHM at your service",
+  "HI KIM how are you doing",
+  "I am doing great , and u?",
+];
