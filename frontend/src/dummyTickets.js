@@ -5,6 +5,27 @@ export const userRows = [
     title: "Printer issue",
     status: "pening",
     createdDate: "2022-03-13",
+    description:
+      "All Ticket Description regarding the ticket should be here, this is from userRows",
+    conversation: [
+      {
+        date: "2022-03-13",
+        comment:
+          "Hello this is our first comment on the ticket. From here on you will be seeing many upcoming comments",
+        commentBy: "osefatul",
+      },
+      {
+        date: "2022-03-13",
+        comment:
+          "Hello this is Yuwan , I am adding comments on the attached conversation. ",
+        commentBy: "yuwan",
+      },
+      {
+        date: "2022-03-13",
+        comment: "Thanks, Yuwan, I appreciate it",
+        commentBy: "osefatul",
+      },
+    ],
   },
   {
     id: 2,

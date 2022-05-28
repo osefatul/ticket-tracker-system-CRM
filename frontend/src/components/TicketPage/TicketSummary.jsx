@@ -1,6 +1,6 @@
 import React from "react";
 
-function TicketSummary({ description }) {
+function TicketSummary({ details }) {
   return (
     <div>
       <hr className="flex items-start justify-start mx-auto bg-slate-500 w-[100%] my-1" />
@@ -24,7 +24,7 @@ function TicketSummary({ description }) {
         </div>
       </div>
       <hr className="flex items-start justify-start mx-auto bg-slate-500 w-[100%] my-1" />
-      <div className="py-4">
+      <div className="p-5 boxShadow rounded-md">
         <div className="flex items-start space-x-2">
           <img
             className="w-[35px] h-[35px] object contain rounded-full"
@@ -37,12 +37,10 @@ function TicketSummary({ description }) {
             <p className=" text-[10px] pb-4">
               2022-05-26 7:12:38 AM (UTC-07:00)
             </p>
-            <p>All Ticket Description regarding the ticket should be here</p>
+            <p>{details}</p>
           </div>
         </div>
       </div>
-
-      <hr className="flex items-start justify-start mx-auto bg-slate-100 w-[100%] my-1" />
     </div>
   );
 }

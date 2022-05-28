@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TicketSummary from "./TicketSummary";
-import { data, data2 } from "../../dummyTickets";
+import { userRows } from "../../dummyTickets";
 import TicketBody from "./TicketBody";
 
 function TicketHeader() {
@@ -8,9 +8,9 @@ function TicketHeader() {
     {
       id: 0,
       category: "Overview",
-      details: data,
+      details: userRows[0].description,
     },
-    { id: 1, category: "Communication", details: data2 },
+    { id: 1, category: "Communication", details: userRows[0].conversation },
   ];
 
   const [value, setValue] = useState(0);
@@ -48,7 +48,13 @@ function TicketHeader() {
 
       <div></div>
 
-      <div>{category === "Overview" ? <TicketSummary /> : <TicketBody />}</div>
+      <div>
+        {category === "Overview" ? (
+          <TicketSummary details={details} />
+        ) : (
+          <TicketBody details={details} />
+        )}
+      </div>
     </div>
   );
 }
