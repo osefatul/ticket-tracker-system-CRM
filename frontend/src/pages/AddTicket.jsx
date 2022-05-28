@@ -18,6 +18,7 @@ function AddTicket() {
           <AddTicketForm />
         </div>
       </div>
+
       <Footer />
     </>
   );

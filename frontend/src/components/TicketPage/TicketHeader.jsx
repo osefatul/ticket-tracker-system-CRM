@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import TicketSummary from "./TicketSummary";
-import { data, data2 } from "../dummyTickets";
+import { data, data2 } from "../../dummyTickets";
 import TicketBody from "./TicketBody";
 
 function TicketHeader() {
@@ -46,17 +46,9 @@ function TicketHeader() {
         </div>
       </div>
 
-      <div>
-        <TicketSummary />
-      </div>
+      <div></div>
 
-      <div>
-        {category === "Overview" ? (
-          "This Should be the Ticket Description"
-        ) : (
-          <TicketBody />
-        )}
-      </div>
+      <div>{category === "Overview" ? <TicketSummary /> : <TicketBody />}</div>
     </div>
   );
 }

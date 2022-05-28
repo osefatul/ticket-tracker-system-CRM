@@ -1,6 +1,6 @@
 import React from "react";
 import TextareaAutosize from "@mui/material/TextareaAutosize";
-import TicketConversation from "../components/TicketConversation";
+import TicketConversation from "./TicketConversation";
 function TicketBody() {
   return (
     <div>

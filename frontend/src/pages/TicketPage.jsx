@@ -2,8 +2,8 @@ import React from "react";
 import PageBreadCrumbs from "../components/PageBreadCrumbs";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import TicketHeader from "../components/TicketHeader";
-import TicketBody from "../components/TicketBody";
+import TicketHeader from "../components/TicketPage/TicketHeader";
+
 function TicketPage() {
   return (
     <>
@@ -15,9 +15,6 @@ function TicketPage() {
         </div>
 
         {/* Ticket Body */}
-        {/* <main>
-          <TicketBody />
-        </main> */}
       </div>
       <Footer />
     </>
