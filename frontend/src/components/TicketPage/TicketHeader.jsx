@@ -2,8 +2,11 @@ import React, { useState } from "react";
 import TicketSummary from "./TicketSummary";
 import { userRows } from "../../dummyTickets";
 import TicketBody from "./TicketBody";
+import { useParams } from "react-router-dom";
 
 function TicketHeader() {
+  const { tid } = useParams(); //ticketID from the Ticket_communication page
+
   const tabs = [
     {
       id: 0,

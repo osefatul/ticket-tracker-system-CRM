@@ -3,9 +3,9 @@ import React from "react";
 function TicketConversation({ details }) {
   console.log(details);
   return (
-    <div className="">
+    <div className="overflow-auto">
       {details.map((cmnt, index) => (
-        <div className="space-y-3 mb-3">
+        <div key={index + cmnt.date} className="space-y-3 mb-3">
           <div key={index + cmnt.date} className="flex items-start space-x-2">
             <img
               className="w-[35px] h-[35px] object contain rounded-full"

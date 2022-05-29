@@ -19,7 +19,7 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="new_ticket" element={<AddTicket />} />
         <Route path="ticket-lists" element={<TicketLists />} />
-        <Route path="ticket-communication" element={<TicketPage />} />
+        <Route path="ticket_communication/:tid" element={<TicketPage />} />
       </Routes>
     </div>
   );

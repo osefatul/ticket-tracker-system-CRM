@@ -1,5 +1,6 @@
 import React from "react";
 import TicketsTable from "../components/TicketsTable";
+import { Link } from "react-router-dom";
 
 import PageBreadCrumbs from "../components/PageBreadCrumbs";
 import Header from "../components/Header";
@@ -16,9 +17,11 @@ function Dashboard() {
           <PageBreadCrumbs page="Dashboard" />
         </div>
         <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0">
-          <button className="  text-[14px] border border-1 h-8 px-3 rounded-lg bg-green-800 ">
-            New Ticket
-          </button>
+          <Link to="/new_ticket">
+            <button className="  text-[14px] border border-1 h-8 px-3 rounded-lg bg-green-800 ">
+              New Ticket
+            </button>
+          </Link>
 
           <div className="text-black">
             <p>

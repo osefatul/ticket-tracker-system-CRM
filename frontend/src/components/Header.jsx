@@ -15,11 +15,11 @@ function Header() {
           {["Dashboard", "Tickets", "Logout"].map((item, index) => (
             <li className="px-1 font-comorants hoverText" key={`link-${item}`}>
               <div className=" hover:border" />
-              <div className="flex items-center jsutify-center">
-                <Link to={`/${linklist[index]}`}>
+              <Link to={`/${linklist[index]}`}>
+                <div className="flex items-center jsutify-center">
                   <a href={`#${item}`}>{item}</a>
-                </Link>
-              </div>
+                </div>
+              </Link>
             </li>
           ))}
         </ul>
@@ -47,15 +47,17 @@ function Header() {
             } ease-out duration-700  shadow-2xl`}
           >
             <ul className="h-[100%] w-full flex flex-col justify-start items-start space-y-5 mt-32">
-              {["Dashboard", "Tickets", "Logout"].map((item) => (
-                <li
-                  key={item}
-                  className="hoverText w-[100%] flex items-start justify-center"
-                >
-                  <a href={`#${item}`} onClick={() => setToggle(false)}>
-                    {item}
-                  </a>
-                </li>
+              {["Dashboard", "Tickets", "Logout"].map((item, index) => (
+                <Link key={item} to={`/${linklist[index]}`}>
+                  <li
+                    key={item}
+                    className="hoverText w-[100%] flex items-start justify-center"
+                  >
+                    <a href={`#${item}`} onClick={() => setToggle(false)}>
+                      {item}
+                    </a>
+                  </li>
+                </Link>
               ))}
             </ul>
           </div>

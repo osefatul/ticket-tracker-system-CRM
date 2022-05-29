@@ -13,8 +13,6 @@ function TicketPage() {
         <div>
           <TicketHeader />
         </div>
-
-        {/* Ticket Body */}
       </div>
       <Footer />
     </>

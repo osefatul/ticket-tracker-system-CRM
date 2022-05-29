@@ -13,26 +13,67 @@ function TicketsTable({ tickets }) {
   }, [tickets]);
 
   const columns = [
-    { field: "id", headerName: "ID", width: 120 },
     {
-      field: "severity",
-      headerName: "Severity",
-      width: 130,
+      field: "id",
+      headerName: "ID",
+      width: 120,
+      renderCell: (params) => {
+        return (
+          <Link to={`/ticket_communication/${params.row.id}`}>
+            <div>{params.row.id}</div>
+          </Link>
+        );
+      },
     },
     {
       field: "title",
       headerName: "Title",
       width: 200,
+      renderCell: (params) => {
+        return (
+          <Link to={`/ticket_communication/${params.row.id}`}>
+            <div>{params.row.title}</div>
+          </Link>
+        );
+      },
     },
+    {
+      field: "severity",
+      headerName: "Severity",
+      width: 130,
+      renderCell: (params) => {
+        return (
+          <Link to={`/ticket_communication/${params.row.id}`}>
+            <div>{params.row.severity}</div>
+          </Link>
+        );
+      },
+    },
+
     {
       field: "status",
       headerName: "Status",
       width: 110,
+      renderCell: (params) => {
+        return (
+          <Link to={`/ticket_communication/${params.row.id}`}>
+            <div>{params.row.status}</div>
+          </Link>
+        );
+      },
     },
+
     {
       field: "createdDate",
       headerName: "Created Date",
       width: 120,
+      renderCell: (params) => {
+        return (
+          <Link to={`/ticket_communication/${params.row.id}`}>
+            <div>{params.row.createdDate}</div>
+          </Link>
+        );
+      },
     },
   ];
 
