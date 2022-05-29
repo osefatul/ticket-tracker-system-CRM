@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
+import { Link } from "react-router-dom";
 
 function Header() {
   const [toggle, setToggle] = useState(false);
+  const linklist = ["dashboard", "ticket-lists", "logout"];
 
   return (
     <div className=" bg-slate-900 flex items-center justify-between px-8 h-[50px] fixed w-full top-0 z-50">
@@ -10,11 +12,13 @@ function Header() {
 
       <div className="">
         <ul className="hidden sm:flex items-center justify-center text-white space-x-5 text-[12px] px-12 ">
-          {["Dashboard", "Tickets", "Logout"].map((item) => (
+          {["Dashboard", "Tickets", "Logout"].map((item, index) => (
             <li className="px-1 font-comorants hoverText" key={`link-${item}`}>
               <div className=" hover:border" />
               <div className="flex items-center jsutify-center">
-                <a href={`#${item}`}>{item}</a>
+                <Link to={`/${linklist[index]}`}>
+                  <a href={`#${item}`}>{item}</a>
+                </Link>
               </div>
             </li>
           ))}
