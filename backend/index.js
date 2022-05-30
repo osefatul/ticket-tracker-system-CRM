@@ -6,6 +6,7 @@ const morgan = require("morgan");
 
 const userRouter = require("./src/routers/userRouter");
 const ticketRouter = require("./src/routers/ticketRouter");
+const handleError = require("./src/utils/errorHandler");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -27,9 +28,15 @@ app.use(bodyParser.json());
 app.use("/v1/user", userRouter);
 app.use("/v1/ticket", ticketRouter);
 
-// If we enter wrong router
-app.use("*", (req, res) => {
-  res.json({ message: "Resources not found !" });
+//HOW TO HANDLE ERROR IF NONE OF THE ABOVE ROUTERS ARE REQUESTD.
+app.use((req, res, next) => {
+  const error = new Error("Resources Not Found");
+  error.status = 404; // not found error status number
+  next(error); //pass error to next router.
+});
+
+app.use((error, req, res, next) => {
+  handleError(error, res);
 });
 
 //
