@@ -28,18 +28,20 @@ app.use(bodyParser.json());
 app.use("/v1/user", userRouter);
 app.use("/v1/ticket", ticketRouter);
 
-//HOW TO HANDLE ERROR IF NONE OF THE ABOVE ROUTERS ARE REQUESTD.
+//HOW TO HANDLE ERROR IF NONE OF THE ABOVE ROUTERS ARE REQUESTED.
+//1.CREATE AN ERROR MESSAGE
 app.use((req, res, next) => {
   const error = new Error("Resources Not Found");
   error.status = 404; // not found error status number
   next(error); //pass error to next router.
 });
 
+//2.PASS ERROR MESSAGE TO ERROR HANDLER
 app.use((error, req, res, next) => {
   handleError(error, res);
 });
 
-//
+//TEST GET REQUEST
 app.use("/", (req, res) => {
   res.json("Hi There");
 });
