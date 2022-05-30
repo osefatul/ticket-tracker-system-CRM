@@ -8,7 +8,7 @@ function Header() {
 
   return (
     <div className=" bg-slate-900 flex items-center justify-between px-8 h-[50px] fixed w-full top-0 z-50">
-      <div className="font-bold text-[15px]">WDK-CRM</div>
+      <div className="font-bold text-[15px]">Osefatul-CRM</div>
 
       <div className="">
         <ul className="hidden sm:flex items-center justify-center text-white space-x-5 text-[12px] px-12 ">

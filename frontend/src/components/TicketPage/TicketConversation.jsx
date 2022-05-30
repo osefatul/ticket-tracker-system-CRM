@@ -3,7 +3,7 @@ import React from "react";
 function TicketConversation({ details }) {
   console.log(details);
   return (
-    <div className="overflow-auto">
+    <div className=" overflow-auto rounded-md">
       {details.map((cmnt, index) => (
         <div key={index + cmnt.date} className="space-y-3 mb-3">
           <div key={index + cmnt.date} className="flex items-start space-x-2">

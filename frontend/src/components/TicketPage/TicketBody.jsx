@@ -3,7 +3,7 @@ import TextareaAutosize from "@mui/material/TextareaAutosize";
 import TicketConversation from "./TicketConversation";
 function TicketBody({ details }) {
   return (
-    <div className="mb-24">
+    <div className="">
       <form>
         <label className="text-[10px]">Add Comment</label>
         <textarea
@@ -17,7 +17,7 @@ function TicketBody({ details }) {
           required
         />
       </form>
-      <div className="p-5 boxShadow rounded-md">
+      <div className="p-5 boxShadow rounded-md ">
         <TicketConversation details={details} />
       </div>
     </div>
