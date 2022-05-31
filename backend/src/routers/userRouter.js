@@ -10,7 +10,13 @@ router.all("/", (req, res, next) => {
 });
 
 //POST
-router.post("/", (req, res) => {
-  res.status(200).json(req.body);
+router.post("/", async (req, res) => {
+  try {
+    await insertUser(req.body, res);
+  } catch (err) {
+    console.log(err);
+    res.json({ status: "error", message: err.message });
+  }
 });
+
 module.exports = router;
