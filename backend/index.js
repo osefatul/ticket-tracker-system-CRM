@@ -1,15 +1,22 @@
 const express = require("express");
-const bodyParser = require("body-parser");
-const cors = require("cors");
-const helmet = require("helmet");
 const morgan = require("morgan");
-
+const cors = require("cors");
+require("dotenv").config();
+const bodyParser = require("body-parser");
+const helmet = require("helmet");
+const mongoose = require("mongoose");
 const userRouter = require("./src/routers/userRouter");
 const ticketRouter = require("./src/routers/ticketRouter");
 const handleError = require("./src/utils/errorHandler");
 
 const app = express();
 const port = process.env.PORT || 5000;
+
+//Connect to MONGODB
+mongoose
+  .connect(process.env.MONGO_URL)
+  .then(console.log("connected to MongoDB"))
+  .catch((err) => console.log(err));
 
 //API security
 app.use(helmet());
