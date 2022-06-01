@@ -3,13 +3,26 @@ const bcrypt = require("bcrypt");
 
 const createUser = async (req, res) => {
   const { name, company, address, phone, email, password } = req.body;
+
   //Fill up all details in the inputs
   if (!name || !company || !address || !phone || !email || !password) {
     res
       .status(422)
       .json({ errors: [{ message: "Please fill up the details" }] });
   }
-  //check if user exists
+
+  // Check Password length
+  if (password.length < 8) {
+    return res.status(422).json({
+      errors: [{ message: "Password should be or more than 8 characters" }],
+    });
+  }
+
+  //Encrypt the password
+  const salt = await bcrypt.genSalt(10);
+  const hashPassword = await bcrypt.hash(password, salt);
+
+  //check if email or phone alrady exists
   const userExist = await UserSchema.findOne({
     $or: [{ email: email }, { phone: phone }],
   });
@@ -27,7 +40,7 @@ const createUser = async (req, res) => {
       address,
       phone,
       email,
-      password,
+      password: hashPassword,
     });
 
     const result = await newUser.save();
