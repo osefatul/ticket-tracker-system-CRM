@@ -19,6 +19,7 @@ const createUser = async (req, res) => {
   }
 
   //Encrypt the password
+  //number indicates more time to take to generated arandom string
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
 
@@ -51,4 +52,24 @@ const createUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser };
+const getUserByEmailnPassword = async (req, res) => {
+  const { email, password } = req.body;
+  //Check if email exist
+  const user = await UserSchema.findOne({ email });
+  !user && res.status(404).json({ message: "User not found" });
+
+  //Check if password match
+  const validPassword = await bcrypt.compare(password, user.password);
+  !validPassword && res.status(404).json({ message: "Wrong Password" });
+
+  try {
+    //Send everything except Password
+    const { password, ...others } = user._doc;
+
+    res.status(200).json({ message: "Login successfully", others });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+module.exports = { createUser, getUserByEmailnPassword };
