@@ -1,5 +1,9 @@
 const { UserSchema } = require("./User.schema");
 const bcrypt = require("bcrypt");
+const {
+  createAccessJWT,
+  createRefreshJWT,
+} = require("../../helpers/jwt.helper");
 
 const createUser = async (req, res) => {
   const { name, company, address, phone, email, password } = req.body;
@@ -62,11 +66,16 @@ const getUserByEmailnPassword = async (req, res) => {
   const validPassword = await bcrypt.compare(password, user.password);
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
+  const accessJWT = await createAccessJWT(user.email, `${user._id}`);
+  const refreshJWT = await createRefreshJWT(user.email);
+
   try {
     //Send everything except Password
     const { password, ...others } = user._doc;
 
-    res.status(200).json({ message: "Login successfully", others });
+    res
+      .status(200)
+      .json({ message: "Login successfully", others, accessJWT, refreshJWT });
   } catch (error) {
     console.log(error);
   }
