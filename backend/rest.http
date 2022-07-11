@@ -1,13 +1,16 @@
 ### User sign up endpoint
-POST http://localhost:5000/v1/user
+POST http://localhost:5000/v1/user/
 Content-Type: application/json
 
-{"name": "Sefat", "company":"Amazon", "address":"6320skaha", "phone":"778651789", "email":"sefat@amazon.com", "password":"Omarkhan2"  }
+{"name": "Sefat3", "company":"Amazon",
+"address":"6320skaha", "phone":"788651789",
+"email":"sefat232@amazon.com",
+"password":"Omarkhan322"  }
 
 
 
 ### User sign in endpoint
-GET http://localhost:5000/v1/user/login
+POST http://localhost:5000/v1/user/login
 Content-Type: application/json
 
-{"email":"sefat@amazon.com", "password":"Omarkhan2" }
+{"email":"sefat@amazon.com", "password":"Omarkhan" }

@@ -1,9 +1,13 @@
 const { UserSchema } = require("./User.schema");
 const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
+
 const {
   createAccessJWT,
   createRefreshJWT,
 } = require("../../helpers/jwt.helper");
+
+const {client} =require("../../helpers/redis.helper");
 
 const createUser = async (req, res) => {
   const { name, company, address, phone, email, password } = req.body;
@@ -23,11 +27,11 @@ const createUser = async (req, res) => {
   }
 
   //Encrypt the password
-  //number indicates more time to take to generated arandom string
+  //number indicates more time to take to generated random string
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
 
-  //check if email or phone alrady exists
+  //Check if email or phone already exists
   const userExist = await UserSchema.findOne({
     $or: [{ email: email }, { phone: phone }],
   });
@@ -56,7 +60,7 @@ const createUser = async (req, res) => {
   }
 };
 
-const getUserByEmailnPassword = async (req, res) => {
+const getUserByEmail = async (req, res) => {
   const { email, password } = req.body;
   //Check if email exist
   const user = await UserSchema.findOne({ email });
@@ -68,19 +72,24 @@ const getUserByEmailnPassword = async (req, res) => {
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
   try {
-    //Pass parameters for JWT
-    const accessJWT = await createAccessJWT(user.email, `${user._id}`);
-    const refreshJWT = await createRefreshJWT(user.email, `${user._id}`);
+    // //Pass parameters for JWT
+    // const accessJWT = await createAccessJWT(`${user.email}`, `${user._id}`);
+    // const refreshJWT = await createRefreshJWT(user.email, `${user._id}`);
 
-    //Send everything except Password
-    // const { password, ...others } = user._doc;
+    const accessJWT = await jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
+      expiresIn: "15m", //change this to 15m
+    });
 
-    res
-      .status(200)
-      .json({ message: "Login successfully", user, accessJWT, refreshJWT });
+    const setJWT = await client.set(`${user._id}`,accessJWT, (err, data) => {
+      if(err) throw err;
+      return data
+    })
+
+    return res.status(200)
+      .json({ message: "Login successfully",user, accessJWT, setJWT});
   } catch (error) {
     console.log(error);
   }
 };
 
-module.exports = { createUser, getUserByEmailnPassword };
+module.exports = { createUser, getUserByEmail };
