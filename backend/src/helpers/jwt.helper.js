@@ -3,6 +3,7 @@ const { client } = require("./redis.helper");
 const { UserSchema } = require("../models/user/User.schema");
 
 
+// This will be stored in the Redis database.
 const createAccessJWT = async (email, _id) => {
   try {
     const accessJWT =  jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
@@ -26,7 +27,7 @@ const createAccessJWT = async (email, _id) => {
 const storeUserRefreshJWT =  (_id, token) => {
   try {
     const storeRFtoken = UserSchema.findOneAndUpdate({_id},
-      // $set operator will create a field if doesn't exist already.
+      // $set operator will create a field if doesn't already exist .
       {$set: {"refreshJWT.token": token, 
       "refreshJWT.addedAt": Date.now()},
     },
@@ -40,6 +41,7 @@ const storeUserRefreshJWT =  (_id, token) => {
 }
 
 
+// This will be stored in the mongoDB database
 const createRefreshJWT = async (email, _id) => {
   try {
     const refreshJWT = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET, {
@@ -47,10 +49,7 @@ const createRefreshJWT = async (email, _id) => {
     });
 
     const stored = await storeUserRefreshJWT(_id ,refreshJWT);
-    // const getJWT =  client.get(refreshJWT, (err, data) => {
-    //   if(err) throw err;
-    //   return data
-    // })
+   
 
     return {NewRefreshToken: refreshJWT, MDBstoredRefreshToken: stored}
   } catch (error) {
