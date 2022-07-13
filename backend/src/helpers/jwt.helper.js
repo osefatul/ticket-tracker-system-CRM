@@ -1,9 +1,6 @@
 const jwt = require("jsonwebtoken");
 const { client } = require("./redis.helper");
-
 const { UserSchema } = require("../models/user/User.schema");
-
-
 
 
 const createAccessJWT = async (email, _id) => {
@@ -19,23 +16,21 @@ const createAccessJWT = async (email, _id) => {
     })
 
     //return both values
-    return {redis: setJWT, Jwt: accessJWT}
+    return {redis: setJWT, JwtAccess: accessJWT}
   } catch (error) {
     return error
   }
 };
 
 
-
-
 const storeUserRefreshJWT = (_id, token) => {
   try {
     const storeRFtoken = UserSchema.findOneAndUpdate({_id},
+      // $set operator will create a field if doesn't exist already.
       {$set: {"refreshJWT.token": token, 
       "refreshJWT.addedAt": Date.now()},
     },
-    {new: true}
-    )
+    {new: true})
     return storeRFtoken 
   }
   catch(error) {
@@ -45,26 +40,23 @@ const storeUserRefreshJWT = (_id, token) => {
 }
 
 
-
-const createRefreshJWT = async (email, _id) => {
+const createRefreshJWT =  (email, _id) => {
   try {
     const refreshJWT = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET, {
       expiresIn: "30d",
     });
 
-    storeUserRefreshJWT(refreshJWT);
-    const getJWT = await client.get(refreshJWT, (err, data) => {
-      if(err) throw err;
-      return data
-    })
+    storeUserRefreshJWT(_id ,refreshJWT);
+    // const getJWT =  client.get(refreshJWT, (err, data) => {
+    //   if(err) throw err;
+    //   return data
+    // })
 
-    return {GetRedisValue: getJWT}
+    return {JwtRefresh: refreshJWT, stored:storeUserRefreshJWT }
   } catch (error) {
     return error
   }
 };
-
-
 
 
 module.exports = { createAccessJWT, createRefreshJWT };

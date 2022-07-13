@@ -70,29 +70,16 @@ const getUserByEmail = async (req, res) => {
 
   //Check if password match
   const validPassword = await bcrypt.compare(password, user.password);
-
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
   try {
 
     //Redis storing JWT authentication credentials.
     const accessJWTToken = await createAccessJWT(email, `${user._id}`);
-	  // const refreshJWT = await crateRefreshJWT(email, `${user._id}`);
-    //Pass parameters for JWT
-
-    // const accessJWT = await jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
-    //   expiresIn: "15m", //change this to 15m
-    // });
-
-
-    //Set key and value in the Redis.
-    // const setJWT = await client.set(accessJWT,`${user._id}`, (err, data) => {
-    //   if(err) throw err;
-    //   return data
-    // })
+	  const refreshJWT = await createRefreshJWT(email, `${user._id}`);
 
     return res.status(200)
-      .json({ message: "Login successfully",user, accessJWTToken } );
+      .json({ message: "Login successfully",user, accessJWTToken, refreshJWT } );
   } catch (error) {
     console.log(error);
   }
