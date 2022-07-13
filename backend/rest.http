@@ -2,10 +2,10 @@
 POST http://localhost:5000/v1/user/
 Content-Type: application/json
 
-{"name": "Sefat3", "company":"Amazon",
-"address":"6320skaha", "phone":"788651789",
-"email":"sefat232@amazon.com",
-"password":"Omarkhan322"  }
+{"name": "Sefat", "company":"Amazon",
+"address":"6320skaha", "phone":"78651789",
+"email":"sefat1@amazon.com",
+"password":"sefatkhan"  }
 
 
 

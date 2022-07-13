@@ -1,9 +1,5 @@
 const redis = require("redis");
-const client = redis.createClient();
-
-// client.on('connect', function() {
-//   console.log('Connected!');
-// });
+const client = redis.createClient(process.env.REDIS_URL);
 
 (async () => {
   client.on("error", (err) => console.log("Redis Client Error", err));
@@ -12,19 +8,6 @@ const client = redis.createClient();
 
 
 
-// const setJWT = (key, value) => {
-//   console.log(key, value)
-//   return new Promise((resolve, reject) => {
-//     try {
-//       return client.set(key, value, (err, res) => {
-//         if (err) reject(err);
-//         resolve(res);
-//       });
-//     } catch (error) {
-//       reject(error);
-//     }
-//   });
-// };
 
 const setJWT = (key, value) => {
   console.log(key, value)

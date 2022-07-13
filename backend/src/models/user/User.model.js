@@ -60,6 +60,8 @@ const createUser = async (req, res) => {
   }
 };
 
+
+
 const getUserByEmail = async (req, res) => {
   const { email, password } = req.body;
   //Check if email exist
@@ -72,24 +74,33 @@ const getUserByEmail = async (req, res) => {
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
   try {
-    // //Pass parameters for JWT
-    // const accessJWT = await createAccessJWT(`${user.email}`, `${user._id}`);
-    // const refreshJWT = await createRefreshJWT(user.email, `${user._id}`);
 
-    const accessJWT = await jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
-      expiresIn: "15m", //change this to 15m
-    });
+    //Redis storing JWT authentication credentials.
+    const accessJWTToken = await createAccessJWT(email, `${user._id}`);
+	  // const refreshJWT = await crateRefreshJWT(email, `${user._id}`);
+    //Pass parameters for JWT
 
-    const setJWT = await client.set(`${user._id}`,accessJWT, (err, data) => {
-      if(err) throw err;
-      return data
-    })
+    // const accessJWT = await jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
+    //   expiresIn: "15m", //change this to 15m
+    // });
+
+
+    //Set key and value in the Redis.
+    // const setJWT = await client.set(accessJWT,`${user._id}`, (err, data) => {
+    //   if(err) throw err;
+    //   return data
+    // })
 
     return res.status(200)
-      .json({ message: "Login successfully",user, accessJWT, setJWT});
+      .json({ message: "Login successfully",user, accessJWTToken } );
   } catch (error) {
     console.log(error);
   }
 };
 
+
+
+
+
 module.exports = { createUser, getUserByEmail };
+
