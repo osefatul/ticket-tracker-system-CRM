@@ -23,7 +23,7 @@ const createAccessJWT = async (email, _id) => {
 };
 
 
-const storeUserRefreshJWT = (_id, token) => {
+const storeUserRefreshJWT =  (_id, token) => {
   try {
     const storeRFtoken = UserSchema.findOneAndUpdate({_id},
       // $set operator will create a field if doesn't exist already.
@@ -40,19 +40,19 @@ const storeUserRefreshJWT = (_id, token) => {
 }
 
 
-const createRefreshJWT =  (email, _id) => {
+const createRefreshJWT = async (email, _id) => {
   try {
     const refreshJWT = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET, {
       expiresIn: "30d",
     });
 
-    storeUserRefreshJWT(_id ,refreshJWT);
+    const stored = await storeUserRefreshJWT(_id ,refreshJWT);
     // const getJWT =  client.get(refreshJWT, (err, data) => {
     //   if(err) throw err;
     //   return data
     // })
 
-    return {JwtRefresh: refreshJWT, stored:storeUserRefreshJWT }
+    return {NewRefreshToken: refreshJWT, MDBstoredRefreshToken: stored}
   } catch (error) {
     return error
   }
