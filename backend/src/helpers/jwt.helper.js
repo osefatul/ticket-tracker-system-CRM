@@ -47,10 +47,7 @@ const createRefreshJWT = async (email, _id) => {
     const refreshJWT = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET, {
       expiresIn: "30d",
     });
-
     const stored = await storeUserRefreshJWT(_id ,refreshJWT);
-   
-
     return {NewRefreshToken: refreshJWT, MDBstoredRefreshToken: stored}
   } catch (error) {
     return error
