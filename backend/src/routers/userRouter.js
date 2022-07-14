@@ -12,6 +12,23 @@ router.all("/", (req, res, next) => {
   next();
 });
 
+
+
+
+// GET USER PROFILES
+router.get ("/", (req, res)=>{
+  
+  const dummyUser = {"name": "Sefatullah", "company":"Amazon",
+  "Address":"6320skaha", "phone":"78651789",
+  "email":"osefatul@amazon.com",
+  "password":"sefatOmar"  }
+
+  res.json({dummyUser});
+
+})
+
+
+
 //REGISTER A NEW USER
 router.post("/", async (req, res) => {
   try {

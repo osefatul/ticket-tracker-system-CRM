@@ -13,4 +13,13 @@ Content-Type: application/json
 POST http://localhost:5000/v1/user/login
 Content-Type: application/json
 
+{"email":"sefat1@amazon.com", "password":"sefatkhan" }
+
+
+
+
+### Get a user profile endpoint
+Get http://localhost:5000/v1/user/
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3NzY5MjIxLCJleHAiOjE2NTc3NzAxMjF9.dfU_9DNf00Dyipi-WK2kVZHzP5IZIXh-jDOP3h7uXmg
+
 {"email":"sefat@amazon.com", "password":"Omarkhan" }

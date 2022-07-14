@@ -14,7 +14,10 @@ require("crypt0").randomBytes(64).toString("hex")
 ```
 once we got random generated tokens then update env file.
 
-### Access Token and Refresh Token
+#### Access Token and Refresh Token
 Access Token is stored in the redis database while refresh token is stored in the mongoDB database.
 
 The login router is a post request so we can add tokens to the databases while updating the user information as well.
+
+### USER AUTHORIZATION
+Before accessing data from the database, we need to authorize the user and verify that the user is authorized. We can do that using the access token provided by the authorization in the header.
