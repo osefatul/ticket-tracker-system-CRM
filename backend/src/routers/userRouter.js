@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-
+const {userAuthorization} = require("../middlewares/authorization.middleware")
 const {
   createUser,
   getUserByEmail,
@@ -16,7 +16,7 @@ router.all("/", (req, res, next) => {
 
 
 // GET USER PROFILES
-router.get ("/", (req, res)=>{
+router.get ("/", userAuthorization, (req, res)=>{
   
   const dummyUser = {"name": "Sefatullah", "company":"Amazon",
   "Address":"6320skaha", "phone":"78651789",

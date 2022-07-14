@@ -3,7 +3,7 @@ const { client } = require("./redis.helper");
 const { UserSchema } = require("../models/user/User.schema");
 
 
-// This will be stored in the Redis database.
+// Creating JWT Access token and will be stored in the Redis database.
 const createAccessJWT = async (email, _id) => {
   try {
     const accessJWT =  jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
