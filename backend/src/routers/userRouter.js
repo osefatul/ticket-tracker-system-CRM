@@ -1,5 +1,6 @@
 const express = require("express");
 const router = express.Router();
+
 const {userAuthorization} = require("../middlewares/authorization.middleware")
 const {
   createUser,
@@ -20,7 +21,7 @@ router.get ("/", userAuthorization, async(req, res)=>{
   // 1,2,3 have been in the userAuthorization middleware.
   // 4. Get user profile based on the user_id
   const id = req.userId
-
+  
   try {
     await getUserById(id, res)
     // return res.json({id});
@@ -28,8 +29,6 @@ router.get ("/", userAuthorization, async(req, res)=>{
     console.log(err);
     res.json({status: 'error', message: err.message})
   }
-
-
 })
 
 
@@ -46,6 +45,7 @@ router.post("/", async (req, res) => {
 
 //LOGIN USER
 router.post("/login", async (req, res) => {
+
   try {
     await getUserByEmail(req, res);
   } catch (err) {

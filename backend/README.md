@@ -28,3 +28,7 @@ Road map for authorization process:
 
 1- Create a middleware and call it authorization.middleware. The job of this middleware is to wrap up the entire process of authorization. If it is successful, then pass the pointer to router for getting user profile.
 
+2- When the router gets pointing to router.get("/", userAuthorizationMiddleware, ...) then we need to retrieve the user profile from the userId.
+
+
+### MANAGE JWT IN THE BACKEND

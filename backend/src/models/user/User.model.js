@@ -61,6 +61,7 @@ const createUser = async (req, res) => {
 
 
 const getUserByEmail = async (req, res) => {
+  
   const { email, password } = req.body;
   //Check if email exist
   const user = await UserSchema.findOne({ email });

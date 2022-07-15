@@ -17,9 +17,17 @@ Content-Type: application/json
 
 
 
-
-### Get a user profile endpoint
+### Get a user profile endpoint, token is access token
 Get http://localhost:5000/v1/user/
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbasCI6InZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3ODY2MDg2LCJleHAiOjE2NTc4NjY5ODZ9.ks_juqGfbC1o3i86fHfiYBeOaYewJac1qLuzXSbZS7o
 
 {"email":"sefat1@amazon.com", "password":"sefatkhan" }
+
+
+
+
+
+### Get refreshed token, token is refreshed token
+GET http://localhost:5000/v1/tokens/new-access-jwt
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3ODY3NDI3LCJleHAiOjE2NjA0NTk0Mjd9.lhyqCEpTN-5zbbfIEs_LP-9s1pRPvHVQZYLskw3E5cs
+
