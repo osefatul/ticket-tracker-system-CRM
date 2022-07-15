@@ -22,7 +22,9 @@ The login router is a post request so we can add tokens to the databases while u
 ### USER AUTHORIZATION
 Before accessing data from the database, we need to authorize the user and verify that the user is authorized. We can do that using the access token provided by the authorization in the header.
 
+If you remember we created a JWT access token from the email and stored it in the redis database providing `JWT token` as `key` and `userId` as `value`. So, basically in this process we get back the userId from the redis database, where we give it the `key` which was the access token and returned the userId from the redis database. 
+
 Road map for authorization process:
 
-1- Create a middleware and call it authorization.middleware - the job of this middleware is to wrap up the entire process of authorization if it is successful then pass the pointer to router for getting user profile.
+1- Create a middleware and call it authorization.middleware. The job of this middleware is to wrap up the entire process of authorization. If it is successful, then pass the pointer to router for getting user profile.
 
