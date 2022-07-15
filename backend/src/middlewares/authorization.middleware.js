@@ -1,5 +1,4 @@
 const {verifyAccessJWT} = require('../helpers/jwt.helper');
-// const { getJWT } = require('../helpers/redis.helper');
 const { client } = require("../helpers/redis.helper");
 
 const userAuthorization = async (req, res, next) => {
@@ -10,26 +9,24 @@ const userAuthorization = async (req, res, next) => {
     const decoded = await verifyAccessJWT(authorization)
     console.log(decoded)
 
+    //After decode of token if we have email then the code is valid.
+    // 2. Check if JWT exists in redis database.
     if(decoded.email){
 
+    // 3. Extract user id.
         const userId = await client.get(authorization, (error, res)=>{
             if(error) throw error
-            return res
-        })
-
-        // const userId = await getJWT(authorization);
+            return res})
 
         if(!userId){
             return res.status(403).json({message: 'Forbidden'})
         }
+
         req.userId = userId;
         return next();
         
         
     }
-    // 2. Check if JWT exists in redis database.
-    // 3. Extract user id.
-    // 4. Ger user profile based on the user_id
 
 
     res.json(403).json({message: "forbidden"})

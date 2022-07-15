@@ -4,6 +4,7 @@ const {userAuthorization} = require("../middlewares/authorization.middleware")
 const {
   createUser,
   getUserByEmail,
+  getUserById,
 } = require("../models/user/User.model");
 
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
@@ -14,20 +15,27 @@ router.all("/", (req, res, next) => {
 
 
 // GET USER PROFILES
-router.get ("/", userAuthorization, (req, res)=>{
+router.get ("/", userAuthorization, async(req, res)=>{
   
-  const dummyUser = {"name": "Sefatullah", "company":"Amazon",
-  "Address":"6320skaha", "phone":"78651789",
-  "email":"osefatul@amazon.com",
-  "password":"sefatOmar"  }
+  // 1,2,3 have been in the userAuthorization middleware.
+  // 4. Get user profile based on the user_id
+  const id = req.userId
 
-  res.json({dummyUser});
+  try {
+    await getUserById(id, res)
+    // return res.json({id});
+  }catch (err) {
+    console.log(err);
+    res.json({status: 'error', message: err.message})
+  }
+
 
 })
 
 
 //REGISTER A NEW USER
 router.post("/", async (req, res) => {
+  
   try {
     await createUser(req, res);
   } catch (err) {

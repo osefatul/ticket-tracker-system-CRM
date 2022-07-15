@@ -87,7 +87,21 @@ const getUserByEmail = async (req, res) => {
 
 
 
+const getUserById = async (id, res) => {
+
+  const user = await UserSchema.findOne({ id });
+  !user && res.status(404).json({ message: "User not found" });
+
+  try {
+    return res.status(200)
+      .json({ message: user } );
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 
-module.exports = { createUser, getUserByEmail };
+
+
+module.exports = { createUser, getUserByEmail,getUserById };
 

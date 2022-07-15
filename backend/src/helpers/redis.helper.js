@@ -18,9 +18,9 @@ const setJWT = (key, value) => {
     }
 };
 
-const getJWT = (key) => {
+const getJWT = async (key) => {
     try {
-      client.get(key, (error, data) => {
+      await client.get(key, (error, data) => {
         if (error) throw(error);
         return data
       });
