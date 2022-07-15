@@ -1,13 +1,11 @@
 const { UserSchema } = require("./User.schema");
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtoken");
 
 const {
   createAccessJWT,
   createRefreshJWT,
 } = require("../../helpers/jwt.helper");
 
-const {client} =require("../../helpers/redis.helper");
 
 const createUser = async (req, res) => {
   const { name, company, address, phone, email, password } = req.body;
@@ -73,7 +71,6 @@ const getUserByEmail = async (req, res) => {
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
   try {
-
     //Redis storing JWT authentication credentials.
     const accessJwtToken = await createAccessJWT(email, `${user._id}`);
 	  const refreshJwtToken = await createRefreshJWT(email, `${user._id}`);
@@ -88,10 +85,8 @@ const getUserByEmail = async (req, res) => {
 
 
 const getUserById = async (id, res) => {
-
   const user = await UserSchema.findOne({ id });
   !user && res.status(404).json({ message: "User not found" });
-
   try {
     return res.status(200)
       .json({ message: user } );
