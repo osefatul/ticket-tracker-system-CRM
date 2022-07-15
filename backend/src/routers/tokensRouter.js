@@ -1,10 +1,8 @@
 const express = require("express");
 const { verifyRefreshJWT, createAccessJWT } = require("../helpers/jwt.helper")
-const { getUserByEmail } = require("../models/user/User.model");
 const { UserSchema } = require("../models/user/User.schema");
 
 const router = express.Router();
-
 
 //return refresh jwt
 router.get("/new-access-jwt", async (req, res, next) => {

@@ -34,3 +34,20 @@ Road map for authorization process:
 ### MANAGE JWT IN THE BACKEND
 
 In this phase there is a token router `tokensRouter` where it will redirect us into a GET request so we can recreate access token from the refresh token and extending the refresh token expiration data as well.
+
+
+
+
+
+### Ticket API Resources
+
+All the user API router follows `v1/tokens/`
+
+| #  | Routers                      | Request | Progress | Is Private | Description                     |
+|----|------------------------------| --------| ---------| -----------| --------------------------------|
+| 1  | `v1/ticket`                  | Get     | Done     | YeS        | Get all tickets for login user  |
+| 2  | `v1/ticket/{id}`             | Get     | Done     | YeS        | Get ticket details              |
+| 3  | `v1/ticket`                  | POST    | Done     | YeS        | Create new ticket               |
+| 4  | `v1/ticket/{id}`             | PUT     | Done     | YeS        | Update ticket details,eg: reply |
+| 5  | `v1/ticket/close-ticket/:id` | PATCH   | Done     | YeS        | Update ticket status to close   |
+
