@@ -19,7 +19,7 @@ Content-Type: application/json
 
 ### Get a user profile endpoint, token is access token
 Get http://localhost:5000/v1/user/
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbasCI6InZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3ODY2MDg2LCJleHAiOjE2NTc4NjY5ODZ9.ks_juqGfbC1o3i86fHfiYBeOaYewJac1qLuzXSbZS7o
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3ODcxNTM4LCJleHAiOjE2NTc4NzE1OTh9.qrYjdKV5VGNqQm-Wr-TFHrm517BnXocSHKwAerQLqXc
 
 {"email":"sefat1@amazon.com", "password":"sefatkhan" }
 
@@ -27,5 +27,5 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbasCI6InZmF0MUBhbWF6b
 
 ### Get refreshed token, token is refreshed token
 GET http://localhost:5000/v1/tokens/new-access-jwt
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3ODY4NDgwLCJleHAiOjE2NjA0NjA0ODB9.wYFHlyEZAPjRVTOK2vukiNV4fysqVgEpe5LudKVf87M
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3ODcxNTM4LCJleHAiOjE2NjA0NjM1Mzh9.FMLWrlREl6HneTqBTZWYqpzuba7BZG8dEewxugEwo54
 

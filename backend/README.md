@@ -33,4 +33,4 @@ Road map for authorization process:
 
 ### MANAGE JWT IN THE BACKEND
 
-In this phase there is a token router `tokensRouter` where it will redirect us into a get request so we will be able to renew access token from the refresh token and extending the refresh token expiration data as well.
+In this phase there is a token router `tokensRouter` where it will redirect us into a GET request so we can recreate access token from the refresh token and extending the refresh token expiration data as well.

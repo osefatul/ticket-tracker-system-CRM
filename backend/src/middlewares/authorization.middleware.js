@@ -10,10 +10,9 @@ const userAuthorization = async (req, res, next) => {
     console.log(decoded)
 
     //After decode of token if we have email then the code is valid.
-    // 2. Check if JWT exists in redis database.
     if(decoded.email){
-
-    // 3. Extract user id.
+    
+    // 2. Check if JWT exists in redis database if yes Extract user id.
         const userId = await client.get(authorization, (error, res)=>{
             if(error) throw error
             return res})
@@ -24,13 +23,12 @@ const userAuthorization = async (req, res, next) => {
 
         req.userId = userId;
         return next();
-        
-        
     }
 
+    //3. If key is either expired or invalid then delete it redis database
+    await client.del(authorization)
 
-    res.json(403).json({message: "forbidden"})
-    next()
+    return res.json(403).json({message: "forbidden"})
 }
 
 
