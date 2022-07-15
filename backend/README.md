@@ -38,8 +38,23 @@ In this phase there is a token router `tokensRouter` where it will redirect us i
 
 
 
+### USER API Resources
 
-### Ticket API Resources
+All the user API router follows `v1/user/`
+
+| #  | Routers                      | Request | Progress | Is Private | Description                             |
+|----|------------------------------| --------| ---------| -----------| --------------------------------        |
+| 1  | `v1/user`                    | Get     | Done     | Yes        | Get user info                           |
+| 2  | `v1/user`                    | POST    | Done     | NO         | Create a user                           |
+| 3  | `v1/user/login`              | POST    | Done     | NO         | Verify authentication then return JWT   |
+| 4  | `v1/user/reset-password`     | POST    | Done     | NO         | Verify email & its pin to reset password|
+| 5  | `v1/user/reset-password`     | PATCH   | Done     | NO         | Replace password                        |
+| 5  | `v1/user/logout`             | Delete  | Done     | Yes        | Delete user accessJWT                   |
+
+
+
+
+### TICKET API Resources
 
 All the user API router follows `v1/tokens/`
 
@@ -49,5 +64,5 @@ All the user API router follows `v1/tokens/`
 | 2  | `v1/ticket/{id}`             | Get     | Done     | YeS        | Get ticket details              |
 | 3  | `v1/ticket`                  | POST    | Done     | YeS        | Create new ticket               |
 | 4  | `v1/ticket/{id}`             | PUT     | Done     | YeS        | Update ticket details,eg: reply |
-| 5  | `v1/ticket/close-ticket/:id` | PATCH   | Done     | YeS        | Update ticket status to close   |
+| 5  | `v1/ticket/close-ticket/{id}`| PATCH   | Done     | YeS        | Update ticket status to close   |
 
