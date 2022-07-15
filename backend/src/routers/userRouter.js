@@ -13,8 +13,6 @@ router.all("/", (req, res, next) => {
 });
 
 
-
-
 // GET USER PROFILES
 router.get ("/", userAuthorization, (req, res)=>{
   
@@ -26,7 +24,6 @@ router.get ("/", userAuthorization, (req, res)=>{
   res.json({dummyUser});
 
 })
-
 
 
 //REGISTER A NEW USER

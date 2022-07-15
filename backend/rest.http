@@ -20,6 +20,6 @@ Content-Type: application/json
 
 ### Get a user profile endpoint
 Get http://localhost:5000/v1/user/
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3NzY5MjIxLCJleHAiOjE2NTc3NzAxMjF9.dfU_9DNf00Dyipi-WK2kVZHzP5IZIXh-jDOP3h7uXmg
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3ODU2NTY4LCJleHAiOjE2NTc4NTc0Njh9.9PXWKeaa_M8oUzzM2qRqsto87zIvrRXj9XNgrsTzZlE
 
-{"email":"sefat@amazon.com", "password":"Omarkhan" }
+{"email":"sefat1@amazon.com", "password":"sefatkhan" }

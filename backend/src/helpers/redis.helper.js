@@ -19,17 +19,16 @@ const setJWT = (key, value) => {
 };
 
 const getJWT = (key) => {
-  // console.log(key);
-  return new Promise((resolve, reject) => {
     try {
-      client.get(key, (err, res) => {
-        if (err) reject(err);
-        resolve(res);
+      client.get(key, (error, data) => {
+        if (error) throw(error);
+        return data
       });
     } catch (error) {
-      reject(error);
+      console.log(error)
+      return(error);
     }
-  });
+ 
 };
 
 module.exports = { setJWT, getJWT, client };

@@ -41,7 +41,7 @@ const storeUserRefreshJWT =  (_id, token) => {
 }
 
 
-// This will be stored in the mongoDB database
+//Creating JWT Refresh token This will be stored in the mongoDB database
 const createRefreshJWT = async (email, _id) => {
   try {
     const refreshJWT = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET, {
@@ -55,4 +55,21 @@ const createRefreshJWT = async (email, _id) => {
 };
 
 
-module.exports = { createAccessJWT, createRefreshJWT };
+
+const verifyAccessJWT = userJWT => {
+  try {
+    return jwt.verify(userJWT, process.env.JWT_ACCESS_SECRET )
+  } catch (error) {
+    console.log(error)
+    return error
+  }
+}
+
+
+
+
+
+
+
+
+module.exports = { createAccessJWT, createRefreshJWT, verifyAccessJWT };

@@ -31,7 +31,7 @@ app.use(morgan("combined"));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-//Everytime a request is coming to this path, redirect it to userRouter.
+//Every time a request is coming to this path, redirect it to userRouter.
 app.use("/v1/user", userRouter);
 app.use("/v1/ticket", ticketRouter);
 

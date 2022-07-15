@@ -21,3 +21,8 @@ The login router is a post request so we can add tokens to the databases while u
 
 ### USER AUTHORIZATION
 Before accessing data from the database, we need to authorize the user and verify that the user is authorized. We can do that using the access token provided by the authorization in the header.
+
+Road map for authorization process:
+
+1- Create a middleware and call it authorization.middleware - the job of this middleware is to wrap up the entire process of authorization if it is successful then pass the pointer to router for getting user profile.
+
