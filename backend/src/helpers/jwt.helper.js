@@ -67,9 +67,16 @@ const verifyAccessJWT = userJWT => {
 
 
 
+const verifyRefreshJWT = userJWT => {
+  try {
+    return jwt.verify(userJWT, process.env.JWT_REFRESH_SECRET )
+  } catch (error) {
+    console.log(error)
+    return error
+  }
+}
 
 
 
 
-
-module.exports = { createAccessJWT, createRefreshJWT, verifyAccessJWT };
+module.exports = { createAccessJWT, createRefreshJWT, verifyAccessJWT,verifyRefreshJWT };
