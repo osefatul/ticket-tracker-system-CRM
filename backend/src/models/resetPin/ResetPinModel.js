@@ -5,11 +5,11 @@ const { randomPinNumber } = require("../../utils/randomGenerator");
 const setPasswordResetPin = async (email) => {
     
     const pinLength = 6;
-    // const randPin = await randomPinNumber(pinLength);
-    const randPin = "123456"
-
+    const randPin = randomPinNumber(pinLength);
+    
     const resetObject = {
-        email, pin: randPin
+        email,
+        pin: randPin
     }
 
     const resetSavedObject = await new ResetPinSchema(resetObject).save()
