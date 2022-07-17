@@ -14,16 +14,15 @@ const transporter = nodemailer.createTransport({
 
 
 
-
-const send =  (info)=>{
+const send = async (info)=>{
 try {
     // send mail with defined transport object
-    let result = transporter.sendMail(info);
+    let result = await transporter.sendMail(info);
 
     console.log("Message sent: %s", result.messageId);
     console.log("Preview URL: %s", nodemailer.getTestMessageUrl(result));
 
-    return (result);
+    return result
     } catch (error) {
     console.log(error);
     }
@@ -31,7 +30,7 @@ try {
 
 
 
-const emailProcessor = ({ email, pin }) => {
+const emailProcessor = async ({ email, pin }) => {
 
     const info = {
     from: '"Ticket CRM Company" <juliana.halvorson63@ethereal.email>', // sender address
@@ -47,7 +46,7 @@ const emailProcessor = ({ email, pin }) => {
     This pin will expires in 1day
     <p></p>`, // html body
     };
-    send(info)
+    await send(info)
 }
 
 
