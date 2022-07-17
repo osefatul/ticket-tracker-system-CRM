@@ -2,8 +2,9 @@ const { token } = require("morgan");
 const { ResetPinSchema } = require("./ResetPinSchema");
 const { randomPinNumber } = require("../../utils/randomGenerator");   
 
-const setPasswordResetPin = async (email) => {
-    
+
+
+const setPasswordResetPin = async (email) => {    
     const pinLength = 6;
     const randPin = randomPinNumber(pinLength);
     
@@ -14,8 +15,18 @@ const setPasswordResetPin = async (email) => {
 
     const resetSavedObject = await new ResetPinSchema(resetObject).save()
     
-    return {resetSavedObject} 
+    return resetSavedObject
 }
+
+
+
+
+
+
+
+
+
+
 
 module.exports = {
     setPasswordResetPin

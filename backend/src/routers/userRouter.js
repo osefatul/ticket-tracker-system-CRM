@@ -10,6 +10,7 @@ const {
   getUserByEmail,
   getUserById,
 } = require("../models/user/User.model");
+const { emailProcessor } = require("../helpers/email.helper");
 
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
 router.all("/", (req, res, next) => {
@@ -69,10 +70,13 @@ router.post ("/reset-password", async (req, res)=> {
   if (user && user._id) {
     // Create unique 6 digits pin
     const setPin = await setPasswordResetPin(email);
-   return res.json(setPin);
+    await emailProcessor({
+			email,
+			pin: setPin.pin,
+		});
   }
-
-  return res.json({
+  
+  res.json({
 		status: "success",
 		message:
 			"If the email exists in our database, the password reset pin will be sent shortly.",

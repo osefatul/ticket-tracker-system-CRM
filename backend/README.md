@@ -45,7 +45,7 @@ Password Road map:
     1- Receive Email
     2- Check if user exist for the email
     3- Create unique 6 digits pin code
-    4- Save pin and email in the database
+    4- Save pin and email in the database using nodemailer.
     5- Email the pin.
 
     B: Update password in the database.
