@@ -36,6 +36,31 @@ Road map for authorization process:
 In this phase there is a token router `tokensRouter` where it will redirect us into a GET request so we can recreate access token from the refresh token and extending the refresh token expiration data as well.
 
 
+### PASSWORD RESET BACKEND
+
+we need to have to request, one POST request where it will redirect user to submit request for resetting password. Another, PATCH request where the password will be reset or get updated.
+
+Password Road map:
+    A: Create and send password reset pin code
+    1- Receive Email
+    2- Check if user exist for the email
+    3- Create unique 6 digits pin code
+    4- Save pin and email in the database
+    5- Email the pin.
+
+    B: Update password in the database.
+    1- Receive email, pin and new password.
+    2- Validate pin
+    3- Encrypt the pin.
+    4- Update the Password in the database.
+    5- Send email notification.
+
+    C: Server Side form validation.
+    1- Create middleware to validate form data.
+
+
+
+
 
 
 ### USER API Resources

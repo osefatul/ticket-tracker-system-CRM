@@ -74,7 +74,7 @@ const getUserByEmail = async (req, res) => {
   try {
     //Redis storing JWT authentication credentials.
     const accessJwtToken = await createAccessJWT(email, `${user._id}`);
-	  const refreshJwtToken = await createRefreshJWT(email, `${user._id}`);
+    const refreshJwtToken = await createRefreshJWT(email, `${user._id}`);
 
     return res.status(200)
       .json({ message: "Login successfully", accessJwtToken, refreshJwtToken } );

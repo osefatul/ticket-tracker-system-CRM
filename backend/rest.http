@@ -1,3 +1,5 @@
+
+
 ### User sign up endpoint
 POST http://localhost:5000/v1/user/
 Content-Type: application/json
@@ -6,7 +8,6 @@ Content-Type: application/json
 "address":"6320skaha", "phone":"78651789",
 "email":"sefat1@amazon.com",
 "password":"sefatkhan"  }
-
 
 
 ### User sign in endpoint
@@ -19,7 +20,7 @@ Content-Type: application/json
 
 ### Get a user profile endpoint, token is access token
 Get http://localhost:5000/v1/user/
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3ODg0NzM0LCJleHAiOjE2NTc4ODQ3OTR9.rL8mh8nZEicrGeLBqBHNaqTaqqrn3lf8DVtSegg4XLU
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MDUyNzUwLCJleHAiOjE2NjA2NDQ3NTB9.Yi6cqMFwX1_yYFdz1PXgVbljK9N3XAFARWvvOoF8iXo
 
 {"email":"sefat1@amazon.com", "password":"sefatkhan" }
 
@@ -27,5 +28,21 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 ### Get new tokens, token is refreshed token
 GET http://localhost:5000/v1/tokens/new-access-jwt
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU3ODg0NjMzLCJleHAiOjE2NjA0NzY2MzN9.ldMib0J5GaGIpEuftGbdMk0PL6WAcn0xbs69-6TYOBU
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MDUyNzUwLCJleHAiOjE2NjA2NDQ3NTB9.Yi6cqMFwX1_yYFdz1PXgVbljK9N3XAFARWvvOoF8iXo
 
+
+
+### Request reset-password 
+POST http://localhost:5000/v1/user/reset-password
+Content-Type: application/json
+
+{"email":"sefat1@amazon.com"}
+
+
+
+
+### Update new Password 
+PATCH http://localhost:5000/v1/user/reset-password
+Content-Type: application/json
+
+{"email":"sefat1@amazon.com"}
