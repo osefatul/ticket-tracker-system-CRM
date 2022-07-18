@@ -63,7 +63,9 @@ Password Road map:
     6- Delete pin from the database, so it's no longer valid.
 
     C: Server Side form validation.
-    1- Create middleware to validate form data: formValidation.middleware.js
+    1- Create middleware to validate form data using:
+        a- joi library
+        b- helpers/formValidation.middleware.js
 
 
 
