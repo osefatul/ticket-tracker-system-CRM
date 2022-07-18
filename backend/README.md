@@ -43,7 +43,7 @@ we need to have to request, one POST request where it will redirect user to subm
 Password Road map:
 
     A: Request for reset password: router.post("/reset-password")
-    1 Create and send password reset pin code: ResetPinModel.js
+    1- Create and send password reset pin code: ResetPinModel.js
     2- Receive Email
     3- Check if user exist for the email
     4- Create unique 6 digits pin code
@@ -53,9 +53,10 @@ Password Road map:
     B: Update password in the database: router.patch("/reset-password")
     1- Receive email, pin and new password.
     2- Validate pin
-    3- Encrypt the pin.
+    3- Encrypt the password.
     4- Update the Password in the database.
     5- Send email notification.
+    6- Delete pin from the database, so it's no longer valid.
 
     C: Server Side form validation.
     1- Create middleware to validate form data.

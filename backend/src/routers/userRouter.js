@@ -22,6 +22,10 @@ router.all("/", (req, res, next) => {
 });
 
 
+
+// --------------------------------------------------------------------------------------
+
+
 // GET USER PROFILES
 router.get ("/", userAuthorization, async(req, res)=>{
   
@@ -39,6 +43,8 @@ router.get ("/", userAuthorization, async(req, res)=>{
 })
 
 
+
+
 //REGISTER A NEW USER
 router.post("/", async (req, res) => {
   
@@ -49,6 +55,9 @@ router.post("/", async (req, res) => {
     res.json({ status: "error", message: err.message });
   }
 });
+
+
+
 
 //LOGIN USER
 router.post("/login", async (req, res) => {
@@ -63,14 +72,14 @@ router.post("/login", async (req, res) => {
 
 
 
-
-// RESET PASSWORD
+// RESET AND UPDATE PASSWORD
+//A: RESET PASSWORD
 router.post ("/reset-password", async (req, res)=> {
   const {email} = req.body;
   const user = await UserSchema.findOne({email});
 
   // Check if user exist for the email
-  if (user && user._id) {
+  if (user && user?._id) {
     // Create unique 6 digits pin
     const setPin = await setPasswordResetPin(email);
     await emailProcessor({
@@ -89,18 +98,22 @@ router.post ("/reset-password", async (req, res)=> {
 
 
 
-// UPDATE RESET PASSWORD
+
+
+//B: UPDATE RESET PASSWORD
 router.patch ("/reset-password", async (req, res)=> {
+  
+  //1- Received email and pin..
   const {email, pin, newPassword} = req.body;
 
-  //retrieve Pin from database.
+  //Retrieve Pin from MongoDB.
   const getPin = await getPinByEmail(email, pin)
 
-  //Validate pin
+  //2- Validate pin
   if(getPin?._id){
 
     const dbDate = getPin.addedAt;
-    const expiresIn = 1;
+    const expiresIn = 1; //expiry data shouldn't be more than 1 day.
 
     let expDate = dbDate.setDate(dbDate.getDate() + expiresIn);
 		const today = new Date();
@@ -109,15 +122,16 @@ router.patch ("/reset-password", async (req, res)=> {
 			return res.json({ status: "error", message: "Invalid or expired pin." });
 		}
 
-    //Encrypt new Password.
+    //3- Encrypt new Password.
     const hashedPass = await hashPassword(newPassword);
+    //4- Updated DB
     const user = await updatePassword(res, email, hashedPass);
     
     if (user._id) {
-			// send email notification
+			//5- send email notification
 			await emailProcessor({ email, type: "update-password-success" });
 
-			//delete pin from db
+			//6- delete pin from db
 			deletePin(email, pin);
 
 			return res.json({

@@ -37,6 +37,7 @@ const getPinByEmail = ( email, pin)=>{
     };
 
 
+    //We are deleting pin code so the user cannot reset password again having same code.
     const deletePin = (email, pin) => {
         try {
         ResetPinSchema.findOneAndDelete({ email, pin }, (error, data) => {
