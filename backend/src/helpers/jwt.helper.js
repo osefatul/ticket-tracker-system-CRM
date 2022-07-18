@@ -1,7 +1,9 @@
 const jwt = require("jsonwebtoken");
 const { client } = require("./redis.helper");
 const { UserSchema } = require("../models/user/User.schema");
-// const {storeUserRefreshJWT} = require("../models/user/User.model")
+
+
+
 
 
 // Creating JWT Access token and will be stored in the Redis database.
@@ -51,8 +53,8 @@ const createRefreshJWT = async (email, _id) => {
     const refreshJWT = jwt.sign({ email }, process.env.JWT_REFRESH_SECRET, {
       expiresIn: "30d",
     });
-    const stored = await storeUserRefreshJWT(_id ,refreshJWT);
-    return {NewRefreshToken: refreshJWT, MDBstoredRefreshToken: stored}
+    await storeUserRefreshJWT(_id ,refreshJWT);
+    return {NewRefreshToken: refreshJWT}
   } catch (error) {
     return error
   }
@@ -87,4 +89,9 @@ const verifyRefreshJWT = userJWT => {
 
 
 
-module.exports = { createAccessJWT, createRefreshJWT, verifyAccessJWT,verifyRefreshJWT, storeUserRefreshJWT };
+module.exports = { 
+  createAccessJWT, 
+  createRefreshJWT, 
+  verifyAccessJWT,
+  verifyRefreshJWT, 
+  storeUserRefreshJWT };

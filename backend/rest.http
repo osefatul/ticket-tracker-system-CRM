@@ -53,7 +53,7 @@ Content-Type: application/json
 
 ### user logout endpoint
 DELETE http://localhost:5000/v1/user/logout
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MTMzNzIwLCJleHAiOjE2NTgxMzQwMjB9.cx33oHel4thbjoWB2_qd1D78oStEmPty4v_IsrFuq6Q
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MTM3Mjg5LCJleHAiOjE2NTgxMzc1ODl9.Udr0kjhwjiZsSyWET56HAolLsjBZ7yk4dg8-8Yatd0E
 
 
 
