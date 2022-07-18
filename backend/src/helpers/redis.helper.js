@@ -7,28 +7,26 @@ const client = redis.createClient(process.env.REDIS_URL);
 })();
 
 
+// const setJWT = (key, value) => {
+//   console.log(key, value)
+//     try {
+//       return client.set(key, value);
+//     } catch (error) {
+//       console.log(error);
+//     }
+// };
 
-
-const setJWT = (key, value) => {
-  console.log(key, value)
-    try {
-      return client.set(key, value);
-    } catch (error) {
-      console.log(error);
-    }
-};
-
-const getJWT = async (key) => {
-    try {
-      await client.get(key, (error, data) => {
-        if (error) throw(error);
-        return data
-      });
-    } catch (error) {
-      console.log(error)
-      return(error);
-    }
+// const getJWT = async (key) => {
+//     try {
+//       await client.get(key, (error, data) => {
+//         if (error) throw(error);
+//         return data
+//       });
+//     } catch (error) {
+//       console.log(error)
+//       return(error);
+//     }
  
-};
+// };
 
-module.exports = { setJWT, getJWT, client };
+module.exports = { client };

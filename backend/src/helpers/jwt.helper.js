@@ -1,13 +1,14 @@
 const jwt = require("jsonwebtoken");
 const { client } = require("./redis.helper");
 const { UserSchema } = require("../models/user/User.schema");
+// const {storeUserRefreshJWT} = require("../models/user/User.model")
 
 
 // Creating JWT Access token and will be stored in the Redis database.
 const createAccessJWT = async (email, _id) => {
   try {
     const accessJWT =  jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
-      expiresIn: "1m", //change this to 15m
+      expiresIn: "5m", //change this to 15m
     });
 
      //Set key and value in the Redis.
@@ -24,9 +25,11 @@ const createAccessJWT = async (email, _id) => {
 };
 
 
-const storeUserRefreshJWT =  (_id, token) => {
+
+//Update refreshJWT token from user Database.
+const storeUserRefreshJWT = async (_id, token) => {
   try {
-    const storeRFtoken = UserSchema.findOneAndUpdate({_id},
+    const storeRFtoken = await UserSchema.findOneAndUpdate({_id},
       // $set operator will create a field if doesn't already exist .
       {$set: {"refreshJWT.token": token, 
       "refreshJWT.addedAt": Date.now()},
@@ -39,6 +42,7 @@ const storeUserRefreshJWT =  (_id, token) => {
   return error
   }
 }
+
 
 
 //Creating JWT Refresh token This will be stored in the mongoDB database
@@ -56,6 +60,7 @@ const createRefreshJWT = async (email, _id) => {
 
 
 
+//Verify access tokens if they are same
 const verifyAccessJWT = userJWT => {
   try {
     return jwt.verify(userJWT, process.env.JWT_ACCESS_SECRET )
@@ -67,6 +72,7 @@ const verifyAccessJWT = userJWT => {
 
 
 
+//Verify refresh token if they are same.
 const verifyRefreshJWT = userJWT => {
   try {
     return jwt.verify(userJWT, process.env.JWT_REFRESH_SECRET )
@@ -79,4 +85,6 @@ const verifyRefreshJWT = userJWT => {
 
 
 
-module.exports = { createAccessJWT, createRefreshJWT, verifyAccessJWT,verifyRefreshJWT };
+
+
+module.exports = { createAccessJWT, createRefreshJWT, verifyAccessJWT,verifyRefreshJWT, storeUserRefreshJWT };

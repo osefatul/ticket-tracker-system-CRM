@@ -6,10 +6,12 @@ const {
   createRefreshJWT,
 } = require("../../helpers/jwt.helper");
 
+// --------------------------------------------------------------------
 
 
 
 
+//Create a new user profile
 const createUser = async (req, res) => {
   const { name, company, address, phone, email, password } = req.body;
 
@@ -63,6 +65,8 @@ const createUser = async (req, res) => {
 
 
 
+
+// Get user data from database using its email
 const getUserByEmail = async (req, res) => {
   
   const { email, password } = req.body;
@@ -88,12 +92,14 @@ const getUserByEmail = async (req, res) => {
 
 
 
+
+// Get user data from database using its id
 const getUserById = async (id, res) => {
   const user = await UserSchema.findOne({ id });
   !user && res.status(404).json({ message: "User not found" });
   try {
     return res.status(200)
-      .json({ message: user } );
+      .json({ user } );
   } catch (error) {
     console.log(error);
   }
@@ -101,6 +107,8 @@ const getUserById = async (id, res) => {
 
 
 
+
+//Update user password
 const updatePassword = async (res, email, newHashedPassword) => {
 
   return new Promise((resolve, reject) => {
@@ -126,5 +134,10 @@ const updatePassword = async (res, email, newHashedPassword) => {
 
 
 
-module.exports = { createUser, getUserByEmail,getUserById, updatePassword };
+module.exports = { 
+  createUser, 
+  getUserByEmail,
+  getUserById, 
+  updatePassword,
+};
 

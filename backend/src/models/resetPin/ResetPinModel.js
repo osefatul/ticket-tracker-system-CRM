@@ -3,7 +3,6 @@ const { ResetPinSchema } = require("./ResetPinSchema");
 const { randomPinNumber } = require("../../utils/randomGenerator");   
 
 
-
 const setPasswordResetPin = async (email) => {    
     const pinLength = 6;
     const randPin = randomPinNumber(pinLength);
@@ -37,18 +36,18 @@ const getPinByEmail = ( email, pin)=>{
     };
 
 
-    //We are deleting pin code so the user cannot reset password again having same code.
-    const deletePin = (email, pin) => {
-        try {
-        ResetPinSchema.findOneAndDelete({ email, pin }, (error, data) => {
-            if (error) {
-            console.log(error);
-            }
-        });
-        } catch (error) {
+//We are deleting pin code so the user cannot reset password again having same code.
+const deletePin = (email, pin) => {
+    try {
+    ResetPinSchema.findOneAndDelete({ email, pin }, (error, data) => {
+        if (error) {
         console.log(error);
         }
-    };
+    });
+    } catch (error) {
+    console.log(error);
+    }
+};
 
 
 

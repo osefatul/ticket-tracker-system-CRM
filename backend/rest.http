@@ -14,21 +14,21 @@ Content-Type: application/json
 POST http://localhost:5000/v1/user/login
 Content-Type: application/json
 
-{"email":"sefat1@amazon.com", "password":"sefatkhan" }
+{"email":"sefat1@amazon.com", "password":"password5" }
 
 
 
-### Get a user profile endpoint, token is access token
+### Get a user profile endpoint, using access token
 Get http://localhost:5000/v1/user/
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MDUyNzUwLCJleHAiOjE2NjA2NDQ3NTB9.Yi6cqMFwX1_yYFdz1PXgVbljK9N3XAFARWvvOoF8iXo
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MTMzNTY3LCJleHAiOjE2NTgxMzM4Njd9.-UOglT9B0oECHt_Z-ZaRF3Hpgg9H-IwUIgTx62JJlJg
 
-{"email":"sefat1@amazon.com", "password":"sefatkhan" }
+{"email":"sefat1@amazon.com", "password":"password5" }
 
 
 
 ### Get new tokens, token is refreshed token
 GET http://localhost:5000/v1/tokens/new-access-jwt
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MDUyNzUwLCJleHAiOjE2NjA2NDQ3NTB9.Yi6cqMFwX1_yYFdz1PXgVbljK9N3XAFARWvvOoF8iXo
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MTMxOTk2LCJleHAiOjE2NjA3MjM5OTZ9.hR-HrHQdREJ1tB9THE3tisfu4Zf3v0QL9BjKKq71CXI
 
 
 
@@ -45,6 +45,53 @@ PATCH http://localhost:5000/v1/user/reset-password
 Content-Type: application/json
 
 {"email":"sefat1@amazon.com",
-"pin": "140411",
-"newPassword": "password3"
+"pin": "116454",
+"newPassword": "password5"
 }
+
+
+
+### user logout endpoint
+DELETE http://localhost:5000/v1/user/logout
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MTMzNzIwLCJleHAiOjE2NTgxMzQwMjB9.cx33oHel4thbjoWB2_qd1D78oStEmPty4v_IsrFuq6Q
+
+
+
+##Ticket APIs
+
+### Open new ticket
+POST http://localhost:3001/v1/ticket
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5ODkxOTg0LCJleHAiOjE2MDk5NzgzODR9.7cUfpK_RF68a-xfxVXuet4PWVqwToUPyDXpupFlCQNI
+Content-Type: application/json 
+
+{
+"subject": "Form Issue",
+"sender": "Prem",
+"message": "1 Contact form not working. please fix it as soon as possible" 
+}
+
+###Get all the tickets
+GET http://localhost:3001/v1/ticket
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5ODkyOTMxLCJleHAiOjE2MDk5NzkzMzF9.sPqRPk6nKGpS5tMK0uYIJv778CWBfyn3zm_Y9iTS4Iw
+
+### Get single ticket
+GET http://localhost:3001/v1/ticket/5fcd969896b6cb084ceafd19
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5ODkxOTg0LCJleHAiOjE2MDk5NzgzODR9.7cUfpK_RF68a-xfxVXuet4PWVqwToUPyDXpupFlCQNI
+
+### Reply message to the ticket
+PUT http://localhost:3001/v1/ticket/5fcd969896b6cb084ceafd19
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5ODkxOTg0LCJleHAiOjE2MDk5NzgzODR9.7cUfpK_RF68a-xfxVXuet4PWVqwToUPyDXpupFlCQNI
+Content-Type: application/json 
+
+{ 
+    "message": "this is the 222 reply", 
+    "sender": "Prem" 
+}
+
+### Close the ticket
+PATCH http://localhost:3001/v1/ticket/close-ticket/5fcd969896b6cb084ceafd19
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5OTA0NjQyLCJleHAiOjE2MDk5OTEwNDJ9.hRSVE-AFfMnsnxgCouqV_W2U5A2nfVLOBClPE59GGls
+
+### Delete the ticket
+DELETE  http://localhost:3001/v1/ticket/5fcd969896b6cb084ceafd19
+Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e

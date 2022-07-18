@@ -33,10 +33,10 @@ Road map for authorization process:
 
 ### MANAGE JWT IN THE BACKEND
 
-In this phase there is a token router `tokensRouter` where it will redirect us into a GET request so we can recreate access token from the refresh token and extending the refresh token expiration data as well.
+In this phase there is a token router `tokensRouter` where it will redirect us into a GET request so we can recreate access token from the refresh token and then extending the refresh token expiration data as well.
 
 
-### PASSWORD RESET BACKEND
+### USER PASSWORD RESET BACKEND
 
 we need to have to request, one POST request where it will redirect user to submit request for resetting password. Another, PATCH request where the password will be reset or get updated.
 
@@ -68,6 +68,11 @@ Password Road map:
         b- helpers/formValidation.middleware.js
 
 
+### USER LOGOUT
+Workflow for logging out a user.
+    1- Get JWT and verify
+    2- Delete accessJWT from redis database
+    3- delete refreshJWT from mongodb database.
 
 
 

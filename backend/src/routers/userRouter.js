@@ -4,7 +4,8 @@ const { UserSchema } = require("../models/user/User.schema");
 const {userAuthorization} = require("../middlewares/authorization.middleware")
 const { hashPassword} = require("../helpers/bcrypt.helper");
 const { emailProcessor } = require("../helpers/email.helper");
-
+const {client} = require("../helpers/redis.helper")
+const {storeUserRefreshJWT} = require("../helpers/jwt.helper")
 const { setPasswordResetPin, getPinByEmail, deletePin } = require("../models/resetPin/ResetPinModel");
 
 
@@ -19,6 +20,7 @@ const {
   getUserByEmail,
   getUserById,
   updatePassword,
+  // storeUserRefreshJWT
 } = require("../models/user/User.model");
 
 
@@ -30,26 +32,7 @@ router.all("/", (req, res, next) => {
 
 
 
-// --------------------------------------------------------------------------------------
-
-
-// GET USER PROFILES
-router.get ("/", userAuthorization, async(req, res)=>{
-  
-  // 1,2,3 have been in the userAuthorization middleware.
-  // 4. Get user profile based on the user_id
-  const id = req.userId
-  
-  try {
-    await getUserById(id, res)
-    // return res.json({id});
-  }catch (err) {
-    console.log(err);
-    res.json({status: 'error', message: err.message})
-  }
-})
-
-
+// ----------------------------------------------------------------------------
 
 
 //REGISTER A NEW USER
@@ -76,6 +59,23 @@ router.post("/login", async (req, res) => {
     res.json({ status: "error", message: err.message });
   }
 });
+
+
+
+// GET USER PROFILES
+router.get ("/", userAuthorization, async(req, res)=>{
+  
+  // 1,2,3 have been in the userAuthorization middleware.
+  // 4. Get user profile based on the user_id
+  const id = req.userId
+  
+  try {
+    await getUserById(id, res)
+  }catch (err) {
+    console.log(err);
+    res.json({status: 'error', message: err.message})
+  }
+})
 
 
 
@@ -159,6 +159,33 @@ router.patch ("/reset-password", updatePasswordValidation, async (req, res)=> {
 
 })
 
+
+
+
+
+//USER LOGOUT
+router.delete("/logout", userAuthorization, async (req, res) => {
+  const {authorization} = req.headers;
+
+  //Data coming form DB
+  const id = req.userId;
+
+  //delete accessJWT from redis database
+  authorization && client.del(authorization);
+
+  //delete refreshJWT from mongoDB
+  const result = await storeUserRefreshJWT(id, "");
+  
+  if(result._id){
+    return res.json({status:"success", message:"Logged out successfully"});
+  }
+
+  res.json({
+		status: "error",
+		message: "Unable to log you out, plz try again later",
+	});
+
+})
 
 
 
