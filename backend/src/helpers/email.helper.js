@@ -28,25 +28,6 @@ const send = (info) => {
 
 
 
-// const emailProcessor = async ({ email, pin }) => {
-
-//     const info = {
-//     from: '"Ticket CRM Company" <stuart.schneider39@ethereal.email>', // sender address
-//     to: email, // list of receivers
-//     subject: "Password rest Pin", // Subject line
-//     text:
-//         "Here is your password rest pin" +
-//         pin +
-//         " This pin will expires in 1day", // plain text body
-//     html: `<b>Hello </b>
-//     Here is your pin 
-//     <b>${pin} </b>
-//     This pin will expires in 1day
-//     <p></p>`, // html body
-//     };
-//     await send(info)
-// }
-
 
 const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
     let info = "";

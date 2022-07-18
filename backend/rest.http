@@ -45,6 +45,6 @@ PATCH http://localhost:5000/v1/user/reset-password
 Content-Type: application/json
 
 {"email":"sefat1@amazon.com",
-"pin": "690469",
+"pin": "140411",
 "newPassword": "password3"
 }

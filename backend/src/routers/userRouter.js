@@ -78,21 +78,25 @@ router.post ("/reset-password", async (req, res)=> {
   const {email} = req.body;
   const user = await UserSchema.findOne({email});
 
-  // Check if user exist for the email
-  if (user && user?._id) {
+  // Check if user exists for the email
+  if (user?._id) {
     // Create unique 6 digits pin
     const setPin = await setPasswordResetPin(email);
+
     await emailProcessor({
 			email,
 			pin: setPin.pin,
       type: "request-new-password" 
 		});
   }
+  else{
+    return res.status(404).json({ message: "User not found" });
+  }
   
-  res.json({
+  return res.json({
 		status: "success",
 		message:
-			"If the email exists in our database, the password reset pin will be sent shortly.",
+			"The password reset pin will be sent shortly.",
 	});
 })
 
@@ -106,7 +110,7 @@ router.patch ("/reset-password", async (req, res)=> {
   //1- Received email and pin..
   const {email, pin, newPassword} = req.body;
 
-  //Retrieve Pin from MongoDB.
+  //Retrieve Pin object from MongoDB.
   const getPin = await getPinByEmail(email, pin)
 
   //2- Validate pin
@@ -143,7 +147,7 @@ router.patch ("/reset-password", async (req, res)=> {
 
 	res.json({
 		status: "error",
-		message: "Unable to update your password. plz try again later",
+		message: "Unable to update your password. plz verify your pin or email address",
 	});
 
 })
