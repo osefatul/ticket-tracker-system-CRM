@@ -43,12 +43,16 @@ we need to have to request, one POST request where it will redirect user to subm
 Password Road map:
 
     A: Request for reset password: router.post("/reset-password")
-    1- Create and send password reset pin code: ResetPinModel.js
+    1- Create and send password reset pin code:
+        a- models/resetPin/ResetPinModel.js
     2- Receive Email
     3- Check if user exist for the email
     4- Create unique 6 digits pin code
-    5- Save pin and email in the database using nodemailer and resetPinSchema.js
-    6- Email the pin.
+    5- Save pin and email in the database using: 
+        a- nodemailer library
+        b- models/resetPin/resetPinSchema.js
+    6- Email the pin using:
+        a- emailProcessing: `type` should be "request-new-password" in helpers/email.helpers.js
 
     B: Update password in the database: router.patch("/reset-password")
     1- Receive email, pin and new password.
@@ -59,7 +63,7 @@ Password Road map:
     6- Delete pin from the database, so it's no longer valid.
 
     C: Server Side form validation.
-    1- Create middleware to validate form data.
+    1- Create middleware to validate form data: formValidation.middleware.js
 
 
 

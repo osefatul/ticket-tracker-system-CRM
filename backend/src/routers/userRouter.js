@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const { UserSchema } = require("../models/user/User.schema");
 const {userAuthorization} = require("../middlewares/authorization.middleware")
-const { hashPassword, comparePassword } = require("../helpers/bcrypt.helper");
+const { hashPassword} = require("../helpers/bcrypt.helper");
 const { setPasswordResetPin, getPinByEmail, deletePin } = require("../models/resetPin/ResetPinModel");
 
 
@@ -13,7 +13,7 @@ const {
   updatePassword,
 } = require("../models/user/User.model");
 const { emailProcessor } = require("../helpers/email.helper");
-const { json } = require("body-parser");
+
 
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
 router.all("/", (req, res, next) => {
