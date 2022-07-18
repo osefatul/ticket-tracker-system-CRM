@@ -23,16 +23,14 @@ const {
   // storeUserRefreshJWT
 } = require("../models/user/User.model");
 
+// ----------------------------------------------------------------------------
+
 
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
 router.all("/", (req, res, next) => {
   // res.json({ message: "return from user router" });
   next();
 });
-
-
-
-// ----------------------------------------------------------------------------
 
 
 //REGISTER A NEW USER
@@ -45,7 +43,6 @@ router.post("/", async (req, res) => {
     res.json({ status: "error", message: err.message });
   }
 });
-
 
 
 
@@ -106,7 +103,6 @@ router.post ("/reset-password", resetPasswordReqValidation, async (req, res)=> {
 			"The password reset pin will be sent shortly.",
 	});
 })
-
 
 
 
@@ -186,10 +182,6 @@ router.delete("/logout", userAuthorization, async (req, res) => {
 	});
 
 })
-
-
-
-
 
 
 

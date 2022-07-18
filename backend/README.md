@@ -4,6 +4,10 @@
 
 We have used error handler to cope with any error inside routers(ticket or user). if any error happens in the routers that will be passed to handleError.
 
+
+
+## USER CRUD
+
 ### USER AUTHENTICATION (API & JWT)
 
 First we used node to generate a random token for Access and refresh tokens.
@@ -91,7 +95,13 @@ All the user API router follows `v1/user/`
 | 5  | `v1/user/logout`             | Delete  | Done     | Yes        | Delete user accessJWT                   |
 
 
+------------------------------------------------
 
+
+
+
+
+## TICKET CRUD
 
 ### TICKET API Resources
 
