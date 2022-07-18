@@ -84,4 +84,18 @@ router.post ("/reset-password", async (req, res)=> {
 })
 
 
+
+
+// UPDATE RESET PASSWORD
+router.patch ("/reset-password", async (req, res)=> {
+  const {email, pin, newPassword} = req.body;
+})
+
+
+
+
+
+
+
+
 module.exports = router;

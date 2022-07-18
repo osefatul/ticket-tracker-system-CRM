@@ -12,9 +12,7 @@ const setPasswordResetPin = async (email) => {
         email,
         pin: randPin
     }
-
     const resetSavedObject = await new ResetPinSchema(resetObject).save()
-    
     return resetSavedObject
 }
 

@@ -1,14 +1,13 @@
 const nodemailer = require("nodemailer");
 
 
-
 //Email address of the company to send pin codes.
 const transporter = nodemailer.createTransport({
     host: 'smtp.ethereal.email',
     port: 587,
     auth: {
-        user: 'juliana.halvorson63@ethereal.email',
-        pass: 'm8t1xDgJsfvWAXsqfP'
+        user: 'stuart.schneider39@ethereal.email',
+        pass: 'tPYh56J3Yk3D6MtPCh'
     }
 });
 
@@ -33,7 +32,7 @@ try {
 const emailProcessor = async ({ email, pin }) => {
 
     const info = {
-    from: '"Ticket CRM Company" <juliana.halvorson63@ethereal.email>', // sender address
+    from: '"Ticket CRM Company" <stuart.schneider39@ethereal.email>', // sender address
     to: email, // list of receivers
     subject: "Password rest Pin", // Subject line
     text:

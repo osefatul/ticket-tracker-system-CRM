@@ -41,14 +41,16 @@ In this phase there is a token router `tokensRouter` where it will redirect us i
 we need to have to request, one POST request where it will redirect user to submit request for resetting password. Another, PATCH request where the password will be reset or get updated.
 
 Password Road map:
-    A: Create and send password reset pin code
-    1- Receive Email
-    2- Check if user exist for the email
-    3- Create unique 6 digits pin code
-    4- Save pin and email in the database using nodemailer.
-    5- Email the pin.
 
-    B: Update password in the database.
+    A: Request for reset password: router.post("/reset-password")
+    1 Create and send password reset pin code: ResetPinModel.js
+    2- Receive Email
+    3- Check if user exist for the email
+    4- Create unique 6 digits pin code
+    5- Save pin and email in the database using nodemailer.
+    6- Email the pin.
+
+    B: Update password in the database: router.patch("/reset-password")
     1- Receive email, pin and new password.
     2- Validate pin
     3- Encrypt the pin.
