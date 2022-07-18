@@ -47,7 +47,7 @@ Password Road map:
     2- Receive Email
     3- Check if user exist for the email
     4- Create unique 6 digits pin code
-    5- Save pin and email in the database using nodemailer.
+    5- Save pin and email in the database using nodemailer and resetPinSchema.js
     6- Email the pin.
 
     B: Update password in the database: router.patch("/reset-password")

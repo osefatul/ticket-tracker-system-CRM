@@ -40,9 +40,11 @@ Content-Type: application/json
 
 
 
-
 ### Update new Password 
 PATCH http://localhost:5000/v1/user/reset-password
 Content-Type: application/json
 
-{"email":"sefat1@amazon.com"}
+{"email":"sefat1@amazon.com",
+"pin": "690469",
+"newPassword": "password3"
+}

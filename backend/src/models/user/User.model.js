@@ -7,6 +7,9 @@ const {
 } = require("../../helpers/jwt.helper");
 
 
+
+
+
 const createUser = async (req, res) => {
   const { name, company, address, phone, email, password } = req.body;
 
@@ -98,6 +101,30 @@ const getUserById = async (id, res) => {
 
 
 
+const updatePassword = async (res, email, newHashedPassword) => {
 
-module.exports = { createUser, getUserByEmail,getUserById };
+  return new Promise((resolve, reject) => {
+    try {
+      UserSchema.findOneAndUpdate(
+        { email },
+        {
+          $set: { password: newHashedPassword },
+        },
+        { new: true }
+      )
+        .then((data) => resolve(data))
+        .catch((error) => {
+          console.log(error);
+          reject(error);
+        });
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+};
+
+
+
+module.exports = { createUser, getUserByEmail,getUserById, updatePassword };
 
