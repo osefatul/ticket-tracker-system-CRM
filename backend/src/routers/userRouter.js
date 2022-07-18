@@ -3,8 +3,16 @@ const router = express.Router();
 const { UserSchema } = require("../models/user/User.schema");
 const {userAuthorization} = require("../middlewares/authorization.middleware")
 const { hashPassword} = require("../helpers/bcrypt.helper");
+const { emailProcessor } = require("../helpers/email.helper");
+
 const { setPasswordResetPin, getPinByEmail, deletePin } = require("../models/resetPin/ResetPinModel");
 
+
+const {
+	resetPasswordReqValidation,
+	updatePasswordValidation,
+
+} = require("../middlewares/formValidation.middleware");
 
 const {
   createUser,
@@ -12,7 +20,6 @@ const {
   getUserById,
   updatePassword,
 } = require("../models/user/User.model");
-const { emailProcessor } = require("../helpers/email.helper");
 
 
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
@@ -74,7 +81,7 @@ router.post("/login", async (req, res) => {
 
 // RESET AND UPDATE PASSWORD
 //A: RESET PASSWORD
-router.post ("/reset-password", async (req, res)=> {
+router.post ("/reset-password", resetPasswordReqValidation, async (req, res)=> {
   const {email} = req.body;
   const user = await UserSchema.findOne({email});
 
@@ -105,7 +112,7 @@ router.post ("/reset-password", async (req, res)=> {
 
 
 //B: UPDATE RESET PASSWORD
-router.patch ("/reset-password", async (req, res)=> {
+router.patch ("/reset-password", updatePasswordValidation, async (req, res)=> {
   
   //1- Received email and pin..
   const {email, pin, newPassword} = req.body;
