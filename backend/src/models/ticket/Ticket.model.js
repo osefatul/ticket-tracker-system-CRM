@@ -4,6 +4,7 @@ const { TicketSchema } = require("./Ticket.schema");
 const createTicket = ticketObject =>{
     try {
     const savedTicket = TicketSchema(ticketObject).save()
+    console.log(savedTicket);
     return savedTicket;
     } catch (error) {
     console.log(error);
@@ -11,7 +12,20 @@ const createTicket = ticketObject =>{
     }
 }
 
+// Get tickets for a specific user
+const getTickets = clientId =>{
+    try {
+        const findTicket = TicketSchema.find({ clientId })
+        return findTicket;
+    }
+    catch (error) {
+        console.log(error);
+        return (error);
+    }
+}
+
 
 module.exports = {
     createTicket,
+    getTickets
 }

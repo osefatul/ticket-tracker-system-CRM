@@ -27,7 +27,7 @@ const userAuthorization = async (req, res, next) => {
 
     //3. If key is either expired or invalid then delete it from redis database
     await client.del(authorization)
-    return res.json(403).json({message: "forbidden"})
+    return res.status(403).json({message: "forbidden"})
 }
 
 

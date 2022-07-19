@@ -64,18 +64,20 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 ### Open new ticket
 POST http://localhost:5000/v1/ticket
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjI4MDcwLCJleHAiOjE2NTgyMjgzNzB9.i2ID6_SdSiQVhMlFOZXPIApiFQoNTvkyRwRmuTSxmbw
 Content-Type: application/json
 
 {
-"title": "Email issue",
+"title": "token issue",
 "sender": "Prem",
 "message": "Please work on outlook",
 "severity": 3 
 }
 
 ###Get all the tickets
-GET http://localhost:3001/v1/ticket
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5ODkyOTMxLCJleHAiOjE2MDk5NzkzMzF9.sPqRPk6nKGpS5tMK0uYIJv778CWBfyn3zm_Y9iTS4Iw
+GET http://localhost:5000/v1/ticket
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjI4MDcwLCJleHAiOjE2NTgyMjgzNzB9.i2ID6_SdSiQVhMlFOZXPIApiFQoNTvkyRwRmuTSxmbw
+
 
 ### Get single ticket
 GET http://localhost:3001/v1/ticket/5fcd969896b6cb084ceafd19

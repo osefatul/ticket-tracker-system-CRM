@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {userAuthorization,} = require("../middlewares/authorization.middleware");
-const {createTicket} = require("../models/ticket/Ticket.model")
+const {createTicket, getTickets} = require("../models/ticket/Ticket.model")
 
 
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
@@ -12,25 +12,18 @@ router.all("/", (req, res, next) => {
 
 
 //CREATE A NEW TICKET
-router.post(
-  "/", async (req, res) => {
+router.post("/", userAuthorization, async (req, res) => {
     try {
       const { title, sender, message, severity } = req.body;
-
       const userId = req.userId;
 
       const ticketObj = {
         clientId: userId,
         title,
         severity,
-        conversations: [
-          {
-            sender,
-            message,
-          },
-        ],
+        conversations: [{sender,message,},],
       };
-
+      
       const result = await createTicket(ticketObj);
 
       if (result._id) {
@@ -44,11 +37,26 @@ router.post(
         status: "error",
         message: "Unable to create the ticket , please try again later",
       });
+
     } catch (error) {
       res.json({ status: "error", message: error.message });
     }
   }
 );
+
+
+
+// GET ALL TICKETS FOR A SPECIFIC USER
+router.get("/", userAuthorization, async (req, res)=>{
+  try {
+    const userId = req.userId;
+    const result = await getTickets(userId);
+
+    return res.json({status: "success", result});
+  }catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+})
 
 
 
