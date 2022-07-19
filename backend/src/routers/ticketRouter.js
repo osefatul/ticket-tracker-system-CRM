@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {userAuthorization,} = require("../middlewares/authorization.middleware");
-const {createTicket, getTickets} = require("../models/ticket/Ticket.model")
+const {createTicket, getTickets, getTicketById} = require("../models/ticket/Ticket.model")
 
 
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
@@ -51,6 +51,21 @@ router.get("/", userAuthorization, async (req, res)=>{
   try {
     const userId = req.userId;
     const result = await getTickets(userId);
+
+    return res.json({status: "success", result});
+  }catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+})
+
+
+//GET A SPECIFIC TICKET FOR A SPECIFIC USER
+router.get('/:id', userAuthorization, async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const clientId = req.userId;
+    const result = await getTicketById(id, clientId);
 
     return res.json({status: "success", result});
   }catch (error) {

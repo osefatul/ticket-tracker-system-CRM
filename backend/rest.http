@@ -76,15 +76,19 @@ Content-Type: application/json
 
 ###Get all the tickets
 GET http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjI4MDcwLCJleHAiOjE2NTgyMjgzNzB9.i2ID6_SdSiQVhMlFOZXPIApiFQoNTvkyRwRmuTSxmbw
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjI4NDk2LCJleHAiOjE2NTgyMjg3OTZ9.krGdp9GOS5lj4gPplLtkqrhc3XIVfCw6K8SRg3NoRFo
+Content-Type: application/json
 
 
 ### Get single ticket
-GET http://localhost:3001/v1/ticket/5fcd969896b6cb084ceafd19
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5ODkxOTg0LCJleHAiOjE2MDk5NzgzODR9.7cUfpK_RF68a-xfxVXuet4PWVqwToUPyDXpupFlCQNI
+GET http://localhost:5000/v1/ticket/62d68df60180724f40ac619c
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjI5NjA5LCJleHAiOjE2NTgyMjk5MDl9.bDkCTPEQWTYWCz1v5lgOkquW8WjyT6Y4kvzhABKbRaI
+Content-Type: application/json
+
+
 
 ### Reply message to the ticket
-PUT http://localhost:3001/v1/ticket/5fcd969896b6cb084ceafd19
+PUT http://localhost:3001/v1/ticket/62d68e000180724f40ac619f
 Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5ODkxOTg0LCJleHAiOjE2MDk5NzgzODR9.7cUfpK_RF68a-xfxVXuet4PWVqwToUPyDXpupFlCQNI
 Content-Type: application/json 
 

@@ -25,7 +25,23 @@ const getTickets = clientId =>{
 }
 
 
+// Get tickets for a specific user
+const getTicketById = (paramId, clientId) =>{
+    try {
+        const findTicket = TicketSchema.findOne({
+            $and: [{_id:paramId}, { clientId: clientId}],
+        });
+        return findTicket;
+    }
+    catch (error) {
+        console.log(error);
+        return (error);
+    }
+}
+
+
 module.exports = {
     createTicket,
-    getTickets
+    getTickets,
+    getTicketById
 }
