@@ -57,17 +57,20 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 
 
+
+
+
 ##Ticket APIs
 
 ### Open new ticket
-POST http://localhost:3001/v1/ticket
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5ODkxOTg0LCJleHAiOjE2MDk5NzgzODR9.7cUfpK_RF68a-xfxVXuet4PWVqwToUPyDXpupFlCQNI
-Content-Type: application/json 
+POST http://localhost:5000/v1/ticket
+Content-Type: application/json
 
 {
-"subject": "Form Issue",
+"title": "Email issue",
 "sender": "Prem",
-"message": "1 Contact form not working. please fix it as soon as possible" 
+"message": "Please work on outlook",
+"severity": 3 
 }
 
 ###Get all the tickets

@@ -6,7 +6,9 @@ We have used error handler to cope with any error inside routers(ticket or user)
 
 
 
-## USER CRUD
+## USER CRUD API
+
+We will start User's workflow from authentication and authorization.
 
 ### USER AUTHENTICATION (API & JWT)
 
@@ -44,7 +46,7 @@ In this phase there is a token router `tokensRouter` where it will redirect us i
 
 we need to have to request, one POST request where it will redirect user to submit request for resetting password. Another, PATCH request where the password will be reset or get updated.
 
-Password Road map:
+Password Road map/Workflow:
 
     A: Request for reset password: router.post("/reset-password")
     1- Create and send password reset pin code:
@@ -102,6 +104,18 @@ All the user API router follows `v1/user/`
 
 
 ## TICKET CRUD
+
+Workflow:
+    1- Create URL for endpoint.
+    2- Receive new ticket data.
+    3- Authorize every request with JWT.
+    4- Insert in mongodb.
+    5- Retrieve all the tickets for the specific user.
+    6- Update conversation in the ticket database.
+    7- update ticket status eg. close, pending...
+    8- delete ticket from mongoDB.
+
+
 
 ### TICKET API Resources
 
