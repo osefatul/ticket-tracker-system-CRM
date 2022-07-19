@@ -6,6 +6,7 @@ const email = Joi.string().email({
 });
 
 const pin = Joi.number().min(10000).max(999999).required();
+const severity = Joi.number().min(1).max(5).required();
 const newPassword = Joi.string().min(3).max(30).required();
 
 const phone = Joi.number().min(400000001).max(500000001).required();
@@ -41,8 +42,47 @@ const updatePasswordValidation = (req, res, next) => {
 
 
 
+
+const createNewTicketValidation = (req, res, next) => {
+	const schema = Joi.object({
+		title: shortString.required(),
+		sender: shortString.required(),
+		message: longString.required(),
+		severity:severity
+		// issueDate: datee.required(),
+	});
+
+	console.log(req.body);
+	const value = schema.validate(req.body);
+
+	if (value.error) {
+		return res.json({ status: "error", message: value.error.message });
+	}
+	next();
+};
+
+
+const replyTicketMessageValidation = (req, res, next) => {
+	const schema = Joi.object({
+		sender: shortString.required(),
+		message: longString.required(),
+	});
+
+	console.log(req.body);
+	const value = schema.validate(req.body);
+
+	if (value.error) {
+		return res.json({ status: "error", message: value.error.message });
+	}
+	next();
+};
+
+
+
 module.exports = {
 	resetPasswordReqValidation,
 	updatePasswordValidation,
+	createNewTicketValidation,
+	replyTicketMessageValidation
 
 };

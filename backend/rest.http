@@ -64,13 +64,13 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 ### Open new ticket
 POST http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjI4MDcwLCJleHAiOjE2NTgyMjgzNzB9.i2ID6_SdSiQVhMlFOZXPIApiFQoNTvkyRwRmuTSxmbw
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjMwNzA5LCJleHAiOjE2NTgyMzEwMDl9.mT0nT9O0h9udWGXM4CDNorISVsK3o79k70fY-V7vjUk
 Content-Type: application/json
 
 {
-"title": "token issue",
-"sender": "Prem",
-"message": "Please work on outlook",
+"title": "Laptop issue",
+"sender": "Khan",
+"message": "Please work on Laptop issue",
 "severity": 3 
 }
 
@@ -81,8 +81,8 @@ Content-Type: application/json
 
 
 ### Get single ticket
-GET http://localhost:5000/v1/ticket/62d68df60180724f40ac619c
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjI5NjA5LCJleHAiOjE2NTgyMjk5MDl9.bDkCTPEQWTYWCz1v5lgOkquW8WjyT6Y4kvzhABKbRaI
+GET http://localhost:5000/v1/ticket/62d6986befc3cb43f5746fee
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjMwNzA5LCJleHAiOjE2NTgyMzEwMDl9.mT0nT9O0h9udWGXM4CDNorISVsK3o79k70fY-V7vjUk
 Content-Type: application/json
 
 

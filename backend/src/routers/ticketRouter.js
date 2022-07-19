@@ -3,6 +3,10 @@ const router = express.Router();
 const {userAuthorization,} = require("../middlewares/authorization.middleware");
 const {createTicket, getTickets, getTicketById} = require("../models/ticket/Ticket.model")
 
+const {
+  createNewTicketValidation,
+  replyTicketMessageValidation,
+} = require("../middlewares/formValidation.middleware");
 
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
 router.all("/", (req, res, next) => {
@@ -12,7 +16,7 @@ router.all("/", (req, res, next) => {
 
 
 //CREATE A NEW TICKET
-router.post("/", userAuthorization, async (req, res) => {
+router.post("/", createNewTicketValidation, userAuthorization, async (req, res) => {
     try {
       const { title, sender, message, severity } = req.body;
       const userId = req.userId;
