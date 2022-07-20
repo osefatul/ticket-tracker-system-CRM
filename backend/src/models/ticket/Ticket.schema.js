@@ -27,24 +27,30 @@ const TicketSchema = new Schema({
     required: true,
     default: 5,
   },
+  description: {
+    type: String,
+    maxlength: 1000,
+    required: true,
+    default: "",
+  },
 
   conversations: [
     {
       sender: {
         type: String,
         maxlength: 50,
-        required: true,
+        // required: true,
         default: "",
       },
       message: {
         type: String,
         maxlength: 1000,
-        required: true,
+        // required: true,
         default: "",
       },
       msgAt: {
         type: Date,
-        required: true,
+        // required: true,
         default: Date.now(),
       },
     },

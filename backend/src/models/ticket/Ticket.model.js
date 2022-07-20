@@ -40,8 +40,34 @@ const getTicketById = (paramId, clientId) =>{
 }
 
 
+
+// Get tickets for a specific user
+const updateTicketConversation = (paramId, message, sender) =>{
+    try {
+        const findTicket = TicketSchema.findOneAndUpdate(
+            { paramId },
+            {
+            status: "Pending operator response",
+            $push: {
+                conversations: { message:message, sender:sender },
+            },
+            },
+            { new: true }
+        )
+        return findTicket;
+    }
+    catch (error) {
+        console.log(error);
+        return (error);
+    }
+}
+
+
+
+
 module.exports = {
     createTicket,
     getTickets,
-    getTicketById
+    getTicketById,
+    updateTicketConversation
 }

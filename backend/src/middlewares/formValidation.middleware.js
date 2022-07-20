@@ -28,7 +28,6 @@ const resetPasswordReqValidation = (req, res, next) => {
 
 
 
-
 const updatePasswordValidation = (req, res, next) => {
 	const schema = Joi.object({ email, pin, newPassword });
 
@@ -41,13 +40,11 @@ const updatePasswordValidation = (req, res, next) => {
 
 
 
-
-
 const createNewTicketValidation = (req, res, next) => {
 	const schema = Joi.object({
 		title: shortString.required(),
-		sender: shortString.required(),
-		message: longString.required(),
+		// sender: shortString.required(),
+		description: longString.required(),
 		severity:severity
 		// issueDate: datee.required(),
 	});
@@ -60,6 +57,7 @@ const createNewTicketValidation = (req, res, next) => {
 	}
 	next();
 };
+
 
 
 const replyTicketMessageValidation = (req, res, next) => {

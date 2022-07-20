@@ -64,42 +64,46 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 ### Open new ticket
 POST http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjMwNzA5LCJleHAiOjE2NTgyMzEwMDl9.mT0nT9O0h9udWGXM4CDNorISVsK3o79k70fY-V7vjUk
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mjg4NzA4LCJleHAiOjE2NTgyODkwMDh9.aCIXZh58bxyCoML4UIGBvyfg8cXTXIE4_z4Kd5qkago
 Content-Type: application/json
 
 {
-"title": "Laptop issue",
-"sender": "Khan",
-"message": "Please work on Laptop issue",
-"severity": 3 
+"title": "Email issue",
+"description": "Please work on outlook issue",
+"severity": 5 
 }
 
 ###Get all the tickets
 GET http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjI4NDk2LCJleHAiOjE2NTgyMjg3OTZ9.krGdp9GOS5lj4gPplLtkqrhc3XIVfCw6K8SRg3NoRFo
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mjg4NDc4LCJleHAiOjE2NTgyODg3Nzh9.r_vwpHHXeWbYfXHiSrNWXBVGoPKnHA04BJD4E7jHjgE
 Content-Type: application/json
 
 
 ### Get single ticket
-GET http://localhost:5000/v1/ticket/62d6986befc3cb43f5746fee
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjMwNzA5LCJleHAiOjE2NTgyMzEwMDl9.mT0nT9O0h9udWGXM4CDNorISVsK3o79k70fY-V7vjUk
+GET http://localhost:5000/v1/ticket/62d69f3806a4445851491ed2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjMyNjA3LCJleHAiOjE2NTgyMzI5MDd9.71O30uC1xhCVl4Ie7DskhMEJM-9C23shJ4Tp4iYxQck
 Content-Type: application/json
 
 
 
 ### Reply message to the ticket
-PUT http://localhost:3001/v1/ticket/62d68e000180724f40ac619f
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5ODkxOTg0LCJleHAiOjE2MDk5NzgzODR9.7cUfpK_RF68a-xfxVXuet4PWVqwToUPyDXpupFlCQNI
+PUT http://localhost:5000/v1/ticket/62d77ae96793fece08c83ac5
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mjg4NzA4LCJleHAiOjE2NTgyODkwMDh9.aCIXZh58bxyCoML4UIGBvyfg8cXTXIE4_z4Kd5qkago
 Content-Type: application/json 
 
 { 
-    "message": "this is the 222 reply", 
-    "sender": "Prem" 
+    "message": "Hey buddy email has been fixed, check it out", 
+    "sender": "Omar" 
 }
+
+
+
 
 ### Close the ticket
 PATCH http://localhost:3001/v1/ticket/close-ticket/5fcd969896b6cb084ceafd19
 Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImUyQGUuY29tIiwiaWF0IjoxNjA5OTA0NjQyLCJleHAiOjE2MDk5OTEwNDJ9.hRSVE-AFfMnsnxgCouqV_W2U5A2nfVLOBClPE59GGls
+
+
 
 ### Delete the ticket
 DELETE  http://localhost:3001/v1/ticket/5fcd969896b6cb084ceafd19
