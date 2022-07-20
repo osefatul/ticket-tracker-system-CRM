@@ -8,6 +8,9 @@ const {
   replyTicketMessageValidation,
 } = require("../middlewares/formValidation.middleware");
 
+
+
+
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
 router.all("/", (req, res, next) => {
   // res.json({ message: "return from ticket router" });
@@ -116,7 +119,7 @@ router.put("/:id", replyTicketMessageValidation, userAuthorization, async (req, 
 
 
 
-// update ticket status to close
+// UPDATE TICKET STATUS
 router.patch("/close-ticket/:id", userAuthorization, async (req, res) => {
   try {
     const { id } = req.params;
@@ -143,7 +146,7 @@ router.patch("/close-ticket/:id", userAuthorization, async (req, res) => {
 });
 
 
-
+// DELETE TICKET
 
 router.delete("/:id", userAuthorization, async (req, res) => {
   try {
@@ -157,4 +160,7 @@ router.delete("/:id", userAuthorization, async (req, res) => {
     res.json({ status: "error", message: error.message });
   }
 });
+
+
+
 module.exports = router;

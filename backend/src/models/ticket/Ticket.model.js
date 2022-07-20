@@ -39,7 +39,6 @@ const getTicketById = (paramId, clientId) =>{
     }
 }
 
-
 // Get tickets for a specific user
 const updateTicketConversation = (paramId, message, sender) =>{
     try {
@@ -60,8 +59,6 @@ const updateTicketConversation = (paramId, message, sender) =>{
         return (error);
     }
 }
-
-
 
 
 //Close Ticket
@@ -89,8 +86,7 @@ const updatedStatusClose = (paramId, clientId, message)=>{
     }
 }
 
-
-
+//Delete a ticket
 const deleteTicket = async (paramId, clientId, res) => {
     try {
         //first find ticket
@@ -118,7 +114,6 @@ const deleteTicket = async (paramId, clientId, res) => {
         return (error);
     }
 }
-
 
 
 

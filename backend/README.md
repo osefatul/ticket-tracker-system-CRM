@@ -105,7 +105,7 @@ All the user API router follows `v1/user/`
 
 ## TICKET CRUD
 
-Workflow:
+#### Workflow:
     1- Create URL for endpoint.
     2- Receive new ticket data.
     3- Authorize every request with JWT.
@@ -116,16 +116,15 @@ Workflow:
     8- delete ticket from mongoDB.
 
 
-
 ### TICKET API Resources
 
 All the user API router follows `v1/tokens/`
 
-| #  | Routers                      | Request | Progress | Is Private | Description                     |
-|----|------------------------------| --------| ---------| -----------| --------------------------------|
-| 1  | `v1/ticket`                  | Get     | Done     | YeS        | Get all tickets for login user  |
-| 2  | `v1/ticket/{id}`             | Get     | Done     | YeS        | Get ticket details              |
-| 3  | `v1/ticket`                  | POST    | Done     | YeS        | Create new ticket               |
-| 4  | `v1/ticket/{id}`             | PUT     | Done     | YeS        | Update ticket details,eg: reply |
-| 5  | `v1/ticket/close-ticket/{id}`| PATCH   | Done     | YeS        | Update ticket status to close   |
+| #  | Routers                     | Request | Progress | Is Private | Description                     |
+|----|-----------------------------| --------| ---------| -----------| --------------------------------|
+| 1  | `v1/ticket`                 | Get     | Done     | YeS        | Get all tickets for login user  |
+| 2  | `v1/ticket/:id`             | Get     | Done     | YeS        | Get ticket details              |
+| 3  | `v1/ticket`                 | POST    | Done     | YeS        | Create new ticket               |
+| 4  | `v1/ticket/:id`             | PUT     | Done     | YeS        | Update ticket details,eg: reply |
+| 5  | `v1/ticket/close-ticket/:id`| PATCH   | Done     | YeS        | Update ticket status to close   |
 
