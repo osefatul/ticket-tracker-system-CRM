@@ -93,13 +93,13 @@ const updatedStatusClose = (paramId, clientId, message)=>{
 
 const deleteTicket = async (paramId, clientId, res) => {
     try {
-
+        //first find ticket
         const findTicket =  await TicketSchema.findOne({
             $and: [{_id:paramId}, { clientId: clientId}],
         });
 
+        //if ticket is found in the DB then delete
         if(findTicket){
-
         const deleteTicket = await findTicket.deleteOne()
         return res.json({
             status: "success",
@@ -108,9 +108,9 @@ const deleteTicket = async (paramId, clientId, res) => {
         });
         }
 
+        //if ticket not found in the DB then:
         return res.json({ status: 'error', message:"ticket is not found"}); 
-        // console.log(findTicket)
-
+    
 
     }
     catch (error) {
