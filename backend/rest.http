@@ -64,13 +64,13 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 ### Open new ticket
 POST http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9taWRAYW1hem9uLmNvbSIsImlhdCI6MTY1ODI4OTI4MywiZXhwIjoxNjU4Mjg5NTgzfQ.C6PZJz-CJWWw4RzI27kxu0MOkd-kWykhL-WJRcXJGHU
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MzAyMzcxLCJleHAiOjE2NTgzMDMyNzF9.QNs5oV1_aPFaRTUXoZY75FpGtub3Lq2hpZx9ziX_nGo
 Content-Type: application/json
 
 {
-"title": "Fastenal issue",
-"description": "Please work on Fastenal machine issue",
-"severity": 5 
+"title": "ap issue",
+"description": "Please work on wireless machine issue",
+"severity": 3 
 }
 
 ###Get all the tickets
@@ -105,5 +105,5 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6
 
 
 ### Delete the ticket
-DELETE  http://localhost:3001/v1/ticket/62d77cb1fb20e2654b8a587f
-Authorization:  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e
+DELETE  http://localhost:5000/v1/ticket/62d77ae96793fece08c83ac5
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MzAyMzcxLCJleHAiOjE2NTgzMDMyNzF9.QNs5oV1_aPFaRTUXoZY75FpGtub3Lq2hpZx9ziX_nGo

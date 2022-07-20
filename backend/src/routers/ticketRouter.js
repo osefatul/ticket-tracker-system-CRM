@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {userAuthorization,} = require("../middlewares/authorization.middleware");
-const {createTicket, getTickets, getTicketById, updateTicketConversation, updatedStatusClose} = require("../models/ticket/Ticket.model")
+const {createTicket, getTickets, getTicketById, updateTicketConversation, updatedStatusClose, deleteTicket} = require("../models/ticket/Ticket.model")
 
 const {
   createNewTicketValidation,
@@ -142,4 +142,19 @@ router.patch("/close-ticket/:id", userAuthorization, async (req, res) => {
   }
 });
 
+
+
+
+router.delete("/:id", userAuthorization, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const clientId = req.userId;
+
+  await deleteTicket( id, clientId, res );
+
+
+  } catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+});
 module.exports = router;

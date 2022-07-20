@@ -91,11 +91,44 @@ const updatedStatusClose = (paramId, clientId, message)=>{
 
 
 
+const deleteTicket = async (paramId, clientId, res) => {
+    try {
+
+        const findTicket =  await TicketSchema.findOne({
+            $and: [{_id:paramId}, { clientId: clientId}],
+        });
+
+        if(findTicket){
+
+        const deleteTicket = await findTicket.deleteOne()
+        return res.json({
+            status: "success",
+            message: "The ticket has been deleted",
+            deleteTicket
+        });
+        }
+
+        return res.json({ status: 'error', message:"ticket is not found"}); 
+        // console.log(findTicket)
+
+
+    }
+    catch (error) {
+        console.log(error);
+        return (error);
+    }
+}
+
+
+
+
+
 
 module.exports = {
     createTicket,
     getTickets,
     getTicketById,
     updateTicketConversation,
-    updatedStatusClose
+    updatedStatusClose,
+    deleteTicket
 }
