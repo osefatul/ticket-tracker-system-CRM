@@ -65,7 +65,7 @@ const updateTicketConversation = (paramId, message, sender) =>{
 
 
 //Close Ticket
-const updatedStatusClose = (paramId, clientId)=>{
+const updatedStatusClose = (paramId, clientId, message)=>{
 
     try {
         const findTicket = TicketSchema.findOneAndUpdate(
@@ -73,7 +73,10 @@ const updatedStatusClose = (paramId, clientId)=>{
         $and: [{_id:paramId}, { clientId: clientId}],
         },
         {
-        status: "Resolved"
+        status: "Resolved",
+        $push : {
+            conversations:{message:message}
+        }
         },
         { new: true }
         );

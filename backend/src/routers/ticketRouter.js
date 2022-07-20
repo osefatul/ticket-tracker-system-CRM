@@ -121,8 +121,9 @@ router.patch("/close-ticket/:id", userAuthorization, async (req, res) => {
   try {
     const { id } = req.params;
     const clientId = req.userId;
+    const {message} = req.body;
 
-    const result = await updatedStatusClose( id, clientId );
+    const result = await updatedStatusClose( id, clientId, message );
 
     console.log(result);
 
