@@ -122,9 +122,11 @@ router.patch("/close-ticket/:id", userAuthorization, async (req, res) => {
     const { id } = req.params;
     const clientId = req.userId;
 
-    const result = await updatedStatusClose({ _id, clientId });
+    const result = await updatedStatusClose( id, clientId );
 
-    if (result._id) {
+    console.log(result);
+
+    if (result) {
       return res.json({
         status: "success",
         message: "The ticket has been resolved successfully",
