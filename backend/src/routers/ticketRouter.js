@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {userAuthorization,} = require("../middlewares/authorization.middleware");
-const {createTicket, getTickets, getTicketById, updateTicketConversation} = require("../models/ticket/Ticket.model")
+const {createTicket, getTickets, getTicketById, updateTicketConversation, updatedStatusClose} = require("../models/ticket/Ticket.model")
 
 const {
   createNewTicketValidation,
@@ -56,8 +56,12 @@ router.get("/", userAuthorization, async (req, res)=>{
   try {
     const userId = req.userId;
     const result = await getTickets(userId);
+    // res.json(result.map(ticket=>ticket._id));
+    if(result) 
+    {return res.json({status: "success", result});}
+  
+    res.json({status: "success", message: "This user has no ticket"})
 
-    return res.json({status: "success", result});
   }catch (error) {
     res.json({ status: "error", message: error.message });
   }
@@ -73,7 +77,10 @@ router.get('/:id', userAuthorization, async (req, res) => {
     const clientId = req.userId;
     const result = await getTicketById(id, clientId);
 
-    return res.json({status: "success", result});
+    if(result) return res.json({status: "success", result}); 
+
+    res.json({status: "success", message: "This specific ticket is not in the user's list."});
+
   }catch (error) {
     res.json({ status: "error", message: error.message });
   }
@@ -109,8 +116,27 @@ router.put("/:id", replyTicketMessageValidation, userAuthorization, async (req, 
 
 
 
-router.get("/", (req, res) => {
-  res.status(200).json(req.body);
+// update ticket status to close
+router.patch("/close-ticket/:id", userAuthorization, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const clientId = req.userId;
+
+    const result = await updatedStatusClose({ _id, clientId });
+
+    if (result._id) {
+      return res.json({
+        status: "success",
+        message: "The ticket has been resolved successfully",
+      });
+    }
+    res.json({
+      status: "error",
+      message: "Unable to update the ticket",
+    });
+  } catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
 });
 
 module.exports = router;

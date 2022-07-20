@@ -12,11 +12,11 @@ const createTicket = ticketObject =>{
     }
 }
 
-// Get tickets for a specific user
+// Get all tickets for a specific user
 const getTickets = clientId =>{
     try {
-        const findTicket = TicketSchema.find({ clientId })
-        return findTicket;
+        const findTickets = TicketSchema.find({ clientId })
+        return findTickets;
     }
     catch (error) {
         console.log(error);
@@ -40,7 +40,6 @@ const getTicketById = (paramId, clientId) =>{
 }
 
 
-
 // Get tickets for a specific user
 const updateTicketConversation = (paramId, message, sender) =>{
     try {
@@ -62,6 +61,25 @@ const updateTicketConversation = (paramId, message, sender) =>{
     }
 }
 
+//Close Ticket
+const updatedStatusClose = ({id, clientId})=>{
+    try {
+        const findTicket = TicketSchema.findOneAndUpdate(
+            {  $and: [{_id:paramId}, { clientId: clientId}], },
+            {
+            status: "Resolved",
+            },
+            { new: true }
+        )
+        return findTicket;
+    }
+    catch (error) {
+        console.log(error);
+        return (error);
+    
+}
+}
+
 
 
 
@@ -69,5 +87,6 @@ module.exports = {
     createTicket,
     getTickets,
     getTicketById,
-    updateTicketConversation
+    updateTicketConversation,
+    updatedStatusClose
 }

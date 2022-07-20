@@ -4,10 +4,10 @@
 POST http://localhost:5000/v1/user/
 Content-Type: application/json
 
-{"name": "Sefat", "company":"Amazon",
-"address":"6320skaha", "phone":"78651789",
-"email":"sefat1@amazon.com",
-"password":"sefatkhan"  }
+{"name": "ravinder", "company":"Amazon",
+"address":"6320skaha", "phone":"688651789",
+"email":"ravinder@amazon.com",
+"password":"password5"  }
 
 
 ### User sign in endpoint
@@ -64,24 +64,24 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 ### Open new ticket
 POST http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mjg4NzA4LCJleHAiOjE2NTgyODkwMDh9.aCIXZh58bxyCoML4UIGBvyfg8cXTXIE4_z4Kd5qkago
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9taWRAYW1hem9uLmNvbSIsImlhdCI6MTY1ODI4OTI4MywiZXhwIjoxNjU4Mjg5NTgzfQ.C6PZJz-CJWWw4RzI27kxu0MOkd-kWykhL-WJRcXJGHU
 Content-Type: application/json
 
 {
-"title": "Email issue",
-"description": "Please work on outlook issue",
+"title": "Fastenal issue",
+"description": "Please work on Fastenal machine issue",
 "severity": 5 
 }
 
 ###Get all the tickets
 GET http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mjg4NDc4LCJleHAiOjE2NTgyODg3Nzh9.r_vwpHHXeWbYfXHiSrNWXBVGoPKnHA04BJD4E7jHjgE
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjkwNTY0LCJleHAiOjE2NTgyOTE0NjR9.1F_RJ0YWAj5QA2HAu-CxbxeKXF5NPTtPntLNz5v-F_U
 Content-Type: application/json
 
 
 ### Get single ticket
-GET http://localhost:5000/v1/ticket/62d69f3806a4445851491ed2
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjMyNjA3LCJleHAiOjE2NTgyMzI5MDd9.71O30uC1xhCVl4Ie7DskhMEJM-9C23shJ4Tp4iYxQck
+GET http://localhost:5000/v1/ticket/62d77cb1fb20e2654b8a587f
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjkwNTY0LCJleHAiOjE2NTgyOTE0NjR9.1F_RJ0YWAj5QA2HAu-CxbxeKXF5NPTtPntLNz5v-F_U
 Content-Type: application/json
 
 
@@ -95,7 +95,6 @@ Content-Type: application/json
     "message": "Hey buddy email has been fixed, check it out", 
     "sender": "Omar" 
 }
-
 
 
 

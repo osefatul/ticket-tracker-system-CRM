@@ -30,7 +30,6 @@ const resetPasswordReqValidation = (req, res, next) => {
 
 const updatePasswordValidation = (req, res, next) => {
 	const schema = Joi.object({ email, pin, newPassword });
-
 	const value = schema.validate(req.body);
 	if (value.error) {
 		return res.json({ status: "error", message: value.error.message });
@@ -43,15 +42,13 @@ const updatePasswordValidation = (req, res, next) => {
 const createNewTicketValidation = (req, res, next) => {
 	const schema = Joi.object({
 		title: shortString.required(),
-		// sender: shortString.required(),
 		description: longString.required(),
 		severity:severity
-		// issueDate: datee.required(),
+	
 	});
 
 	console.log(req.body);
 	const value = schema.validate(req.body);
-
 	if (value.error) {
 		return res.json({ status: "error", message: value.error.message });
 	}
