@@ -1,15 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
+
 const initialState = {
-    ticket:[],
+    tickets: [],
     isLoading: false,
-    error: '',
+    error: "",
     replyTicketError: "",
     searchTicketList: [],
     selectedTicket: {},
     replyMsg: "",
-}
+};
 
 const ticketListSlice = createSlice({
     name: "ticketList",
@@ -23,7 +24,7 @@ const ticketListSlice = createSlice({
         state.searchTicketList = action.payload;
         state.isLoading = false;
     },
-    fetchTicketFail: (state, { payload }) => {
+    fetchTicketFail: (state, { payload }) => {//payload has been destructed from action
         state.isLoading = false;
         state.error = payload;
     },
@@ -97,6 +98,6 @@ export const {
     closeTicketFail,
     searchTickets,
     resetResponseMsg,
-  } = actions;
-  
-  export default reducer;
+} = actions;
+
+export default reducer;
