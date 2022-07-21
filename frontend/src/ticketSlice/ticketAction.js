@@ -12,4 +12,17 @@ import {
     closeTicketLoading,
     closeTicketSuccess,
     closeTicketFail,
-  } from "./ticketsSlice";
+} from "./ticketsSlice";
+
+
+const fetchAllTickets = ()=> (dispatch)=>{
+    dispatch(fetchTicketLoading());
+
+    try {
+        //
+    }catch(error) {
+        dispatch(fetchTicketFail(error.message));
+
+    }
+
+}
