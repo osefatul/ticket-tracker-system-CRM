@@ -7,14 +7,10 @@ const closeTicketUrl = rootUrl + "ticket/close-ticket";
 
 
 
-
-
-
-
 export const createNewTicket  = async (formData)=>{
     console.log("from api", formData)
     try{
-        const result =await axios.post(ticketUlr, frmData, {
+        const result =await axios.post(ticketUlr, formData, {
             headers: {
             Authorization: sessionStorage.getItem("accessJWT"),
             },
@@ -24,7 +20,6 @@ export const createNewTicket  = async (formData)=>{
         return e;
     }
 }
-
 
 
 

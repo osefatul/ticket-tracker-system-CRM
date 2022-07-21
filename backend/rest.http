@@ -75,7 +75,7 @@ Content-Type: application/json
 
 ###Get all the tickets
 GET http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjkwNTY0LCJleHAiOjE2NTgyOTE0NjR9.1F_RJ0YWAj5QA2HAu-CxbxeKXF5NPTtPntLNz5v-F_U
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mzk0MjE2LCJleHAiOjE2NTgzOTUxMTZ9.ykiNIUCm5TR998rULFfNeGTaMWzbEBbG1k8oW4oClDo
 Content-Type: application/json
 
 
@@ -88,7 +88,7 @@ Content-Type: application/json
 
 ### Reply message to the ticket
 PUT http://localhost:5000/v1/ticket/62d77ae96793fece08c83ac5
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mjg4NzA4LCJleHAiOjE2NTgyODkwMDh9.aCIXZh58bxyCoML4UIGBvyfg8cXTXIE4_z4Kd5qkago
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mzk0MjE2LCJleHAiOjE2NTgzOTUxMTZ9.ykiNIUCm5TR998rULFfNeGTaMWzbEBbG1k8oW4oClDo
 Content-Type: application/json 
 
 { 
