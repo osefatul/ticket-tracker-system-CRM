@@ -1,0 +1,15 @@
+import {
+    fetchTicketLoading,
+    fetchTicketSuccess,
+    fetchTicketFail,
+    searchTickets,
+    fetchSingleTicketLoading,
+    fetchSingleTicketSuccess,
+    fetchSingleTicketFail,
+    replyTicketLoading,
+    replyTicketSuccess,
+    replyTicketFail,
+    closeTicketLoading,
+    closeTicketSuccess,
+    closeTicketFail,
+  } from "./ticketsSlice";
