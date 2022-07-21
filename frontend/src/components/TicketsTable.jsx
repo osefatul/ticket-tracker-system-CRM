@@ -3,10 +3,23 @@ import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-function TicketsTable({ tickets }) {
+import {useSelector} from "react-redux";
+
+
+
+
+function TicketsTable({dummyTickets }) {
+
+// function TicketsTable() {
+
+  const {tickets, isLoading, error} = useSelector(state => state.tickets)
 
   //using state hook in order to comply with changing as we are deleting rows
   const [data, setData] = useState(tickets);
+
+  console.log(tickets)
+  console.log(data)
+
   // const classes = useStyles();
 
   // Every time Tickets list get changed, then change Data as well.
@@ -16,9 +29,9 @@ function TicketsTable({ tickets }) {
 
   const columns = [
     {
-      field: "id",
+      field: "clientId",
       headerName: "ID",
-      width: 120,
+      width: 220,
       renderCell: (params) => {
         return (
           <Link to={`/ticket_communication/${params.row.id}`}>
@@ -42,7 +55,7 @@ function TicketsTable({ tickets }) {
     {
       field: "severity",
       headerName: "Severity",
-      width: 130,
+      width: 100,
       renderCell: (params) => {
         return (
           <Link to={`/ticket_communication/${params.row.id}`}>
@@ -55,7 +68,7 @@ function TicketsTable({ tickets }) {
     {
       field: "status",
       headerName: "Status",
-      width: 110,
+      width: 200,
       renderCell: (params) => {
         return (
           <Link to={`/ticket_communication/${params.row.id}`}>
@@ -66,13 +79,13 @@ function TicketsTable({ tickets }) {
     },
 
     {
-      field: "createdDate",
+      field: "openAt",
       headerName: "Created Date",
-      width: 120,
+      width: 200,
       renderCell: (params) => {
         return (
           <Link to={`/ticket_communication/${params.row.id}`}>
-            <div>{params.row.createdDate}</div>
+            <div>{params.row.openAt}</div>
           </Link>
         );
       },
@@ -89,9 +102,10 @@ function TicketsTable({ tickets }) {
           border: 0, // also tried setting to none 
           borderRadius: 2,
           p: 2,
-          minWidth: 300,
+          minWidth: 200,
       }}
-        rows={data}
+        rows={tickets}
+        // getRowId = {(row) => row._id}
         disableSelectionOnClick
         columns={columns}
         autoPageSize

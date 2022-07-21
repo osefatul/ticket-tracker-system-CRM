@@ -64,12 +64,12 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 ### Open new ticket
 POST http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MzAyMzcxLCJleHAiOjE2NTgzMDMyNzF9.QNs5oV1_aPFaRTUXoZY75FpGtub3Lq2hpZx9ziX_nGo
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NDA0MDI2LCJleHAiOjE2NTg0MDQ5MjZ9.rG-1CI2OdiFXRYXxZPMytAY7TabdyMx2dxuEyPH8hT0
 Content-Type: application/json
 
 {
-"title": "ap issue",
-"description": "Please work on wireless machine issue",
+"title": "Router issue",
+"description": "Please work on router camera issue",
 "severity": 3 
 }
 

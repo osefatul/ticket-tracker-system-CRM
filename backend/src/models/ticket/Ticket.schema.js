@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// We are adding virtual, because mongodb "id" along with "_id".
+const opts = { toJSON: { virtuals: true } };
+
 const TicketSchema = new Schema({
   clientId: {
     type: Schema.Types.ObjectId,
@@ -55,7 +58,7 @@ const TicketSchema = new Schema({
       },
     },
   ],
-});
+}, opts);
 
 module.exports = {
   TicketSchema: mongoose.model("Ticket", TicketSchema),

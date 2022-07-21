@@ -6,14 +6,22 @@ import { AiOutlineSearch } from "react-icons/ai";
 import TicketsTable from "../components/TicketsTable";
 import { Link } from "react-router-dom";
 
+import {useDispatch} from "react-redux";
+import {fetchAllTickets} from "../ticketSlice/ticketAction";
+
+
 // Dummy tickets
 import { userRows } from "../dummyTickets";
 
 function TicketLists() {
+  const dispatch = useDispatch();
+
   const [searchString, setSearchString] = useState("");
   const [tickets, setTickets] = useState(userRows);
 
-  useEffect(() => {}, [searchString, tickets]);
+  useEffect(() => {
+    dispatch (fetchAllTickets())
+  }, );
 
   const handleOnChange = (e) => {
     const { value } = e.target;
@@ -55,7 +63,7 @@ function TicketLists() {
           </div>
         </div>
 
-        <TicketsTable tickets={tickets} />
+        <TicketsTable dummyTickets={tickets} />
       </div>
 
       <Footer />

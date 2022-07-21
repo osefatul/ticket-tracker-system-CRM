@@ -12,7 +12,7 @@ import {
     closeTicketLoading,
     closeTicketSuccess,
     closeTicketFail,
-} from "./ticketsSlice";
+} from "./ticketSlice";
 
 
 import {
@@ -23,15 +23,27 @@ import {
 } from "../api/ticketApi";
 
 
+import axios from "axios";
+
+
 
 export const fetchAllTickets = () => async (dispatch)=>{
     dispatch(fetchTicketLoading());
     try {
-        const result = await getAllTickets();
+        const result = await axios ("http://localhost:5000/v1/ticket", {
+            headers:{
+                Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NDAzMzAwLCJleHAiOjE2NTg0MDQyMDB9.A0pomB2kCYTFKSvFklGEhxRi37lwxu_3UzuDdOLE2e0"
+            }
+        })
+
+        // console.log(result)
+        dispatch (fetchTicketSuccess(result.data.result))
+
+        // const result = await getAllTickets();
 
         //data.result = this is an object we get in ticketRouter.js in the backend
-        result.data.result.length && dispatch(fetchTicketSuccess(result.data.result));
-
+        // result.data.result.length && dispatch(fetchTicketSuccess(result.data.result));
+    
     }catch(error) {
         dispatch(fetchTicketFail(error.message));
     }

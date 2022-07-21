@@ -12,9 +12,11 @@ const initialState = {
     replyMsg: "",
 };
 
+
 const ticketListSlice = createSlice({
     name: "ticketList",
     initialState,
+
     reducers: {
     fetchTicketLoading: (state) => {
         state.isLoading = true;
@@ -99,5 +101,14 @@ export const {
     searchTickets,
     resetResponseMsg,
 } = actions;
+
+
+export const selectTickets = state => state.ticketList.tickets;
+export const selectIsLoading = state => state.ticketList.isLoading;
+export const selectError = state => state.ticketList.error;
+export const selectReplyTicketError = state => state.ticketList.replyTicketError;
+export const selectSearchTicketList = state => state.ticketList.searchTicketList;
+export const selectSelectedTicket = state => state.ticketList.selectedTicket;
+export const selectReplyMsg = state => state.ticketList.replyMsg
 
 export default reducer;
