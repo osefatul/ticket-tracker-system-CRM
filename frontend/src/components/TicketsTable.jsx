@@ -4,10 +4,12 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function TicketsTable({ tickets }) {
-  //using state hook in order to comply with changing as we are deleteing rows
-  const [data, setData] = useState(tickets);
 
-  // Everytime Tickets list get changed, then change Data as well.
+  //using state hook in order to comply with changing as we are deleting rows
+  const [data, setData] = useState(tickets);
+  // const classes = useStyles();
+
+  // Every time Tickets list get changed, then change Data as well.
   useEffect(() => {
     setData(tickets);
   }, [tickets]);
@@ -79,10 +81,16 @@ function TicketsTable({ tickets }) {
 
   return (
     <div
-      className="text-white h-4/5 flex pt-8 "
+      className="text-white h-5/6 flex pt-8 "
       // style={{ display: "flex", height: "", color: "white" }}
     >
       <DataGrid
+        sx={{
+          border: 0, // also tried setting to none 
+          borderRadius: 2,
+          p: 2,
+          minWidth: 300,
+      }}
         rows={data}
         disableSelectionOnClick
         columns={columns}

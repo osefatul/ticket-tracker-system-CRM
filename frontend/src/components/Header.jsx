@@ -4,20 +4,22 @@ import { Link } from "react-router-dom";
 
 function Header() {
   const [toggle, setToggle] = useState(false);
-  const linklist = ["dashboard", "ticket-lists", "logout"];
+  const linkList = ["dashboard", "ticket-lists", "logout"];
 
   return (
-    <div className=" bg-slate-900 flex items-center justify-between px-8 h-[50px] fixed w-full top-0 z-50">
+    <div className=" bg-slate-900 flex items-center justify-between px-6 h-[50px] fixed w-full top-0 z-50">
+      <div>
       <Link to="/">
         <div className="font-bold text-[15px]">Tickets-CRM</div>
       </Link>
+      </div>
 
       <div className="">
-        <ul className="hidden sm:flex items-center justify-center text-white space-x-5 text-[12px] px-12 ">
+        <ul className="hidden sm:flex items-center justify-center text-white space-x-3 text-[12px] px-10 ">
           {["Dashboard", "Tickets", "Logout"].map((item, index) => (
             <li className="px-1 font-comorants hoverText" key={`link-${item}`}>
               <div className=" hover:border" />
-              <Link to={`/${linklist[index]}`}>
+              <Link to={`/${linkList[index]}`}>
                 <div className="flex items-center jsutify-center">
                   <a href={`#${item}`}>{item}</a>
                 </div>
@@ -42,15 +44,15 @@ function Header() {
           )}
 
           <div
-            className={`fixed top-0 right-0 z-10 h-screen w-[50vw] 
+            className={`fixed top-0 right-0 z-10 h-screen w-[40vw] 
             flex flex-col justify-end items-end 
             bg-[#0e214b] ${
               toggle ? "translate-x-0" : "translate-x-full"
             } ease-out duration-700  shadow-2xl`}
           >
-            <ul className="h-[100%] w-full flex flex-col justify-start items-start space-y-5 mt-32">
+            <ul className="h-[100%] w-full flex flex-col justify-start items-start space-y-5 mt-32 pl-5">
               {["Dashboard", "Tickets", "Logout"].map((item, index) => (
-                <Link key={item} to={`/${linklist[index]}`}>
+                <Link key={item} to={`/${linkList[index]}`}>
                   <li
                     key={item}
                     className="hoverText w-[100%] flex items-start justify-center"

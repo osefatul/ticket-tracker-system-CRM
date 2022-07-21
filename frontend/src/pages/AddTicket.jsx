@@ -8,12 +8,10 @@ function AddTicket() {
   return (
     <>
       <Header />
-
       <div className="layout ">
         <div>
           <PageBreadCrumbs page="New Ticket" />
         </div>
-
         <div>
           <AddTicketForm />
         </div>
