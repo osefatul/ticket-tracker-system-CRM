@@ -7,36 +7,24 @@ import TicketsTable from "../components/TicketsTable";
 import { Link } from "react-router-dom";
 
 import {useDispatch} from "react-redux";
-import {fetchAllTickets} from "../ticketSlice/ticketAction";
+import {fetchAllTickets, filterSearchTicket} from "../ticketSlice/ticketAction";
 
 
-// Dummy tickets
-import { userRows } from "../dummyTickets";
 
 function TicketLists() {
   const dispatch = useDispatch();
 
-  const [searchString, setSearchString] = useState("");
-  const [tickets, setTickets] = useState(userRows);
-
+  //fetch all tickets once when the page is loaded.
   useEffect(() => {
     dispatch (fetchAllTickets())
-  }, );
+  }, []);
 
+  
   const handleOnChange = (e) => {
-    const { value } = e.target;
-    setSearchString(value);
-    searchTicket(value);
+    const {value} = e.target;
+    dispatch(filterSearchTicket(value))
   };
 
-  // Search Tickets
-  const searchTicket = (stringg) => {
-    const filteredTickets = userRows.filter((ticket) =>
-      ticket.title.toLowerCase().includes(stringg.toLowerCase())
-    );
-    setTickets(filteredTickets);
-    // console.log(filteredTickets);
-  };
 
   return (
     <>
@@ -56,14 +44,14 @@ function TicketLists() {
               type="text"
               name="searchTicket"
               onChange={handleOnChange}
-              value={searchString}
+              // value={searchString}
               placeholder="Search for ticket"
               className="focus:outline-none flex items-center justify-center text-[13px]"
             />
           </div>
         </div>
 
-        <TicketsTable dummyTickets={tickets} />
+        <TicketsTable />
       </div>
 
       <Footer />

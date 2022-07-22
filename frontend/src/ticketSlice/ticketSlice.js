@@ -26,7 +26,7 @@ const ticketListSlice = createSlice({
         state.searchTicketList = action.payload;
         state.isLoading = false;
     },
-    fetchTicketFail: (state, { payload }) => {//payload has been destructed from action
+    fetchTicketFail: (state, { payload }) => {//payload has been destructured from action
         state.isLoading = false;
         state.error = payload;
     },
@@ -34,7 +34,7 @@ const ticketListSlice = createSlice({
         state.searchTicketList = state.tickets.filter((row) => {
         if (!payload) return row;
 
-        return row.subject.toLowerCase().includes(payload.toLowerCase());
+        return row.title.toLowerCase().includes(payload.toLowerCase());
         });
     },
     fetchSingleTicketLoading: (state) => {
@@ -103,12 +103,5 @@ export const {
 } = actions;
 
 
-export const selectTickets = state => state.ticketList.tickets;
-export const selectIsLoading = state => state.ticketList.isLoading;
-export const selectError = state => state.ticketList.error;
-export const selectReplyTicketError = state => state.ticketList.replyTicketError;
-export const selectSearchTicketList = state => state.ticketList.searchTicketList;
-export const selectSelectedTicket = state => state.ticketList.selectedTicket;
-export const selectReplyMsg = state => state.ticketList.replyMsg
 
 export default reducer;

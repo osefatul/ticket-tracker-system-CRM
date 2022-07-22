@@ -32,7 +32,7 @@ export const fetchAllTickets = () => async (dispatch)=>{
     try {
         const result = await axios ("http://localhost:5000/v1/ticket", {
             headers:{
-                Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NDAzMzAwLCJleHAiOjE2NTg0MDQyMDB9.A0pomB2kCYTFKSvFklGEhxRi37lwxu_3UzuDdOLE2e0"
+                Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NTMyMjYwLCJleHAiOjE2NTg1MzMxNjB9.oH5p1dOAo90QQ2_hP9z8GTlHFPyjbtrcUzFgmhtPx0U"
             }
         })
 
@@ -68,8 +68,7 @@ export const fetchSingleTicket = id => async dispatch =>{
         )
 }catch (e) {
     dispatch(fetchSingleTicketFail(e.message));
-}
-}
+}}
 
 
 

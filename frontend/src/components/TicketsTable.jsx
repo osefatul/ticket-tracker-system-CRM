@@ -8,24 +8,13 @@ import {useSelector} from "react-redux";
 
 
 
-function TicketsTable({dummyTickets }) {
+function TicketsTable() {
 
-// function TicketsTable() {
+  // const {tickets, isLoading, error} = useSelector(state => state.tickets)
 
-  const {tickets, isLoading, error} = useSelector(state => state.tickets)
-
-  //using state hook in order to comply with changing as we are deleting rows
-  const [data, setData] = useState(tickets);
-
-  console.log(tickets)
-  console.log(data)
-
-  // const classes = useStyles();
-
-  // Every time Tickets list get changed, then change Data as well.
-  useEffect(() => {
-    setData(tickets);
-  }, [tickets]);
+  const {searchTicketList, isLoading, error} = useSelector(state => state.tickets)
+  
+  if (isLoading) { return  <h3>Loading...</h3>}
 
   const columns = [
     {
@@ -93,26 +82,32 @@ function TicketsTable({dummyTickets }) {
   ];
 
   return (
+
     <div
-      className="text-white h-5/6 flex pt-8 "
-      // style={{ display: "flex", height: "", color: "white" }}
+    className="text-black h-5/6 flex pt-8 "
+    // style={{ display: "flex", height: "", color: "white" }}
     >
-      <DataGrid
-        sx={{
-          border: 0, // also tried setting to none 
-          borderRadius: 2,
-          p: 2,
-          minWidth: 200,
-      }}
-        rows={tickets}
-        // getRowId = {(row) => row._id}
-        disableSelectionOnClick
-        columns={columns}
-        autoPageSize
-        checkboxSelection
-      ></DataGrid>
+
+      { error ? <h3>{error}</h3>:
+    
+    <DataGrid
+    sx={{
+      border: 0, // also tried setting to none 
+      borderRadius: 2,
+      p: 2,
+      minWidth: 200,
+    }}
+    rows={searchTicketList}
+    // getRowId = {(row) => row._id}
+    disableSelectionOnClick
+    columns={columns}
+    autoPageSize
+    checkboxSelection
+    ></DataGrid>
+  }
     </div>
-  );
-}
+  
+    );
+  }
 
 export default TicketsTable;
