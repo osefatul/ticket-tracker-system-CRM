@@ -27,7 +27,7 @@ export const getAllTickets = async ()=>{
     try{
         const result = await axios.get("http://localhost:5000/v1/ticket", {
             headers: {
-                Authorization: sessionStorage.getItem("accessJWT")
+                Authorization:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NTMzMTgxLCJleHAiOjE2NTg1MzQwODF9.TjOVN8kHxmrAnbAx0Ib4tepb0ncyXM5ViF81q-kK9Tg"
             }
         })
         return result;
@@ -77,7 +77,8 @@ export const updateTicketStatusClosed = async (id) => {
     try {
         const result = await axios.patch(closeTicketUrl + id, {}, {
         headers: {
-            Authorization: sessionStorage.getItem("accessJWT"),
+            // Authorization: sessionStorage.getItem("accessJWT"),
+            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NTMzMTAzLCJleHAiOjE2NTg1MzQwMDN9.g-N4iP_3PyhNCf9RbXze9McLsgpdoc-exnrsz6_cIsI"
         },
         });
         return (result);

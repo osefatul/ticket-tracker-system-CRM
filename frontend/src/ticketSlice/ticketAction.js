@@ -30,19 +30,8 @@ import axios from "axios";
 export const fetchAllTickets = () => async (dispatch)=>{
     dispatch(fetchTicketLoading());
     try {
-        const result = await axios ("http://localhost:5000/v1/ticket", {
-            headers:{
-                Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NTMyMjYwLCJleHAiOjE2NTg1MzMxNjB9.oH5p1dOAo90QQ2_hP9z8GTlHFPyjbtrcUzFgmhtPx0U"
-            }
-        })
-
-        // console.log(result)
-        dispatch (fetchTicketSuccess(result.data.result))
-
-        // const result = await getAllTickets();
-
-        //data.result = this is an object we get in ticketRouter.js in the backend
-        // result.data.result.length && dispatch(fetchTicketSuccess(result.data.result));
+        const result = await getAllTickets();
+        result.data.result.length && dispatch(fetchTicketSuccess(result.data.result));
     
     }catch(error) {
         dispatch(fetchTicketFail(error.message));

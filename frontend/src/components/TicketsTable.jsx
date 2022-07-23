@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
-import { DataGrid, GridColDef, GridValueGetterParams } from "@mui/x-data-grid";
-import { useState } from "react";
+import { DataGrid} from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
-
 import {useSelector} from "react-redux";
-
-
 
 
 function TicketsTable() {
