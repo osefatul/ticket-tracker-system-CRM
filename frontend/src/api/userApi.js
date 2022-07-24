@@ -69,3 +69,20 @@ export const fetchUser = async () =>{
         return(error.message);
     }
 }
+
+
+
+
+//use this where the logout option is.
+export const userLogout = async () => {
+    try {
+        await axios.delete(logoutUrl, {
+        headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+        },
+    });
+    } catch (error) {
+        console.log(error);
+        return error.message;
+    }
+};

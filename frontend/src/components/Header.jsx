@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
+import { userLogout } from "../api/userApi";
 
 function Header() {
   const [toggle, setToggle] = useState(false);
@@ -10,12 +11,15 @@ function Header() {
 
   const clickOnItem = ()=>{
     sessionStorage.removeItem("accessJWT");
+    localStorage.removeItem("crmSite");
+    userLogout();
     setToggle(false)
     navigate("/auth")
   }
 
   return (
     <div className=" bg-slate-900 flex items-center justify-between px-6 h-[50px] fixed w-full top-0 z-50">
+      {/* TOP BAR */}
       <div>
       <Link to="/">
         <div className="font-bold text-[15px]">Tickets-CRM</div>
@@ -42,6 +46,8 @@ function Header() {
           ))}
         </ul>
 
+
+        {/* SIDE BAR ICON & X ICON  */}
         <div className=" sm:hidden h-[40px] relative flex items-center justify-center ]">
           {!toggle ? (
             <HiMenuAlt4
@@ -57,6 +63,8 @@ function Header() {
             </div>
           )}
 
+
+          {/* SIDE BAR */}
           <div
             className={`fixed top-0 right-0 z-10 h-screen w-[40vw] 
             flex flex-col justify-end items-end 
