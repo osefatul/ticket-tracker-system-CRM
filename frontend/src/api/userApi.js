@@ -12,7 +12,6 @@ export const userLogin = async (formData) =>{
     const res = await axios.post(loginUrl, formData);
     
     // console.log(res)
-
     if(res.status === 200){
         sessionStorage.setItem("accessJWT", res.data.accessJwtToken.JwtAccess);
 
@@ -23,6 +22,24 @@ export const userLogin = async (formData) =>{
     // if there is an error we will send the whole response.
     return res
     
+    }catch(error){
+        console.log(error);
+        return error
+    }
+}
+
+
+export const userRegistration = async (formData)=>{
+    try {
+        const res = await axios.post(userProfileUrl, formData);
+        // console.log(res);
+
+        if(res.status === 200){
+            console.log (res.data.message)
+            return res.data.message
+        }
+
+        return res
     }catch(error){
         console.log(error);
         return error

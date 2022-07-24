@@ -14,7 +14,7 @@ function App() {
   return (
     <div className="App text-white">
       <Routes>
-        <Route path="authentication" element={<Auth />} />
+        <Route path="auth" element={<Auth />} />
         <Route path="/" element={<Home>Home Page</Home>} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="new_ticket" element={<AddTicket />} />

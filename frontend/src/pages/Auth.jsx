@@ -1,9 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate , useLocation } from "react-router-dom";
-import { userLogin } from "../api/userApi";
-import { loginFail, loginSuccess, loginPending} from "../features/loginSlice/loginSlice";
+import { userLogin, userRegistration } from "../api/userApi";
+import { loginFail, loginSuccess, loginPending} from "../features/authSlice/loginSlice";
+import { registrationPending, registrationSuccess, registrationError} from "../features/authSlice/registrationSlice";
 import { fetchAllTickets } from "../features/ticketSlice/ticketAction";
+import 'react-phone-number-input/style.css'
+import PhoneInput from 'react-phone-number-input'
 
 // Spinner
 import Spinner from "../utils/spinner"
@@ -11,45 +14,49 @@ import Spinner from "../utils/spinner"
 
 const initialState = {
   email: "",
-  username: "",
+  name: "",
   password: "",
   confirmPassword: "",
+  phone: ""
 };
 
 function Auth() {
+  
+  const {isLoading, isAuth, error,} = useSelector(state => state.login)
+  const {isLoading:regLoading, status, message,} = useSelector(state => state.registration)
 
-  const {isLoading, isAuth, error,} = useSelector(state => state.auth)
 
   const dispatch = useDispatch();
 	const navigate = useNavigate ();
 	let location = useLocation();
 
   const [form, setForm] = useState(initialState);
+
   const [isSignup, setIsSignup] = useState(true);
   const [resetPassword, setResetPassword] = useState(false);
 
-  useEffect(() => {
-    dispatch(fetchAllTickets())
-  },[])
+  // useEffect(() => {
+  //   dispatch()
+  // },[])
 
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
+    setForm({ ...form, [e.target.name]: e.target.value },);
+
     console.log(form);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(loginPending())
-
-    const { email, username, password } = form;
+    
+    const { email, name, password, confirmPassword, phone, company } = form;
     // console.log(email, username, password);
-
+    
     try {
-
+      
       //Sign In form
       if (!isSignup){
-
+        dispatch(loginPending())
         const isAuth = await userLogin({email, password});
 
         // if we receive unsuccessful response then
@@ -62,10 +69,29 @@ function Auth() {
         console.log(isAuth)
         dispatch(loginSuccess());
         navigate("/dashboard")
+      } 
+
+
+      
+      // SignUp form
+      if(isSignup){
+        dispatch(registrationPending())
+        const isRegistered = await userRegistration({email, name, phone, company,  password, confirmPassword})
+
+        
+        //Error
+        const  regResponse = isRegistered?.response?.data?.error
+        if(regResponse){
+          console.log(regResponse)
+          return dispatch(registrationError(regResponse))
+        }
+
+        return dispatch(registrationSuccess(isRegistered));
       }
       
     }catch(error) {
-      dispatch(loginFail(error.message))
+      console.log(error.message)
+      return (error.message)
     }  
   };
 
@@ -138,12 +164,48 @@ function Auth() {
                 className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
                 block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
-                name="username"
+                name="name"
                 type="text"
                 placeholder="Username"
                 onChange={handleChange}
                 required
               />
+            </div>
+          ) : (
+            ""
+          )}
+
+        {resetPassword ? (
+            ""
+          ) : isSignup ? (
+            <div>
+
+            <div className="">
+              <label htmlFor="username">Mobile Number</label>
+              <input
+                className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
+                block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+                focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
+                name="phone"
+                type = 'number'
+                placeholder="Eg: +1 778957689"
+                onChange={handleChange}
+                required
+                />
+            </div>
+            <div className="mt-2">
+              <label htmlFor="username">Company</label>
+              <input
+                className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
+                block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+                focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
+                name="company"
+                type="text"
+                placeholder="company"
+                onChange={handleChange}
+                required
+              />
+            </div>
             </div>
           ) : (
             ""
@@ -199,7 +261,7 @@ function Auth() {
                 : "Sign In"}
                 {/* If form submitted and it is loading then add spinner*/}
                 {
-                  isLoading ? (
+                  isLoading || regLoading ? (
                     < Spinner />
                   ): " "}
             </button>
