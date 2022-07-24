@@ -11,12 +11,17 @@ export const userLogin = async (formData) =>{
     try {
     const res = await axios.post(loginUrl, formData);
     
+    // console.log(res)
+
     if(res.status === 200){
         sessionStorage.setItem("accessJWT", res.data.accessJwtToken.JwtAccess);
+
         localStorage.setItem("crmSite", JSON.stringify({refreshJWT:res.data.refreshJwtToken.NewRefreshToken}))
+        return res.data;
         }
-    console.log(res)
-    return res.data;
+    
+    // if there is an error we will send the whole response.
+    return res
     
     }catch(error){
         console.log(error);

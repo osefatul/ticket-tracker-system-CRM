@@ -70,6 +70,8 @@ const createUser = async (req, res) => {
 const getUserByEmail = async (req, res) => {
   
   const { email, password } = req.body;
+  
+  try {
   //Check if email exist
   const user = await UserSchema.findOne({ email });
   !user && res.status(404).json({ message: "User not found" });
@@ -78,7 +80,6 @@ const getUserByEmail = async (req, res) => {
   const validPassword = await bcrypt.compare(password, user.password);
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
-  try {
     //Redis storing JWT authentication credentials.
     const accessJwtToken = await createAccessJWT(email, `${user._id}`);
     const refreshJwtToken = await createRefreshJWT(email, `${user._id}`);

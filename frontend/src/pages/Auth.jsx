@@ -43,17 +43,26 @@ function Auth() {
     dispatch(loginPending())
 
     const { email, username, password } = form;
-    console.log(email, username, password);
+    // console.log(email, username, password);
 
     try {
-      const isAuth = await userLogin({email, password});
-      
-      if (isAuth.status === "error") {
-        return dispatch(loginFail(error))
-      }
 
-      dispatch(loginSuccess());
-      navigate("/dashboard")
+      //Sign In form
+      if (!isSignup){
+
+        const isAuth = await userLogin({email, password});
+
+        // if we receive unsuccessful response then
+        const AuthResponse = isAuth?.response?.data?.message
+        if (AuthResponse){
+          console.log(AuthResponse)
+          return dispatch(loginFail(error))
+        }
+
+        console.log(isAuth)
+        dispatch(loginSuccess());
+        navigate("/dashboard")
+      }
       
     }catch(error) {
       dispatch(loginFail(error.message))
