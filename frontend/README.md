@@ -32,3 +32,11 @@ Remember payload is nothing but a sent data to the reducer, which in this case i
 
 
 ### React Authentication With JWT REST API & Redux Toolkit 
+We only have one frontend page for authentication and authorization (page/auth.jsx).
+We have three states of the form:
+        1- Sign up form
+        2- Sign in form
+        3- Reset Password form.
+
+We fetched login and registered reducers and used useState hook to switch among form states.
+

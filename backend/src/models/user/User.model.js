@@ -6,9 +6,8 @@ const {
   createRefreshJWT,
 } = require("../../helpers/jwt.helper");
 
-// --------------------------------------------------------------------
 
-
+//--------------------------------------------------------------------
 
 
 //Create a new user profile
@@ -98,9 +97,11 @@ const getUserByEmail = async (req, res) => {
 const getUserById = async (id, res) => {
   const user = await UserSchema.findOne({ id });
   !user && res.status(404).json({ message: "User not found" });
+  const {_id, email, name } = user
+  
   try {
     return res.status(200)
-      .json({ user } );
+      .json({ user: {_id, email, name} } );
   } catch (error) {
     console.log(error);
   }

@@ -77,8 +77,7 @@ export const updateTicketStatusClosed = async (id) => {
     try {
         const result = await axios.patch(closeTicketUrl + id, {}, {
         headers: {
-            // Authorization: sessionStorage.getItem("accessJWT"),
-            Authorization: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NTMzMTAzLCJleHAiOjE2NTg1MzQwMDN9.g-N4iP_3PyhNCf9RbXze9McLsgpdoc-exnrsz6_cIsI"
+            Authorization: sessionStorage.getItem("accessJWT"),
         },
         });
         return (result);

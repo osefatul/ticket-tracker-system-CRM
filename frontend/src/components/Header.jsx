@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Header() {
   const [toggle, setToggle] = useState(false);
-  const linkList = ["dashboard", "ticket-lists", "logout"];
+  const linkList = ["dashboard", "ticket-lists", "/"];
+	const navigate = useNavigate ();
+
+
+  const clickOnItem = ()=>{
+    sessionStorage.removeItem("accessJWT");
+    setToggle(false)
+    navigate("/auth")
+  }
 
   return (
     <div className=" bg-slate-900 flex items-center justify-between px-6 h-[50px] fixed w-full top-0 z-50">
@@ -21,7 +29,13 @@ function Header() {
               <div className=" hover:border" />
               <Link to={`/${linkList[index]}`}>
                 <div className="flex items-center jsutify-center">
-                  <a href={`#${item}`}>{item}</a>
+                {item === "Logout" ?
+                    <a href="#" onClick={clickOnItem}>
+                      {item}
+                    </a> : <a href="#" onClick={item=>setToggle(false)}>
+                      {item}
+                    </a>
+                    }
                 </div>
               </Link>
             </li>
@@ -57,9 +71,13 @@ function Header() {
                     key={item}
                     className="hoverText w-[100%] flex items-start justify-center"
                   >
-                    <a href={`#${item}`} onClick={() => setToggle(false)}>
+                    {item === "Logout" ?
+                    <a href="#" onClick={clickOnItem}>
+                      {item}
+                    </a> : <a href="#" onClick={item=>setToggle(false)}>
                       {item}
                     </a>
+                    }
                   </li>
                 </Link>
               ))}

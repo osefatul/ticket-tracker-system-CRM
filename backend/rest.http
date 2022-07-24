@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ### Get a user profile endpoint, using access token
 Get http://localhost:5000/v1/user/
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MTMzNTY3LCJleHAiOjE2NTgxMzM4Njd9.-UOglT9B0oECHt_Z-ZaRF3Hpgg9H-IwUIgTx62JJlJg
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NjkyMTgzLCJleHAiOjE2NTg2OTQ1ODN9.lvCx01AWNcHNEDofMnj96FmqEjaeFn1FxPWJTWtA8y0
 
 {"email":"sefat1@amazon.com", "password":"password5" }
 
@@ -64,12 +64,12 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 ### Open new ticket
 POST http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NDA0MDI2LCJleHAiOjE2NTg0MDQ5MjZ9.rG-1CI2OdiFXRYXxZPMytAY7TabdyMx2dxuEyPH8hT0
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NjkyMTgzLCJleHAiOjE2NTg2OTQ1ODN9.lvCx01AWNcHNEDofMnj96FmqEjaeFn1FxPWJTWtA8y0
 Content-Type: application/json
 
 {
-"title": "Router issue",
-"description": "Please work on router camera issue",
+"title": "switch configuration issue",
+"description": "Please work on switch issue",
 "severity": 3 
 }
 

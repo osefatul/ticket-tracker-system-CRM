@@ -10,6 +10,7 @@ import PhoneInput from 'react-phone-number-input'
 
 // Spinner
 import Spinner from "../utils/spinner"
+import { getUserProfile } from "../features/SpecificUerSlice/userAction";
 
 
 const initialState = {
@@ -28,10 +29,7 @@ function Auth() {
 
   const dispatch = useDispatch();
 	const navigate = useNavigate ();
-	let location = useLocation();
-
   const [form, setForm] = useState(initialState);
-
   const [isSignup, setIsSignup] = useState(true);
   const [resetPassword, setResetPassword] = useState(false);
 
@@ -63,11 +61,12 @@ function Auth() {
         const AuthResponse = isAuth?.response?.data?.message
         if (AuthResponse){
           console.log(AuthResponse)
-          return dispatch(loginFail(error))
+          return dispatch(loginFail(AuthResponse))
         }
 
         console.log(isAuth)
         dispatch(loginSuccess());
+        dispatch(getUserProfile())
         navigate("/dashboard")
       } 
 
@@ -85,7 +84,7 @@ function Auth() {
           console.log(regResponse)
           return dispatch(registrationError(regResponse))
         }
-
+        setIsSignup(!isSignup)
         return dispatch(registrationSuccess(isRegistered));
       }
       

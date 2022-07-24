@@ -29,6 +29,7 @@ export const userLogin = async (formData) =>{
 }
 
 
+
 export const userRegistration = async (formData)=>{
     try {
         const res = await axios.post(userProfileUrl, formData);
@@ -43,5 +44,28 @@ export const userRegistration = async (formData)=>{
     }catch(error){
         console.log(error);
         return error
+    }
+}
+
+
+
+export const fetchUser = async () =>{
+    try {
+        const accessJWT = sessionStorage.getItem('accessJWT');
+
+        if(!accessJWT){
+            return "Token not found";
+        }
+        const res = await axios.get(userProfileUrl, {
+            headers: {
+                Authorization: accessJWT
+            }
+        })
+
+        // console.log(res)
+        return res.data
+    }catch(error){
+        console.log(error);
+        return(error.message);
     }
 }
