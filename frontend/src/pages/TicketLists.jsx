@@ -7,7 +7,7 @@ import TicketsTable from "../components/TicketsTable";
 import { Link } from "react-router-dom";
 
 import {useDispatch} from "react-redux";
-import {fetchAllTickets, filterSearchTicket} from "../ticketSlice/ticketAction";
+import {fetchAllTickets, filterSearchTicket} from "../features/ticketSlice/ticketAction";
 
 
 

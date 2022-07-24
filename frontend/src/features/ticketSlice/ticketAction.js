@@ -20,7 +20,7 @@ import {
     getSingleTicket,
     updateReplyTicket,
     updateTicketStatusClosed,
-} from "../api/ticketApi";
+} from "../../api/ticketApi";
 
 
 import axios from "axios";

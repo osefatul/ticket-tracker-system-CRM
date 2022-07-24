@@ -1,8 +1,13 @@
-import React, { useState } from "react";
-// import Cookies from "universal-cookie";
-// import axios from "axios";
-// import signinImage from "../assets/signup.jpg";
-// const cookies = new Cookies();
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate , useLocation } from "react-router-dom";
+import { userLogin } from "../api/userApi";
+import { loginFail, loginSuccess, loginPending} from "../features/loginSlice/loginSlice";
+import { fetchAllTickets } from "../features/ticketSlice/ticketAction";
+
+// Spinner
+import Spinner from "../utils/spinner"
+
 
 const initialState = {
   email: "",
@@ -12,22 +17,50 @@ const initialState = {
 };
 
 function Auth() {
+
+  const {isLoading, isAuth, error,} = useSelector(state => state.auth)
+
+  const dispatch = useDispatch();
+	const navigate = useNavigate ();
+	let location = useLocation();
+
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(true);
   const [resetPassword, setResetPassword] = useState(false);
 
+  useEffect(() => {
+    dispatch(fetchAllTickets())
+  },[])
+
+
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    // console.log(form);
+    console.log(form);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    dispatch(loginPending())
+
     const { email, username, password } = form;
     console.log(email, username, password);
+
+    try {
+      const isAuth = await userLogin({email, password});
+      
+      if (isAuth.status === "error") {
+        return dispatch(loginFail(error))
+      }
+
+      dispatch(loginSuccess());
+      navigate("/dashboard")
+      
+    }catch(error) {
+      dispatch(loginFail(error.message))
+    }  
   };
 
-  //########## SWITCH FUNCTIONS ##################################################################
+  //########## SWITCH FUNCTIONS ######################################
   const SignUpSwitchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
   };
@@ -42,7 +75,7 @@ function Auth() {
     setIsSignup(false);
     // window.location.reload();
   };
-  //###############################################################################################
+  //#################################################################
 
   return (
     <div className="h-screen flex items-center justify-center bg-slate-800 ">
@@ -54,6 +87,11 @@ function Auth() {
         >
           {resetPassword ? "Reset Password" : isSignup ? "Sign up" : "Sign in"}
         </p>
+        {error? 
+        <div className="flex justify-center items-center text-orange-700">
+          {error}
+        </div>
+        : "" }
         <form
           className={`space-y-4 ${
             resetPassword ? "" : "flex flex-col justify-center items-center"
@@ -63,12 +101,12 @@ function Auth() {
           <div>
             <label
               className={`${resetPassword ? "mb-2" : ""}`}
-              htmlFor="fullName"
+              htmlFor="email"
             >
               Email
             </label>
             <input
-              className={`placeholder:italic placeholder:text-slate-400 placeholder:pl-1
+              className={`placeholder:italic placeholder:text-slate-400 placeholder:pl-2
               block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
               focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1   ${
                 resetPassword ? "mt-2" : ""
@@ -81,13 +119,14 @@ function Auth() {
             />
           </div>
 
+
           {resetPassword ? (
             ""
           ) : isSignup ? (
             <div className="">
               <label htmlFor="username">Username</label>
               <input
-                className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-1
+                className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
                 block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
                 name="username"
@@ -101,13 +140,14 @@ function Auth() {
             ""
           )}
 
+
           {resetPassword ? (
             ""
           ) : (
             <div className="">
               <label htmlFor="password">Password</label>
               <input
-                className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-1
+                className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
                 block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
                 name="password"
@@ -119,13 +159,14 @@ function Auth() {
             </div>
           )}
 
+
           {resetPassword
             ? ""
             : isSignup && (
                 <div className="">
                   <label htmlFor="confirmPassword">Confirm Password</label>
                   <input
-                    className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-1
+                    className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
                     name="confirmPassword"
@@ -137,16 +178,25 @@ function Auth() {
                 </div>
               )}
 
-          <div className="border rounded-lg w-32 bg-green-900">
+
+
+          <div className={`border rounded-lg ${resetPassword? "w-44": "w-32"} bg-green-900`}>
             <button className="mx-auto flex items-center justify-center">
+              {/* Check which form we are filling */}
               {resetPassword
                 ? "Reset Password"
                 : isSignup
                 ? "Sign Up"
                 : "Sign In"}
+                {/* If form submitted and it is loading then add spinner*/}
+                {
+                  isLoading ? (
+                    < Spinner />
+                  ): " "}
             </button>
           </div>
         </form>
+
 
         {resetPassword ? (
           <div className="text-[12px] text-sky-500 ">
@@ -163,6 +213,7 @@ function Auth() {
             </a>
           </div>
         )}
+
 
         {!resetPassword && (
           <div className="">

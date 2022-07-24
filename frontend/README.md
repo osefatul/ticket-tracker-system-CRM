@@ -29,3 +29,6 @@ state.searchTicketList = state.tickets.filter((row) => {
 ```
 
 Remember payload is nothing but a sent data to the reducer, which in this case is input value.
+
+
+### React Authentication With JWT REST API & Redux Toolkit 
