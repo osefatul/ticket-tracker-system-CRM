@@ -4,7 +4,7 @@ const rootUrl = "http://localhost:5000/v1/";
 const loginUrl = rootUrl + "user/login";
 const userProfileUrl = rootUrl + "user";
 const logoutUrl = rootUrl + "user/logout";
-const newAccessJWT = rootUrl + "tokens";
+const newAccessJWT = rootUrl + "tokens/new-access-jwt";
 
 
 export const userLogin = async (formData) =>{
@@ -46,6 +46,39 @@ export const userRegistration = async (formData)=>{
         return error
     }
 }
+
+
+export const fetchNewAccessJWT = async () => {
+
+    try {
+        const {refreshJWT} = JSON.parse(localStorage.getItem("crmSite"));
+        if(!refreshJWT){
+            return ("Token not found")
+        }
+
+        const res = await axios.get(newAccessJWT, {
+            headers:{
+                Authorization: refreshJWT
+            }
+        })
+
+        if(res.data.status === "success"){
+            sessionStorage.setItem("accessJWT", res.data?.accessJWT?.JwtAccess)
+        }
+
+        return true;
+
+        
+    }catch(error){
+        // if (error.message === "Request failed with status code 403") {
+        //     localStorage.removeItem("crmSite");
+        // }
+        console.log(error.message)
+        return false;
+    }
+}
+
+
 
 
 

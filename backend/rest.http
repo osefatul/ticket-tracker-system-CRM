@@ -28,7 +28,7 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 ### Get new tokens, token is refreshed token
 GET http://localhost:5000/v1/tokens/new-access-jwt
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MTMxOTk2LCJleHAiOjE2NjA3MjM5OTZ9.hR-HrHQdREJ1tB9THE3tisfu4Zf3v0QL9BjKKq71CXI
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NzI4OTk0LCJleHAiOjE2NjEzMjA5OTR9.CM687rMX3hYqrsv2H5y62LbbLvEdv77cso7ju-yNKkwsa
 
 
 

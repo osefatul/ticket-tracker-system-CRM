@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate , useLocation } from "react-router-dom";
+import { useNavigate  } from "react-router-dom";
 import { userLogin, userRegistration } from "../api/userApi";
 import { loginFail, loginSuccess, loginPending} from "../features/authSlice/loginSlice";
 import { registrationPending, registrationSuccess, registrationError} from "../features/authSlice/registrationSlice";
-import { fetchAllTickets } from "../features/ticketSlice/ticketAction";
-import 'react-phone-number-input/style.css'
-import PhoneInput from 'react-phone-number-input'
-
 // Spinner
 import Spinner from "../utils/spinner"
 import { getUserProfile } from "../features/SpecificUerSlice/userAction";
@@ -33,23 +29,23 @@ function Auth() {
   const [isSignup, setIsSignup] = useState(true);
   const [resetPassword, setResetPassword] = useState(false);
 
-  // useEffect(() => {
-  //   dispatch()
-  // },[])
+
+//When the auth page renders check for accessJWT
+  useEffect(() => {
+		sessionStorage.getItem("accessJWT") && navigate("/")
+	}, [navigate, isAuth]);
 
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value },);
-
-    console.log(form);
+    // console.log(form);
   };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     
     const { email, name, password, confirmPassword, phone, company } = form;
-    // console.log(email, username, password);
-    
     try {
       
       //Sign In form
@@ -60,14 +56,14 @@ function Auth() {
         // if we receive unsuccessful response then
         const AuthResponse = isAuth?.response?.data?.message
         if (AuthResponse){
-          console.log(AuthResponse)
+          // console.log(AuthResponse)
           return dispatch(loginFail(AuthResponse))
         }
 
-        console.log(isAuth)
+        //console.log(isAuth)
         dispatch(loginSuccess());
         dispatch(getUserProfile())
-        navigate("/dashboard")
+        navigate("/")
       } 
 
 
@@ -77,7 +73,6 @@ function Auth() {
         dispatch(registrationPending())
         const isRegistered = await userRegistration({email, name, phone, company,  password, confirmPassword})
 
-        
         //Error
         const  regResponse = isRegistered?.response?.data?.error
         if(regResponse){
@@ -93,6 +88,8 @@ function Auth() {
       return (error.message)
     }  
   };
+
+
 
   //########## SWITCH FUNCTIONS ######################################
   const SignUpSwitchMode = () => {
@@ -110,6 +107,8 @@ function Auth() {
     // window.location.reload();
   };
   //#################################################################
+
+
 
   return (
     <div className="h-screen flex items-center justify-center bg-slate-800 ">
