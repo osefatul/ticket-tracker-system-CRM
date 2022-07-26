@@ -6,8 +6,6 @@ import {useSelector} from "react-redux";
 
 function TicketsTable() {
 
-  // const {tickets, isLoading, error} = useSelector(state => state.tickets)
-
   const {searchTicketList, isLoading, error} = useSelector(state => state.tickets)
   
   if (isLoading) { return  <h3>Loading...</h3>}
@@ -81,11 +79,8 @@ function TicketsTable() {
 
     <div
     className="text-black h-5/6 flex pt-8 "
-    // style={{ display: "flex", height: "", color: "white" }}
     >
-
       { error ? <h3>{error}</h3>:
-    
     <DataGrid
     sx={{
       border: 0, // also tried setting to none 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate  } from "react-router-dom";
+import { useLocation, useNavigate  } from "react-router-dom";
 import { userLogin, userRegistration } from "../api/userApi";
 import { loginFail, loginSuccess, loginPending} from "../features/authSlice/loginSlice";
 import { registrationPending, registrationSuccess, registrationError} from "../features/authSlice/registrationSlice";
@@ -19,12 +19,16 @@ const initialState = {
 
 function Auth() {
   
-  const {isLoading, isAuth, error,} = useSelector(state => state.login)
-  const {isLoading:regLoading, status, message,} = useSelector(state => state.registration)
-
-
   const dispatch = useDispatch();
 	const navigate = useNavigate ();
+  const location = useLocation ();
+
+  //When we want to access a page, but is restricted by login, we will be redirected to login page, once we loge in then we will be redirected back to where we wanted to go.
+  const from = location.state?.from?.pathname || "/"
+
+  const {isLoading, isAuth, error,} = useSelector(state => state.login)
+  const {isLoading:regLoading, status, message,} = useSelector(state => state.registration)
+  
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(true);
   const [resetPassword, setResetPassword] = useState(false);
@@ -32,7 +36,7 @@ function Auth() {
 
 //When the auth page renders check for accessJWT
   useEffect(() => {
-		sessionStorage.getItem("accessJWT") && navigate("/")
+		sessionStorage.getItem("accessJWT") && navigate(from , {replace:true})
 	}, [navigate, isAuth]);
 
 

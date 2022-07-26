@@ -12,12 +12,13 @@ import {fetchAllTickets, filterSearchTicket} from "../features/ticketSlice/ticke
 
 
 function TicketLists() {
+  
   const dispatch = useDispatch();
 
   //fetch all tickets once when the page is loaded.
   useEffect(() => {
     dispatch (fetchAllTickets())
-  }, []);
+  }, [dispatch]);
 
   
   const handleOnChange = (e) => {

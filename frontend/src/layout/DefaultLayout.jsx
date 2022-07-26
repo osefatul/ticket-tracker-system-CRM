@@ -22,7 +22,10 @@ export const DefaultLayout = ({ children }) => {
     result && dispatch(loginSuccess());
   };
 
-  !user._id && dispatch(getUserProfile());
+  if(!user._id) {
+    dispatch(getUserProfile());
+    // dispatch(updateAccessJWT()); 
+  }
 
   !sessionStorage.getItem("accessJWT") &&
     localStorage.getItem("crmSite") &&
@@ -39,7 +42,10 @@ export const DefaultLayout = ({ children }) => {
       </header>
 
       {isAuth? (<main className="h-main flex items-center justify-center mx-auto w-[80%]">
+        
         <Outlet />
+
+        {/* state: able to go back where we come from to this page. */}
       </main>): <Navigate to="auth" state={{from: location}} replace/>
     }
 

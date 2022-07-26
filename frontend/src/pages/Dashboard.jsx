@@ -1,14 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TicketsTable from "../components/TicketsTable";
 import { Link } from "react-router-dom";
-
 import PageBreadCrumbs from "../components/PageBreadCrumbs";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchAllTickets } from "../features/ticketSlice/ticketAction";
 
 // Dummy tickets
 import { userRows } from "../dummyTickets";
+
+
+
 function Dashboard() {
+
+  const dispatch = useDispatch();
+  const { tickets } = useSelector((state) => state.tickets);//from store.js
+
+  useEffect(()=>{
+    if (!tickets.length) {
+      dispatch(fetchAllTickets())
+    }
+  },[tickets, dispatch]);
+
+
   return (
     <>
       <Header />
@@ -37,7 +52,7 @@ function Dashboard() {
         </div>
 
         {/* Tickets Table */}
-        <TicketsTable tickets={userRows} />
+        <TicketsTable tickets={tickets}/>
       </div>
       <Footer />
     </>
