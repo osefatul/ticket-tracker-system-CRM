@@ -6,19 +6,16 @@ function TicketSummary({ details }) {
       <hr className="flex items-start justify-start mx-auto bg-slate-500 w-[100%] my-1" />
       <div className="text-black flex flex-col justify-center w-[80%]">
         <div className="text-sm flex items-start justify-start overflow-x-auto ">
-          <div className="grid grid-rows-2 grid-flow-col gap-x-10 ">
+          <div className="grid gap-x-10 ">
             <p className=" text-[11px]">
-              <span className="">Status: </span>Pending{" "}
+              <span className="font-medium">Status:{" "} </span>{details.status}
             </p>
             <p className=" text-[11px]">
-              <span className=" ">Sev: </span>4
+              <span className="font-medium"> Created: </span>
+              {details.openAt}
             </p>
             <p className=" text-[11px]">
-              <span className=""> Created: </span>
-              02-01-2022
-            </p>
-            <p className=" text-[11px]">
-              <span className="">Status: </span>Pending
+              <span className="font-medium">Sev: {" "}{details.severity}</span>
             </p>
           </div>
         </div>
@@ -37,7 +34,7 @@ function TicketSummary({ details }) {
             <p className=" text-[10px] pb-4">
               2022-05-26 7:12:38 AM (UTC-07:00)
             </p>
-            <p>{details}</p>
+            <p>{details.description}</p>
           </div>
         </div>
       </div>

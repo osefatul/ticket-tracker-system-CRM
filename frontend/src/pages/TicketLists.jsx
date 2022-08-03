@@ -8,6 +8,8 @@ import { Link } from "react-router-dom";
 
 import {useDispatch} from "react-redux";
 import {fetchAllTickets, filterSearchTicket} from "../features/ticketSlice/ticketAction";
+import { loginSuccess } from "../features/authSlice/loginSlice";
+import { fetchNewAccessJWT } from "../api/userApi";
 
 
 
@@ -17,7 +19,11 @@ function TicketLists() {
 
   //fetch all tickets once when the page is loaded.
   useEffect(() => {
-    dispatch (fetchAllTickets())
+    const updateAccessJWT = async () => {
+      const result = await fetchNewAccessJWT();
+      result && dispatch(loginSuccess());
+    }
+    updateAccessJWT && dispatch (fetchAllTickets())
   }, [dispatch]);
 
   

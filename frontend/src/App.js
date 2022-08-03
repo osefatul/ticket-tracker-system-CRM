@@ -21,12 +21,12 @@ function App() {
         <Route path="auth" element={<Auth />} />
         
         <Route path="/" element={<DefaultLayout />} >
-        <Route path="/" element={<Home>Home Page</Home>} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="new_ticket" element={<AddTicket />} />
-        <Route path="ticket-lists" element={<TicketLists />} />
-        <Route path="ticket_communication/:tid" element={<TicketPage />} />
-      </Route>
+          <Route path="/" element={<Home>Home Page</Home>} />
+          <Route path="dashboard" element={<Dashboard />} />
+          <Route path="new_ticket" element={<AddTicket />} />
+          <Route path="ticket-lists" element={<TicketLists />} />
+          <Route path="ticket_communication/:tid" element={<TicketPage />} />
+        </Route>
 
       </Routes> 
     </div>

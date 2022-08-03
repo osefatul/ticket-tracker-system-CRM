@@ -40,19 +40,23 @@ const getTicketById = (paramId, clientId) =>{
 }
 
 // Get tickets for a specific user
-const updateTicketConversation = (paramId, message) =>{
+const updateTicketConversation = (_id, message, sender) =>{
     try {
-        const findTicket = TicketSchema.findOneAndUpdate(
-            { paramId },
+
+        // const findTicket = TicketSchema.findOne({_id});
+
+        // return findTicket
+        const updateTicket = TicketSchema.findOneAndUpdate(
+            {_id:_id},
             {
             status: "Pending operator response",
             $push: {
-                conversations: { message:message },
+                conversations: { message, sender },
             },
             },
             { new: true }
         )
-        return findTicket;
+        return updateTicket;
     }
     catch (error) {
         console.log(error);

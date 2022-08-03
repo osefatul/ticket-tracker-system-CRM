@@ -95,11 +95,12 @@ router.get('/:id', userAuthorization, async (req, res) => {
 router.put("/:id", replyTicketMessageValidation, userAuthorization, async (req, res) => {
 
   try {
-    const {message} = req.body; 
+    const {message, sender} = req.body; 
     const { id } = req.params;
     const userId = req.userId;
 
-    const result = await updateTicketConversation(id, message);
+    const result = await updateTicketConversation(id, message, sender);
+
     if (result._id) {
       return res.json({
         status: "success",

@@ -20,7 +20,7 @@ Content-Type: application/json
 
 ### Get a user profile endpoint, using access token
 Get http://localhost:5000/v1/user/
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NjkyMTgzLCJleHAiOjE2NTg2OTQ1ODN9.lvCx01AWNcHNEDofMnj96FmqEjaeFn1FxPWJTWtA8y0
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4ODM2NjA4LCJleHAiOjE2NTg4Mzg0MDh9.YQDly3dlj4biSzuFqmCAo5370JavDIsftkn-ALB5op4
 
 {"email":"sefat1@amazon.com", "password":"password5" }
 
@@ -80,19 +80,19 @@ Content-Type: application/json
 
 
 ### Get single ticket
-GET http://localhost:5000/v1/ticket/62d77cb1fb20e2654b8a587f
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MjkwNTY0LCJleHAiOjE2NTgyOTE0NjR9.1F_RJ0YWAj5QA2HAu-CxbxeKXF5NPTtPntLNz5v-F_U
+GET http://localhost:5000/v1/ticket/62dda28956da557135f3eef5
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4ODMxNzExLCJleHAiOjE2NTg4MzM1MTF9.xXWSpVoQCl8ZIde6EykB63pQ0-it6TYj4JdA_PoGtJ0
 Content-Type: application/json
 
 
 
 ### Reply message to the ticket
-PUT http://localhost:5000/v1/ticket/62d77ae96793fece08c83ac5
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mzk0MjE2LCJleHAiOjE2NTgzOTUxMTZ9.ykiNIUCm5TR998rULFfNeGTaMWzbEBbG1k8oW4oClDo
+PUT http://localhost:5000/v1/ticket/62dda28956da557135f3eef5
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4ODMzNzI2LCJleHAiOjE2NTg4MzU1MjZ9.Qpg_XgiW1RjOervA2EwiU2IpaIanba53GLZ7dMRGtTE
 Content-Type: application/json 
 
 { 
-    "message": "Hey buddy email has been fixed, check it out", 
+    "message": "Switch configuration is done", 
     "sender": "Omar" 
 }
 

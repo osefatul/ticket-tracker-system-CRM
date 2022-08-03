@@ -29,17 +29,13 @@ function Header() {
       <div className="">
         <ul className="hidden sm:flex items-center justify-center text-white space-x-3 text-[12px] px-10 ">
           {["Dashboard", "Tickets", "Logout"].map((item, index) => (
+
             <li className="px-1 font-comorants hoverText" key={`link-${item}`}>
               <div className=" hover:border" />
               <Link to={`/${linkList[index]}`}>
-                <div className="flex items-center jsutify-center">
-                {item === "Logout" ?
-                    <a href="#" onClick={clickOnItem}>
-                      {item}
-                    </a> : <a href="#" onClick={item=>setToggle(false)}>
-                      {item}
-                    </a>
-                    }
+                <div className="flex items-center justify-center"  
+                onClick = {item ==="Logout"? clickOnItem : () => setToggle(false) }>
+                    {item}
                 </div>
               </Link>
             </li>
@@ -47,7 +43,7 @@ function Header() {
         </ul>
 
 
-        {/* SIDE BAR ICON & X ICON  */}
+        {/* SIDE BAR ICON & X  */}
         <div className=" sm:hidden h-[40px] relative flex items-center justify-center ]">
           {!toggle ? (
             <HiMenuAlt4
@@ -78,14 +74,9 @@ function Header() {
                   <li
                     key={item}
                     className="hoverText w-[100%] flex items-start justify-center"
+                    onClick = {item ==="Logout"? clickOnItem : () => setToggle(false) }
                   >
-                    {item === "Logout" ?
-                    <a href="#" onClick={clickOnItem}>
-                      {item}
-                    </a> : <a href="#" onClick={item=>setToggle(false)}>
-                      {item}
-                    </a>
-                    }
+                    {item}
                   </li>
                 </Link>
               ))}

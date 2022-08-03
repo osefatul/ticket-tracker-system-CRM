@@ -37,10 +37,7 @@ export const DefaultLayout = ({ children }) => {
 
   return (
     <div className="default-layout">
-      <header className="header mb-2">
-        <Header />
-      </header>
-
+    
       {isAuth? (<main className="h-main flex items-center justify-center mx-auto w-[80%]">
         
         <Outlet />
@@ -48,10 +45,6 @@ export const DefaultLayout = ({ children }) => {
         {/* state: able to go back where we come from to this page. */}
       </main>): <Navigate to="auth" state={{from: location}} replace/>
     }
-
-      <footer className="footer">
-        <Footer />
-      </footer>
     </div>
   );
 };

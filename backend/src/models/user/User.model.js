@@ -95,7 +95,8 @@ const getUserByEmail = async (req, res) => {
 
 // Get user data from database using its id
 const getUserById = async (id, res) => {
-  const user = await UserSchema.findOne({ id });
+  const user = await UserSchema.findOne({ _id:id });
+
   !user && res.status(404).json({ message: "User not found" });
   const {_id, email, name } = user
   
@@ -116,7 +117,7 @@ const updatePassword = async (res, email, newHashedPassword) => {
   return new Promise((resolve, reject) => {
     try {
       UserSchema.findOneAndUpdate(
-        { email },
+        { email:email },
         {
           $set: { password: newHashedPassword },
         },

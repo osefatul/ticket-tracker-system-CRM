@@ -1,15 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 
-
 const initialState = {
     tickets: [],
     isLoading: false,
     error: "",
+    replyMsg: "",
     replyTicketError: "",
     searchTicketList: [],
     selectedTicket: {},
-    replyMsg: "",
 };
 
 

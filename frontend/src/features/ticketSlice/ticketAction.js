@@ -23,9 +23,6 @@ import {
 } from "../../api/ticketApi";
 
 
-import axios from "axios";
-
-
 
 export const fetchAllTickets = () => async (dispatch)=>{
     dispatch(fetchTicketLoading());
@@ -46,15 +43,16 @@ export const filterSearchTicket = str => dispatch =>{
 
 
 
-export const fetchSingleTicket = id => async dispatch =>{
+export const fetchSingleTicket = (id) => async dispatch =>{
     dispatch(fetchSingleTicketLoading());
     try {
         const result = await getSingleTicket(id);
         dispatch(
             fetchSingleTicketSuccess(
-            result.data.result.length && result.data.result[0]
+            result.data.result
             )
         )
+    
 }catch (e) {
     dispatch(fetchSingleTicketFail(e.message));
 }}
@@ -65,13 +63,14 @@ export const replyOnTicket = (id, msgObj) => async dispatch =>{
     dispatch(replyTicketLoading());
     try {
         const result = await updateReplyTicket(id, msgObj);
-        console.log(result);
+        // console.log(result);
         if(result.status === "error"){
             return dispatch(replyTicketFail(result.message));
         }
 
+        console.log("replyOnticket:" ,result.data.message)
+        dispatch(replyTicketSuccess(result.data.message));
         dispatch(fetchSingleTicket(id));
-        dispatch(replyTicketSuccess(result.message));
     }catch(error){
         console.log(error.message);
         dispatch(replyTicketFail(error.message));
