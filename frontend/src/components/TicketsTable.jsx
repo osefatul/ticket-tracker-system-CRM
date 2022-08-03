@@ -71,7 +71,7 @@ function TicketsTable() {
       renderCell: (params) => {
         return (
           <Link to={`/ticket_communication/${params.row.id}`}>
-            <div>{params.row.openAt}</div>
+            <div>{new Date (params.row.openAt).toLocaleString()}</div>
           </Link>
         );
       },

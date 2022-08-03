@@ -12,7 +12,7 @@ function TicketSummary({ details }) {
             </p>
             <p className=" text-[11px]">
               <span className="font-medium"> Created: </span>
-              {details.openAt}
+              {details.openAt && new Date(details.openAt).toLocaleString()}
             </p>
             <p className=" text-[11px]">
               <span className="font-medium">Sev: {" "}{details.severity}</span>

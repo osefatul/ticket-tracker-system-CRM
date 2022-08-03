@@ -30,7 +30,7 @@ function TicketConversation({ details }) {
             <div className="flex flex-col items-start justify-start text-[12px]">
               <p className="">{cmnt.sender}</p>
               <p className=" text-[9px] text-[gray] pb-2">
-                {moment(cmnt.msgAt).format("YYYY-MM-DD Hh:mm:ss")}
+              {cmnt.msgAt && new Date(cmnt.msgAt).toLocaleString()}
               </p>
               <p>{cmnt.message}</p>
             </div>

@@ -56,7 +56,9 @@ function TicketOverviewAndSummary() {
 
   return (
     <div>
+      
       {MessageAddedAlert && <div className=" bg-green-800 text-white text-small rounded flex items-center justify-center m-3">{replyMsg}</div>}
+
       <div>
         <div className="flex items-center justify-between p1-2 pb-2">
           <div className="flex space-x-3 flex justify-center items-center">
