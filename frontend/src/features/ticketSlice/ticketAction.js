@@ -67,9 +67,9 @@ export const replyOnTicket = (id, msgObj) => async dispatch =>{
         if(result.status === "error"){
             return dispatch(replyTicketFail(result.message));
         }
-
-        console.log("replyOnticket:" ,result.data.message)
+        // In order to show message added modal 
         dispatch(replyTicketSuccess(result.data.message));
+        //If we don't fetchSingleTicket again the message we added wont be shown
         dispatch(fetchSingleTicket(id));
     }catch(error){
         console.log(error.message);
