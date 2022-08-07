@@ -35,7 +35,7 @@ function AddTicketForm() {
 
     //validation check
     setFormDataError(initialFormDataError);
-    const isTitleValid = await validationText(formData.title); // if this is true then the warning should disapear
+    const isTitleValid = await validationText(formData.title); // if this is true then the warning should disappear
     setFormDataError({ ...initialFormData, title: !isTitleValid });
     setFormData(initialFormData);
   };

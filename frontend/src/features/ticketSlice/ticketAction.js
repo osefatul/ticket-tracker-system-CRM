@@ -59,6 +59,7 @@ export const fetchSingleTicket = (id) => async dispatch =>{
 
 
 
+
 export const replyOnTicket = (id, msgObj) => async dispatch =>{
     dispatch(replyTicketLoading());
     try {
@@ -80,17 +81,18 @@ export const replyOnTicket = (id, msgObj) => async dispatch =>{
 
 
 
-
 export const closeTicket = id => async (dispatch) => {
     dispatch(closeTicketLoading());
     try {
         const result = await updateTicketStatusClosed(id);
+        console.log(result);
 
         if(result.status === "error"){
             return dispatch(closeTicketFail(result.message));
+        
         }
         dispatch(fetchSingleTicket(id));
-        dispatch(closeTicketSuccess("Status updated successfully"));
+        dispatch(closeTicketSuccess(result.data.message));
     }catch (e) {
     dispatch(closeTicketFail(e.message));
 }}

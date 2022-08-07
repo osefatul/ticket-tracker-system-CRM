@@ -99,8 +99,8 @@ Content-Type: application/json
 
 
 ### Close the ticket
-PATCH http://localhost:5000/v1/ticket/close-ticket/62d77cb1fb20e2654b8a587f
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mjk5MTYwLCJleHAiOjE2NTgzMDAwNjB9.YeRSVIkl8RZC1SNqeCEzwKcLwpBl2ToZEqoc-33RN5k
+PATCH http://localhost:5000/v1/ticket/close-ticket/62dda27856da557135f3eef3
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU5NTE4MjA2LCJleHAiOjE2NTk1MjAwMDZ9.3t5J_GG-vKzzj8fa8DBASdhFRJ1540h2Fq0uruEe324
 
 
 

@@ -4,7 +4,7 @@ import { userRows } from "../../dummyTickets";
 import TicketBody from "./TicketBody";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSingleTicket } from "../../features/ticketSlice/ticketAction";
+import { fetchSingleTicket, closeTicket } from "../../features/ticketSlice/ticketAction";
 import { resetResponseMsg } from "../../features/ticketSlice/ticketSlice";
 
 function TicketOverviewAndSummary() {
@@ -20,11 +20,15 @@ function TicketOverviewAndSummary() {
 	} = useSelector(state => state.tickets);
   const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
 
+
+
   useEffect(()=>{
     setTimeout(()=>{
       setMessageAddedAlert(false);
-    },5000)
+    },10000)
   },[MessageAddedAlert])
+
+  
 
   
   useEffect(() => {
@@ -37,6 +41,7 @@ function TicketOverviewAndSummary() {
   }
   ,[dispatch, tid, replyMsg, replyTicketError])
   
+
   
   const tabs = [
     {
@@ -50,13 +55,15 @@ function TicketOverviewAndSummary() {
   ];
   
   
+
   const [value, setValue] = useState(0);
   const { id, category, details } = tabs[value];
 
 
+
   return (
     <div>
-      
+
       {MessageAddedAlert && <div className=" bg-green-800 text-white text-small rounded flex items-center justify-center m-3">{replyMsg}</div>}
 
       <div>
@@ -68,8 +75,11 @@ function TicketOverviewAndSummary() {
           </h1>
 
           </div>
-          <button className="border border-1 rounded-sm px-4 py-[2px] cursor-pointer bg-slate-200 text-[12px]">
-            Edit
+          <button className="border border-1 rounded-sm px-4 py-[2px] cursor-pointer bg-slate-400 text-[12px] " 
+          onClick ={()=>dispatch(closeTicket(tid))}
+          disabled = {selectedTicket.status === "Resolved"}
+          >
+            Close
           </button>
         </div>
         <div className="flex items-center justify-start space-x-4">

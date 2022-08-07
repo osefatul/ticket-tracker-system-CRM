@@ -8,7 +8,9 @@ function TicketSummary({ details }) {
         <div className="text-sm flex items-start justify-start overflow-x-auto ">
           <div className="grid gap-x-10 ">
             <p className=" text-[11px]">
-              <span className="font-medium">Status:{" "} </span>{details.status}
+              <span className="font-medium">Status: </span>
+                {details.status === "Resolved" ? <span className="text-green-800">Resolved</span> : <span className="text-red-800">{details.status}</span>}
+
             </p>
             <p className=" text-[11px]">
               <span className="font-medium"> Created: </span>
