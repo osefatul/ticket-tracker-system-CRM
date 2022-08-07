@@ -17,14 +17,17 @@ const newTicketSlice = createSlice({
     openNewTicketSuccess: (state, { payload }) => {
         state.isLoading = false;
         state.successMsg = payload;
+        state.error = "";
+
     },
     openNewTicketFail: (state, { payload }) => {
-        state.isLoading = true;
+        state.isLoading = false;
         state.error = payload;
     },
     resetSuccessMSg: (state) => {
-        state.isLoading = true;
+        state.isLoading = false;
         state.successMsg = "";
+        state.error = "";
     },
 },
 });
