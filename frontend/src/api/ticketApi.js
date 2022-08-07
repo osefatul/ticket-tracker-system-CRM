@@ -15,6 +15,7 @@ export const createNewTicket  = async (formData)=>{
             Authorization: sessionStorage.getItem("accessJWT"),
             },
         });
+        console.log("ticket post", result)
         return result;
     }catch(e){
         return e;

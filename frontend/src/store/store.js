@@ -1,8 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit'
 import ticketReducer from "../features/ticketSlice/ticketSlice"
 import loginReducer from "../features/authSlice/loginSlice";
-import registrationReducer from "../features/authSlice/registrationSlice";
 import userReducer from "../features/SpecificUerSlice/userSlice"
+import newTicketReducer  from '../features/newTicket/newTicketSlice';
+import registrationReducer from "../features/authSlice/registrationSlice";
 
 
 const store = configureStore({
@@ -10,7 +11,8 @@ const store = configureStore({
         tickets:ticketReducer,
         login:loginReducer,
         registration:registrationReducer,
-        user: userReducer
+        user: userReducer,
+        openTicket: newTicketReducer
     }
 })
 

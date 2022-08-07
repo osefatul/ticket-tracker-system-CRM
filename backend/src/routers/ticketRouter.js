@@ -21,7 +21,7 @@ router.all("/", (req, res, next) => {
 //CREATE A NEW TICKET
 router.post("/", createNewTicketValidation, userAuthorization, async (req, res) => {
     try {
-      const { title, sender, severity, description, openAt } = req.body;
+      const { title, creator, severity, description, openAt } = req.body;
       const userId = req.userId;
 
       const ticketObj = {
@@ -30,7 +30,7 @@ router.post("/", createNewTicketValidation, userAuthorization, async (req, res) 
         severity,
         description,
         openAt,
-        // conversations: [{sender}],
+        creator,
       };
       
       const result = await createTicket(ticketObj);

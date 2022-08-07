@@ -59,18 +59,18 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 
 
-
 ##Ticket APIs
 
 ### Open new ticket
 POST http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NjkyMTgzLCJleHAiOjE2NTg2OTQ1ODN9.lvCx01AWNcHNEDofMnj96FmqEjaeFn1FxPWJTWtA8y0
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU5OTA3NzYxLCJleHAiOjE2NTk5MDk1NjF9.lKoCvPktXX8py4MlWdr2GhSmvgvdRy_UNGZkdYEEp6I
 Content-Type: application/json
 
 {
-"title": "switch configuration issue",
+"title": "switch configuration issue3",
 "description": "Please work on switch issue",
-"severity": 3 
+"severity": 3,
+"sender" : "Omar"
 }
 
 ###Get all the tickets

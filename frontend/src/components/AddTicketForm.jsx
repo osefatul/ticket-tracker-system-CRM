@@ -1,19 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { validationText } from "../utils/validation";
+import { useDispatch, useSelector } from "react-redux";
+import {resetSuccessMSg} from "../features/newTicket/newTicketSlice"
+import {openNewTicket} from "../features/newTicket/newTicketAction"
 
 //for Data submission
 const initialFormData = {
   title: "",
-  sev: "",
-  createdDate: "",
+  severity: "",
+  // openAt: "",
   description: "",
 };
 
 //for validation error messages
 const initialFormDataError = {
   title: false,
-  sev: false,
-  createdDate: false,
+  severity: false,
+  // openAt: false,
   description: false,
 };
 
@@ -21,12 +24,18 @@ function AddTicketForm() {
   const [formData, setFormData] = useState(initialFormData);
   const [formDataError, setFormDataError] = useState(initialFormDataError);
 
+  const dispatch = useDispatch();
+  const {user:{name}} = useSelector((state)=> state.user)
+  const {isLoading, error, successMsg} = useSelector(
+    state => state.openTicket)
+
+
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
     setFormData({
       ...formData,
-      [name]: value,
+      [name]: name ==="severity"? parseInt(value) :value,
     });
   };
 
@@ -35,13 +44,24 @@ function AddTicketForm() {
 
     //validation check
     setFormDataError(initialFormDataError);
+
     const isTitleValid = await validationText(formData.title); // if this is true then the warning should disappear
     setFormDataError({ ...initialFormData, title: !isTitleValid });
+    
+    dispatch(openNewTicket({...formData, creator:name}))
+
     setFormData(initialFormData);
+
   };
 
+
   //Every time formData change run this component
-  useEffect(() => {}, [formData, formDataError]);
+  useEffect(() => {
+    return ()=>{
+      successMsg && dispatch(resetSuccessMSg())
+    }
+  }, [dispatch, formData, formDataError]);
+
 
   return (
     <div className="pt-5 sm:w-[80%] mx-auto ">
@@ -90,17 +110,17 @@ function AddTicketForm() {
             bg-white rounded-sm shadow-sm sm:text-sm
               focus:outline-none focus:ring-1 mt-2
               }`}
-            name="sev"
+            name="severity"
             onChange={handleOnChange}
           >
-            <option value="1">Sev-1: Critical function down</option>
-            <option value="2">Sev-2: Critical function impaired</option>
-            <option value="3">Sev-3: Group productivity impaired</option>
-            <option value="4">Sev-4: Individual productivity affected</option>
-            <option value="5">Sev-5: productivity not immediately affected</option>
+            <option value={1}>Sev-1: Critical function down</option>
+            <option value={2}>Sev-2: Critical function impaired</option>
+            <option value={3}>Sev-3: Group productivity impaired</option>
+            <option value={4}>Sev-4: Individual productivity affected</option>
+            <option value={5}>Sev-5: productivity not immediately affected</option>
           </select>
         </div>
-        <div className="flex justify-center sm:justify-between sm:w-[80%] space-x-5">
+        {/* <div className="flex justify-center sm:justify-between sm:w-[80%] space-x-5">
           <label
             className=" flex justify-start w-[20%] text-[12px]"
             htmlFor="title"
@@ -117,7 +137,7 @@ function AddTicketForm() {
             onChange={handleOnChange}
             required
           />
-        </div>
+        </div> */}
         <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-5">
           <label
             className=" flex justify-start w-[20%] text-[12px]"

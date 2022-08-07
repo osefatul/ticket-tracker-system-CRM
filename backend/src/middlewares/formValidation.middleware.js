@@ -43,7 +43,8 @@ const createNewTicketValidation = (req, res, next) => {
 	const schema = Joi.object({
 		title: shortString.required(),
 		description: longString.required(),
-		severity: severity
+		severity: severity,
+		creator: shortString.required(),
 	
 	});
 

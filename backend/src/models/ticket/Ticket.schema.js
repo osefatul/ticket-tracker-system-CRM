@@ -36,13 +36,18 @@ const TicketSchema = new Schema({
     required: true,
     default: "",
   },
-
+  creator: {
+    type: String,
+    maxlength: 50,
+    required: true,
+    default: "",
+  },
   conversations: [
     {
       sender: {
         type: String,
         maxlength: 50,
-        // required: true,
+        required: true,
         default: "",
       },
       message: {
