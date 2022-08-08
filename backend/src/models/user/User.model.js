@@ -12,10 +12,10 @@ const {
 
 //Create a new user profile
 const createUser = async (req, res) => {
-  const { name, company, address, phone, email, password } = req.body;
+  const { name, company, address, phone, email, password, confirmPassword } = req.body;
 
   //Fill up all details in the inputs
-  if (!name || !company || !phone || !email || !password) {
+  if (!name || !company || !phone || !email || !password || !confirmPassword) {
     res
       .status(422)
       .json({ error: "Please fill up the details" });
@@ -25,6 +25,12 @@ const createUser = async (req, res) => {
   if (password.length < 8) {
     return res.status(422).json({
       error: "Password should be or more than 8 characters" 
+    });
+  }
+
+  if(password !== confirmPassword) {
+    return res.status(422).json({
+      error: "Passwords do not match" 
     });
   }
 

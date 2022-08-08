@@ -12,6 +12,7 @@ import { getUserProfile } from "../features/SpecificUerSlice/userAction";
 const initialState = {
   email: "",
   name: "",
+  company: "",
   password: "",
   confirmPassword: "",
   phone: ""
@@ -28,10 +29,34 @@ function Auth() {
 
   const {isLoading, isAuth, error,} = useSelector(state => state.login)
   const {isLoading:regLoading, status, message,} = useSelector(state => state.registration)
+  const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
   
   const [form, setForm] = useState(initialState);
   const [isSignup, setIsSignup] = useState(true);
   const [resetPassword, setResetPassword] = useState(false);
+
+
+
+  //FOR STRONG PASSWORD
+  const passwordVerificationError = {
+    isLengthy: false,
+    hasUpper: false,
+    hasLower: false,
+    hasNumber: false,
+    hasSpecialChar: false,
+    confirmPassword: false,
+  }
+  const [passwordError, setPasswordError] = useState(passwordVerificationError);
+
+
+
+//Make the message disappear
+  useEffect(()=>{
+  setTimeout(()=>{
+    setMessageAddedAlert(false);
+  },5000)
+  },[MessageAddedAlert])
+
 
 
 //When the auth page renders check for accessJWT
@@ -40,12 +65,44 @@ function Auth() {
 	}, [navigate, isAuth]);
 
 
+
+
+//WHEN FORM INPUTS UPDATE
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value },);
-    // console.log(form);
+    const {name, value} = e.target
+    setForm({ ...form, [name]: value },);
+
+    
+    //Password verificationError
+    if(name === "password"){
+      const isLengthy = value.length > 8;
+      const hasUpper = /[A-Z]/.test(value);
+      const hasLower = /[a-z]/.test(value);
+      const hasNumber = /[0-9]/.test(value);
+      const hasSpecialChar = /[!,@,#,$,%,&]/.test(value);
+      
+      setPasswordError({
+        ...passwordError,
+        isLengthy,
+        hasUpper,
+        hasLower,
+        hasNumber,
+        hasSpecialChar,
+      });
+    }
+    
+    if (name === "confirmPassword") {
+      setPasswordError({
+        ...passwordError,
+        confirmPassword: form.password === value,
+      });
+    }
+    console.log(form)
   };
 
 
+
+// SUBMITTING FORM
   const handleSubmit = async (e) => {
     e.preventDefault();
     
@@ -56,7 +113,6 @@ function Auth() {
       if (!isSignup){
         dispatch(loginPending())
         const isAuth = await userLogin({email, password});
-
         // if we receive unsuccessful response then
         const AuthResponse = isAuth?.response?.data?.message
         if (AuthResponse){
@@ -83,7 +139,11 @@ function Auth() {
           console.log(regResponse)
           return dispatch(registrationError(regResponse))
         }
-        setIsSignup(!isSignup)
+
+        setPasswordError(passwordVerificationError)
+        setMessageAddedAlert(true)//To turn on message alert
+        setIsSignup(!isSignup) //To return to sign in
+
         return dispatch(registrationSuccess(isRegistered));
       }
       
@@ -115,14 +175,20 @@ function Auth() {
 
 
   return (
-    <div className="h-screen flex items-center justify-center bg-slate-800 ">
+    <div className=" h-screen flex flex-col items-center justify-center bg-slate-800 space-x-2">
+
+      {MessageAddedAlert && <div className=" bg-green-800 w-[80%] text-white text-small rounded flex items-center justify-center m-3">{message}</div>}
+      {status ==="error" ? <div className=" bg-red-400 w-[80%] text-white text-small rounded flex items-center justify-center m-2">{message}</div> : ""}
+
+  
+      
       <div className="space-y-3">
         <p
-          className={`text-green-800 font-bold text-[35px] flex items-center justify-center ${
+          className={` text-green-800 font-bold text-[25px] sm:text-[30px] flex items-center justify-center ${
             resetPassword ? "mb-2" : " "
           }`}
         >
-          {resetPassword ? "Reset Password" : isSignup ? "Sign up" : "Sign in"}
+          {resetPassword ? "Reset Password" : isSignup ? "Registration" : "Login"}
         </p>
         {error? 
         <div className="flex justify-center items-center text-orange-700">
@@ -135,7 +201,7 @@ function Auth() {
           }`}
           onSubmit={handleSubmit}
         >
-          <div>
+          <div className="text-[13px]">
             <label
               className={`${resetPassword ? "mb-2" : ""}`}
               htmlFor="email"
@@ -160,7 +226,7 @@ function Auth() {
           {resetPassword ? (
             ""
           ) : isSignup ? (
-            <div className="">
+            <div className="text-[13px]">
               <label htmlFor="username">Username</label>
               <input
                 className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
@@ -182,7 +248,7 @@ function Auth() {
           ) : isSignup ? (
             <div>
 
-            <div className="">
+            <div className="text-[13px]">
               <label htmlFor="username">Mobile Number</label>
               <input
                 className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
@@ -195,7 +261,7 @@ function Auth() {
                 required
                 />
             </div>
-            <div className="mt-2">
+            <div className="text-[13px]">
               <label htmlFor="username">Company</label>
               <input
                 className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
@@ -217,7 +283,7 @@ function Auth() {
           {resetPassword ? (
             ""
           ) : (
-            <div className="">
+            <div className="text-[13px]">
               <label htmlFor="password">Password</label>
               <input
                 className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
@@ -227,6 +293,7 @@ function Auth() {
                 type="password"
                 placeholder="Password"
                 onChange={handleChange}
+                value={form.password}
                 required
               />
             </div>
@@ -236,7 +303,7 @@ function Auth() {
           {resetPassword
             ? ""
             : isSignup && (
-                <div className="">
+                <div className="text-[13px]">
                   <label htmlFor="confirmPassword">Confirm Password</label>
                   <input
                     className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
@@ -246,15 +313,66 @@ function Auth() {
                     type="password"
                     placeholder="Confirm Password"
                     onChange={handleChange}
+                    value = {form.confirmPassword}
                     required
                   />
                 </div>
               )}
+              
+              {
+                    isSignup ? (
+                    <div className="flex flex-col items-start justify-center ">
+                    
+                      <ul className="flex flex-col items-start justify-center text-[10px]">
+                        <li
+                          className={
+                            passwordError.isLengthy ? "text-green-400" : "text-red-400"
+                          }
+                        >
+                          • Min 8 characters
+                        </li>
+                        <li
+                          className={
+                            passwordError.hasUpper ? "text-green-400" : "text-red-400"
+                          }
+                        >
+                          • At least one upper case
+                        </li>
+                        <li
+                          className={
+                            passwordError.hasLower ? "text-green-400" : "text-red-400"
+                          }
+                        >
+                          • At least one lower case
+                        </li>
+                        <li
+                          className={
+                            passwordError.hasNumber ? "text-green-400" : "text-red-400"
+                          }
+                        >
+                          • At least one number
+                        </li>
+                        <li
+                          className={
+                            passwordError.hasSpecialChar ? "text-green-400" : "text-red-400"
+                          }
+                        >
+                          • At least one special character.
+                        </li>
+                      </ul>
+                    </div>) 
+                    
+                    : " "
+                }
 
 
 
           <div className={`border rounded-lg ${resetPassword? "w-44": "w-32"} bg-green-900`}>
-            <button className="mx-auto flex items-center justify-center">
+            <button 
+            className="mx-auto flex items-center justify-center"
+            type ="submit"
+            disabled = { isSignup && Object.values(passwordError).includes(false)}
+            >
               {/* Check which form we are filling */}
               {resetPassword
                 ? "Reset Password"
@@ -289,7 +407,7 @@ function Auth() {
 
 
         {!resetPassword && (
-          <div className="">
+          <div className="text-[13px]">
             <p>
               {isSignup ? "Already have an account?" : "Don't have an account?"}
               <span
@@ -302,6 +420,8 @@ function Auth() {
           </div>
         )}
       </div>
+
+    
     </div>
   );
 }
