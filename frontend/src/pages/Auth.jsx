@@ -203,7 +203,7 @@ function Auth() {
                 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
                 name="company"
                 type="text"
-                placeholder="company"
+                placeholder="Company"
                 onChange={handleChange}
                 required
               />

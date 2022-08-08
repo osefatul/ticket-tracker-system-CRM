@@ -46,26 +46,42 @@ function Dashboard() {
     <>
       <Header />
       <div className="layout">
+
         <div className="text-[12px]">
           <PageBreadCrumbs page="Dashboard" />
         </div>
-        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0">
+
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-6 pt-4">
+
           <Link to="/new_ticket">
             <button className="  text-[14px] border border-1 h-8 px-3 rounded-lg bg-green-800 ">
-              New Ticket
+              Create New Ticket
             </button>
           </Link>
 
-          <div className="text-black">
-            <p className="">
-              Total tickets: <span> {totalTickets}</span>{" "}
-            </p>
-            <p>
-              Pending tickets: <span>{pendingTickets.length}</span>{" "}
-            </p>
-            <p>
-              Recently added tickets: <span> {recentlyAddedTickets.length}</span>{" "}
-            </p>
+          <div className="text-black w-34 flex flex-col">
+
+            <div className="flex items-center justify-between ">
+              <p className="">
+              Total tickets:
+              </p>
+              <span className="pl-10"> {totalTickets}</span>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <p>
+                  Pending tickets: 
+              </p>
+              <span>{pendingTickets.length}</span>
+            </div>
+            
+            <div className="flex items-center justify-between">
+              <p>
+                  Recently added T:
+              </p>
+              <span> {recentlyAddedTickets.length}</span>
+            </div>
+          
           </div>
         </div>
 
