@@ -26,7 +26,6 @@ const client = redis.createClient(process.env.REDIS_URL);
 //       console.log(error)
 //       return(error);
 //     }
- 
 // };
 
 module.exports = { client };

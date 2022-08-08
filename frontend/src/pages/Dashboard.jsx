@@ -6,6 +6,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchAllTickets } from "../features/ticketSlice/ticketAction";
+import moment from "moment";
 
 // Dummy tickets
 import { userRows } from "../dummyTickets";
@@ -24,6 +25,23 @@ function Dashboard() {
   },[tickets, dispatch]);
 
 
+
+  const pendingTickets = tickets.filter((row) => row.status !== "Resolved");
+  const totalTickets = tickets.length;
+  
+  const recentlyAddedTickets = tickets.filter((row) => {
+    //Change the format to only hours and days
+    const today = new Date();
+    const todayHours = moment(today).format("HH")
+    const todayDay = moment(today).format("DDD");
+
+    const ticketHours =moment(row.openAt).format("HH")
+    const ticketsDay = moment(row.openAt).format("DDD");
+
+    return (todayDay === ticketsDay) && (todayHours - ticketHours< 2) 
+    })
+
+
   return (
     <>
       <Header />
@@ -39,14 +57,14 @@ function Dashboard() {
           </Link>
 
           <div className="text-black">
-            <p>
-              Total tickets: <span> 50</span>{" "}
+            <p className="">
+              Total tickets: <span> {totalTickets}</span>{" "}
             </p>
             <p>
-              Pending tickets: <span> 9</span>{" "}
+              Pending tickets: <span>{pendingTickets.length}</span>{" "}
             </p>
             <p>
-              Recently added tickets: <span> 9</span>{" "}
+              Recently added tickets: <span> {recentlyAddedTickets.length}</span>{" "}
             </p>
           </div>
         </div>
