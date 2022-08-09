@@ -76,7 +76,7 @@ const createUser = async (req, res) => {
     res.status(200).json({ message: "New user created", result });
   } catch (error) {
     console.log(error);
-  }
+}
 };
 
 
@@ -93,6 +93,10 @@ const getUserByEmail = async (req, res) => {
   //Check if email exist
   const user = await UserSchema.findOne({ email });
   !user && res.status(404).json({ message: "User not found" });
+
+  if(!user.isVerified){
+    res.status(404).json({ message: "Please check your email for verification code..." });
+  }
 
   //Check if password match
   const validPassword = await bcrypt.compare(password, user.password);
@@ -162,16 +166,22 @@ const updatePassword = async (res, email, newHashedPassword) => {
 const verifyUser = async ( email, res) => {
     try {
 
-    const result =  await UserSchema.findOneAndUpdate(
-        { email:email},
+        //first find ticket
+        const findTicket =  await UserSchema.findOne({
+          $and: [{email:email}, {isVerified: false}],
+      });
+
+
+      const result =  await findTicket.update(
         {
           $set: { isVerified: true },
         },
         { new: true }
       )
 
-      // console.log(result)
-      if(result && result.id){
+      console.log(findTicket)
+      
+      if(findTicket && findTicket._id){
         return res.json({
           status : "success",
           message: "Your account has been verified, you may sign in now"

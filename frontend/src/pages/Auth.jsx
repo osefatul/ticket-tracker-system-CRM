@@ -115,8 +115,11 @@ function Auth() {
         const isAuth = await userLogin({email, password});
         // if we receive unsuccessful response then
         const AuthResponse = isAuth?.response?.data?.message
+
+          //Error
         if (AuthResponse){
           // console.log(AuthResponse)
+          setMessageAddedAlert(true)//To turn on message alert
           return dispatch(loginFail(AuthResponse))
         }
 
@@ -155,6 +158,7 @@ function Auth() {
 
 
 
+
   //########## SWITCH FUNCTIONS ######################################
   const SignUpSwitchMode = () => {
     setIsSignup((prevIsSignup) => !prevIsSignup);
@@ -190,11 +194,11 @@ function Auth() {
         >
           {resetPassword ? "Reset Password" : isSignup ? "Registration" : "Login"}
         </p>
-        {error? 
-        <div className="flex justify-center items-center text-orange-700">
+        {MessageAddedAlert && <div className="flex justify-center items-center text-orange-700">
           {error}
         </div>
-        : "" }
+        }
+
         <form
           className={`space-y-4 ${
             resetPassword ? "" : "flex flex-col justify-center items-center"

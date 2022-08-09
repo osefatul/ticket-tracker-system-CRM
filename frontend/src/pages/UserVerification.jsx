@@ -26,31 +26,39 @@ function UserVerification() {
         setResponse(result);
         };
     
+        //call api and send the _id to verify user
         !response.status && apiCall();
 
     }, [response]);
 
 
-//call api and send the _id to verify user
 
     return (
         <div className=" h-screen flex items-center justify-center">
         <div className="">
             <div className="">
                 {!response.status && <Spinner />}
-                {response.status && (
-                <div className="text-black text-[20px]">
-                    {response.message}
+                {response.status === "success" ? (
+
+                <div className="flex flex-col items-center justify-center mt-10">
+                    <div className="text-black text-[20px]">
+                        {response.message}
+                    </div>
+                    <button className="rounded bg-green-600 text-white w-[40%] h-10 cursor-pointer mt-4">
+                    <Link to="/">
+                        Click here to Sign in
+                    </Link>
+                    </button>
                 </div>
-                )}
+
+                ): 
+                <div className="text-black text-[20px]">
+                {response.message}
+                </div>
+            
+            }
             </div>
-            <div className="flex items-center justify-center mt-10">
-                <button className="rounded bg-green-400 text-white w-[40%] cursor-pointer ">
-                <Link to="/">
-                    Click here to Sign in
-                </Link>
-                </button>
-            </div>
+            
         </div>
     </div>
     

@@ -1,16 +1,24 @@
 const nodemailer = require("nodemailer");
 
-
+//For Test
 //Email address of the company to send pin codes.
-const transporter = nodemailer.createTransport({
-    host: 'smtp.ethereal.email',
-    port: 587,
-    auth: {
-        user: 'stuart.schneider39@ethereal.email',
-        pass: 'tPYh56J3Yk3D6MtPCh'
-    }
-});
+// const transporter = nodemailer.createTransport({
+//     host: 'smtp.ethereal.email',
+//     port: 587,
+//     auth: {
+//         user: 'stuart.schneider39@ethereal.email',
+//         pass: 'tPYh56J3Yk3D6MtPCh'
+//     }
+// });
 
+//Actual Email
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: "nodejsdev007@gmail.com",
+        pass:"geweyagctezizybt"
+    }
+})
 
 
 const send = (info) => {
@@ -34,7 +42,7 @@ const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
     switch (type) {
     case "request-new-password":
         info = {
-          from: '"Ticket CRM Company" <stuart.schneider39@ethereal.email>', // sender address
+          from: '"Ticket CRM Company" <nodejsdev007@gmail.com>', // sender address
           to: email, // list of receivers
           subject: "Password rest Pin", // Subject line
         text:
@@ -53,7 +61,7 @@ const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
 
     case "update-password-success":
         info = {
-          from: '"Ticket CRM Company" <stuart.schneider39@ethereal.email>', // sender address
+          from: '"Ticket CRM Company" <nodejsdev007@gmail.com>', // sender address
           to: email, // list of receivers
           subject: "Password updated", // Subject line
           text: "Your new password has been update", // plain text body
@@ -67,13 +75,13 @@ const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
 
     case "new-user-confirmation-required":
         info = {
-        from: '"Ticket CRM Company" <stuart.schneider39@ethereal.email>', // sender address
+        from: '"Ticket CRM Company" <nodejsdev007@gmail.com>', // sender address
           to: email, // list of receivers
           subject: "Please verify your new user", // Subject line
         text:
             "Please follow the link to verify your account before you can login", // plain text body
         html: `<b>Hello </b>
-        <p>Please follow the link to very your account before you can login</p>
+        <p>Please follow the link to verify your account before you can login</p>
         <p>${verificationLink}</P>
           `, // html body
         };

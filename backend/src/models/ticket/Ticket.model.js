@@ -69,7 +69,7 @@ const updateTicketConversation = (_id, message, sender) =>{
 const updatedStatusClose = (paramId, clientId, message)=>{
 
     try {
-        const findTicket = TicketSchema.findOneAndUpdate(
+        const closeTicket = TicketSchema.findOneAndUpdate(
         {
         $and: [{_id:paramId}, { clientId: clientId}],
         },
@@ -82,7 +82,7 @@ const updatedStatusClose = (paramId, clientId, message)=>{
         { new: true }
         );
 
-        return findTicket;
+        return closeTicket;
     }
     catch (error) {
         console.log(error);
