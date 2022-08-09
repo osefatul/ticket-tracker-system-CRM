@@ -110,6 +110,7 @@ const getUserByEmail = async (req, res) => {
 };
 
 
+//--------------------------------------------------------------------
 
 
 // Get user data from database using its id
@@ -127,7 +128,7 @@ const getUserById = async (id, res) => {
   }
 }
 
-
+//--------------------------------------------------------------------
 
 
 //Update user password
@@ -154,32 +155,44 @@ const updatePassword = async (res, email, newHashedPassword) => {
   });
 };
 
-
+//--------------------------------------------------------------------
 
 
 //Verify User
-const verifyUser = (_id, email) => {
-  return new Promise((resolve, reject) => {
+const verifyUser = async ( email, res) => {
     try {
-      UserSchema.findOneAndUpdate(
-        { _id, email, isVerified: false },
+
+    const result =  await UserSchema.findOneAndUpdate(
+        { email:email},
         {
           $set: { isVerified: true },
         },
         { new: true }
       )
-        .then((data) => resolve(data))
-        .catch((error) => {
-          console.log(error.message);
-          reject(error);
-        });
+
+      // console.log(result)
+      if(result && result.id){
+        return res.json({
+          status : "success",
+          message: "Your account has been verified, you may sign in now"
+        })
+      }
+
+      return res.json ({
+        status: "error",
+        message: "Invalid request"
+      })
+
     } catch (error) {
-      console.log(error.message);
-      reject(error);
+      console.log(error);
+      return res.json({
+        status: "error",
+        message: "Invalid request!",
+      });
     }
-  });
 };
 
+//--------------------------------------------------------------------
 
 module.exports = { 
   createUser, 

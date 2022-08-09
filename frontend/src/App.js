@@ -8,6 +8,7 @@ import AddTicket from "./pages/AddTicket";
 import TicketLists from "./pages/TicketLists";
 import TicketPage from "./pages/TicketPage";
 import { DefaultLayout } from "./layout/DefaultLayout";
+import UserVerification from "./pages/UserVerification";
 
 function App() {
 
@@ -19,6 +20,7 @@ function App() {
       <Routes>
 
         <Route path="auth" element={<Auth />} />
+        <Route path="verification/:tid/:email" element={<UserVerification />} />
         
         <Route path="/" element={<DefaultLayout />} >
           <Route path="/" element={<Home>Home Page</Home>} />

@@ -1,10 +1,58 @@
 import axios from "axios"
+import UserVerification from "../pages/UserVerification";
 
 const rootUrl = "http://localhost:5000/v1/";
 const loginUrl = rootUrl + "user/login";
 const userProfileUrl = rootUrl + "user";
 const logoutUrl = rootUrl + "user/logout";
 const newAccessJWT = rootUrl + "tokens/new-access-jwt";
+const UserVerificationUrl = userProfileUrl + "/verify";
+
+
+
+//-----------------------------------------------------------------------------
+
+
+export const userRegistration = async (formData)=>{
+    try {
+        const res = await axios.post(userProfileUrl, formData);
+        // console.log(res);
+
+        if(res.status === 200){
+            console.log (res.data.message)
+            return res.data.message
+        }
+
+        return res
+    }catch(error){
+        console.log(error);
+        return error
+    }
+}
+
+//-----------------------------------------------------------------------------
+
+export const userRegistrationVerification = async (formDate)=>{
+    
+    try {
+        const res = await axios.patch(UserVerificationUrl, formDate);
+
+        if(res.status === 200){
+            // console.log(res.data.message)
+            return res.data
+        }
+
+        return res
+
+    }catch(error){
+        console.log(error);
+        return error
+    }
+}
+
+
+
+//-----------------------------------------------------------------------------
 
 
 export const userLogin = async (formData) =>{
@@ -28,24 +76,8 @@ export const userLogin = async (formData) =>{
     }
 }
 
+//-----------------------------------------------------------------------------
 
-
-export const userRegistration = async (formData)=>{
-    try {
-        const res = await axios.post(userProfileUrl, formData);
-        // console.log(res);
-
-        if(res.status === 200){
-            console.log (res.data.message)
-            return res.data.message
-        }
-
-        return res
-    }catch(error){
-        console.log(error);
-        return error
-    }
-}
 
 
 export const fetchNewAccessJWT = async () => {
@@ -79,6 +111,7 @@ export const fetchNewAccessJWT = async () => {
 }
 
 
+//-----------------------------------------------------------------------------
 
 
 
@@ -104,6 +137,7 @@ export const fetchUser = async () =>{
 }
 
 
+//-----------------------------------------------------------------------------
 
 
 //use this where the logout option is.
@@ -119,3 +153,5 @@ export const userLogout = async () => {
         return error.message;
     }
 };
+
+//-----------------------------------------------------------------------------
