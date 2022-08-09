@@ -1,5 +1,6 @@
 const { UserSchema } = require("./User.schema");
 const bcrypt = require("bcrypt");
+const { emailProcessor } = require("../../helpers/email.helper");
 
 const {
   createAccessJWT,
@@ -7,6 +8,8 @@ const {
 } = require("../../helpers/jwt.helper");
 
 
+//--------------------------------------------------------------------
+const verificationURL = "http://localhost:3000/verification/";
 //--------------------------------------------------------------------
 
 
@@ -61,6 +64,14 @@ const createUser = async (req, res) => {
     });
 
     const result = await newUser.save();
+
+    //Sending email to verify user.
+    await emailProcessor({
+			email,
+			type: "new-user-confirmation-required",
+			verificationLink: verificationURL + result._id + "/" + email,
+		});
+
     console.log(result);
     res.status(200).json({ message: "New user created", result });
   } catch (error) {
@@ -68,6 +79,8 @@ const createUser = async (req, res) => {
   }
 };
 
+
+//--------------------------------------------------------------------
 
 
 
@@ -143,10 +156,36 @@ const updatePassword = async (res, email, newHashedPassword) => {
 
 
 
+
+//Verify User
+const verifyUser = (_id, email) => {
+  return new Promise((resolve, reject) => {
+    try {
+      UserSchema.findOneAndUpdate(
+        { _id, email, isVerified: false },
+        {
+          $set: { isVerified: true },
+        },
+        { new: true }
+      )
+        .then((data) => resolve(data))
+        .catch((error) => {
+          console.log(error.message);
+          reject(error);
+        });
+    } catch (error) {
+      console.log(error.message);
+      reject(error);
+    }
+  });
+};
+
+
 module.exports = { 
   createUser, 
   getUserByEmail,
   getUserById, 
   updatePassword,
+  verifyUser
 };
 

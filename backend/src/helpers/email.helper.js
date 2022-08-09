@@ -71,7 +71,7 @@ const emailProcessor = ({ email, pin, type, verificationLink = "" }) => {
           to: email, // list of receivers
           subject: "Please verify your new user", // Subject line
         text:
-            "Please follow the link to very your account before you can login", // plain text body
+            "Please follow the link to verify your account before you can login", // plain text body
         html: `<b>Hello </b>
         <p>Please follow the link to very your account before you can login</p>
         <p>${verificationLink}</P>

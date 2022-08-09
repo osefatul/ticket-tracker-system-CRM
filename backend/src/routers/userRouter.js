@@ -20,17 +20,21 @@ const {
   getUserByEmail,
   getUserById,
   updatePassword,
+  verifyUser
   // storeUserRefreshJWT
 } = require("../models/user/User.model");
+const { verify } = require("jsonwebtoken");
+
 
 // ----------------------------------------------------------------------------
-
 
 //Used to load middleware functions at a path ("/") for all HTTP request methods.
 router.all("/", (req, res, next) => {
   // res.json({ message: "return from user router" });
   next();
 });
+
+//-----------------------------------------------------------------------------
 
 
 //REGISTER A NEW USER
@@ -43,6 +47,42 @@ router.post("/", async (req, res) => {
     res.json({ status: "error", message: err.message });
   }
 });
+
+//-----------------------------------------------------------------------------
+
+
+//VERIFY JUST NOW REGISTERED USER
+router.patch("/verify", async (req, res) => {
+  try {
+    const {_id, email} = req.body;
+    console.log(_id, email);
+
+    const result = await verifyUser(_id, email);
+
+    if(result && result.id){
+      return res.json({
+        status : "success",
+        message: "Your account has been verified, you may sign in now"
+      })
+    }
+
+    return res.json ({
+      status: "error",
+      message: "Invalid request"
+    })
+
+  }catch (error) {
+    console.log(error);
+		return res.json({
+			status: "error",
+			message: "Invalid request!",
+		});
+
+  }
+})
+
+
+//-----------------------------------------------------------------------------
 
 
 
@@ -57,6 +97,7 @@ router.post("/login", async (req, res) => {
   }
 });
 
+//-----------------------------------------------------------------------------
 
 
 // GET USER PROFILES
@@ -74,6 +115,8 @@ router.get ("/", userAuthorization, async(req, res)=>{
   }
 })
 
+
+//-----------------------------------------------------------------------------
 
 
 // RESET AND UPDATE PASSWORD
@@ -104,6 +147,8 @@ router.post ("/reset-password", resetPasswordReqValidation, async (req, res)=> {
 	});
 })
 
+
+//-----------------------------------------------------------------------------
 
 
 
@@ -156,6 +201,7 @@ router.patch ("/reset-password", updatePasswordValidation, async (req, res)=> {
 })
 
 
+//-----------------------------------------------------------------------------
 
 
 
