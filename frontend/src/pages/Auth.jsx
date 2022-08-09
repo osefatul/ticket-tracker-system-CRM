@@ -94,7 +94,7 @@ function Auth() {
     if (name === "confirmPassword") {
       setPasswordError({
         ...passwordError,
-        confirmPassword: form.password === value,
+        confirmPassword: form.password === value,//if yes make it true or false.
       });
     }
     console.log(form)
