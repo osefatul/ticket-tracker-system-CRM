@@ -241,6 +241,7 @@ function Auth() {
             </label>
             <input
               className={`placeholder:italic placeholder:text-slate-400 placeholder:pl-2
+              ${resetPassword? "w-44": ""}
               block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
               focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1   ${
                 resetPassword ? "mt-2" : ""
@@ -398,9 +399,9 @@ function Auth() {
 
 
 
-          <div className={`border rounded-lg ${resetPassword? "w-44": "w-32"} bg-green-900`}>
+          <div className={`${resetPassword? "w-44": "w-32"}  `}>
             <button 
-            className="mx-auto flex items-center justify-center"
+            className={`mx-auto flex items-center justify-center border rounded-lg ${resetPassword? "w-44": "w-32"} bg-green-800 disabled:opacity-50 disabled:cursor-default`}
             type ="submit"
             disabled = { isSignup && Object.values(passwordError).includes(false)}
             >
