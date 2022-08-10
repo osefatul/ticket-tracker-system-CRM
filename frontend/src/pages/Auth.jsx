@@ -149,6 +149,11 @@ function Auth() {
 
         return dispatch(registrationSuccess(isRegistered));
       }
+
+
+      if(resetPassword){
+        
+      }
       
     }catch(error) {
       console.log(error.message)

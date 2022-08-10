@@ -17,7 +17,6 @@ export const userRegistration = async (formData)=>{
     try {
         const res = await axios.post(userProfileUrl, formData);
         // console.log(res);
-
         if(res.status === 200){
             console.log (res.data.message)
             return res.data.message
@@ -36,12 +35,10 @@ export const userRegistrationVerification = async (formDate)=>{
     
     try {
         const res = await axios.patch(UserVerificationUrl, formDate);
-
         if(res.status === 200){
             // console.log(res.data.message)
             return res.data
         }
-
         return res
 
     }catch(error){
