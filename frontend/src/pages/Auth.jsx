@@ -7,6 +7,8 @@ import { registrationPending, registrationSuccess, registrationError} from "../f
 // Spinner
 import Spinner from "../utils/spinner"
 import { getUserProfile } from "../features/SpecificUerSlice/userAction";
+import { sendPasswordResetOtp } from "../features/passwordResetSlice/passwordResetAction";
+import { otpReqPending } from "../features/passwordResetSlice/passwordResetSlice";
 
 
 const initialState = {
@@ -29,6 +31,12 @@ function Auth() {
 
   const {isLoading, isAuth, error,} = useSelector(state => state.login)
   const {isLoading:regLoading, status, message,} = useSelector(state => state.registration)
+  const {
+    isLoading:resetLoading, 
+    status:resetPasswordStatus, 
+    message:resetPasswordMessage,} = useSelector(state => state.resetPassword)
+
+
   const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
   
   const [form, setForm] = useState(initialState);
@@ -107,10 +115,12 @@ function Auth() {
     e.preventDefault();
     
     const { email, name, password, confirmPassword, phone, company } = form;
+    
     try {
+
       
-      //Sign In form
-      if (!isSignup){
+      //SIGN IN form
+      if (!isSignup && !resetPassword){
         dispatch(loginPending())
         const isAuth = await userLogin({email, password});
         // if we receive unsuccessful response then
@@ -129,10 +139,10 @@ function Auth() {
         navigate("/")
       } 
 
-
+      //------------------------------------------------
       
-      // SignUp form
-      if(isSignup){
+      // SIGN UP form
+      if(isSignup && !resetPassword){
         dispatch(registrationPending())
         const isRegistered = await userRegistration({email, name, phone, company,  password, confirmPassword})
 
@@ -151,8 +161,15 @@ function Auth() {
       }
 
 
+      //------------------------------------------------
+
+      //REQUEST FOR RESETTING PASSWORD
       if(resetPassword){
-        
+
+        const passwordRequest = dispatch(sendPasswordResetOtp(email));
+        console.log(passwordRequest)
+        setMessageAddedAlert(true)//To turn on message alert
+        navigate("/update-password")
       }
       
     }catch(error) {
@@ -186,11 +203,17 @@ function Auth() {
   return (
     <div className=" h-screen flex flex-col items-center justify-center bg-slate-800 space-x-2">
 
+      {/*Registration Form post submission  */}
       {MessageAddedAlert && <div className=" bg-green-800 w-[80%] text-white text-small rounded flex items-center justify-center m-3">{message}</div>}
       {status ==="error" ? <div className=" bg-red-400 w-[80%] text-white text-small rounded flex items-center justify-center m-2">{message}</div> : ""}
 
-  
+
+       {/*Password Rest Form post submission  */}
+      {MessageAddedAlert && <div className=" bg-green-800 w-[80%] text-white text-small rounded flex items-center justify-center m-3">{resetPasswordMessage}</div>}
       
+
+
+
       <div className="space-y-3">
         <p
           className={` text-green-800 font-bold text-[25px] sm:text-[30px] flex items-center justify-center ${
@@ -390,7 +413,7 @@ function Auth() {
                 : "Sign In"}
                 {/* If form submitted and it is loading then add spinner*/}
                 {
-                  isLoading || regLoading ? (
+                  isLoading || regLoading || resetLoading ? (
                     < Spinner />
                   ): " "}
             </button>

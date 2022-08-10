@@ -10,17 +10,21 @@ import { requestPasswordOTP, updateUserPassword } from "../../api/resetPasswordA
 
 
 
-export const sendPasswordResetOtp = email => async dispatch => {
+export const sendPasswordResetOtp = (email) => async dispatch => {
 	try {
+
 		dispatch(otpReqPending());
+		const data = await requestPasswordOTP(email);
+        
+        console.log(data);
 
-		const { status, message } = await requestPasswordOTP(email);
+        dispatch(otpReqSuccess(data));
 
-		if (status === "success") {
-			return dispatch(otpReqSuccess({ message, email }));
-		}
+		// if (status === "success") {
+		// 	return dispatch(otpReqSuccess({ message, email }));
+		// }
 
-		dispatch(otpReqFail(message));
+		// dispatch(otpReqFail(message));
 
 	} catch (error) {
 		dispatch(otpReqFail(error.message));

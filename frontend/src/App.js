@@ -22,7 +22,7 @@ function App() {
 
         <Route path="auth" element={<Auth />} />
         <Route path="verification/:tid/:email" element={<UserVerification />} />
-        <Route path="reset-password" element={<ResetPassword />} />
+        <Route path="update-password" element={<ResetPassword />} />
 
         
         <Route path="/" element={<DefaultLayout />} >
