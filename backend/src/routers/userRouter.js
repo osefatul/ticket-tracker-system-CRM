@@ -101,8 +101,10 @@ router.get ("/", userAuthorization, async(req, res)=>{
 
 //-----------------------------------------------------------------------------
 
-
+// =================================================================
 // RESET AND UPDATE PASSWORD
+// =================================================================
+
 //A: RESET PASSWORD
 router.post ("/reset-password", resetPasswordReqValidation, async (req, res)=> {
   const {email} = req.body;
@@ -119,6 +121,7 @@ router.post ("/reset-password", resetPasswordReqValidation, async (req, res)=> {
       type: "request-new-password" 
 		});
   }
+  
   else{
     return res.status(404).json({ message: "User not found" });
   }

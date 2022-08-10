@@ -4,6 +4,8 @@ import loginReducer from "../features/authSlice/loginSlice";
 import userReducer from "../features/SpecificUerSlice/userSlice"
 import newTicketReducer  from '../features/newTicket/newTicketSlice';
 import registrationReducer from "../features/authSlice/registrationSlice";
+import resetPasswordReducer from "../features/passwordResetSlice/passwordResetSlice";
+
 
 
 const store = configureStore({
@@ -12,7 +14,8 @@ const store = configureStore({
         login:loginReducer,
         registration:registrationReducer,
         user: userReducer,
-        openTicket: newTicketReducer
+        openTicket: newTicketReducer,
+        resetPassword: resetPasswordReducer,
     }
 })
 

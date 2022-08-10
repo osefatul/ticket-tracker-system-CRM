@@ -11,7 +11,8 @@ export const requestPasswordOTP = async (email) =>{
     try {
         const result = await axios.post(otpReqUrl, {email});
         console.log(result);
-        return result
+
+        return result.data;
 
     }catch(error){
         console.log(error);
@@ -25,8 +26,9 @@ export const updateUserPassword = async passwordObject => {
     try {
         const result = await axios.patch (updatePassUrl, passwordObject);
         console.log(result);
-        return result
-        
+
+        return result.data
+
     }catch (error){
         console.log(error);
         return error
