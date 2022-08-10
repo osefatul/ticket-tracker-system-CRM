@@ -9,7 +9,6 @@ import { requestPasswordOTP, updateUserPassword } from "../../api/resetPasswordA
 
 
 
-
 export const sendPasswordResetOtp = (email) => async dispatch => {
 	try {
 
@@ -31,16 +30,24 @@ export const sendPasswordResetOtp = (email) => async dispatch => {
 
 
 export const updatePassword = frmData => async dispatch => {
+
 	try {
 		dispatch(otpReqPending());
 
-		const { status, message } = await updateUserPassword(frmData);
+		const {status, message} = await updateUserPassword(frmData);
 
 		if (status === "success") {
-			return dispatch(updatePassSuccess(message));
+			dispatch(updatePassSuccess(message));
+
+            //once it got updated change the go to home page
+            setTimeout(() =>{
+                window.location.href = '/'
+            },6000)
 		}
 
-		dispatch(otpReqFail(message));
+        return  dispatch(otpReqFail(message));
+    
+
 	} catch (error) {
 		dispatch(otpReqFail(error.message));
 	}

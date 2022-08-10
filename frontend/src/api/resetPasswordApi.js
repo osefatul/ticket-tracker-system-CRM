@@ -24,7 +24,7 @@ export const updateUserPassword = async passwordObject => {
 
     try {
         const result = await axios.patch (updatePassUrl, passwordObject);
-        console.log(result);
+        // console.log(result);
         return result.data
 
     }catch (error){

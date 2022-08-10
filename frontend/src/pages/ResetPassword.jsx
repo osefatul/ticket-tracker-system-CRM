@@ -3,8 +3,8 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { updatePassword } from '../features/passwordResetSlice/passwordResetAction';
 import Spinner from '../utils/spinner';
+import { updatePassword } from '../features/passwordResetSlice/passwordResetAction';
 
 
 
@@ -12,6 +12,7 @@ const initialState = {
     pin: "",
     password: "",
     confirmPassword: "",
+    bodyEmail: ""
     };
 
 const passwordVerificationError = {
@@ -48,7 +49,7 @@ function ResetPassword() {
 
 
     //WHEN FORM INPUTS UPDATE
-    const handleChange = (e) => {
+    const handleChange =  (e) => {
         const {name, value} = e.target
         setForm({ ...form, [name]: value },);
 
@@ -77,23 +78,24 @@ function ResetPassword() {
             confirmPassword: form.password === value,//if yes make it true or false.
             });
         }
+        console.log(form)
     
     };
 
-    const handleSubmit = (e) =>{
+    const handleSubmit = async (e) =>{
         e.preventDefault()
-        const {pin, password} = form
+        const {pin, password, bodyEmail} = form
 
         try {
-        dispatch (updatePassword({pin, newPassword:password, email}))
+            
+            await dispatch (updatePassword({
+            pin, 
+            newPassword:password, 
+            email: email || bodyEmail // if somebody use the link.
+        }))
+
         setMessageAddedAlert(true)//To turn on message alert
         setForm(initialState)
-
-        //Navigate to next page after 5 sec
-        setTimeout(()=>{
-            status === 'success' && navigate('/')
-        },5000)
-
 
         }catch (error){
             console.log(error.message)
@@ -106,15 +108,14 @@ function ResetPassword() {
         
         <div className="space-y-3">
             
-            <p className='text-green-800 font-bold text-[25px] sm:text-[30px] mb-12'>
+            <p className='text-green-800 font-bold text-[25px] sm:text-[30px] mb-12 flex flex-col items-center justify-center'>
                 Update Password
             </p>
 
+            <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center space-y-2 '>
+
             {/* Post Form Submission  */}
             {MessageAddedAlert && <div className="text-green-700 text-small rounded flex items-center justify-center m-3">{message}</div>}
-        
-
-            <form onSubmit={handleSubmit} className='flex flex-col items-center justify-center space-y-2 '>
 
                 <div className="text-[13px] mb-6">
                 <label htmlFor="pin"
@@ -131,6 +132,24 @@ function ResetPassword() {
                     value={form.pin}
                     onChange={handleChange}
                     required
+                    />
+                </div>
+
+                <div className="text-[13px] mb-6">
+                <label htmlFor="pin"
+                >
+
+                Email
+                </label>
+                <input
+                    className="placeholder:italic placeholder:text-slate-400 placeholder:pl-2
+                    block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+                    focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1"
+                    name="bodyEmail"
+                    type="email"
+                    placeholder=" Email (Optional))"
+                    value={form.bodyEmail}
+                    onChange={handleChange}
                     />
                 </div>
 
