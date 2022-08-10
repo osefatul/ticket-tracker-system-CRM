@@ -166,8 +166,7 @@ function Auth() {
       //REQUEST FOR RESETTING PASSWORD
       if(resetPassword){
 
-        const passwordRequest = dispatch(sendPasswordResetOtp(email));
-        console.log(passwordRequest)
+        dispatch(sendPasswordResetOtp(email));
         setMessageAddedAlert(true)//To turn on message alert
         navigate("/update-password")
       }

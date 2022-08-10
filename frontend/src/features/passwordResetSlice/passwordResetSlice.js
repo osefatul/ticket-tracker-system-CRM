@@ -13,6 +13,7 @@ const initialState = {
 const passwordReset = createSlice({
 	name: "passwordReset",
 	initialState,
+	
 	reducers: {
 		otpReqPending: state => {
 			state.isLoading = true;
