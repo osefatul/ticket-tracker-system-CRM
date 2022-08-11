@@ -20,7 +20,8 @@ const {
   getUserByEmail,
   getUserById,
   updatePassword,
-  verifyUser
+  verifyUser,
+  getAllUsers
   // storeUserRefreshJWT
 } = require("../models/user/User.model");
 const { verify } = require("jsonwebtoken");
@@ -92,6 +93,17 @@ router.get ("/", userAuthorization, async(req, res)=>{
   
   try {
     await getUserById(id, res)
+  }catch (err) {
+    console.log(err);
+    res.json({status: 'error', message: err.message})
+  }
+})
+
+
+
+router.get("/users", userAuthorization, async (req, res)  => {
+  try {
+    await getAllUsers(req,res)
   }catch (err) {
     console.log(err);
     res.json({status: 'error', message: err.message})

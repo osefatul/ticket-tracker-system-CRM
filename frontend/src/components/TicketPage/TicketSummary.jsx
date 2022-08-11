@@ -32,9 +32,9 @@ function TicketSummary({ details }) {
           />
 
           <div className="flex flex-col items-start justify-start text-[12px]">
-            <p>Osefatul</p>
+            <p>@{details.creator}</p>
             <p className=" text-[10px] pb-4">
-              2022-05-26 7:12:38 AM (UTC-07:00)
+
             </p>
             <p>{details.description}</p>
           </div>

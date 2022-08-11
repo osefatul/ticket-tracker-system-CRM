@@ -25,7 +25,7 @@ function TicketOverviewAndSummary() {
   useEffect(()=>{
     setTimeout(()=>{
       setMessageAddedAlert(false);
-    },10000)
+    },50000)
   },[MessageAddedAlert])
 
   

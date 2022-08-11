@@ -12,6 +12,11 @@ const UserSchema = new Schema({
     maxlength: 50,
     required: true,
   },
+  department: {
+    type: String,
+    maxlength: 50,
+    required: true,
+  },
   address: {
     type: String,
     maxlength: 100,
@@ -48,6 +53,11 @@ const UserSchema = new Schema({
     required: true,
     default: false,
   },
+  isAdmin: {
+    type: Boolean,
+    required: true,
+    default: false,
+  }
 });
 
 module.exports = {

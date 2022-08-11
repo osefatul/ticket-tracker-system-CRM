@@ -26,6 +26,14 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 
 
+### Get all users profile endpoint, using access token
+Get http://localhost:5000/v1/user/users
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDE5MDkwNiwiZXhwIjoxNjYwMTkyNzA2fQ.y5H2iKZBKmEG3TCXukenluxbfvOAPtgWDYPSi7Y7cfg
+
+
+
+
+
 ### Get new tokens, token is refreshed token
 GET http://localhost:5000/v1/tokens/new-access-jwt
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4NzI4OTk0LCJleHAiOjE2NjEzMjA5OTR9.CM687rMX3hYqrsv2H5y62LbbLvEdv77cso7ju-yNKkwsa
