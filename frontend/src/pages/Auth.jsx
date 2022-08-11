@@ -17,7 +17,8 @@ const initialState = {
   company: "",
   password: "",
   confirmPassword: "",
-  phone: ""
+  phone: "",
+  department: "",
 };
 
 function Auth() {
@@ -114,7 +115,7 @@ function Auth() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const { email, name, password, confirmPassword, phone, company } = form;
+    const { email, name, password, confirmPassword, company, department } = form;
     
     try {
 
@@ -144,7 +145,7 @@ function Auth() {
       // SIGN UP form
       if(isSignup && !resetPassword){
         dispatch(registrationPending())
-        const isRegistered = await userRegistration({email, name, phone, company,  password, confirmPassword})
+        const isRegistered = await userRegistration({email, name, department, company,  password, confirmPassword})
 
         //Error
         const  regResponse = isRegistered?.response?.data?.error
@@ -213,7 +214,7 @@ function Auth() {
 
 
 
-      <div className="space-y-3">
+      <div className="space-y-2">
         <p
           className={` text-green-800 font-bold text-[25px] sm:text-[30px] flex items-center justify-center ${
             resetPassword ? "mb-2" : " "
@@ -227,7 +228,7 @@ function Auth() {
         }
 
         <form
-          className={`space-y-4 ${
+          className={`space-y-3 ${
             resetPassword ? "" : "flex flex-col justify-center items-center"
           }`}
           onSubmit={handleSubmit}
@@ -279,33 +280,38 @@ function Auth() {
             ""
           ) : isSignup ? (
             <div>
-
-            <div className="text-[13px]">
-              <label htmlFor="username">Mobile Number</label>
+              
+              <div className="text-[13px]">
+              <label htmlFor="username">Department</label>
               <input
                 className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
                 block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                 focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
-                name="phone"
-                type = 'number'
-                placeholder="Eg: +1 778957689"
-                onChange={handleChange}
-                required
-                />
-            </div>
-            <div className="text-[13px]">
-              <label htmlFor="username">Company</label>
-              <input
-                className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
-                block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
-                focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
-                name="company"
+                name="department"
                 type="text"
-                placeholder="Company"
+                placeholder="Department"
                 onChange={handleChange}
                 required
+                value={form.department}
               />
             </div>
+            
+
+              <div className="text-[13px] mt-2">
+                <label htmlFor="username">Company</label>
+                <input
+                  className=" placeholder:italic placeholder:text-slate-400 placeholder:pl-2
+                  block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+                  focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1 "
+                  name="company"
+                  type="text"
+                  placeholder="Company"
+                  onChange={handleChange}
+                  value={form.company}
+
+                  required
+                />
+              </div>
             </div>
           ) : (
             ""

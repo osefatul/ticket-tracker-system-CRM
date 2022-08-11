@@ -24,12 +24,14 @@ export const DefaultLayout = ({ children }) => {
 
   if(!user._id) {
     dispatch(getUserProfile());
-    // dispatch(updateAccessJWT()); 
+    dispatch(updateAccessJWT()); 
   }
+
 
   !sessionStorage.getItem("accessJWT") &&
     localStorage.getItem("crmSite") &&
     updateAccessJWT();
+
 
   !isAuth && sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
 }, [dispatch, isAuth, user._id]);
@@ -38,10 +40,10 @@ export const DefaultLayout = ({ children }) => {
   return (
     <div className="default-layout">
     
-      {isAuth? (<main className="h-main flex items-center justify-center mx-auto w-[80%]">
-        
+      {isAuth? (
+      // h-main flex items-center justify-center mx-auto w-[80%]
+      <main className="">
         <Outlet />
-
         {/* state: able to go back where we come from to this page. */}
       </main>): <Navigate to="auth" state={{from: location}} replace/>
     }

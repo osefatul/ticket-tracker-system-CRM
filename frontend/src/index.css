@@ -15,6 +15,9 @@
   .layout {
     @apply h-main  mx-auto w-[80%] pt-14;
   }
+  .homeHeight {
+    @apply h-main pt-12;
+  }
   
 
 }

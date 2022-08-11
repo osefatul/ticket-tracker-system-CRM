@@ -84,7 +84,7 @@ router.post("/login", async (req, res) => {
 //-----------------------------------------------------------------------------
 
 
-// GET USER PROFILES
+// GET USER PROFILE
 router.get ("/", userAuthorization, async(req, res)=>{
   
   // 1,2,3 have been in the userAuthorization middleware.
@@ -99,7 +99,9 @@ router.get ("/", userAuthorization, async(req, res)=>{
   }
 })
 
+//-----------------------------------------------------------------------------
 
+// GET ALL USERS PROFILES
 
 router.get("/users", userAuthorization, async (req, res)  => {
   try {
