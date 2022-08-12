@@ -1,3 +1,4 @@
+const {UserSchema} = require("../user/User.schema");
 const { TicketSchema } = require("./Ticket.schema");
 
 
@@ -11,6 +12,28 @@ const createTicket = ticketObject =>{
     return (error);
     }
 }
+
+
+const getAllTicketsOfAllDepartments = async (user, res)=>{
+    try {
+        const adminUser = await UserSchema.findOne({_id:user});
+
+        if(adminUser.isAdmin){
+            const result = await TicketSchema.find();
+            !result && res.status(404).json({ message: "Tickets not found" });
+            
+            return res.json({ status: "success", tickets: result, })
+        }
+    
+        res.status(404).json({ message: "You are not allowed to access all tickets" });
+
+    }catch (error) {
+        console.log(error);
+        res.status(404).json({ message: "Error: " + error.message });
+    }
+}
+
+
 
 // Get all tickets for a specific user
 const getTickets = clientId =>{
@@ -125,6 +148,7 @@ const deleteTicket = async (paramId, clientId, res) => {
 
 module.exports = {
     createTicket,
+    getAllTicketsOfAllDepartments,
     getTickets,
     getTicketById,
     updateTicketConversation,

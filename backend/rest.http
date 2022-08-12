@@ -80,7 +80,15 @@ Content-Type: application/json
 "sender" : "Omar"
 }
 
-###Get all the tickets
+
+###Get all the tickets of every user
+GET http://localhost:5000/v1/ticket/tickets
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDMzNjg4MSwiZXhwIjoxNjYwMzM4NjgxfQ.-7yz46IdB2kBNiDhf1RjdCZMsp23IO-8WjJy9Dsqrm0
+Content-Type: application/json
+
+
+
+###Get all the tickets created by a user
 GET http://localhost:5000/v1/ticket
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mzk0MjE2LCJleHAiOjE2NTgzOTUxMTZ9.ykiNIUCm5TR998rULFfNeGTaMWzbEBbG1k8oW4oClDo
 Content-Type: application/json

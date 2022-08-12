@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 const {userAuthorization,} = require("../middlewares/authorization.middleware");
-const {createTicket, getTickets, getTicketById, updateTicketConversation, updatedStatusClose, deleteTicket} = require("../models/ticket/Ticket.model")
+const {createTicket, getTickets, getTicketById, updateTicketConversation, updatedStatusClose, deleteTicket, getAllTicketsOfAllDepartments} = require("../models/ticket/Ticket.model")
 
 const {
   createNewTicketValidation,
   replyTicketMessageValidation,
 } = require("../middlewares/formValidation.middleware");
+// const { getAllTickets } = require("../../../frontend/src/api/ticketApi");
 
 
 
@@ -21,16 +22,17 @@ router.all("/", (req, res, next) => {
 //CREATE A NEW TICKET
 router.post("/", createNewTicketValidation, userAuthorization, async (req, res) => {
     try {
-      const { title, creator, severity, description, openAt } = req.body;
+      const { title, creator, severity, description, openAt, department, assigned } = req.body;
       const userId = req.userId;
 
       const ticketObj = {
-        clientId: userId,
         title,
         severity,
         description,
         openAt,
         creator,
+        department,
+        assigned,
       };
       
       const result = await createTicket(ticketObj);
@@ -53,6 +55,18 @@ router.post("/", createNewTicketValidation, userAuthorization, async (req, res) 
   }
 );
 
+
+//Get all tickets for all users and departments
+router.get("/tickets", userAuthorization, async (req, res) => {
+  try {
+    //find if user is isAdmin
+    const userId = req.userId;
+    await getAllTicketsOfAllDepartments(userId, res)
+
+  }catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+})
 
 
 // GET ALL TICKETS FOR A SPECIFIC USER
@@ -149,7 +163,6 @@ router.patch("/close-ticket/:id", userAuthorization, async (req, res) => {
 
 
 // DELETE TICKET
-
 router.delete("/:id", userAuthorization, async (req, res) => {
   try {
     const { id } = req.params;

@@ -22,9 +22,24 @@ export const createNewTicket  = async (formData)=>{
     }
 }
 
+//Get all tickets for all users and departments
+export const getAllTicketsForAdmin = async ()=>{
+    try{
+        const result = await axios.get(ticketUlr + "tickets" , {
+            headers: {
+                Authorization: sessionStorage.getItem("accessJWT"),
+                },
+        })
+        return result;
+    }catch(e){
+        return e;
+    }
+}
 
 
-export const getAllTickets = async ()=>{
+
+//Get all tickets created by a specific users
+export const getAllTicketsBySpecificUser = async ()=>{
     try{
         const result = await axios.get("http://localhost:5000/v1/ticket", {
             headers: {

@@ -1,21 +1,15 @@
-import React, { useEffect } from "react";
-import { DataGrid} from "@mui/x-data-grid";
-import { Link } from "react-router-dom";
-import {useSelector} from "react-redux";
-import {columns} from "./users/usersTableColumns "
+import { DataGrid } from '@mui/x-data-grid'
+import React from 'react'
+import { useSelector } from 'react-redux'
+import {columns } from "./util/TIcketsTableColumn"
 
-function UsersTable() {
-
-    const{searchUsersList, isLoading, error} = useSelector( state => state.allUsers);
+function AdminTicketsTable() {
+    const {searchTicketList, isLoading, error} = useSelector(state => state.tickets)
 
     if (isLoading) { return  <h3>Loading...</h3>}
 
-
-    
-    console.log(searchUsersList)
     
     return (
-
     <div
     className=" text-black h-5/6 flex pt-8 "
     >
@@ -27,7 +21,7 @@ function UsersTable() {
         p: 2,
         minWidth: 200,
         }}
-        rows={searchUsersList}
+        rows={searchTicketList}
         getRowId = {(row) => row._id}
         disableSelectionOnClick
         columns={columns}
@@ -36,8 +30,7 @@ function UsersTable() {
         ></DataGrid>
     }
         </div>
-    
-    );
+    )
 }
 
-export default UsersTable
+export default AdminTicketsTable

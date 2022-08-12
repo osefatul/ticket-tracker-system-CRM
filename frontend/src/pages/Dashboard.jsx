@@ -5,7 +5,7 @@ import PageBreadCrumbs from "../components/PageBreadCrumbs";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllTickets } from "../features/ticketSlice/ticketAction";
+import { fetchAllTicketsBySpecificUser } from "../features/ticketSlice/ticketAction";
 import moment from "moment";
 
 // Dummy tickets
@@ -20,7 +20,7 @@ function Dashboard() {
 
   useEffect(()=>{
     if (!tickets.length) {
-      dispatch(fetchAllTickets())
+      dispatch(fetchAllTicketsBySpecificUser())
     }
   },[tickets, dispatch]);
 

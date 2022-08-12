@@ -41,7 +41,7 @@ function AddTicketForm() {
     });
 
     if (name === "title"){
-      const title = value.length > 5
+      const title = value.length > 4
       setFormDataError({...formDataError, title} )
     }
   };

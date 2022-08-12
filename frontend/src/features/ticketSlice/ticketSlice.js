@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     tickets: [],
+    adminTickets: [],
     isLoading: false,
     error: "",
     replyMsg: "",
@@ -25,12 +26,26 @@ const ticketListSlice = createSlice({
         state.searchTicketList = action.payload;
         state.isLoading = false;
     },
+
+    fetchAdminTicketSuccess: (state, action) => {
+        state.adminTickets = action.payload;
+        state.searchTicketList = action.payload;
+        state.isLoading = false;
+    },
+
     fetchTicketFail: (state, { payload }) => {//payload has been destructured from action
         state.isLoading = false;
         state.error = payload;
     },
     searchTickets: (state, { payload }) => {
         state.searchTicketList = state.tickets.filter((row) => {
+        if (!payload) return row;
+
+        return row.title.toLowerCase().includes(payload.toLowerCase());
+        });
+    },
+    searchAdminTickets: (state, { payload }) => {
+        state.searchTicketList = state.adminTickets.filter((row) => {
         if (!payload) return row;
 
         return row.title.toLowerCase().includes(payload.toLowerCase());
@@ -88,6 +103,7 @@ export const {
     fetchTicketLoading,
     fetchTicketSuccess,
     fetchTicketFail,
+    fetchAdminTicketSuccess,
     fetchSingleTicketLoading,
     fetchSingleTicketSuccess,
     fetchSingleTicketFail,
@@ -98,6 +114,7 @@ export const {
     closeTicketSuccess,
     closeTicketFail,
     searchTickets,
+    searchAdminTickets,
     resetResponseMsg,
 } = actions;
 

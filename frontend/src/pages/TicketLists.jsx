@@ -7,7 +7,7 @@ import TicketsTable from "../components/TicketsTable";
 import { Link } from "react-router-dom";
 
 import {useDispatch} from "react-redux";
-import {fetchAllTickets, filterSearchTicket} from "../features/ticketSlice/ticketAction";
+import {fetchAllTicketsBySpecificUser, filterSearchTicket} from "../features/ticketSlice/ticketAction";
 import { loginSuccess } from "../features/authSlice/loginSlice";
 import { fetchNewAccessJWT } from "../api/userApi";
 
@@ -23,7 +23,7 @@ function TicketLists() {
       const result = await fetchNewAccessJWT();
       result && dispatch(loginSuccess());
     }
-    updateAccessJWT && dispatch (fetchAllTickets())
+    updateAccessJWT && dispatch (fetchAllTicketsBySpecificUser())
   }, [dispatch]);
 
   

@@ -42,6 +42,19 @@ const TicketSchema = new Schema({
     required: true,
     default: "",
   },
+  department:{
+    type: String,
+    maxlength: 50,
+    required: true,
+    default: "",
+  },
+  assigned: {
+    type: String,
+    maxlength: 50,
+    required: true,
+    default: "",
+  }
+  ,
   conversations: [
     {
       sender: {

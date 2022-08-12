@@ -12,11 +12,14 @@ import {
     closeTicketLoading,
     closeTicketSuccess,
     closeTicketFail,
+    fetchAdminTicketSuccess,
+    searchAdminTickets
 } from "./ticketSlice";
 
 
 import {
-    getAllTickets,
+    getAllTicketsBySpecificUser,
+    getAllTicketsForAdmin,
     getSingleTicket,
     updateReplyTicket,
     updateTicketStatusClosed,
@@ -24,10 +27,24 @@ import {
 
 
 
-export const fetchAllTickets = () => async (dispatch)=>{
+
+export const fetchAllTicketsForAdmin = () => async (dispatch) =>{
+    dispatch(fetchTicketLoading());
+    try{
+        const result = await getAllTicketsForAdmin();
+        dispatch(fetchAdminTicketSuccess(result.data.tickets))
+
+    }catch(error) {
+        dispatch(fetchTicketFail(error.message));
+    }
+}
+
+
+
+export const fetchAllTicketsBySpecificUser = () => async (dispatch)=>{
     dispatch(fetchTicketLoading());
     try {
-        const result = await getAllTickets();
+        const result = await getAllTicketsBySpecificUser();
         result.data.result.length && dispatch(fetchTicketSuccess(result.data.result));
     
     }catch(error) {
@@ -41,6 +58,9 @@ export const filterSearchTicket = str => dispatch =>{
     dispatch(searchTickets(str));
 }
 
+export const filterSearchAdminTicket = str => dispatch =>{
+    dispatch(searchAdminTickets(str));
+}
 
 
 export const fetchSingleTicket = (id) => async dispatch =>{
