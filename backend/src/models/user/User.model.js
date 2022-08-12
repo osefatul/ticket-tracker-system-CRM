@@ -127,7 +127,7 @@ const getUserById = async (id, res) => {
   
   try {
     return res.status(200)
-      .json({ user: {_id, email, name} } );
+      .json({ user: {_id, email, name, isAdmin} } );
   } catch (error) {
     console.log(error);
   }

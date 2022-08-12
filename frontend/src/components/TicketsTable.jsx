@@ -15,13 +15,13 @@ function TicketsTable() {
 
   const columns = [
     {
-      field: "clientId",
-      headerName: "ID",
+      field: "ticketID",
+      headerName: "Ticket ID",
       width: 220,
       renderCell: (params) => {
         return (
-          <Link to={`/ticket_communication/${params.row.id}`}>
-            <div>{params.row.id}</div>
+          <Link to={`/ticket_communication/${params.row._id}`}>
+            <div>{params.row._id}</div>
           </Link>
         );
       },
@@ -32,7 +32,7 @@ function TicketsTable() {
       width: 200,
       renderCell: (params) => {
         return (
-          <Link to={`/ticket_communication/${params.row.id}`}>
+          <Link to={`/ticket_communication/${params.row._id}`}>
             <div>{params.row.title}</div>
           </Link>
         );
@@ -44,7 +44,7 @@ function TicketsTable() {
       width: 100,
       renderCell: (params) => {
         return (
-          <Link to={`/ticket_communication/${params.row.id}`}>
+          <Link to={`/ticket_communication/${params.row._id}`}>
             <div>{params.row.severity}</div>
           </Link>
         );
@@ -57,7 +57,7 @@ function TicketsTable() {
       width: 200,
       renderCell: (params) => {
         return (
-          <Link to={`/ticket_communication/${params.row.id}`}>
+          <Link to={`/ticket_communication/${params.row._id}`}>
             <div 
             className= {
               `${params.row.status === "Resolved" ? "text-green-800":"text-red-800"}`}>
@@ -74,7 +74,7 @@ function TicketsTable() {
       width: 200,
       renderCell: (params) => {
         return (
-          <Link to={`/ticket_communication/${params.row.id}`}>
+          <Link to={`/ticket_communication/${params.row._id}`}>
             <div>{new Date (params.row.openAt).toLocaleString()}</div>
           </Link>
         );

@@ -29,6 +29,7 @@ function Auth() {
   //When we want to access a page, but is restricted by login, we will be redirected to login page, once we loge in then we will be redirected back to where we wanted to go.
   const from = location.state?.from?.pathname || "/"
 
+  //Redux states
   const {isLoading, isAuth, error,} = useSelector(state => state.login)
   const {isLoading:regLoading, status, message,} = useSelector(state => state.registration)
   const {

@@ -28,8 +28,6 @@ function View() {
             dispatch(fetchAllTicketsForAdmin())
         }
 
-
-        console.log(users)
     },[users, dispatch, tabSelected]);
 
 
@@ -39,35 +37,41 @@ function View() {
             dispatch(filterSearchUser(value))
         }
         else if(tabSelected === "Tickets"){
-            dispatch(filterSearchAdminTicket())
+            dispatch(filterSearchAdminTicket(value))
         }
     }
 
     return (
         <div className="homeHeight w-[85%] text-black">
-            
-            <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-7">
+                
+            {tabSelected ?
+                <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-7">
+                    <div className="font-bold flex justify-center items-center">
+                    {`${tabSelected}`} Database
+                    </div>:
+                
+                    <div className="text-gray-500 flex items-center justify-center border border-1 h-8 pl-2 space-x-2 cursor-pointer rounded-md">
+                        <AiOutlineSearch className />
+                        <input
+                            type="text"
+                            name="searchTicket"
+                            onChange={handleOnChange}
+                            //value={searchString}
+                            placeholder="Search for user"
+                            className="focus:outline-none flex items-center justify-center text-[13px]"
+                            />
+                    </div>
+                </div>:
 
-                <div className="font-bold flex justify-center items-center">
-                   {`${tabSelected}`} Database
+                <div className="flex items-center justify-center ">
+                    <h1 className= "font-bold text-[20px]">Welcome to Admin Panel</h1>
                 </div>
-                <div className="text-gray-500 flex items-center justify-center border border-1 h-8 pl-2 space-x-2 cursor-pointer rounded-md">
-                <AiOutlineSearch className />
-                <input
-                    type="text"
-                    name="searchTicket"
-                    onChange={handleOnChange}
-                    //value={searchString}
-                    placeholder="Search for user"
-                    className="focus:outline-none flex items-center justify-center text-[13px]"
-                    />
-                </div>
-            </div>
+            }
 
             {/* Table should be used with height of element */}
             {
                 tabSelected === "Users"?
-                <UsersTable/> : tabSelected === "Tickets" ? <AdminTicketsTable/> :<p>Nothing yet</p>
+                <UsersTable/> : tabSelected === "Tickets" ? <AdminTicketsTable/> :<p>{tabSelected}</p>
             }
         </div>
     )

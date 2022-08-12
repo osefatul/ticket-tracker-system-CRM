@@ -3,17 +3,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getTabsSuccess } from '../../features/selectedHomeTabs/tabsSlice';
 
 function Sidebar() {
-    const [selectedTab, setSelectedTab] = useState(0)
+    const [selectedTab, setSelectedTab] = useState()
     const dispatch = useDispatch();
 
 
     const tabs = [
-        {id:0, title: 'Users'},
+        {id:0, title:"Users"},
         {id:1, title:"Tickets"}, 
         {id:2, title:"Analytics"}
     ]
-        
-
 
     const handleSubmit = (index, title) =>{
     setSelectedTab(index)

@@ -1,16 +1,15 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import Sidebar from "../components/Homepage/Sidebar";
 import View from "../components/Homepage/View";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { getUsersData } from "../features/allUsersSlice/allUsersAction";
+
 
 
 function Home() {
 
-
+  const {user} = useSelector(state => state.user)
 
 
   return (
@@ -19,8 +18,14 @@ function Home() {
       <main className="homeHeight 
       flex items-start justify-start 
       text-black w-[100%] space-x-2 ">
-        <Sidebar className="" />
-        <View className="" />
+
+        {
+          user.isAdmin ? <>
+          <Sidebar className="" />
+          <View className="" />
+          </>: 
+          <h1>Hi common users</h1>
+        } 
       </main>
       
       <Footer />
