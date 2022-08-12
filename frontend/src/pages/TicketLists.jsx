@@ -37,11 +37,14 @@ function TicketLists() {
     <>
       <Header />
       <div className="layout ">
+
         <PageBreadCrumbs page="Ticket Lists" />
-        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 pt-3">
+
+        <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-6 pt-4">
+
           <Link to="/new_ticket">
             <button className="  text-[14px] border border-1 h-8 px-3 rounded-lg bg-green-800 ">
-              New Ticket
+            Create New Ticket
             </button>
           </Link>
 

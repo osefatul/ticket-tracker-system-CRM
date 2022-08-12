@@ -34,29 +34,35 @@ function AddTicketForm() {
 
   const handleOnChange = (e) => {
     const { name, value } = e.target;
+    
     setFormData({
       ...formData,
       [name]: name ==="severity"? parseInt(value) :value,
     });
+
+    if (name === "title"){
+      const title = value.length > 5
+      setFormDataError({...formDataError, title} )
+    }
   };
 
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
 
-    //Clear the every dispatch before creating a new ticket
-    dispatch(resetSuccessMSg())
+    try {
 
-    //Form validation check in term of Front-end 
-    setFormDataError(initialFormDataError);
-    const isTitleValid = await validationText(formData.title); // if this is true then the warning should disappear
-    setFormDataError({ ...initialFormData, title: !isTitleValid }); //send error if title is not valid
+      //Clear the every dispatch before creating a new ticket
+      dispatch(resetSuccessMSg())
+      
+      //dispatch new ticket
+      if(formDataError.title){
+        dispatch(openNewTicket({...formData, creator:name}))
+      } 
+    }catch (error){
+      console.log(error);
+    }
     
-
-    //dispatch new ticket
-    dispatch(openNewTicket({...formData, creator:name
-    }))
-
     //clear all forms data
     setFormData(initialFormData);
 
@@ -66,18 +72,8 @@ function AddTicketForm() {
   useEffect(()=>{
     setTimeout(()=>{
       dispatch(resetSuccessMSg())
-    },10000)
-  },[resetSuccessMSg,error,isLoading,successMsg])
-
-
-  //Every time formData change run this component
-  // useEffect(() => {
-     // Clean previous data if :
-  //   return ()=>{
-  //     successMsg && dispatch(resetSuccessMSg())
-  //   }
-  // }, [dispatch, formData, formDataError]);
-
+    },5000)
+  },[resetSuccessMSg,error,isLoading,successMsg,formDataError])
 
 
   return (
@@ -115,9 +111,9 @@ function AddTicketForm() {
             required
           />
         </div>
-        {formDataError.title && (
+        {!formDataError.title && (
           <p className="flex items-center justify-center text-red-500 text-[9px] mt">
-            Title is not compliant with the policy.
+            Title is not compliant with the policy - At least 5 characters.
           </p>
         )}
         
@@ -137,11 +133,11 @@ function AddTicketForm() {
             name="severity"
             onChange={handleOnChange}
           >
-            <option value={1}>Sev-1: Critical function down</option>
-            <option value={2}>Sev-2: Critical function impaired</option>
-            <option value={3}>Sev-3: Group productivity impaired</option>
-            <option value={4}>Sev-4: Individual productivity affected</option>
-            <option value={5}>Sev-5: productivity not immediately affected</option>
+            <option value="1">Sev-1: Critical function down</option>
+            <option value="2">Sev-2: Critical function impaired</option>
+            <option value="3">Sev-3: Group productivity impaired</option>
+            <option value="4">Sev-4: Individual productivity affected</option>
+            <option value="5">Sev-5: productivity not immediately affected</option>
           </select>
         </div>
     
@@ -169,7 +165,8 @@ function AddTicketForm() {
         <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-5">
           <div className="flex justify-start w-[20%]"></div>
           <button
-            className=" text-[15px] w-[60%] sm:w-[80%] rounded-sm mt-3 border border-1 bg-green-900 text-white"
+            
+            className={`text-[15px] w-[60%] sm:w-[80%] rounded-sm mt-3 border border-1 bg-green-900 text-white `}
             type="submit"
           >
             Create

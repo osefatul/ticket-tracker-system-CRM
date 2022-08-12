@@ -1,15 +1,24 @@
 import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { getTabsSuccess } from '../../features/selectedHomeTabs/tabsSlice';
 
 function Sidebar() {
+    const [selectedTab, setSelectedTab] = useState(0)
+    const dispatch = useDispatch();
 
-    const [selected, setSelected] = useState(0)
 
     const tabs = [
         {id:0, title: 'Users'},
         {id:1, title:"Tickets"}, 
-        {id:2, title:"Analytics"}]
+        {id:2, title:"Analytics"}
+    ]
+        
 
-    const {id, title} = tabs [selected]
+
+    const handleSubmit = (index, title) =>{
+    setSelectedTab(index)
+    dispatch(getTabsSuccess(title))        
+    }
 
 
     return (
@@ -18,8 +27,8 @@ function Sidebar() {
             {tabs.map((tab ,index)=>(
                 
                 <div key={index}
-                className={`${index === selected && "text-orange-800"}`}
-                onClick={()=> setSelected(index)}
+                className={`${index === selectedTab && "text-orange-800"}`}
+                onClick={() => handleSubmit(index, tab.title)}
                 >
                     <p className=" cursor-pointer">
                         {tab.title}

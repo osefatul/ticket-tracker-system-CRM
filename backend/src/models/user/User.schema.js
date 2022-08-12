@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
+// We are adding virtual, because mongodb "id" along with "_id".
+const opts = { toJSON: { virtuals: true } };
+
+
 const UserSchema = new Schema({
   name: {
     type: String,
@@ -20,10 +24,6 @@ const UserSchema = new Schema({
   address: {
     type: String,
     maxlength: 100,
-  },
-  phone: {
-    type: Number,
-    maxlength: 11,
   },
   email: {
     type: String,
@@ -58,7 +58,7 @@ const UserSchema = new Schema({
     required: true,
     default: false,
   }
-});
+}, opts);
 
 module.exports = {
   UserSchema: mongoose.model("User", UserSchema),

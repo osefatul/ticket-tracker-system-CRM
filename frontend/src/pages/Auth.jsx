@@ -17,7 +17,6 @@ const initialState = {
   company: "",
   password: "",
   confirmPassword: "",
-  phone: "",
   department: "",
 };
 
@@ -156,6 +155,7 @@ function Auth() {
 
         setPasswordError(passwordVerificationError)
         setMessageAddedAlert(true)//To turn on message alert
+        setForm(initialState)
         setIsSignup(!isSignup) //To return to sign in
 
         return dispatch(registrationSuccess(isRegistered));
@@ -171,6 +171,7 @@ function Auth() {
         setMessageAddedAlert(true)//To turn on message alert
         navigate("/update-password")
       }
+
       
     }catch(error) {
       console.log(error.message)
@@ -251,6 +252,7 @@ function Auth() {
               type="email"
               placeholder="Email@gmail.com"
               onChange={handleChange}
+              value={form.email}
               required
             />
           </div>

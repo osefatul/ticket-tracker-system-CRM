@@ -99,6 +99,7 @@ router.get ("/", userAuthorization, async(req, res)=>{
   }
 })
 
+
 //-----------------------------------------------------------------------------
 
 // GET ALL USERS PROFILES

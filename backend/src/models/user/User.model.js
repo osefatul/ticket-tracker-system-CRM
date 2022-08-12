@@ -15,10 +15,10 @@ const verificationURL = "http://localhost:3000/verification/";
 
 //Create a new user profile
 const createUser = async (req, res) => {
-  const { name, company, address, phone, email, password, confirmPassword } = req.body;
+  const { name, company, address, department, email, password, confirmPassword } = req.body;
 
   //Fill up all details in the inputs
-  if (!name || !company || !phone || !email || !password || !confirmPassword) {
+  if (!name || !company || !department || !email || !password || !confirmPassword) {
     res
       .status(422)
       .json({ error: "Please fill up the details" });
@@ -44,7 +44,7 @@ const createUser = async (req, res) => {
 
   //Check if email or phone already exists
   const userExist = await UserSchema.findOne({
-    $or: [{ email: email }, { phone: phone }],
+    $or: [{ email: email }, { name: name }],
   });
 
   if (userExist) {
@@ -58,7 +58,7 @@ const createUser = async (req, res) => {
       name,
       company,
       address,
-      phone,
+      department,
       email,
       password: hashPassword,
     });
@@ -71,6 +71,7 @@ const createUser = async (req, res) => {
 			type: "new-user-confirmation-required",
 			verificationLink: verificationURL + result._id + "/" + email,
 		});
+    
 
     console.log(result);
     res.status(200).json({ message: "New user created", result });
@@ -122,7 +123,7 @@ const getUserById = async (id, res) => {
   const user = await UserSchema.findOne({ _id:id });
 
   !user && res.status(404).json({ message: "User not found" });
-  const {_id, email, name } = user
+  const {_id, email, name, isAdmin } = user
   
   try {
     return res.status(200)
@@ -136,18 +137,24 @@ const getUserById = async (id, res) => {
 
 
 const getAllUsers = async (req, res) => {
-  const users = await UserSchema.find();
 
-  !users && res.status(404).json({ message: "Users not found" });
+  const FindUsers = await UserSchema.find();
+
+  !FindUsers && res.status(404).json({ message: "Users not found" });
+
+  const users = FindUsers.map(user => {
+
+    const {_id, name, email, department, company } = user
+    return {_id, name, email, department, company}
+  })
   
   try {
     return res.status(200)
-      .json({ users } );
+      .json({users});
   } catch (error) {
     console.log(error);
   }
 }
-
 
 
 //--------------------------------------------------------------------

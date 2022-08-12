@@ -58,7 +58,11 @@ function TicketsTable() {
       renderCell: (params) => {
         return (
           <Link to={`/ticket_communication/${params.row.id}`}>
-            <div>{params.row.status}</div>
+            <div 
+            className= {
+              `${params.row.status === "Resolved" ? "text-green-800":"text-red-800"}`}>
+            
+            {params.row.status}</div>
           </Link>
         );
       },

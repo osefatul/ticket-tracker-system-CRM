@@ -4,6 +4,7 @@ import UserVerification from "../pages/UserVerification";
 const rootUrl = "http://localhost:5000/v1/";
 const loginUrl = rootUrl + "user/login";
 const userProfileUrl = rootUrl + "user";
+const allUsersProfileUrl = rootUrl + "user/users";
 const logoutUrl = rootUrl + "user/logout";
 const newAccessJWT = rootUrl + "tokens/new-access-jwt";
 const UserVerificationUrl = userProfileUrl + "/verify";
@@ -110,7 +111,7 @@ export const fetchNewAccessJWT = async () => {
 
 //-----------------------------------------------------------------------------
 
-
+//Fetch single user
 
 export const fetchUser = async () =>{
     try {
@@ -134,6 +135,32 @@ export const fetchUser = async () =>{
 }
 
 
+//-----------------------------------------------------------------------------
+
+
+//Fetch single user
+
+export const fetchAllUsers = async () =>{
+    try {
+        const accessJWT = sessionStorage.getItem('accessJWT');
+
+        if(!accessJWT){
+            return "Token not found";
+        }
+
+        const res = await axios.get(allUsersProfileUrl, {
+            headers: {
+                Authorization: accessJWT
+            }
+        })
+
+        // console.log(res)
+        return res.data.users
+    }catch(error){
+        console.log(error);
+        return(error.message);
+    }
+}
 //-----------------------------------------------------------------------------
 
 

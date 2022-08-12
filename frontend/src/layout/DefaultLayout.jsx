@@ -18,13 +18,13 @@ export const DefaultLayout = ({ children }) => {
 
   useEffect(()=>{
   const updateAccessJWT = async () => {
-    const result = await fetchNewAccessJWT();
+    const result =  await fetchNewAccessJWT();
     result && dispatch(loginSuccess());
   };
 
   if(!user._id) {
     dispatch(getUserProfile());
-    dispatch(updateAccessJWT()); 
+    // dispatch(updateAccessJWT()); 
   }
 
 
