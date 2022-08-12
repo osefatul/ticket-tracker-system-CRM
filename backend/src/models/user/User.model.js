@@ -144,8 +144,8 @@ const getAllUsers = async (req, res) => {
 
   const users = FindUsers.map(user => {
 
-    const {_id, name, email, department, company } = user
-    return {_id, name, email, department, company}
+    const {_id, name, email, department, company, isVerified, isAdmin } = user
+    return {_id, name, email, department, company, isVerified, isAdmin}
   })
   
   try {

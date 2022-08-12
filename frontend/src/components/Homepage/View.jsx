@@ -13,11 +13,11 @@ function View() {
     const {users: {users}} = useSelector ((state) => state.allUsers)
 
     useEffect(()=>{
+        //if no user found fetch users
         if(!users?.length){
             dispatch(getUsersData())
         }
         console.log(users)
-
     },[users, dispatch]);
 
 
@@ -31,7 +31,9 @@ function View() {
             
             <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-6">
 
-                <div></div>
+                <div className="font-bold flex justify-center items-center">
+                    All Users Database
+                </div>
                 <div className="text-gray-500 flex items-center justify-center border border-1 h-8 pl-2 space-x-2 cursor-pointer rounded-md">
                 <AiOutlineSearch className />
                 <input
@@ -44,10 +46,9 @@ function View() {
                     />
                 </div>
             </div>
-        
+
+            {/* Table should be used with height of element */}
             <UsersTable/>
-            
-            
         </div>
     )
 }

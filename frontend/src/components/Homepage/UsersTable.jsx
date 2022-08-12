@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { DataGrid} from "@mui/x-data-grid";
 import { Link } from "react-router-dom";
 import {useSelector} from "react-redux";
-
-
+import {columns} from "./users/usersTableColumns "
 
 function UsersTable() {
 
@@ -12,86 +11,6 @@ function UsersTable() {
     if (isLoading) { return  <h3>Loading...</h3>}
 
 
-    const columns = [
-
-        {
-        field: "_id",
-        headerName: "ID",
-        width: 220,
-        renderCell: (params) => {
-        return (
-            <div>{params.row._id}</div>
-        );
-        },
-    },
-    {
-        field: "name",
-        headerName: "Name",
-        width: 200,
-        renderCell: (params) => {
-        return (
-            // <Link to={`/ticket_communication/${params.row.id}`}>
-            <div>{params.row.name}</div>
-            // </Link>
-        );
-        },
-    },
-    {
-        field: "department",
-        headerName: "Department",
-        width: 100,
-        renderCell: (params) => {
-        return (
-            // <Link to={`/ticket_communication/${params.row.id}`}>
-            <div>{params.row.department}</div>
-            // </Link>
-        );
-        },
-    },
-    {
-        field: "company",
-        headerName: "Company",
-        width: 100,
-        renderCell: (params) => {
-        return (
-            // <Link to={`/ticket_communication/${params.row.id}`}>
-            <div>{params.row.company}</div>
-            // </Link>
-        );
-        },
-    },
-
-    // {
-    //     field: "joinedDate",
-    //     headerName: "Joined Date",
-    //     width: 200,
-    //     renderCell: (params) => {
-    //     return (
-    //         <Link to={`/ticket_communication/${params.row.id}`}>
-    //         <div 
-    //         className= {
-    //             `${params.row.status === "Resolved" ? "text-green-800":"text-red-800"}`}>
-            
-    //         {params.row.status}</div>
-    //         </Link>
-    //     );
-    //     },
-    // },
-
-    // {
-    //     field: "openAt",
-    //     headerName: "Created Date",
-    //     width: 200,
-    //     renderCell: (params) => {
-    //     return (
-    //         <Link to={`/ticket_communication/${params.row.id}`}>
-    //         <div>{new Date (params.row.openAt).toLocaleString()}</div>
-    //         </Link>
-    //     );
-    //     },
-    // },
-    // ];
-    ]
     
     console.log(searchUsersList)
     
