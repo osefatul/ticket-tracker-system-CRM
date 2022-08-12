@@ -39,7 +39,7 @@ export const columns = [
 {
     field: "department",
     headerName: "Department",
-    width: 100,
+    width: 120,
     renderCell: (params) => {
     return (
         // <Link to={`/ticket_communication/${params.row.id}`}>
@@ -75,18 +75,4 @@ export const columns = [
     );
     },
 },
-
-// {
-//     field: "openAt",
-//     headerName: "Created Date",
-//     width: 200,
-//     renderCell: (params) => {
-//     return (
-//         <Link to={`/ticket_communication/${params.row.id}`}>
-//         <div>{new Date (params.row.openAt).toLocaleString()}</div>
-//         </Link>
-//     );
-//     },
-// },
-// ];
 ]
