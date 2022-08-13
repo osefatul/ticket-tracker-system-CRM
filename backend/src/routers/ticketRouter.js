@@ -73,9 +73,7 @@ router.get("/tickets", userAuthorization, async (req, res) => {
 router.get("/", userAuthorization, async (req, res)=>{
   try {
     const userId = req.userId;
-    
     const result = await getTickets(userId);
-    // console.log("This is tickets", findUser)
 
     // res.json(result.map(ticket=>ticket._id));
     if(result) 
@@ -91,13 +89,13 @@ router.get("/", userAuthorization, async (req, res)=>{
 
 
 //GET A SPECIFIC TICKET FOR A SPECIFIC USER
-router.get('/:id', userAuthorization, async (req, res) => {
+router.get('/:id',  async (req, res) => {
   try {
+    
     const { id } = req.params;
+    // const clientId = req.userId;
 
-    const clientId = req.userId;
-    const result = await getTicketById(id, clientId);
-
+    const result = await getTicketById(id );
     if(result) return res.json({status: "success", result}); 
 
     res.json({status: "success", message: "This specific ticket is not in the user's list."});

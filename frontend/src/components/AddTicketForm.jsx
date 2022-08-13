@@ -38,9 +38,8 @@ function AddTicketForm() {
   const {isLoading, error, successMsg} = useSelector(state => state.openTicket)
   const {usersAndDepartments} = useSelector(state => state.allUsers)
 
-  console.log(usersAndDepartments)
 
-
+//update and dispatch department.
   useEffect(()=>{
     dispatch(fetchUsersDepartment({department: department}))
   },[department])
@@ -192,6 +191,8 @@ function AddTicketForm() {
             <option value="SDE">SDE</option>
             <option value="Finance">Finance</option>
             <option value="Learning">Learning</option>
+            <option value="Operations">Operations</option>
+
           </select>
         </div>
 

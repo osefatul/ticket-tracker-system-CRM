@@ -35,21 +35,17 @@ const getAllTicketsOfAllDepartments = async (user, res)=>{
 
 
 
-// Get all tickets for a specific user
+// Get list of all tickets for a specific user
 const getTickets = async clientId =>{
     try {
-        
         //find who is logged in
         const findUser = await UserSchema.findOne ({_id: clientId})
-
         const {name, department} = findUser
 
         const findTickets = await TicketSchema.find({
             $and: [{assignee: name}, {department: department}] 
         })
-
         // console.log("This is tickets", findUser)
-
         return findTickets;
     }
     catch (error) {
@@ -59,11 +55,20 @@ const getTickets = async clientId =>{
 }
 
 
-// Get tickets for a specific user
-const getTicketById = (paramId, clientId) =>{
+// Get a specific ticket assigned, 
+const getTicketById = async (paramId, clientId) =>{
     try {
-        const findTicket = TicketSchema.findOne({
-            $and: [{_id:paramId}, { clientId: clientId}],
+        
+        //find who is logged in
+        // const findUser = await UserSchema.findOne ({_id: clientId})
+        // const {name, department} = findUser
+
+        // const findTicket = await TicketSchema.findOne({
+        //     $and: [{_id:paramId}, { assignee: name}, { department: department}],
+        // });
+
+        const findTicket = await TicketSchema.findOne({
+        _id:paramId
         });
         return findTicket;
     }
@@ -72,6 +77,7 @@ const getTicketById = (paramId, clientId) =>{
         return (error);
     }
 }
+
 
 // Get tickets for a specific user
 const updateTicketConversation = (_id, message, sender) =>{

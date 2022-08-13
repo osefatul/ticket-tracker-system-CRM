@@ -105,8 +105,8 @@ Content-Type: application/json
 
 
 ### Get single ticket
-GET http://localhost:5000/v1/ticket/62dda28956da557135f3eef5
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4ODMxNzExLCJleHAiOjE2NTg4MzM1MTF9.xXWSpVoQCl8ZIde6EykB63pQ0-it6TYj4JdA_PoGtJ0
+GET http://localhost:5000/v1/ticket/62f71dec8a8d11288de33471
+
 Content-Type: application/json
 
 
