@@ -5,6 +5,7 @@ const rootUrl = "http://localhost:5000/v1/";
 const loginUrl = rootUrl + "user/login";
 const userProfileUrl = rootUrl + "user";
 const allUsersProfileUrl = rootUrl + "user/users";
+const usersAndDepartments = rootUrl + "user/assigned-user/";
 const logoutUrl = rootUrl + "user/logout";
 const newAccessJWT = rootUrl + "tokens/new-access-jwt";
 const UserVerificationUrl = userProfileUrl + "/verify";
@@ -13,6 +14,7 @@ const UserVerificationUrl = userProfileUrl + "/verify";
 
 //-----------------------------------------------------------------------------
 
+//Register a user
 
 export const userRegistration = async (formData)=>{
     try {
@@ -32,6 +34,8 @@ export const userRegistration = async (formData)=>{
 
 //-----------------------------------------------------------------------------
 
+
+//Verify user after registration
 export const userRegistrationVerification = async (formDate)=>{
     
     try {
@@ -49,9 +53,9 @@ export const userRegistrationVerification = async (formDate)=>{
 }
 
 
-
 //-----------------------------------------------------------------------------
 
+//Login user
 
 export const userLogin = async (formData) =>{
     try {
@@ -76,7 +80,7 @@ export const userLogin = async (formData) =>{
 
 //-----------------------------------------------------------------------------
 
-
+// update or fetch new access token
 
 export const fetchNewAccessJWT = async () => {
 
@@ -138,7 +142,7 @@ export const fetchUser = async () =>{
 //-----------------------------------------------------------------------------
 
 
-//Fetch single user
+//Fetch All users in DB
 
 export const fetchAllUsers = async () =>{
     try {
@@ -164,7 +168,24 @@ export const fetchAllUsers = async () =>{
 //-----------------------------------------------------------------------------
 
 
+
+//Fetch All users with specific dept in DB
+
+export const fetchUsersWithDepartment = async (dept) =>{
+    try {
+        const res = await axios.post("http://localhost:5000/v1/user/assigned-user/", dept)
+        return res.data.users;
+    }catch(error){
+        console.log(error);
+        return(error.message);
+    }
+}
+//-----------------------------------------------------------------------------
+
+
+
 //use this where the logout option is.
+
 export const userLogout = async () => {
     try {
         await axios.delete(logoutUrl, {

@@ -22,7 +22,7 @@ router.all("/", (req, res, next) => {
 //CREATE A NEW TICKET
 router.post("/", createNewTicketValidation, userAuthorization, async (req, res) => {
     try {
-      const { title, creator, severity, description, openAt, department, assigned } = req.body;
+      const { title, creator, severity, description, openAt, department, assignee } = req.body;
       const userId = req.userId;
 
       const ticketObj = {
@@ -32,7 +32,7 @@ router.post("/", createNewTicketValidation, userAuthorization, async (req, res) 
         openAt,
         creator,
         department,
-        assigned,
+        assignee,
       };
       
       const result = await createTicket(ticketObj);
@@ -73,7 +73,10 @@ router.get("/tickets", userAuthorization, async (req, res) => {
 router.get("/", userAuthorization, async (req, res)=>{
   try {
     const userId = req.userId;
+    
     const result = await getTickets(userId);
+    // console.log("This is tickets", findUser)
+
     // res.json(result.map(ticket=>ticket._id));
     if(result) 
     {return res.json({status: "success", result});}

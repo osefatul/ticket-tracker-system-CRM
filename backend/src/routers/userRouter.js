@@ -21,7 +21,8 @@ const {
   getUserById,
   updatePassword,
   verifyUser,
-  getAllUsers
+  getAllUsers,
+  getAllAssignedUsers
   // storeUserRefreshJWT
 } = require("../models/user/User.model");
 const { verify } = require("jsonwebtoken");
@@ -112,6 +113,23 @@ router.get("/users", userAuthorization, async (req, res)  => {
     res.json({status: 'error', message: err.message})
   }
 })
+
+
+
+//-----------------------------------------------------------------------------
+
+// GET ALL USERS BASED ON THEIR DEPARTMENT.
+
+router.post("/assigned-user",  async (req, res)  => {
+  try {
+    await getAllAssignedUsers(req,res)
+  }catch (err) {
+    console.log(err);
+    res.json({status: 'error', message: err.message})
+  }
+})
+
+
 
 
 //-----------------------------------------------------------------------------

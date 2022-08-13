@@ -21,7 +21,7 @@ export const columns = [
             width: 200,
             renderCell: (params) => {
             return (
-                <Link to={`/ticket_communication/${params.row.id}`}>
+                <Link to={`/ticket_communication/${params.row._id}`}>
                 <div>{params.row.title}</div>
                 </Link>
             );
@@ -33,7 +33,7 @@ export const columns = [
             width: 100,
             renderCell: (params) => {
             return (
-                <Link to={`/ticket_communication/${params.row.id}`}>
+                <Link to={`/ticket_communication/${params.row._id}`}>
                 <div>{params.row.severity}</div>
                 </Link>
             );
@@ -46,7 +46,7 @@ export const columns = [
             width: 100,
             renderCell: (params) => {
             return (
-                <Link to={`/ticket_communication/${params.row.id}`}>
+                <Link to={`/ticket_communication/${params.row._id}`}>
                 <div>{params.row.department}</div>
                 </Link>
             );
@@ -59,7 +59,7 @@ export const columns = [
             width: 200,
             renderCell: (params) => {
             return (
-                <Link to={`/ticket_communication/${params.row.id}`}>
+                <Link to={`/ticket_communication/${params.row._id}`}>
                 <div 
                 className= {
                     `${params.row.status === "Resolved" ? "text-green-800":"text-red-800"}`}>
@@ -76,7 +76,7 @@ export const columns = [
             width: 200,
             renderCell: (params) => {
             return (
-                <Link to={`/ticket_communication/${params.row.id}`}>
+                <Link to={`/ticket_communication/${params.row._id}`}>
                 <div>{new Date (params.row.openAt).toLocaleString()}</div>
                 </Link>
             );

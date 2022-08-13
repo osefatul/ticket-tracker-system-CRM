@@ -1,9 +1,8 @@
-import { getUsersPending, getUsersSuccess, getUsersFail, searchUsers } from "./allUsersSlice";
-import { fetchAllUsers } from "../../api/userApi";
+import { getUsersPending, getUsersSuccess, getUsersFail, searchUsers, getUsersAndDepartmentsSuccess } from "./allUsersSlice";
+import { fetchAllUsers, fetchUsersWithDepartment } from "../../api/userApi";
 
 
 export const getUsersData =() => async dispatch => {
-
     dispatch(getUsersPending());
     try {
         const result = await fetchAllUsers();
@@ -14,6 +13,21 @@ export const getUsersData =() => async dispatch => {
         dispatch(getUsersFail(error));
     }
 }
+
+
+export const fetchUsersDepartment =(str) => async dispatch => {
+    dispatch(getUsersPending());
+    try {
+        const result = await fetchUsersWithDepartment(str);
+        dispatch(getUsersAndDepartmentsSuccess(result));
+        // console.log(result);
+        return result
+        
+    } catch (error) {
+        dispatch(getUsersFail(error));
+    }
+}
+
 
 
 export const filterSearchUser = (str) => dispatch => {

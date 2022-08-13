@@ -53,10 +53,10 @@ export const fetchAllTicketsBySpecificUser = () => async (dispatch)=>{
 }
 
 
-
 export const filterSearchTicket = str => dispatch =>{
     dispatch(searchTickets(str));
 }
+
 
 export const filterSearchAdminTicket = str => dispatch =>{
     dispatch(searchAdminTickets(str));

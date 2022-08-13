@@ -48,7 +48,7 @@ const TicketSchema = new Schema({
     required: true,
     default: "",
   },
-  assigned: {
+  assignee: {
     type: String,
     maxlength: 50,
     required: true,

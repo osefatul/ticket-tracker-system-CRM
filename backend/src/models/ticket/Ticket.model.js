@@ -36,9 +36,20 @@ const getAllTicketsOfAllDepartments = async (user, res)=>{
 
 
 // Get all tickets for a specific user
-const getTickets = clientId =>{
+const getTickets = async clientId =>{
     try {
-        const findTickets = TicketSchema.find({ clientId })
+        
+        //find who is logged in
+        const findUser = await UserSchema.findOne ({_id: clientId})
+
+        const {name, department} = findUser
+
+        const findTickets = await TicketSchema.find({
+            $and: [{assignee: name}, {department: department}] 
+        })
+
+        // console.log("This is tickets", findUser)
+
         return findTickets;
     }
     catch (error) {

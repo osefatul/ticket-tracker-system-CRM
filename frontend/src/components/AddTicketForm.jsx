@@ -5,12 +5,13 @@ import {resetSuccessMSg} from "../features/newTicket/newTicketSlice"
 import {openNewTicket} from "../features/newTicket/newTicketAction"
 import Spinner from "../utils/spinner";
 import { resetResponseMsg } from "../features/ticketSlice/ticketSlice";
+import { fetchUsersDepartment } from "../features/allUsersSlice/allUsersAction";
+import { fetchUsersWithDepartment } from "../api/userApi";
 
 
 //for Data submission
 const initialFormData = {
   title: "",
-  severity: "",
   description: "",
 };
 
@@ -27,9 +28,24 @@ function AddTicketForm() {
   const [formData, setFormData] = useState(initialFormData);
   const [formDataError, setFormDataError] = useState(initialFormDataError);
 
+
+  const [department, setDepartment] = useState("");
+  const [assignee, setAssignee] = useState();
+
+
   const dispatch = useDispatch();
   const {user:{name}} = useSelector((state)=> state.user)
   const {isLoading, error, successMsg} = useSelector(state => state.openTicket)
+  const {usersAndDepartments} = useSelector(state => state.allUsers)
+
+  console.log(usersAndDepartments)
+
+
+  useEffect(()=>{
+    dispatch(fetchUsersDepartment({department: department}))
+  },[department])
+
+
 
 
   const handleOnChange = (e) => {
@@ -39,6 +55,15 @@ function AddTicketForm() {
       ...formData,
       [name]: name ==="severity"? parseInt(value) :value,
     });
+
+
+    if(name === "department"){
+      setDepartment(value);
+    }
+
+    if(name === "assignee") {
+      setAssignee(value);
+    }
 
     if (name === "title"){
       const title = value.length > 4
@@ -51,14 +76,14 @@ function AddTicketForm() {
     e.preventDefault();
 
     try {
-
       //Clear the every dispatch before creating a new ticket
       dispatch(resetSuccessMSg())
       
       //dispatch new ticket
       if(formDataError.title){
-        dispatch(openNewTicket({...formData, creator:name}))
-      } 
+        dispatch(openNewTicket({...formData, creator:name, assignee, department}))
+      }
+      
     }catch (error){
       console.log(error);
     }
@@ -111,8 +136,9 @@ function AddTicketForm() {
             required
           />
         </div>
+
         {!formDataError.title && (
-          <p className="flex items-center justify-center text-red-500 text-[9px] mt">
+          <p className="flex items-center justify-center text-red-500 text-[9px]">
             Title is not compliant with the policy - At least 5 characters.
           </p>
         )}
@@ -128,11 +154,13 @@ function AddTicketForm() {
           <select
             className={`pl-1 border-stone-400  border border-1 w-[60%] sm:w-[80%]
             bg-white rounded-sm shadow-sm sm:text-sm
-              focus:outline-none focus:ring-1 mt-2
+              focus:outline-none focus:ring-1
               }`}
             name="severity"
             onChange={handleOnChange}
+            defaultValue
           >
+            <option disabled value>Select Sev</option>
             <option value="1">Sev-1: Critical function down</option>
             <option value="2">Sev-2: Critical function impaired</option>
             <option value="3">Sev-3: Group productivity impaired</option>
@@ -140,7 +168,65 @@ function AddTicketForm() {
             <option value="5">Sev-5: productivity not immediately affected</option>
           </select>
         </div>
+
+        <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-5">
+          <label
+            className=" flex justify-start w-[20%] text-[12px]"
+            htmlFor="title"
+          >
+            Department
+          </label>
+
+          <select
+            className={`pl-1 border-stone-400  border border-1 w-[60%] sm:w-[80%]
+            bg-white rounded-sm shadow-sm sm:text-sm
+              focus:outline-none focus:ring-1
+              }`}
+            name="department"
+            onChange={handleOnChange}
+            defaultValue
+          >
+            <option disabled value>Select dept </option>
+            <option value="HR">HR</option>
+            <option value="IT">IT</option>
+            <option value="SDE">SDE</option>
+            <option value="Finance">Finance</option>
+            <option value="Learning">Learning</option>
+          </select>
+        </div>
+
+
+        {usersAndDepartments.length > 0 &&
+        
+
+        <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-5">
+          <label
+            className=" flex justify-start w-[20%] text-[12px]"
+            htmlFor="title"
+          >
+            Assignee
+          </label>
+
+          <select
+            className={`pl-1 border-stone-400  border border-1 w-[60%] sm:w-[80%]
+            bg-white rounded-sm shadow-sm sm:text-sm
+              focus:outline-none focus:ring-1
+              }`}
+            name="assignee"
+            onChange={handleOnChange}
+            defaultValue
+          >
+            <option disabled value>Assign a person </option>
+            {usersAndDepartments.map(user => (
+            <option key={user.name+user.email} value={`${user.name}`}>{user.name}</option>
+            ) )}
+          </select>
+        </div>
     
+        }
+        
+        
+        
         <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-5">
           <label
             className=" flex justify-start w-[20%] text-[12px]"

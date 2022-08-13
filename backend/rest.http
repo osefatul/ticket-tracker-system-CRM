@@ -18,11 +18,21 @@ Content-Type: application/json
 
 
 
-### Get a user profile endpoint, using access token
+### Get a specific user profile endpoint, using access token
 Get http://localhost:5000/v1/user/
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4ODM2NjA4LCJleHAiOjE2NTg4Mzg0MDh9.YQDly3dlj4biSzuFqmCAo5370JavDIsftkn-ALB5op4
 
 {"email":"sefat1@amazon.com", "password":"password5" }
+
+
+
+
+### Get all users based on departments, using access token
+POST http://localhost:5000/v1/user/assigned-user/
+Content-Type: application/json
+
+{"department":"SDE"}
+
 
 
 
@@ -90,7 +100,7 @@ Content-Type: application/json
 
 ###Get all the tickets created by a user
 GET http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4Mzk0MjE2LCJleHAiOjE2NTgzOTUxMTZ9.ykiNIUCm5TR998rULFfNeGTaMWzbEBbG1k8oW4oClDo
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDM2NDI5MSwiZXhwIjoxNjYwMzY2MDkxfQ.EaSIibYboaJb-3FqKV-twDpQUga00MEBxLfPCcfUvGc
 Content-Type: application/json
 
 

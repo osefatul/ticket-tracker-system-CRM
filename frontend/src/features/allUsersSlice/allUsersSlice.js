@@ -5,6 +5,7 @@ const initialState = {
     isLoading: false,
     error: "",
     searchUsersList: [],
+    usersAndDepartments: []
 };
 
 const userSlice = createSlice({
@@ -19,6 +20,12 @@ const userSlice = createSlice({
         state.users = payload;
         state.error = "";
         state.searchUsersList = payload;
+    },
+    getUsersAndDepartmentsSuccess: (state, { payload }) => {
+        state.isLoading = false;
+        state.usersAndDepartments = payload;
+        state.error = "";
+        // state.searchUsersList = payload;
     },
     getUsersFail: (state, { payload }) => {
         state.isLoading = false;
@@ -41,7 +48,8 @@ export const {
     getUsersPending,
     getUsersSuccess,
     getUsersFail,
-    searchUsers
+    searchUsers,
+    getUsersAndDepartmentsSuccess
 
 } = userSlice.actions;
 

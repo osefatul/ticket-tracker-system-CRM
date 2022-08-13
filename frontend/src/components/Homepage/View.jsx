@@ -9,11 +9,8 @@ import UsersTable from './users/UsersTable';
 function View() {
 
     const dispatch = useDispatch();
-
     const { tabSelected } = useSelector((state) => state.homeTabs);
     const {users: {users}} = useSelector ((state) => state.allUsers)
-    const {adminTickets} = useSelector ((state) => state.tickets)
-
 
     useEffect(()=>{
 
@@ -23,8 +20,7 @@ function View() {
                 dispatch(getUsersData())
             }
         }
-        if(tabSelected === "Tickets"){
-            //if no user found fetch users    
+        if(tabSelected === "Tickets"){ 
             dispatch(fetchAllTicketsForAdmin())
         }
 

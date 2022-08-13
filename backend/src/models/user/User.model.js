@@ -12,7 +12,7 @@ const {
 const verificationURL = "http://localhost:3000/verification/";
 //--------------------------------------------------------------------
 
-
+//REGISTRATION
 //Create a new user profile
 const createUser = async (req, res) => {
   const { name, company, address, department, email, password, confirmPassword } = req.body;
@@ -83,9 +83,8 @@ const createUser = async (req, res) => {
 
 //--------------------------------------------------------------------
 
-
-
-// Get user data from database using its email
+//
+// Get user data from database using its email - PURPOSE: LOGIN
 const getUserByEmail = async (req, res) => {
   
   const { email, password } = req.body;
@@ -117,25 +116,53 @@ const getUserByEmail = async (req, res) => {
 
 //--------------------------------------------------------------------
 
-
-// Get user data from database using its id
+// Get user data from database using its id - PURPOSE: GET USE DATA AFTER LOGIN
 const getUserById = async (id, res) => {
   const user = await UserSchema.findOne({ _id:id });
 
   !user && res.status(404).json({ message: "User not found" });
-  const {_id, email, name, isAdmin } = user
+  const {_id, email, name, isAdmin, department, company } = user
   
   try {
     return res.status(200)
-      .json({ user: {_id, email, name, isAdmin} } );
+      .json({ user: {_id, email, name, isAdmin, department, company} } );
   } catch (error) {
     console.log(error);
   }
 }
 
+
+
 //--------------------------------------------------------------------
 
+// GET USERS BASED ON THEIR DEPARTMENT - PURPOSE: TO ASSIGN TICKET FOR USERS
+const getAllAssignedUsers = async (req, res) => {
+  
+  try {
 
+  const {department} = req.body;
+  const findUsers = await UserSchema.find({department: department});
+
+  const users = findUsers.map(user => {
+    const {name, company, email, department} = user;
+    return {name, company, email, department}; 
+  })
+
+  !users && res.status(404).json({ message: "User not found" });
+  
+  return res.status(200)
+      .json({ users: users } );
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+
+
+
+//--------------------------------------------------------------------
+
+// GET ALL USERS IN THE DB - PURPOSE: TO RENDER USERS FOR ADMIN.
 const getAllUsers = async (req, res) => {
 
   const FindUsers = await UserSchema.find();
@@ -158,7 +185,6 @@ const getAllUsers = async (req, res) => {
 
 
 //--------------------------------------------------------------------
-
 
 
 //Update user password
@@ -236,6 +262,7 @@ module.exports = {
   getUserById, 
   updatePassword,
   verifyUser,
-  getAllUsers
+  getAllUsers,
+  getAllAssignedUsers
 };
 
