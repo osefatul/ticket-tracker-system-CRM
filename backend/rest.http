@@ -141,8 +141,16 @@ Content-Type: application/json
 
 
 ### Close the ticket
-PATCH http://localhost:5000/v1/ticket/close-ticket/62dda27856da557135f3eef3
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU5NTE4MjA2LCJleHAiOjE2NTk1MjAwMDZ9.3t5J_GG-vKzzj8fa8DBASdhFRJ1540h2Fq0uruEe324
+PATCH http://localhost:5000/v1/ticket/status-update/62f71dec8a8d11288de33471
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDQ2MzE5MSwiZXhwIjoxNjYwNDY0OTkxfQ.TZcsYM2dHICNteCsL35dXtvwZLR0q1ZMv6Hq0qNbv0Q
+Content-Type: application/json 
+
+{ 
+    "status": "Research",
+    "message": "Working on the cause", 
+    "sender": "omar",
+    "statusDetails":"Pending for details" 
+}
 
 
 

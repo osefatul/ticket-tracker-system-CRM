@@ -24,7 +24,15 @@ const TicketSchema = new Schema({
     maxlength: 30,
     required: true,
     default: "Pending operator response",
+    
   },
+  statusDetails:{
+    type: String,
+    maxlength: 30,
+    required: true,
+    default: " ",
+  },
+
   severity : {
     type: Number,
     required: true,

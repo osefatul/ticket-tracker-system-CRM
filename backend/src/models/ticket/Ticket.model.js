@@ -115,7 +115,7 @@ const reAssignTicket = async(paramId, req)=>{
     try {
         const {department, assignee, message, sender} = req.body;
 
-        const closeTicket = await TicketSchema.findOneAndUpdate(
+        const updateTicket = await TicketSchema.findOneAndUpdate(
         {
         _id:paramId
         },
@@ -129,9 +129,8 @@ const reAssignTicket = async(paramId, req)=>{
         { new: true }
         );
 
-        console.log(closeTicket)
 
-        return closeTicket;
+        return updateTicket;
     }
     catch (error) {
         console.log(error);
@@ -144,20 +143,22 @@ const reAssignTicket = async(paramId, req)=>{
 
 
 
+//Status Update Ticket
+const updatedStatus = async(paramId, req)=>{
 
-
-//Close Ticket
-const updatedStatusClose = (paramId, clientId, message)=>{
-
+    
     try {
-        const closeTicket = TicketSchema.findOneAndUpdate(
+        const {status, message, statusDetails,sender }= req.body
+        
+        const closeTicket = await TicketSchema.findOneAndUpdate(
         {
-        $and: [{_id:paramId}, { clientId: clientId}],
+            _id:paramId
         },
         {
-        status: "Resolved",
+        status: status,
+        statusDetails: statusDetails,
         $push : {
-            conversations:{message:message}
+            conversations:{message:message, sender: sender}
         }
         },
         { new: true }
@@ -210,7 +211,7 @@ module.exports = {
     getTickets,
     getTicketById,
     updateTicketConversation,
-    updatedStatusClose,
+    updatedStatus,
     deleteTicket,
     reAssignTicket
 }

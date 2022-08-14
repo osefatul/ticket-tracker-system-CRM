@@ -1,7 +1,17 @@
 const express = require("express");
 const router = express.Router();
 const {userAuthorization,} = require("../middlewares/authorization.middleware");
-const {createTicket, getTickets, getTicketById, updateTicketConversation, updatedStatusClose, deleteTicket, getAllTicketsOfAllDepartments, reAssignTicket} = require("../models/ticket/Ticket.model")
+
+const {
+  createTicket, 
+  getTickets, 
+  getTicketById, 
+  updateTicketConversation, 
+  updatedStatus,
+  deleteTicket,
+  getAllTicketsOfAllDepartments, 
+  reAssignTicket
+} = require("../models/ticket/Ticket.model")
 
 const {
   createNewTicketValidation,
@@ -162,22 +172,17 @@ router.patch("/assign-ticket/:id", async (req, res) => {
 
 
 
-
 // UPDATE TICKET STATUS
-router.patch("/close-ticket/:id", userAuthorization, async (req, res) => {
+router.patch("/status-update/:id", userAuthorization, async (req, res) => {
   try {
     const { id } = req.params;
-    const clientId = req.userId;
-    const {message} = req.body;
-
-    const result = await updatedStatusClose( id, clientId, message );
-
+    const result = await updatedStatus( id, req );
     console.log(result);
 
     if (result) {
       return res.json({
         status: "success",
-        message: "The ticket has been resolved successfully",
+        message: "The ticket status has been updated successfully",
       });
     }
     res.json({
