@@ -29,20 +29,20 @@ function AddTicketForm() {
   const [formDataError, setFormDataError] = useState(initialFormDataError);
 
 
-  const [department, setDepartment] = useState("");
+  const [assigneeDepartment, setAssigneeDepartment] = useState("");
   const [assignee, setAssignee] = useState();
 
 
   const dispatch = useDispatch();
-  const {user:{name}} = useSelector((state)=> state.user)
+  const {user:{name, department}} = useSelector((state)=> state.user)
   const {isLoading, error, successMsg} = useSelector(state => state.openTicket)
   const {usersAndDepartments} = useSelector(state => state.allUsers)
 
 
 //update and dispatch department.
   useEffect(()=>{
-    dispatch(fetchUsersDepartment({department: department}))
-  },[department])
+    dispatch(fetchUsersDepartment({department: assigneeDepartment}))
+  },[assigneeDepartment])
 
 
 
@@ -57,7 +57,7 @@ function AddTicketForm() {
 
 
     if(name === "department"){
-      setDepartment(value);
+      setAssigneeDepartment(value);
     }
 
     if(name === "assignee") {
@@ -80,7 +80,7 @@ function AddTicketForm() {
       
       //dispatch new ticket
       if(formDataError.title){
-        dispatch(openNewTicket({...formData, creator:name, assignee, department}))
+        dispatch(openNewTicket({...formData, creator:name, assignee, department:assigneeDepartment, creatorDepartment: department}))
       }
       
     }catch (error){
@@ -173,7 +173,7 @@ function AddTicketForm() {
             className=" flex justify-start w-[20%] text-[12px]"
             htmlFor="title"
           >
-            Department
+            Assignee Department
           </label>
 
           <select
@@ -217,13 +217,13 @@ function AddTicketForm() {
             onChange={handleOnChange}
             defaultValue
           >
-            <option disabled value>Assign a person </option>
+            <option disabled value>Assign user or team </option>
             {usersAndDepartments.map(user => (
             <option key={user.name+user.email} value={`${user.name}`}>{user.name}</option>
             ) )}
+            <option value={`${assigneeDepartment}`}>{assigneeDepartment}- Department</option>
           </select>
         </div>
-    
         }
         
         

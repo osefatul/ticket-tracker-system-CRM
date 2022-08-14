@@ -7,10 +7,18 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchSingleTicket, closeTicket } from "../../features/ticketSlice/ticketAction";
 import { resetResponseMsg } from "../../features/ticketSlice/ticketSlice";
 
+import LunchResolveTicket from "./closeTicket/LunchResolveTicket";
+import Modal from "./closeTicket/Modal";
+
 function TicketOverviewAndSummary() {
 
   const { tid } = useParams(); //ticketID from the Ticket_communication page
   const dispatch = useDispatch();
+  const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
+
+  const modalOpen = useSelector((state) => state.closeTicketModal);
+  
+
   const {
 		isLoading,
 		error,
@@ -18,17 +26,14 @@ function TicketOverviewAndSummary() {
 		replyMsg,
 		replyTicketError,
 	} = useSelector(state => state.tickets);
-  const[MessageAddedAlert, setMessageAddedAlert] = useState(false)
 
 
 
   useEffect(()=>{
     setTimeout(()=>{
       setMessageAddedAlert(false);
-    },50000)
+    },5000)
   },[MessageAddedAlert])
-
-  
 
   
   useEffect(() => {
@@ -39,7 +44,7 @@ function TicketOverviewAndSummary() {
       (replyMsg || replyTicketError) && dispatch(resetResponseMsg());
     }
   }
-  ,[dispatch, tid, replyMsg, replyTicketError])
+  ,[dispatch, tid, replyMsg, replyTicketError, modalOpen])
   
 
   
@@ -61,9 +66,11 @@ function TicketOverviewAndSummary() {
 
 
 
+
+
   return (
     <div>
-
+      
       {MessageAddedAlert && <div className=" bg-green-800 text-white text-small rounded flex items-center justify-center m-3">{replyMsg}</div>}
 
       <div>
@@ -73,14 +80,15 @@ function TicketOverviewAndSummary() {
           <h1 className="flex items-start justify-start font-semibold text-[18px]">
           {selectedTicket.title}
           </h1>
+          </div >
 
-          </div>
-          <button className="border border-1 rounded-sm px-4 py-[2px] cursor-pointer bg-slate-400 text-[12px] " 
-          onClick ={()=>dispatch(closeTicket(tid))}
-          disabled = {selectedTicket.status === "Resolved"}
-          >
-            Close
-          </button>
+          <LunchResolveTicket 
+          ticketDetails= {selectedTicket} 
+          dispatch={dispatch}
+          closeTicket={closeTicket}
+          tid={tid}
+          />
+        
         </div>
         <div className="flex items-center justify-start space-x-4">
           {tabs.map((item, index) => {

@@ -42,6 +42,12 @@ const TicketSchema = new Schema({
     required: true,
     default: "",
   },
+  creatorDepartment:{
+    type: String,
+    maxlength: 50,
+    required: true,
+    default: "",
+  },
   department:{
     type: String,
     maxlength: 50,

@@ -47,6 +47,7 @@ const createNewTicketValidation = (req, res, next) => {
 		creator: shortString.required(),
 		department: shortString.required(),
 		assignee: shortString.required(),
+		creatorDepartment: shortString.required(),
 	});
 
 	console.log(req.body);

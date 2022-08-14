@@ -10,6 +10,8 @@ import TicketPage from "./pages/TicketPage";
 import { DefaultLayout } from "./layout/DefaultLayout";
 import UserVerification from "./pages/UserVerification";
 import ResetPassword from "./pages/ResetPassword";
+import { useSelector } from "react-redux";
+import Modal from "./components/TicketPage/closeTicket/Modal";
 
 function App() {
 
@@ -26,6 +28,7 @@ function App() {
 
         
         <Route path="/" element={<DefaultLayout />} >
+
           <Route path="/" element={<Home>Home Page</Home>} />
           <Route path="dashboard" element={<Dashboard />} />
           <Route path="new_ticket" element={<AddTicket />} />

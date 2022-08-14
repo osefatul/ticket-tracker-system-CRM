@@ -4,6 +4,7 @@ import loginReducer from "../features/authSlice/loginSlice";
 import userReducer from "../features/SpecificUerSlice/userSlice"
 import usersReducer from "../features/allUsersSlice/allUsersSlice"
 import newTicketReducer  from '../features/newTicket/newTicketSlice';
+import CloseTicketModalReducer from '../features/modalSlice/CloseTicketModalSlice';
 import registrationReducer from "../features/authSlice/registrationSlice";
 import resetPasswordReducer from "../features/passwordResetSlice/passwordResetSlice";
 import tabsReducer from '../features/selectedHomeTabs/tabsSlice';
@@ -20,6 +21,7 @@ const store = configureStore({
         resetPassword: resetPasswordReducer,
         allUsers: usersReducer,
         homeTabs: tabsReducer,
+        closeTicketModal: CloseTicketModalReducer
     }
 })
 

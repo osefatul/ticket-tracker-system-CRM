@@ -22,7 +22,7 @@ router.all("/", (req, res, next) => {
 //CREATE A NEW TICKET
 router.post("/", createNewTicketValidation, userAuthorization, async (req, res) => {
     try {
-      const { title, creator, severity, description, openAt, department, assignee } = req.body;
+      const { title, creator, severity, description, openAt, department, assignee, creatorDepartment } = req.body;
       const userId = req.userId;
 
       const ticketObj = {
@@ -32,6 +32,7 @@ router.post("/", createNewTicketValidation, userAuthorization, async (req, res) 
         openAt,
         creator,
         department,
+        creatorDepartment,
         assignee,
       };
       
@@ -56,7 +57,7 @@ router.post("/", createNewTicketValidation, userAuthorization, async (req, res) 
 );
 
 
-//Get all tickets for all users and departments
+//Get all tickets of all users and departments - This is for Admin
 router.get("/tickets", userAuthorization, async (req, res) => {
   try {
     //find if user is isAdmin

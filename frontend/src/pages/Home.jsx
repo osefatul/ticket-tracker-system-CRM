@@ -6,9 +6,7 @@ import Sidebar from "../components/Homepage/Sidebar";
 import View from "../components/Homepage/View";
 
 
-
 function Home() {
-
   const {user} = useSelector(state => state.user)
 
 
