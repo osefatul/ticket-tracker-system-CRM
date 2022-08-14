@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {userAuthorization,} = require("../middlewares/authorization.middleware");
-const {createTicket, getTickets, getTicketById, updateTicketConversation, updatedStatusClose, deleteTicket, getAllTicketsOfAllDepartments} = require("../models/ticket/Ticket.model")
+const {createTicket, getTickets, getTicketById, updateTicketConversation, updatedStatusClose, deleteTicket, getAllTicketsOfAllDepartments, reAssignTicket} = require("../models/ticket/Ticket.model")
 
 const {
   createNewTicketValidation,
@@ -134,6 +134,32 @@ router.put("/:id", replyTicketMessageValidation, userAuthorization, async (req, 
   }
 }
 );
+
+
+
+//RE-ASSIGN TICKET TO ANOTHER DEPARTMENT AND USER
+router.patch("/assign-ticket/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const result = await reAssignTicket( id, req );
+
+    console.log(result);
+
+    if (result) {
+      return res.json({
+        status: "success",
+        message: "The ticket is assigned to another user successfully",
+      });
+    }
+    res.json({
+      status: "error",
+      message: "Unable to update the ticket",
+    });
+  } catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+});
+
 
 
 

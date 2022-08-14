@@ -82,9 +82,9 @@ function AssignTicket() {
 
 
     return (
-    <div className="space-y-2">
+    <div className="space-y-2 sm:w-[80%] mx-auto">
 
-        <div className="flex justify-center sm:justify-between sm:w-[80%] space-x-5">
+        <div className="flex justify-center sm:justify-between sm:w-[80%] space-x-10 sm:space-x-5">
                 <label
                     className=" flex justify-start w-[20%] text-[12px]"
                     htmlFor="title"
@@ -114,7 +114,7 @@ function AssignTicket() {
 
 
         {usersAndDepartments.length > 0 &&
-        <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-5">
+        <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-10 sm:space-x-5">
             <label
                 className=" flex justify-start w-[20%] text-[12px]"
                 htmlFor="title"
@@ -141,12 +141,12 @@ function AssignTicket() {
             }
 
 
-        <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-5">
+        <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-10 sm:space-x-5">
         <label
             className=" flex justify-start w-[20%] text-[12px]"
             htmlFor="title"
         >
-            Description
+            Comment
         </label>
         <textarea
             rows="7"

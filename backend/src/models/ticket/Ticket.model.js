@@ -105,6 +105,47 @@ const updateTicketConversation = (_id, message, sender) =>{
 }
 
 
+
+
+
+
+//Re-Assign Ticket
+const reAssignTicket = async(paramId, req)=>{
+    
+    try {
+        const {department, assignee, message, sender} = req.body;
+
+        const closeTicket = await TicketSchema.findOneAndUpdate(
+        {
+        _id:paramId
+        },
+        {
+        department: department,
+        assignee: assignee,
+        $push : {
+            conversations:{message:message, sender:sender}
+        }
+        },
+        { new: true }
+        );
+
+        console.log(closeTicket)
+
+        return closeTicket;
+    }
+    catch (error) {
+        console.log(error);
+        return (error);
+    }
+}
+
+
+
+
+
+
+
+
 //Close Ticket
 const updatedStatusClose = (paramId, clientId, message)=>{
 
@@ -170,5 +211,6 @@ module.exports = {
     getTicketById,
     updateTicketConversation,
     updatedStatusClose,
-    deleteTicket
+    deleteTicket,
+    reAssignTicket
 }

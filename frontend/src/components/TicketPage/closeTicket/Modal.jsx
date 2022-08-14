@@ -16,11 +16,8 @@ function Modal (ticketDetails, closeTicket, tid, children, onClick) {
         category: "Assign Ticket",
         details: " ",
         },
-        { id: 1, 
-        category: "Resolve Ticket",  
-        details: " " },
         {
-        id: 2,
+        id: 1,
         category: "Change Status",
         details: " ",
             },
@@ -50,7 +47,7 @@ return (
         <div className="flex flex-col px-4 pt-6 sm:px-6">
 
             {/* Modal Tabs */}
-            <div className='flex items-center justify-center space-x-2 sm:space-x-10'>
+            <div className='flex items-center justify-center space-x-4 sm:space-x-10'>
                 
                 {modalTabs.map((item, index) => {
                 return (
@@ -70,11 +67,9 @@ return (
             })}
             </div>
 
-            <div className="pt-4">
+            <div className="pt-6">
             {category === "Assign Ticket" ? (
             <AssignTicket details={details} />
-            ) : category === "Resolve Ticket"? (
-            <ResolveTicket details={details} />
             ) :
             <ChangeStatus details={details} />
             }
