@@ -7,7 +7,7 @@ import AssignTicket from './AssignTicket';
 import ResolveTicket from './ResolveTicket';
 import ChangeStatus from './ChangeStatus';
 
-function Modal (ticketDetails, closeTicket, tid, children, onClick) {
+function Modal ({tid}) {
     const dispatch = useDispatch()
 
     const modalTabs = [
@@ -69,21 +69,13 @@ return (
 
             <div className="pt-6">
             {category === "Assign Ticket" ? (
-            <AssignTicket details={details} />
+            <AssignTicket details={details} tid={tid} />
             ) :
-            <ChangeStatus details={details} />
+            <ChangeStatus details={details} tid ={tid} />
             }
             </div>
             
-            {/* Submit button */}
-            <div  className=' fixed right-0 left-0 bottom-10 flex items-center justify-center'>
-                <button
-                    className="bg-[#1d9bf0] text-white rounded-full w-24 h-6 font-bold shadow-md hover:bg-[#1a8cd8]"
-                    type="submit"
-                    onClick={handleOnSubmit}>
-                        Submit
-                </button>
-            </div>
+    
         </div>
     </div>
 </div>

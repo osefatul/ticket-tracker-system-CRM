@@ -7,11 +7,18 @@ function TicketSummary({ details }) {
       <div className="text-black flex flex-col justify-center w-[80%]">
         <div className="text-sm flex items-start justify-start overflow-x-auto ">
           <div className="grid gap-x-10 ">
+            
             <p className=" text-[11px]">
               <span className="font-medium">Status: </span>
-                {details.status === "Resolved" ? <span className="text-green-800">Resolved</span> : <span className="text-red-800">{details.status}</span>}
-
+                {details.status === "Resolved" ? <span className="text-green-800">Resolved</span> : <span className="text-red-800">{details.status}</span>
+              }
             </p>
+
+            <p className=" text-[11px]">
+              <span className="font-medium"> Reason: </span>
+              {details.statusDetails}
+            </p>
+
             <p className=" text-[11px]">
               <span className="font-medium"> Created: </span>
               {details.openAt && new Date(details.openAt).toLocaleString()}

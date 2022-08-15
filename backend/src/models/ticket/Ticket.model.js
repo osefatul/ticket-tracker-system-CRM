@@ -142,13 +142,11 @@ const reAssignTicket = async(paramId, req)=>{
 
 
 
-
 //Status Update Ticket
 const updatedStatus = async(paramId, req)=>{
 
-    
     try {
-        const {status, message, statusDetails,sender }= req.body
+        const {status, message, statusDetails,sender, severity }= req.body
         
         const closeTicket = await TicketSchema.findOneAndUpdate(
         {
@@ -157,6 +155,7 @@ const updatedStatus = async(paramId, req)=>{
         {
         status: status,
         statusDetails: statusDetails,
+        severity: severity,
         $push : {
             conversations:{message:message, sender: sender}
         }
@@ -171,6 +170,9 @@ const updatedStatus = async(paramId, req)=>{
         return (error);
     }
 }
+
+
+
 
 //Delete a ticket
 const deleteTicket = async (paramId, clientId, res) => {

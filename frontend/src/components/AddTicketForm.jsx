@@ -142,6 +142,7 @@ function AddTicketForm() {
           </p>
         )}
         
+
         <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-5">
           <label
             className=" flex justify-start w-[20%] text-[12px]"
@@ -167,6 +168,7 @@ function AddTicketForm() {
             <option value="5">Sev-5: productivity not immediately affected</option>
           </select>
         </div>
+
 
         <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-5">
           <label

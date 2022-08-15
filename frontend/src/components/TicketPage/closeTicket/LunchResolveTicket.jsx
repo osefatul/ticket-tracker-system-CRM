@@ -5,7 +5,7 @@ import { setModalOpenFail, setModalOpenPending, setModalOpenSuccess } from '../.
 import Modal from './Modal';
 
 
-function LunchResolveTicket({ticketDetails, closeTicket, tid}) {
+function LunchResolveTicket({tid}) {
     const dispatch = useDispatch();
     const {modalOpen} = useSelector(state => state.closeTicketModal)
     
@@ -31,7 +31,7 @@ return (
         Actions
         </motion.button>
         
-        {modalOpen && <Modal/>}
+        {modalOpen && <Modal tid={tid} />}
     
     </div>
 

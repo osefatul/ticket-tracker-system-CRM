@@ -140,16 +140,17 @@ Content-Type: application/json
 
 
 
-### Close the ticket
-PATCH http://localhost:5000/v1/ticket/status-update/62f71dec8a8d11288de33471
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDQ2MzE5MSwiZXhwIjoxNjYwNDY0OTkxfQ.TZcsYM2dHICNteCsL35dXtvwZLR0q1ZMv6Hq0qNbv0Q
+### Update ticket status
+PATCH http://localhost:5000/v1/ticket/status-update/62f813a2131b1daf74f6a6f6
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDQ2NjkzMCwiZXhwIjoxNjYwNDY4NzMwfQ.qhsa92gTqmi2j6uoCPtV4xNgbIbeXXbYqyAQmVIw0XU
 Content-Type: application/json 
 
 { 
     "status": "Research",
     "message": "Working on the cause", 
     "sender": "omar",
-    "statusDetails":"Pending for details" 
+    "statusDetails":"Pending for details",
+    "severity": 3 
 }
 
 

@@ -84,9 +84,7 @@ function TicketOverviewAndSummary() {
 
           <LunchResolveTicket 
           ticketDetails= {selectedTicket} 
-          dispatch={dispatch}
-          closeTicket={closeTicket}
-          tid={tid}
+  
           />
         
         </div>

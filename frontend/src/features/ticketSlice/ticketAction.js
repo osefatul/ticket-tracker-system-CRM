@@ -21,8 +21,9 @@ import {
     getAllTicketsBySpecificUser,
     getAllTicketsForAdmin,
     getSingleTicket,
+    reAssignTicket,
     updateReplyTicket,
-    updateTicketStatusClosed,
+    updateTicketStatus,
 } from "../../api/ticketApi";
 
 
@@ -63,6 +64,7 @@ export const filterSearchAdminTicket = str => dispatch =>{
 }
 
 
+
 export const fetchSingleTicket = (id) => async dispatch =>{
     dispatch(fetchSingleTicketLoading());
     try {
@@ -72,7 +74,6 @@ export const fetchSingleTicket = (id) => async dispatch =>{
             result.data.result
             )
         )
-    
 }catch (e) {
     dispatch(fetchSingleTicketFail(e.message));
 }}
@@ -101,10 +102,24 @@ export const replyOnTicket = (id, msgObj) => async dispatch =>{
 
 
 
-export const closeTicket = id => async (dispatch) => {
+export const SendReAssignTicket = (id, ticketUpdates) => async dispatch => {
+    try {
+        const result = await reAssignTicket(id, ticketUpdates);
+        console.log(result);
+
+        dispatch(fetchSingleTicket(id))
+    }catch (e) {
+        console.log(e.message);
+    }
+
+}
+
+
+
+export const SendTicketStatusUpdate = (id, ticketUpdates) => async (dispatch) => {
     dispatch(closeTicketLoading());
     try {
-        const result = await updateTicketStatusClosed(id);
+        const result = await updateTicketStatus(id, ticketUpdates);
         console.log(result);
 
         if(result.status === "error"){
