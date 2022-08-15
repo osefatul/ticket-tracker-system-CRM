@@ -32,7 +32,7 @@ function Modal ({tid}) {
     
 return (
 
-<div className="h-screen w-screen top-0 right-0 left-0 z-50 fixed flex items-center justify-center bg-black bg-opacity-40 transition ease-out duration-300 ">
+<div className="h-screen w-screen top-0 right-0 left-0 z-50 fixed flex items-center justify-center bg-black bg-opacity-40 transition ease-out duration-300 text-slate-700">
 
     <div className=" h-[400px] inline-block align-bottom bg-white rounded-2xl text-left shadow-3xl transform transition-all sm:my-8 sm:align-middle sm:max-w-xl sm:w-full">
         

@@ -39,7 +39,7 @@ function TicketBody({ details, _id, setMessageAddedAlert }) {
     <div className="">
       <form onSubmit={handleOnSubmit}>
         
-        <button type= 'submit' className="text-[10px] border bg-orange-600 p-[4px] my-4 rounded">Add Comment</button>
+        <button type= 'submit' className="text-[12px] w-24 border bg-amber-600 p-[4px] my-4 rounded">Add Comment</button>
         <textarea
           rows="3"
           className={`placeholder:italic placeholder:text-slate-400 placeholder:pl-1

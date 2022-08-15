@@ -14,10 +14,12 @@ function TicketSummary({ details }) {
               }
             </p>
 
+            {details.status === "Pending" &&
             <p className=" text-[11px]">
               <span className="font-medium"> Reason: </span>
               {details.statusDetails}
             </p>
+            }
 
             <p className=" text-[11px]">
               <span className="font-medium"> Created: </span>

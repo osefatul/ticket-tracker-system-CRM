@@ -21,7 +21,7 @@ function LunchResolveTicket({tid}) {
     }
     
 return (
-    <div className="border border-1 rounded-sm px-4 py-[2px] bg-slate-400 text-[12px] " >
+    <div className="text-[14px] w-20 flex items-center justify-center border border-1 h-8 px-3 rounded-md bg-green-800 shadow-lg text-slate-200 " >
         <motion.button
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}

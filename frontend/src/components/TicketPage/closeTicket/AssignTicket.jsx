@@ -174,7 +174,7 @@ function AssignTicket() {
              {/* Submit button */}
             <div  className=' fixed right-0 left-0 bottom-10 flex items-center justify-center'>
                 <button
-                    className="bg-[#1d9bf0] text-white rounded-full w-24 h-6 font-bold shadow-md hover:bg-[#1a8cd8]"
+                    className="bg-green-700 text-slate-200 rounded-md w-24 h-6 shadow-md hover:bg-green-800"
                     type="submit">
                         Submit
                 </button>

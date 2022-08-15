@@ -10,7 +10,9 @@ const initialFormData = {
   message: "",
 };
 
-const PendingReasons = ["Awaiting customer response", "Schedule", "Pending Approval", "Awaiting staff", "Awaiting Delivery", "Awaiting Confirmation", ""]
+const pendingReason = ["Awaiting customer response", "Schedule", "Pending Approval", "Awaiting staff", "Awaiting Delivery", "Awaiting Confirmation",]
+
+
 
 
 function ChangeStatus() {
@@ -19,6 +21,8 @@ function ChangeStatus() {
   console.log(tid)
 
   const [formData, setFormData] = useState(initialFormData);
+  
+
   const [status, setStatus] = useState("");
 
 
@@ -46,10 +50,14 @@ function ChangeStatus() {
       //we are trying to find if status === pending.
       if(name === "status"){
         setStatus(value);
+
       }
+
+      
 
       console.log(formData)
   };
+
 
 
   const handleOnSubmit = async (e) => {
@@ -138,7 +146,7 @@ function ChangeStatus() {
                 defaultValue
             >
                 <option disabled value>Choose pending reason </option>
-                {PendingReasons.map((reason, index) => (
+                {pendingReason.map((reason, index) => (
                 <option key={index + reason} value={`${reason}`}>{reason}</option>
                 ) )}
             </select>
@@ -200,7 +208,7 @@ function ChangeStatus() {
          {/* Submit button */}
         <div  className=' fixed right-0 left-0 bottom-10 flex items-center justify-center'>
                 <button
-                    className="bg-[#1d9bf0] text-white rounded-full w-24 h-6 font-bold shadow-md hover:bg-[#1a8cd8]"
+                    className="bg-green-700 text-slate-200 rounded-md w-24 h-6 shadow-md hover:bg-green-800"
                     type="submit">
                         Submit
                 </button>

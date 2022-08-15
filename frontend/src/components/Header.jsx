@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogout } from "../api/userApi";
+import { motion } from "framer-motion"
 
 function Header() {
   const [toggle, setToggle] = useState(false);
@@ -22,7 +23,11 @@ function Header() {
       {/* TOP BAR */}
       <div>
       <Link to="/">
-        <div className="font-bold text-[15px]">Tickets-CRM</div>
+        <motion.div
+          className="font-bold text-[15px] hover:text-[]"
+          whileHover={{ scale: 1.1 }}
+          whileTap={{ scale: 0.9 }}
+          >Tickets-CRM</motion.div>
       </Link>
       </div>
 
@@ -30,7 +35,11 @@ function Header() {
         <ul className="hidden sm:flex items-center justify-center text-white space-x-3 text-[12px] px-10 ">
           {["Dashboard", "new_ticket", "Logout"].map((item, index) => (
 
-            <li className="px-1 font-comorants hoverText" key={`link-${item}`}>
+            <motion.li 
+            className="px-1 hoverText" key={`link-${item}`}
+            whileHover={{ scale: 1.07 }}
+            whileTap={{ scale: 0.9 }}
+            >
               <div className=" hover:border" />
               <Link to={`/${linkList[index]}`}>
                 <div className="flex items-center justify-center"  
@@ -38,7 +47,7 @@ function Header() {
                     { item === "new_ticket"? "New Ticket" :  item }
                 </div>
               </Link>
-            </li>
+            </motion.li>
           ))}
         </ul>
 
@@ -51,12 +60,16 @@ function Header() {
               onClick={() => setToggle(!toggle)}
             />
           ) : (
-            <div className="container z-40">
+            <motion.div 
+            className="container z-40"
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
+            >
               <HiX
                 className="hoverText m-3 w-[20px] h-[20px] cursor-pointer "
                 onClick={() => setToggle(false)}
               />
-            </div>
+            </motion.div>
           )}
 
 
@@ -71,13 +84,15 @@ function Header() {
             <ul className="h-[100%] w-full flex flex-col justify-start items-start space-y-5 mt-32 pl-5">
               {["Dashboard", "new_ticket", "Logout"].map((item, index) => (
                 <Link key={item} to={`/${linkList[index]}`}>
-                  <li
+                  <motion.li
                     key={item}
-                    className="hoverText w-[100%] flex items-start justify-center"
+                    whileHover={{ scale: 1.07 }}
+                    whileTap={{ scale: 0.9 }}
+                    className="hoverText w-full flex items-start justify-center"
                     onClick = {item ==="Logout"? clickOnItem : () => setToggle(false) }
                   >
                     { item === "new_ticket"? "New Ticket" :  item }
-                  </li>
+                  </motion.li>
                 </Link>
               ))}
             </ul>
