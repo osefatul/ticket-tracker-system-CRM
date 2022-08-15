@@ -10,13 +10,13 @@ return (
         <Header />
         <div className="layout w-[100%] text-black flex items-center justify-center">
 
-        <div className='flex flex-col items-center justify-center space-y-16 mt-[-10%]'>
+        <div className='flex flex-col items-center justify-center space-y-16 '>
             <h1 className="text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[30px]">Edit User Details</h1>
             
             <form action="" >
-                <div className='grid grid-cols-2 gap-8 text-slate-800'>
+                <div className='grid grid-cols-2 gap-4 text-slate-800'>
 
-                <div className="text-[13px]">
+                <div className="text-[11px]">
                     <label
                     // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="name"
@@ -36,7 +36,7 @@ return (
                     />
                 </div>
 
-                <div className="text-[13px]">
+                <div className="text-[11px]">
                     <label
                     // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="email"
@@ -56,7 +56,7 @@ return (
                     />
                 </div>
 
-                <div className="text-[13px]">
+                <div className="text-[11px]">
                     <label
                     // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="department"
@@ -76,7 +76,7 @@ return (
                     />
                 </div>
 
-                <div className="text-[13px]">
+                <div className="text-[11px]">
                     <label
                     // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="company"
@@ -96,7 +96,7 @@ return (
                     />
                 </div>
 
-                <div className="text-[13px]">
+                <div className="text-[11px]">
                     <label
                     // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="address"
@@ -116,7 +116,7 @@ return (
                     />
                 </div>
 
-                <div className="text-[13px]">
+                <div className="text-[11px]">
                     <label
                     // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="phone"

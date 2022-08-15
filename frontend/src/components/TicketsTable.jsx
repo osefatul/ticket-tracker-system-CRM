@@ -97,7 +97,7 @@ function TicketsTable() {
   return (
 
     <div
-    className=" text-black h-5/6 flex pt-8 "
+    className=" text-black h-4/6 flex pt-8 "
     >
       { error ? <h3>{error}</h3>:
     <DataGrid
