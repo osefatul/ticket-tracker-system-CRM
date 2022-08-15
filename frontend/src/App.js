@@ -6,13 +6,13 @@ import { Routes, Route, Link, Router } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import DashboardUpdated from "./pages/DashboardUpdated";
 import AddTicket from "./pages/AddTicket";
-import TicketLists from "./pages/TicketLists";
+import TicketLists from "./pages/TicketsList/TicketLists";
 import TicketPage from "./pages/TicketPage";
 import { DefaultLayout } from "./layout/DefaultLayout";
 import UserVerification from "./pages/UserVerification";
 import ResetPassword from "./pages/ResetPassword";
-import DepTicketList from "./pages/DepTicketList";
-import CreatedByMeTicketList from "./pages/CreatedByMeTicketList";
+import DepTicketList from "./pages/TicketsList/DepTicketList";
+import CreatedByMeTicketList from "./pages/TicketsList/CreatedByMeTicketList";
 
 function App() {
 
@@ -31,8 +31,8 @@ function App() {
         <Route path="/" element={<DefaultLayout />} >
 
           <Route path="/" element={<Home>Home Page</Home>} />
-          <Route path="dashboard" element={<Dashboard />} />
-          <Route path="dashboard-updated" element={<DashboardUpdated />} />
+          {/* <Route path="dashboard" element={<Dashboard />} /> */}
+          <Route path="dashboard" element={<DashboardUpdated />} />
           <Route path="new_ticket" element={<AddTicket />} />
           <Route path="ticket-lists" element={<TicketLists />} />
           <Route path="dept-ticket-lists" element={<DepTicketList />} />

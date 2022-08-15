@@ -52,10 +52,9 @@ return (
                 {modalTabs.map((item, index) => {
                 return (
                 <div
-                
                     key={item.id}
                     onClick={() => setValue(index)}
-                    className={`${index === value && " text-orange-800 border-b border-blue-500 shadow-md" } ${
+                    className={`${index === value && "text-orange-800 border-b border-blue-500 shadow-md" } ${
                         index === value && "border-slate-500  "
                     }`}
                 >

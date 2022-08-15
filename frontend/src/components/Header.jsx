@@ -5,7 +5,7 @@ import { userLogout } from "../api/userApi";
 
 function Header() {
   const [toggle, setToggle] = useState(false);
-  const linkList = ["dashboard", "ticket-lists", "/"];
+  const linkList = ["dashboard", "new_ticket", "/"];
 	const navigate = useNavigate ();
 
 
@@ -28,14 +28,14 @@ function Header() {
 
       <div className="">
         <ul className="hidden sm:flex items-center justify-center text-white space-x-3 text-[12px] px-10 ">
-          {["Dashboard", "Tickets", "Logout"].map((item, index) => (
+          {["Dashboard", "new_ticket", "Logout"].map((item, index) => (
 
             <li className="px-1 font-comorants hoverText" key={`link-${item}`}>
               <div className=" hover:border" />
               <Link to={`/${linkList[index]}`}>
                 <div className="flex items-center justify-center"  
                 onClick = {item ==="Logout"? clickOnItem : () => setToggle(false) }>
-                    {item}
+                    { item === "new_ticket"? "New Ticket" :  item }
                 </div>
               </Link>
             </li>
@@ -69,14 +69,14 @@ function Header() {
             } ease-out duration-700  shadow-2xl`}
           >
             <ul className="h-[100%] w-full flex flex-col justify-start items-start space-y-5 mt-32 pl-5">
-              {["Dashboard", "Tickets", "Logout"].map((item, index) => (
+              {["Dashboard", "new_ticket", "Logout"].map((item, index) => (
                 <Link key={item} to={`/${linkList[index]}`}>
                   <li
                     key={item}
                     className="hoverText w-[100%] flex items-start justify-center"
                     onClick = {item ==="Logout"? clickOnItem : () => setToggle(false) }
                   >
-                    {item}
+                    { item === "new_ticket"? "New Ticket" :  item }
                   </li>
                 </Link>
               ))}

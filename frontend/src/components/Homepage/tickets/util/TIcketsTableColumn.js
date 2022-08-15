@@ -1,3 +1,4 @@
+import { AiFillDelete, AiOutlineDelete } from "react-icons/ai";
 import { Link } from "react-router-dom";
 
 
@@ -6,11 +7,11 @@ export const columns = [
         {
             field: "id",
             headerName: "Ticket ID",
-            width: 220,
+            width: 180,
             renderCell: (params) => {
             return (
                 <Link to={`/ticket_communication/${params.row._id}`}>
-                <div>{params.row._id}</div>
+                <div >T- {params.row._id.slice(0,10)}...</div>
                 </Link>
             );
             },
@@ -22,7 +23,7 @@ export const columns = [
             renderCell: (params) => {
             return (
                 <Link to={`/ticket_communication/${params.row._id}`}>
-                <div>{params.row.title}</div>
+                <div >{params.row.title.slice(0,25)}...</div>
                 </Link>
             );
             },
@@ -41,13 +42,39 @@ export const columns = [
         },
 
         {
-            field: "department",
-            headerName: "Department",
+            field: "creator",
+            headerName: "Assigner",
             width: 100,
             renderCell: (params) => {
             return (
                 <Link to={`/ticket_communication/${params.row._id}`}>
-                <div>{params.row.department}</div>
+                <div>{params.row.creator}</div>
+                </Link>
+            );
+            },
+        },
+
+        {
+            field: "assignee",
+            headerName: "Assignee",
+            width: 110,
+            renderCell: (params) => {
+            return (
+                <Link to={`/ticket_communication/${params.row._id}`}>
+                <div>{params.row.assignee}</div>
+                </Link>
+            );
+            },
+        },
+
+        {
+            field: "department",
+            headerName: "Assignee Department",
+            width: 160,
+            renderCell: (params) => {
+            return (
+                <Link to={`/ticket_communication/${params.row._id}`}>
+                <div className="text-center">{params.row.department}</div>
                 </Link>
             );
             },
@@ -62,9 +89,9 @@ export const columns = [
                 <Link to={`/ticket_communication/${params.row._id}`}>
                 <div 
                 className= {
-                    `${params.row.status === "Resolved" ? "text-green-800":"text-red-800"}`}>
+                    `${params.row.status === "Resolved" ? "text-green-800":"text-red-800"} ml-2`}>
                 
-                {params.row.status}</div>
+                {params.row.status.slice(0,15)}...</div>
                 </Link>
             );
             },
@@ -82,4 +109,24 @@ export const columns = [
             );
             },
         },
+
+
+        {
+            field: "action",
+            headerName: "Action",
+            width: 150,
+            renderCell: (params) => {
+            return (
+                <>
+                <AiOutlineDelete
+                    className="text-red-700 w-[18px] h-[18px] ml-2 cursor-pointer "
+                    // onClick={() => handleDelete(params.row.id)}
+                />
+                </>
+            );
+            },
+        },
+        
         ];
+
+        

@@ -1,21 +1,16 @@
 import React, { useEffect } from "react";
-import TicketsTable from "../components/TicketsTable";
-import { Link } from "react-router-dom";
-import PageBreadCrumbs from "../components/PageBreadCrumbs";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllTicketsAssignedToAUser } from "../features/ticketSlice/ticketAction";
 import moment from "moment";
 
-function TicketListsStatistics() {
+
+function TicketListsStatistics({fetchFunction}) {
 
     const dispatch = useDispatch();
     const { tickets } = useSelector((state) => state.tickets);//from store.js
 
     useEffect(()=>{
         if (!tickets.length) {
-        dispatch(fetchAllTicketsAssignedToAUser())
+        dispatch(fetchFunction())
         }
     },[tickets, dispatch]);
 
@@ -39,7 +34,34 @@ function TicketListsStatistics() {
 
 
     return (
-    <div>TicketListsStatistics</div>
+    <div>
+
+        <div className="text-black w-52 flex flex-col text-sm">
+
+        <div className="flex items-center justify-between  ">
+            <p className="">
+            Total tickets:
+            </p>
+            <span className="pl-10"> {totalTickets}</span>
+            </div>
+
+            <div className="flex items-center justify-between">
+            <p className="">
+                Pending tickets: 
+            </p>
+            <span className="text-red-500" >{pendingTickets.length}</span>
+            </div>
+
+            <div className="flex items-center justify-between">
+            <p className="">
+                Recently added Tickets:
+            </p>
+            <span className="text-orange-400" > {recentlyAddedTickets.length}</span>
+        </div>
+
+        </div>
+
+    </div>
 )
 }
 

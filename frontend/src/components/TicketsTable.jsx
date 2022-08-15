@@ -73,8 +73,7 @@ function TicketsTable() {
           <Link to={`/ticket_communication/${params.row._id}`}>
             <div 
             className= {
-              `${params.row.status === "Resolved" ? "text-green-800":"text-red-800"}`}>
-            
+              `${params.row.status === "Assigned" ? "text-red-800": " "}`}>
             {params.row.status.slice(0,15)}...</div>
           </Link>
         );

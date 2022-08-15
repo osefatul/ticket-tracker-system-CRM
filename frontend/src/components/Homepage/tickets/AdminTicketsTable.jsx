@@ -22,7 +22,6 @@ function AdminTicketsTable() {
         minWidth: 300,
         }}
         rows={searchTicketList}
-        // getRowId = {(row) => row._id}
         disableSelectionOnClick
         columns={columns}
         autoPageSize

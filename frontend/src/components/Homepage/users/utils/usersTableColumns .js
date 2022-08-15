@@ -1,3 +1,5 @@
+import { AiOutlineDelete } from "react-icons/ai";
+
 export const columns = [
 
     {
@@ -26,7 +28,7 @@ export const columns = [
 {
     field: "email",
     headerName: "Email",
-    width: 180,
+    width: 200,
     renderCell: (params) => {
     return (
         // <Link to={`/ticket_communication/${params.row.id}`}>
@@ -64,7 +66,7 @@ export const columns = [
 {
     field: "isVerified",
     headerName: "Verified",
-    width: 200,
+    width: 100,
     renderCell: (params) => {
     return (
 
@@ -75,4 +77,38 @@ export const columns = [
     );
     },
 },
+{
+    field: "isAdmin",
+    headerName: "Admin",
+    width: 100,
+    renderCell: (params) => {
+    return (
+
+        <div 
+        className= {
+            `${params.row.isAdmin? "text-green-800":"text-red-800"}`}>
+        {params.row.isAdmin? "Yes":"No" }</div>
+    );
+    },
+},
+
+{
+    field: "action",
+    headerName: "Action",
+    width: 150,
+    renderCell: (params) => {
+    return (
+    <>
+        {/* <Link to={"/user/" + params.row.id}> */}
+        <button className="bg-green-700 w-[40px] rounded-sm text-slate-200 text-sm">Edit</button>
+        {/* </Link> */}
+        <AiOutlineDelete
+        className="text-red-700 w-[20px] h-[20px] ml-2 cursor-pointer "
+        // onClick={() => handleDelete(params.row.id)}
+        />
+    </>
+    );
+},
+},
+
 ]

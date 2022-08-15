@@ -3,10 +3,11 @@ import { AiOutlineSearch } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterSearchUser, getUsersData } from '../../features/allUsersSlice/allUsersAction';
 import { fetchAllTicketsForAdmin, filterSearchAdminTicket } from '../../features/ticketSlice/ticketAction';
+import AdminPanel from './AdminPanel';
 import AdminTicketsTable from './tickets/AdminTicketsTable';
 import UsersTable from './users/UsersTable';
 
-function View() {
+function View({user}) {
 
     const dispatch = useDispatch();
     const { tabSelected } = useSelector((state) => state.homeTabs);
@@ -38,13 +39,13 @@ function View() {
     }
 
     return (
-        <div className="homeHeight w-[85%] text-black">
+        <div className="homeHeight w-[80%] sm:w-[85%] text-black">
                 
             {tabSelected ?
                 <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-7">
                     <div className="font-bold flex justify-center items-center">
                     {`${tabSelected}`} Database
-                    </div>:
+                    </div>
                 
                     <div className="text-gray-500 flex items-center justify-center border border-1 h-8 pl-2 space-x-2 cursor-pointer rounded-md">
                         <AiOutlineSearch className />
@@ -59,8 +60,12 @@ function View() {
                     </div>
                 </div>:
 
-                <div className="flex items-center justify-center ">
-                    <h1 className= "font-bold text-[20px]">Welcome to Admin Panel</h1>
+                <div className="flex flex-col items-center justify-center ">
+                    <h1 className= "font-bold text-[17px] sm:text-[20px]">
+                        {`Welcome ${
+                            user.name.charAt(0).toUpperCase() + user.name.slice(1)
+                        } to Admin Panel`}</h1>
+                    <AdminPanel/>
                 </div>
             }
 

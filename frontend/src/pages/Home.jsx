@@ -20,7 +20,7 @@ function Home() {
         {
           user.isAdmin ? <>
           <Sidebar className="" />
-          <View className="" />
+          <View user={user}/>
           </>: 
           <h1>Hi common users</h1>
         } 

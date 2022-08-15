@@ -26,6 +26,7 @@ function DashboardUpdated() {
             </motion.div>
           </Link>
           
+          
           <div className='pt-10 sm:pt-16 space-y-4 sm:space-x-4 flex flex-col sm:flex-row items-center justify-center'>
             
             <Link to="/dept-ticket-lists">
