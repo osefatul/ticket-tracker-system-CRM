@@ -4,6 +4,9 @@ const rootUrl = "http://localhost:5000/v1";
 const ticketUlr = rootUrl + "/ticket/"
 const closeTicketUrl = ticketUlr + "status-update/";
 const reassignTicketUrl = ticketUlr + "assign-ticket/"
+const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
+const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
+
 
 
 
@@ -24,7 +27,7 @@ export const createNewTicket  = async (formData)=>{
 }
 
 
-//Get all tickets for all users and departments
+//Get all tickets for all users and departments - Admin only
 export const getAllTicketsForAdmin = async ()=>{
     try{
         const result = await axios.get(ticketUlr + "tickets" , {
@@ -40,8 +43,8 @@ export const getAllTicketsForAdmin = async ()=>{
 
 
 
-//Get all tickets created by a specific users
-export const getAllTicketsBySpecificUser = async ()=>{
+//Get all tickets Assigned to a specific users
+export const getAllTicketsToaSpecificUser = async ()=>{
     try{
         const result = await axios.get("http://localhost:5000/v1/ticket", {
             headers: {
@@ -53,6 +56,45 @@ export const getAllTicketsBySpecificUser = async ()=>{
         return e;
     }
 }
+
+
+
+//Get all tickets Assigned to a user Department
+export const getAllTicketsToaDepartment = async ()=>{
+    try{
+        const result = await axios.get(assignedToADeptTicketsUrl, {
+            headers: {
+                Authorization: sessionStorage.getItem("accessJWT"),
+                },
+        })
+        return result;
+    }catch(e){
+        return e;
+    }
+}
+
+
+
+
+
+
+// Get all tickets created by a user,
+export const getAllTicketsCreatedByAUser = async ()=>{
+    try {
+        const result = await axios.get(createdByAUserTicketUrl ,
+            {
+                headers: {
+                    Authorization: sessionStorage.getItem("accessJWT"),
+                    },
+            })
+            return result;
+        }catch(e){
+            return e;
+        }
+}
+
+
+
 
 
 
@@ -123,3 +165,6 @@ export const updateTicketStatus = async (id, ticketUpdates) => {
         return(error);
     }
 };
+
+
+

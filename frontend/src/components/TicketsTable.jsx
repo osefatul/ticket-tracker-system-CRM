@@ -17,11 +17,11 @@ function TicketsTable() {
     {
       field: "ticketID",
       headerName: "Ticket ID",
-      width: 220,
+      width: 180,
       renderCell: (params) => {
         return (
           <Link to={`/ticket_communication/${params.row._id}`}>
-            <div>{params.row._id}</div>
+            <div >T- {params.row._id.slice(0,10)}...</div>
           </Link>
         );
       },
@@ -33,7 +33,7 @@ function TicketsTable() {
       renderCell: (params) => {
         return (
           <Link to={`/ticket_communication/${params.row._id}`}>
-            <div>{params.row.title}</div>
+            <div >{params.row.title.slice(0,25)}...</div>
           </Link>
         );
       },
@@ -52,6 +52,19 @@ function TicketsTable() {
     },
 
     {
+      field: "creator",
+      headerName: "Assigner",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <Link to={`/ticket_communication/${params.row._id}`}>
+            <div>{params.row.creator}</div>
+          </Link>
+        );
+      },
+    },
+
+    {
       field: "status",
       headerName: "Status",
       width: 200,
@@ -62,7 +75,7 @@ function TicketsTable() {
             className= {
               `${params.row.status === "Resolved" ? "text-green-800":"text-red-800"}`}>
             
-            {params.row.status}</div>
+            {params.row.status.slice(0,15)}...</div>
           </Link>
         );
       },

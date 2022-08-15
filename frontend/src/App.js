@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useEffect } from "react";
+import React from "react";
 import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 import { Routes, Route, Link, Router } from "react-router-dom";
@@ -11,8 +11,8 @@ import TicketPage from "./pages/TicketPage";
 import { DefaultLayout } from "./layout/DefaultLayout";
 import UserVerification from "./pages/UserVerification";
 import ResetPassword from "./pages/ResetPassword";
-import { useSelector } from "react-redux";
-import Modal from "./components/TicketPage/closeTicket/Modal";
+import DepTicketList from "./pages/DepTicketList";
+import CreatedByMeTicketList from "./pages/CreatedByMeTicketList";
 
 function App() {
 
@@ -35,6 +35,8 @@ function App() {
           <Route path="dashboard-updated" element={<DashboardUpdated />} />
           <Route path="new_ticket" element={<AddTicket />} />
           <Route path="ticket-lists" element={<TicketLists />} />
+          <Route path="dept-ticket-lists" element={<DepTicketList />} />
+          <Route path="creator-ticket-lists" element={<CreatedByMeTicketList />} />
           <Route path="ticket_communication/:tid" element={<TicketPage />} />
         </Route>
 

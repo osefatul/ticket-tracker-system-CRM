@@ -28,16 +28,16 @@ function DashboardUpdated() {
           
           <div className='pt-10 sm:pt-16 space-y-4 sm:space-x-4 flex flex-col sm:flex-row items-center justify-center'>
             
-            <Link to="/ticket-lists">
+            <Link to="/dept-ticket-lists">
               <motion.div
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.9 }}
               className=' cursor-pointer mt-4 p-2 bg-slate-700 w-36 sm:w-44 h-22 sm:h-40 shadow-lg rounded-lg  flex flex-col items-center justify-center text-center text-white hover:border hover:border-red-500 shadow-lg'>
 
               <img className='w-[44px] h-[44px] sm:w-24 sm:h-24 bg-slate-700'  src="https://icons-for-free.com/iconfiles/png/512/format+list+icon-1320183326433350365.png" alt="" />
               
               <p className=' text-slate-200 text-sm sm:text-md'>
-              TIckets Assigned to our Dept
+              Tickets Assigned to our Department
                 </p>
             </motion.div>
             </Link>
@@ -45,7 +45,7 @@ function DashboardUpdated() {
 
             <Link to="/ticket-lists">
             <motion.div
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.9 }}
               className=' cursor-pointer  p-2 bg-slate-700 w-36 sm:w-44 h-22 sm:h-40 shadow-lg rounded-lg  flex flex-col items-center justify-center text-center text-white hover:border hover:border-red-500 shadow-lg'>
 
@@ -58,9 +58,9 @@ function DashboardUpdated() {
 
 
 
-            <Link to="/ticket-lists">
+            <Link to="/creator-ticket-lists">
             <motion.div
-              whileHover={{ scale: 1.1 }}
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.9 }}
               className=' cursor-pointer p-2 bg-slate-700 w-36 sm:w-44 h-22 sm:h-40 shadow-lg rounded-lg  flex flex-col items-center justify-center text-center text-white hover:border hover:border-red-500 shadow-lg'>
 

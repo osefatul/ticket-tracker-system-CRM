@@ -18,8 +18,11 @@ import {
 
 
 import {
-    getAllTicketsBySpecificUser,
+    
+    getAllTicketsCreatedByAUser,
     getAllTicketsForAdmin,
+    getAllTicketsToaDepartment,
+    getAllTicketsToaSpecificUser,
     getSingleTicket,
     reAssignTicket,
     updateReplyTicket,
@@ -29,6 +32,10 @@ import {
 
 
 
+
+
+
+//Get ALL TICKETS - ONLY ADMIN
 export const fetchAllTicketsForAdmin = () => async (dispatch) =>{
     dispatch(fetchTicketLoading());
     try{
@@ -41,11 +48,11 @@ export const fetchAllTicketsForAdmin = () => async (dispatch) =>{
 }
 
 
-
-export const fetchAllTicketsBySpecificUser = () => async (dispatch)=>{
+//GET TICKETS ASSIGNED TO A USER
+export const fetchAllTicketsAssignedToAUser = () => async (dispatch)=>{
     dispatch(fetchTicketLoading());
     try {
-        const result = await getAllTicketsBySpecificUser();
+        const result = await getAllTicketsToaSpecificUser();
         result.data.result.length && dispatch(fetchTicketSuccess(result.data.result));
     
     }catch(error) {
@@ -54,17 +61,51 @@ export const fetchAllTicketsBySpecificUser = () => async (dispatch)=>{
 }
 
 
+//GET TICKETS ASSIGNED TO A USER
+export const fetchTicketsAssignedToADepartment = () => async (dispatch)=>{
+    dispatch(fetchTicketLoading());
+    try {
+        const result = await getAllTicketsToaDepartment();
+        result.data.result.length && dispatch(fetchTicketSuccess(result.data.result));
+    
+    }catch(error) {
+        dispatch(fetchTicketFail(error.message));
+    }
+}
+
+
+
+//GET TICKETS ASSIGNED TO A USER
+export const fetchTicketsCreatedByAUser = () => async (dispatch)=>{
+    dispatch(fetchTicketLoading());
+    try {
+        const result = await getAllTicketsCreatedByAUser();
+        result.data.result.length && dispatch(fetchTicketSuccess(result.data.result));
+    
+    }catch(error) {
+        dispatch(fetchTicketFail(error.message));
+    }
+}
+
+
+
+
+
+
+
+//GET TICKETS THAT ARE SEARCHED FOR
 export const filterSearchTicket = str => dispatch =>{
     dispatch(searchTickets(str));
 }
 
 
+//GET TICKETS THAT ARE SEARCHED FOR IN THE ADMIN PAGE
 export const filterSearchAdminTicket = str => dispatch =>{
     dispatch(searchAdminTickets(str));
 }
 
 
-
+//GET A SINGLE TICKET USING ITS ID
 export const fetchSingleTicket = (id) => async dispatch =>{
     dispatch(fetchSingleTicketLoading());
     try {
@@ -80,7 +121,7 @@ export const fetchSingleTicket = (id) => async dispatch =>{
 
 
 
-
+//RELY TO A TICKET OR PUSHING COMMENTS
 export const replyOnTicket = (id, msgObj) => async dispatch =>{
     dispatch(replyTicketLoading());
     try {
@@ -101,7 +142,7 @@ export const replyOnTicket = (id, msgObj) => async dispatch =>{
 
 
 
-
+//GET API TO SEND RE-ASSIGN TICKET
 export const SendReAssignTicket = (id, ticketUpdates) => async dispatch => {
     try {
         const result = await reAssignTicket(id, ticketUpdates);
@@ -115,7 +156,7 @@ export const SendReAssignTicket = (id, ticketUpdates) => async dispatch => {
 }
 
 
-
+//GET API TO UPDATE TICKET STATUS
 export const SendTicketStatusUpdate = (id, ticketUpdates) => async (dispatch) => {
     dispatch(closeTicketLoading());
     try {
