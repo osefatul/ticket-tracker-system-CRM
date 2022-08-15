@@ -43,7 +43,7 @@ function View({user}) {
                 
             {tabSelected ?
                 <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-7">
-                    <div className="font-bold flex justify-center items-center">
+                    <div className="text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[15px] sm:text-[24px]">
                     {`${tabSelected}`} Database
                     </div>
                 
@@ -61,7 +61,7 @@ function View({user}) {
                 </div>:
 
                 <div className="flex flex-col items-center justify-center ">
-                    <h1 className= "font-bold text-[17px] sm:text-[20px]">
+                    <h1 className="text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[16px] sm:text-[30px]">
                         {`Welcome ${
                             user.name.charAt(0).toUpperCase() + user.name.slice(1)
                         } to Admin Panel`}</h1>
