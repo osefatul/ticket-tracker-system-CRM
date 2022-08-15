@@ -4,6 +4,7 @@ import Auth from "./pages/Auth";
 import Home from "./pages/Home";
 import { Routes, Route, Link, Router } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
+import DashboardUpdated from "./pages/DashboardUpdated";
 import AddTicket from "./pages/AddTicket";
 import TicketLists from "./pages/TicketLists";
 import TicketPage from "./pages/TicketPage";
@@ -31,6 +32,7 @@ function App() {
 
           <Route path="/" element={<Home>Home Page</Home>} />
           <Route path="dashboard" element={<Dashboard />} />
+          <Route path="dashboard-updated" element={<DashboardUpdated />} />
           <Route path="new_ticket" element={<AddTicket />} />
           <Route path="ticket-lists" element={<TicketLists />} />
           <Route path="ticket_communication/:tid" element={<TicketPage />} />
