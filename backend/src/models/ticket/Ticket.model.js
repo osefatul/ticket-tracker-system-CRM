@@ -14,6 +14,8 @@ const createTicket = ticketObject =>{
 }
 
 
+
+//Get All tickets - Just for Admin only
 const getAllTicketsOfAllDepartments = async (user, res)=>{
     try {
         const adminUser = await UserSchema.findOne({_id:user});
@@ -35,7 +37,7 @@ const getAllTicketsOfAllDepartments = async (user, res)=>{
 
 
 
-// Get list of all tickets for a specific user
+// Get a list of all tickets assigned to a specific user
 const getTickets = async clientId =>{
     try {
         //find who is logged in
@@ -55,10 +57,11 @@ const getTickets = async clientId =>{
 }
 
 
-// Get a specific ticket assigned, 
+// Get a specific ticket  
 const getTicketById = async (paramId, clientId) =>{
     try {
         
+        // Follow below if want to make it private
         //find who is logged in
         // const findUser = await UserSchema.findOne ({_id: clientId})
         // const {name, department} = findUser
@@ -79,11 +82,35 @@ const getTicketById = async (paramId, clientId) =>{
 }
 
 
-// Get tickets for a specific user
+
+
+// Get a list of all tickets assigned to a specific user
+const getTicketsCreator= async clientId =>{
+    try {
+        console.log("This is clientID:", clientId)
+        //find who is logged in
+        const findUser = await UserSchema.findOne ({_id: clientId})
+        const {name, department} = findUser
+
+        const findTickets = await TicketSchema.find({
+            creator: name
+        })
+
+        return findTickets;
+    }
+    catch (error) {
+        console.log(error);
+        return (error);
+    }
+}
+
+
+
+
+
+// Update conversation or push messages
 const updateTicketConversation = (_id, message, sender) =>{
     try {
-
-        // const findTicket = TicketSchema.findOne({_id});
 
         // return findTicket
         const updateTicket = TicketSchema.findOneAndUpdate(
@@ -142,7 +169,7 @@ const reAssignTicket = async(paramId, req)=>{
 
 
 
-//Status Update Ticket
+//Update Ticket Status
 const updatedStatus = async(paramId, req)=>{
 
     try {
@@ -215,5 +242,6 @@ module.exports = {
     updateTicketConversation,
     updatedStatus,
     deleteTicket,
-    reAssignTicket
+    reAssignTicket,
+    getTicketsCreator
 }

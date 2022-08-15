@@ -10,7 +10,8 @@ const {
   updatedStatus,
   deleteTicket,
   getAllTicketsOfAllDepartments, 
-  reAssignTicket
+  reAssignTicket,
+  getTicketsCreator
 } = require("../models/ticket/Ticket.model")
 
 const {
@@ -67,6 +68,8 @@ router.post("/", createNewTicketValidation, userAuthorization, async (req, res) 
 );
 
 
+
+
 //Get all tickets of all users and departments - This is for Admin
 router.get("/tickets", userAuthorization, async (req, res) => {
   try {
@@ -80,7 +83,30 @@ router.get("/tickets", userAuthorization, async (req, res) => {
 })
 
 
-// GET ALL TICKETS FOR A SPECIFIC USER
+
+
+
+// GET ALL TICKETS  CREATED By A USER
+router.get("/tickets-creator", userAuthorization, async (req, res)=>{
+  try {
+    const userId = req.userId;
+    const result = await getTicketsCreator(userId);
+
+    // res.json(result.map(ticket=>ticket._id));
+    if(result) 
+    {return res.json({status: "success", result});}
+  
+    res.json({status: "success", message: "This user has no ticket"})
+
+  }catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+})
+
+
+
+
+// GET ALL TICKETS  ASSIGNED To A SPECIFIC USER
 router.get("/", userAuthorization, async (req, res)=>{
   try {
     const userId = req.userId;
@@ -96,6 +122,7 @@ router.get("/", userAuthorization, async (req, res)=>{
     res.json({ status: "error", message: error.message });
   }
 })
+
 
 
 
@@ -115,6 +142,8 @@ router.get('/:id',  async (req, res) => {
     res.json({ status: "error", message: error.message });
   }
 })
+
+
 
 
 

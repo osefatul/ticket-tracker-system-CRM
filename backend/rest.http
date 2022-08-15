@@ -98,16 +98,27 @@ Content-Type: application/json
 
 
 
-###Get all the tickets created by a user
+###Get all the tickets Assigned to user
 GET http://localhost:5000/v1/ticket
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDM2NDI5MSwiZXhwIjoxNjYwMzY2MDkxfQ.EaSIibYboaJb-3FqKV-twDpQUga00MEBxLfPCcfUvGc
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9taWRAYW1hem9uLmNvbSIsImlhdCI6MTY2MDUzOTk2NSwiZXhwIjoxNjYwNTQxNzY1fQ.BhjXwfcpwdTP-QOxOvOEtgUUe-3u8-HYG0X39ivTrZM
 Content-Type: application/json
+
 
 
 ### Get single ticket
-GET http://localhost:5000/v1/ticket/62f71dec8a8d11288de33471
-
+GET http://localhost:5000/v1/ticket/62f813a2131b1daf74f6a6f6
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9taWRAYW1hem9uLmNvbSIsImlhdCI6MTY2MDUzOTk2NSwiZXhwIjoxNjYwNTQxNzY1fQ.BhjXwfcpwdTP-QOxOvOEtgUUe-3u8-HYG0X39ivTrZM
 Content-Type: application/json
+
+
+
+
+###Get all the tickets Assigned by user
+GET http://localhost:5000/v1/ticket/tickets-creator/
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDU0MTA0MywiZXhwIjoxNjYwNTQyODQzfQ.oLWEMzwVTDaMo7fJahbzjt4nmIm5jVm2-UG_0qgTwKw
+Content-Type: application/json
+
+
 
 
 
