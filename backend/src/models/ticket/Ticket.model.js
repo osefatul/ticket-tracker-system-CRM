@@ -37,6 +37,8 @@ const getAllTicketsOfAllDepartments = async (user, res)=>{
 
 
 
+
+
 // Get a list of all tickets assigned to a specific user
 const getTickets = async clientId =>{
     try {
@@ -55,6 +57,31 @@ const getTickets = async clientId =>{
         return (error);
     }
 }
+
+
+
+
+// Get a list of all tickets assigned to a specific user
+const getTicketsForDepartment = async clientId =>{
+    try {
+        //find who is logged in
+        const findUser = await UserSchema.findOne ({_id: clientId})
+        const {name, department} = findUser
+
+        const findTickets = await TicketSchema.find({
+            $and: [{assignee: department}, {department: department}] 
+        })
+        // console.log("This is tickets", findUser)
+        return findTickets;
+    }
+    catch (error) {
+        console.log(error);
+        return (error);
+    }
+}
+
+
+
 
 
 // Get a specific ticket  
@@ -243,5 +270,6 @@ module.exports = {
     updatedStatus,
     deleteTicket,
     reAssignTicket,
-    getTicketsCreator
+    getTicketsCreator,
+    getTicketsForDepartment
 }

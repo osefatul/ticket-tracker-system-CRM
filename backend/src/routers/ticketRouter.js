@@ -11,7 +11,8 @@ const {
   deleteTicket,
   getAllTicketsOfAllDepartments, 
   reAssignTicket,
-  getTicketsCreator
+  getTicketsCreator,
+  getTicketsForDepartment
 } = require("../models/ticket/Ticket.model")
 
 const {
@@ -111,6 +112,25 @@ router.get("/", userAuthorization, async (req, res)=>{
   try {
     const userId = req.userId;
     const result = await getTickets(userId);
+
+    // res.json(result.map(ticket=>ticket._id));
+    if(result) 
+    {return res.json({status: "success", result});}
+  
+    res.json({status: "success", message: "This user has no ticket"})
+
+  }catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+})
+
+
+
+// GET ALL TICKETS  ASSIGNED To A USER DEPARTMENT
+router.get("/department-tickets", userAuthorization, async (req, res)=>{
+  try {
+    const userId = req.userId;
+    const result = await getTicketsForDepartment(userId);
 
     // res.json(result.map(ticket=>ticket._id));
     if(result) 
