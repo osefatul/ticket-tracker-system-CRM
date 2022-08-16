@@ -215,7 +215,64 @@ const getUserDataByIdForEdit = async (paramId, clientId, res) =>{
 }
 
 
+
 //--------------------------------------------------------------------
+
+
+const EdiUserDataById = async ( req, res) =>{
+  const {name, email, address, company, phone, department, isAdmin, isVerified} = req.body;
+  const clientId = req.userId;
+  const { id } = req.params;
+
+    try {
+
+    //find who is logged in
+    const adminUser = await UserSchema.findOne ({_id: clientId})
+
+    if(adminUser.isAdmin){
+      const findUser = await UserSchema.findOneAndUpdate({
+        _id: id
+        },
+        
+        {$set: {
+          name:name,
+          email:email,
+          address:address,
+          company:company,
+          department:department,
+          phone:phone,
+          isAdmin:isAdmin,
+          isVerified:isVerified,
+        }
+      }
+      
+
+        );
+
+        !findUser && res.status(404).json({ message: "User not found" });
+
+        // const {name, company, address, phone, email, isVerified, isAdmin, department, id} = findUser
+          
+        return res.json({ status: "success", user: findUser, })
+      }
+
+      return res.status(404).json({ message: "You are not allowed to access User details" });
+
+
+    }
+
+catch (error) {
+    console.log(error);
+    return (error);
+}
+}
+
+
+
+//--------------------------------------------------------------------
+
+
+
 
 
 //Update user password
@@ -295,6 +352,7 @@ module.exports = {
   verifyUser,
   getAllUsers,
   getAllAssignedUsers,
-  getUserDataByIdForEdit
+  getUserDataByIdForEdit,
+  EdiUserDataById
 };
 

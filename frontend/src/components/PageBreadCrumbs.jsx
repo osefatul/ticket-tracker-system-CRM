@@ -8,7 +8,7 @@ function PageBreadCrumbs({ page }) {
       <Link className="text-[12px]" underline="hover" color="inherit" href="/">
         Home
       </Link>
-      <Typography style={{ fontSize: "12px" }} color="text.primary">
+      <Typography className="text-[12px]" style={{ fontSize: "12px" }} color="text.primary">
         {page}
       </Typography>
     </Breadcrumbs>

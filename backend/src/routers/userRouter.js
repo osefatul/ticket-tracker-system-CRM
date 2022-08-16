@@ -23,7 +23,8 @@ const {
   verifyUser,
   getAllUsers,
   getAllAssignedUsers,
-  getUserDataByIdForEdit
+  getUserDataByIdForEdit,
+  EdiUserDataById
   // storeUserRefreshJWT
 } = require("../models/user/User.model");
 const { verify } = require("jsonwebtoken");
@@ -86,6 +87,12 @@ router.post("/login", async (req, res) => {
 //-----------------------------------------------------------------------------
 
 
+
+
+
+
+
+
 // GET USER PROFILE
 router.get ("/", userAuthorization, async(req, res)=>{
   
@@ -132,6 +139,11 @@ router.post("/assigned-user",  async (req, res)  => {
 
 
 //-----------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
+
+
+
+
 
 
 
@@ -148,9 +160,25 @@ router.get('/user_details/:id', userAuthorization,  async (req, res) => {
   }
 })
 
+
+
+//-------------------------------------------------------
+
+
+
+//GET A SPECIFIC TICKET FOR A SPECIFIC USER
+router.put('/user_details/:id', userAuthorization,  async (req, res) => {
+try{
+  await EdiUserDataById(req,res)
+}
+  catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+})
+
+
+
 //-----------------------------------------------------------------------------
-
-
 
 
 
@@ -188,6 +216,8 @@ router.post ("/reset-password", resetPasswordReqValidation, async (req, res)=> {
 
 
 //-----------------------------------------------------------------------------
+
+
 
 
 

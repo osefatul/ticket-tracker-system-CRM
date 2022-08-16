@@ -6,6 +6,7 @@ import { motion } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getUserInfoOnEdit } from '../features/SpecificUerSlice/userAction'
+import PageBreadCrumbs from '../components/PageBreadCrumbs'
 
 
 function UserEdit() {
@@ -16,6 +17,7 @@ function UserEdit() {
     const {selectedUser} = useSelector(state => state.user)
     console.log(selectedUser);
     
+
     useEffect(() => {
         dispatch(getUserInfoOnEdit(uid))
     },[])
@@ -24,11 +26,14 @@ function UserEdit() {
 
 
 
-
 return (
     <div>
         <Header />
-        <div className="layout w-[100%] text-black flex items-center justify-center">
+        <div className="layout w-[80%] text-black ">
+
+        <div className='pt-5 sm:pl-16'>
+        <PageBreadCrumbs page="Edit User"/>
+        </div>
 
         <div className='flex flex-col items-center justify-center space-y-16 '>
             <h1 className="text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[30px]">Edit User Details</h1>

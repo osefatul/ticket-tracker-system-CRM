@@ -10,6 +10,7 @@ Content-Type: application/json
 "password":"password5"  }
 
 
+
 ### User sign in endpoint
 POST http://localhost:5000/v1/user/login
 Content-Type: application/json
@@ -26,7 +27,6 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b
 
 
 
-
 ### Get all users based on departments, using access token
 POST http://localhost:5000/v1/user/assigned-user/
 Content-Type: application/json
@@ -35,9 +35,29 @@ Content-Type: application/json
 
 
 
+
 ### Get user profile endpoint, using URL params.
 Get http://localhost:5000/v1/user/user_details/62d77c6dfb20e2654b8a587b
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDYyMjY3NiwiZXhwIjoxNjYwNjI0NDc2fQ.72A1zEiqjAiSqdE2MChd4_GCYwyCY4SC2CSCvwLQVhE
+
+
+
+
+
+### Update user profile endpoint, using URL params.
+PUT http://localhost:5000/v1/user/user_details/62d77c6dfb20e2654b8a587b
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDY1MDIyNiwiZXhwIjoxNjYwNjUyMDI2fQ.N9ynyZqpnmx8rrUoiHUBpyogM7R0X9Myg_r5zifU6Bw
+Content-Type: application/json
+
+{"name": "Omid", 
+"company":"Amazon",
+"address":"6220skaha", 
+"phone":"888651789",
+"email":"omid@amazon.com", 
+"department":"Operations",
+"isAdmin":false,
+"isVerified":true
+}
 
 
 
@@ -79,6 +99,7 @@ Content-Type: application/json
 ### user logout endpoint
 DELETE http://localhost:5000/v1/user/logout
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MTM3Mjg5LCJleHAiOjE2NTgxMzc1ODl9.Udr0kjhwjiZsSyWET56HAolLsjBZ7yk4dg8-8Yatd0E
+
 
 
 
