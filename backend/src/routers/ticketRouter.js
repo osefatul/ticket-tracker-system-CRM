@@ -107,7 +107,7 @@ router.get("/tickets-creator", userAuthorization, async (req, res)=>{
 
 
 
-// GET ALL TICKETS  ASSIGNED To A SPECIFIC USER
+// GET ALL TICKETS  ASSIGNED TO A SPECIFIC USER
 router.get("/", userAuthorization, async (req, res)=>{
   try {
     const userId = req.userId;
@@ -126,7 +126,7 @@ router.get("/", userAuthorization, async (req, res)=>{
 
 
 
-// GET ALL TICKETS  ASSIGNED To A USER DEPARTMENT
+// GET ALL TICKETS  ASSIGNED TO A USER DEPARTMENT
 router.get("/department-tickets", userAuthorization, async (req, res)=>{
   try {
     const userId = req.userId;

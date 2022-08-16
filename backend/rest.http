@@ -35,10 +35,18 @@ Content-Type: application/json
 
 
 
+### Get user profile endpoint, using URL params.
+Get http://localhost:5000/v1/user/user_details/62d77c6dfb20e2654b8a587b
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDYyMjY3NiwiZXhwIjoxNjYwNjI0NDc2fQ.72A1zEiqjAiSqdE2MChd4_GCYwyCY4SC2CSCvwLQVhE
+
+
+
 
 ### Get all users profile endpoint, using access token
 Get http://localhost:5000/v1/user/users
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDIwNzU2NywiZXhwIjoxNjYwMjA5MzY3fQ.gsAL89JqsZHHcOukIU3a9HX5aPmjaphQ_gUDCpidfB4
+
+
 
 
 

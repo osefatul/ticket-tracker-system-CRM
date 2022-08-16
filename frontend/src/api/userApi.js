@@ -5,17 +5,16 @@ const rootUrl = "http://localhost:5000/v1/";
 const loginUrl = rootUrl + "user/login";
 const userProfileUrl = rootUrl + "user";
 const allUsersProfileUrl = rootUrl + "user/users";
-const usersAndDepartments = rootUrl + "user/assigned-user/";
 const logoutUrl = rootUrl + "user/logout";
 const newAccessJWT = rootUrl + "tokens/new-access-jwt";
 const UserVerificationUrl = userProfileUrl + "/verify";
+const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
 
 
 
 //-----------------------------------------------------------------------------
 
 //Register a user
-
 export const userRegistration = async (formData)=>{
     try {
         const res = await axios.post(userProfileUrl, formData);
@@ -56,7 +55,6 @@ export const userRegistrationVerification = async (formDate)=>{
 //-----------------------------------------------------------------------------
 
 //Login user
-
 export const userLogin = async (formData) =>{
     try {
     const res = await axios.post(loginUrl, formData);
@@ -81,7 +79,6 @@ export const userLogin = async (formData) =>{
 //-----------------------------------------------------------------------------
 
 // update or fetch new access token
-
 export const fetchNewAccessJWT = async () => {
 
     try {
@@ -115,8 +112,7 @@ export const fetchNewAccessJWT = async () => {
 
 //-----------------------------------------------------------------------------
 
-//Fetch single user
-
+//Fetch single user -a logged in user data or profile
 export const fetchUser = async () =>{
     try {
         const accessJWT = sessionStorage.getItem('accessJWT');
@@ -138,6 +134,31 @@ export const fetchUser = async () =>{
     }
 }
 
+
+
+//-----------------------------------------------------------------------------
+
+//Fetch User information on the Edit page.
+export const fetchUserInfoEdit = async (id) =>{
+    try {
+        const accessJWT = sessionStorage.getItem('accessJWT');
+
+        if(!accessJWT){
+            return "Token not found";
+        }
+        const res = await axios.get(UserInfoOnEditUrl + id, {
+            headers: {
+                Authorization: accessJWT
+            }
+        })
+
+        // console.log(res)
+        return res.data
+    }catch(error){
+        console.log(error);
+        return(error.message);
+    }
+}
 
 //-----------------------------------------------------------------------------
 
@@ -170,7 +191,6 @@ export const fetchAllUsers = async () =>{
 
 
 //Fetch All users with specific dept in DB
-
 export const fetchUsersWithDepartment = async (dept) =>{
     try {
         const res = await axios.post("http://localhost:5000/v1/user/assigned-user/", dept)

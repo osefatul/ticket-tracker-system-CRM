@@ -1,4 +1,6 @@
 const { UserSchema } = require("./User.schema");
+const { TicketSchema } = require("../ticket/Ticket.schema");
+
 const bcrypt = require("bcrypt");
 const { emailProcessor } = require("../../helpers/email.helper");
 
@@ -116,7 +118,7 @@ const getUserByEmail = async (req, res) => {
 
 //--------------------------------------------------------------------
 
-// Get user data from database using its id - PURPOSE: GET USE DATA AFTER LOGIN
+// Get user data from database using its id - PURPOSE: GET USER DATA AFTER LOGIN
 const getUserById = async (id, res) => {
   const user = await UserSchema.findOne({ _id:id });
 
@@ -180,6 +182,35 @@ const getAllUsers = async (req, res) => {
       .json({users});
   } catch (error) {
     console.log(error);
+  }
+}
+
+
+//--------------------------------------------------------------------
+
+// Get a specific ticket  
+const getUserDataByIdForEdit = async (paramId, clientId, res) =>{
+  try {
+      
+      //find who is logged in
+      const adminUser = await UserSchema.findOne ({_id: clientId})
+
+      if(adminUser.isAdmin){
+        const findUser = await UserSchema.findOne({
+          _id:paramId
+          });
+          !findUser && res.status(404).json({ message: "User not found" });
+
+          const {name, company, address, phone, email, isVerified, isAdmin, department, id} = findUser
+            
+          return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id}, })
+      }
+
+      res.status(404).json({ message: "You are not allowed to access User details" });
+  }
+  catch (error) {
+      console.log(error);
+      return (error);
   }
 }
 
@@ -263,6 +294,7 @@ module.exports = {
   updatePassword,
   verifyUser,
   getAllUsers,
-  getAllAssignedUsers
+  getAllAssignedUsers,
+  getUserDataByIdForEdit
 };
 

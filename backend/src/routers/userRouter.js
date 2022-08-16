@@ -22,7 +22,8 @@ const {
   updatePassword,
   verifyUser,
   getAllUsers,
-  getAllAssignedUsers
+  getAllAssignedUsers,
+  getUserDataByIdForEdit
   // storeUserRefreshJWT
 } = require("../models/user/User.model");
 const { verify } = require("jsonwebtoken");
@@ -130,9 +131,28 @@ router.post("/assigned-user",  async (req, res)  => {
 })
 
 
+//-----------------------------------------------------------------------------
 
+
+
+//GET A SPECIFIC TICKET FOR A SPECIFIC USER
+router.get('/user_details/:id', userAuthorization,  async (req, res) => {
+  try {
+    
+    const { id } = req.params;
+    const clientId = req.userId;
+    await getUserDataByIdForEdit(id, clientId,res );
+
+  }catch (error) {
+    res.json({ status: "error", message: error.message });
+  }
+})
 
 //-----------------------------------------------------------------------------
+
+
+
+
 
 // =================================================================
 // RESET AND UPDATE PASSWORD

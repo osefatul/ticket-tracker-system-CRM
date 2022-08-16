@@ -1,10 +1,30 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Sidebar from '../components/Homepage/Sidebar'
 import { motion } from "framer-motion"
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { getUserInfoOnEdit } from '../features/SpecificUerSlice/userAction'
+
 
 function UserEdit() {
+
+    const {uid} = useParams();
+    const dispatch = useDispatch();
+
+    const {selectedUser} = useSelector(state => state.user)
+    console.log(selectedUser);
+    
+    useEffect(() => {
+        dispatch(getUserInfoOnEdit(uid))
+    },[])
+
+
+
+
+
+
 return (
     <div>
         <Header />
@@ -24,12 +44,12 @@ return (
                     Username
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
+                    className={` placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="name"
                     type="text"
-                    placeholder="Ex: Mike"
+                    placeholder={`${selectedUser.name}`}
                     // onChange={handleChange}
                     // value={form.email}
                     required
@@ -44,12 +64,12 @@ return (
                     Email
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
+                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="email"
                     type="email"
-                    placeholder="Email@gmail.com"
+                    placeholder={`${selectedUser.email}`}
                     // onChange={handleChange}
                     // value={form.email}
                     required
@@ -64,12 +84,13 @@ return (
                     Department
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
+                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="department"
                     type="text"
-                    placeholder="Ex. SDE"
+                    placeholder={`${selectedUser.department}`}
+
                     // onChange={handleChange}
                     // value={form.email}
                     required
@@ -84,12 +105,13 @@ return (
                     Company
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
+                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="company"
                     type="text"
-                    placeholder="Enter company name"
+                    placeholder={`${selectedUser.company}`}
+
                     // onChange={handleChange}
                     // value={form.email}
                     required
@@ -104,12 +126,13 @@ return (
                     Address
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
+                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="address"
                     type="text"
-                    placeholder="Enter Your Address"
+                    placeholder={`${selectedUser.address? selectedUser.address: "Please enter your add"}`}
+
                     // onChange={handleChange}
                     // value={form.email}
                     required
@@ -121,41 +144,53 @@ return (
                     // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="phone"
                     >
-                    Address
+                    Phone
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
+                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="phone"
                     type="number"
-                    placeholder="Ex: +1 778 957 5786"
+                    placeholder={`${selectedUser.phone? selectedUser.phone: "Please enter phone#"}`}
+
                     // onChange={handleChange}
                     // value={form.email}
                     required
                     />
                 </div>
 
+
                 <div>
                     <label htmlFor="isVerified">isVerified?</label>
-                    <select name="isVerified" id="isVerified" defaval className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
+                    <select 
+                    name="isVerified" 
+                    id="isVerified" 
+                    defaultValue
+                    
+                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     >
-                        <option disabled value>- Choose Value -</option>
+                        <option disabled value> {`${selectedUser.isVerified}`} </option>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
 
                     </select>
                 </div>
 
+
                 <div>
                     <label htmlFor="isAdmin">isAdmin?</label>
-                    <select name="isAdmin" id="isAdmin" defaval className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
+                    <select 
+                    name="isAdmin" 
+                    id="isAdmin" 
+                    defaultValue 
+                    className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     >
-                        <option disabled value>- Choose Value -</option>
+                        <option disabled value>{`${selectedUser.isAdmin}`}</option>
                         <option value="No">No</option>
                         <option value="Yes">Yes</option>
 
