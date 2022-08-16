@@ -9,6 +9,8 @@ const logoutUrl = rootUrl + "user/logout";
 const newAccessJWT = rootUrl + "tokens/new-access-jwt";
 const UserVerificationUrl = userProfileUrl + "/verify";
 const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
+const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
+
 
 
 
@@ -162,6 +164,32 @@ export const fetchUserInfoEdit = async (id) =>{
 
 //-----------------------------------------------------------------------------
 
+
+
+
+//Fetch User information on the Edit page.
+export const UpdateUserInfoEdit = async (id, userInfo) =>{
+    try {
+        const accessJWT = sessionStorage.getItem('accessJWT');
+
+        if(!accessJWT){
+            return "Token not found";
+        }
+        const res = await axios.put(UserInfoOnEditUrl + id, userInfo, {
+            headers: {
+                Authorization: accessJWT
+            }
+        })
+
+        // console.log(res)
+        return res.data
+    }catch(error){
+        console.log(error);
+        return(error.message);
+    }
+}
+
+//-----------------------------------------------------------------------------
 
 //Fetch All users in DB
 

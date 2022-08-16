@@ -1,30 +1,70 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import Sidebar from '../components/Homepage/Sidebar'
 import { motion } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { getUserInfoOnEdit } from '../features/SpecificUerSlice/userAction'
+import { getUserInfoOnEdit, UpdateUserInfoOnEdit } from '../features/SpecificUerSlice/userAction'
 import PageBreadCrumbs from '../components/PageBreadCrumbs'
 
 
+
+//for Data submission
+const initialFormData = {
+    name: "",
+    email: "",
+    company: "",
+    department: "",
+    phone: "",
+    address: "",
+};
+
 function UserEdit() {
 
+    const {selectedUser, selectedUserAfterEdit} = useSelector(state => state.user)
+    const [formData, setFormData] = useState(selectedUser);
+    const [submit, setSubmit] = useState(false);
     const {uid} = useParams();
     const dispatch = useDispatch();
 
-    const {selectedUser} = useSelector(state => state.user)
-    console.log(selectedUser);
+
+    console.log(selectedUserAfterEdit)
     
 
     useEffect(() => {
         dispatch(getUserInfoOnEdit(uid))
-    },[])
+    },[dispatch, selectedUserAfterEdit])
+
+
+    useEffect(()=>{
+        setTimeout(()=>{
+            setSubmit(false)
+        },5000)
+    },[submit])
 
 
 
+    const handleChange =  (e) =>{
+        const {name, value} = e.target;
 
+        setFormData({...formData, [name]:value})
+    }
+
+
+
+    const handleOnSubmit = (e)=>{
+        e.preventDefault();
+
+        try {
+            dispatch(UpdateUserInfoOnEdit(uid, formData))
+            setSubmit(true)
+        }catch(error){
+            console.log(error.message)
+        }
+
+
+    }
 
 return (
     <div>
@@ -35,10 +75,14 @@ return (
         <PageBreadCrumbs page="Edit User"/>
         </div>
 
+        {submit && <h2 className="flex items-center justify-center text-green-500 text-12px">Profile Updated Successfully</h2>}
+
         <div className='flex flex-col items-center justify-center space-y-16 '>
             <h1 className="text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[30px]">Edit User Details</h1>
+
             
-            <form action="" >
+            
+            <form action="" onSubmit={handleOnSubmit} >
                 <div className='grid grid-cols-2 gap-4 text-slate-800'>
 
                 <div className="text-[11px]">
@@ -55,9 +99,8 @@ return (
                     name="name"
                     type="text"
                     placeholder={`${selectedUser.name}`}
-                    // onChange={handleChange}
-                    // value={form.email}
-                    required
+                    onChange={handleChange}
+                    value={formData.name}
                     />
                 </div>
 
@@ -75,9 +118,8 @@ return (
                     name="email"
                     type="email"
                     placeholder={`${selectedUser.email}`}
-                    // onChange={handleChange}
-                    // value={form.email}
-                    required
+                    onChange={handleChange}
+                    value={formData.email}
                     />
                 </div>
 
@@ -96,9 +138,8 @@ return (
                     type="text"
                     placeholder={`${selectedUser.department}`}
 
-                    // onChange={handleChange}
-                    // value={form.email}
-                    required
+                    onChange={handleChange}
+                    // value={selectedUser.department}
                     />
                 </div>
 
@@ -117,9 +158,9 @@ return (
                     type="text"
                     placeholder={`${selectedUser.company}`}
 
-                    // onChange={handleChange}
-                    // value={form.email}
-                    required
+                    onChange={handleChange}
+                    value={formData.company}
+        
                     />
                 </div>
 
@@ -138,9 +179,8 @@ return (
                     type="text"
                     placeholder={`${selectedUser.address? selectedUser.address: "Please enter your add"}`}
 
-                    // onChange={handleChange}
-                    // value={form.email}
-                    required
+                    onChange={handleChange}
+                    value={formData.address}
                     />
                 </div>
 
@@ -159,9 +199,8 @@ return (
                     type="number"
                     placeholder={`${selectedUser.phone? selectedUser.phone: "Please enter phone#"}`}
 
-                    // onChange={handleChange}
-                    // value={form.email}
-                    required
+                    onChange={handleChange}
+                    value={formData.phone}
                     />
                 </div>
 
@@ -210,7 +249,6 @@ return (
                 <button 
                 type="submit" 
                 className=" text-slate-100 rounded-md bg-green-800 w-32 h-10"
-            
                 >
                     Submit
                 </button>

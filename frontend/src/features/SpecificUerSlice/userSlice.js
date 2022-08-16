@@ -4,7 +4,8 @@ const initialState = {
     user: {},
     isLoading: false,
     error: "",
-    selectedUser: {}
+    selectedUser: {},
+    selectedUserAfterEdit: {}
 };
 
 const userSlice = createSlice({
@@ -24,6 +25,12 @@ const userSlice = createSlice({
         state.selectedUser = payload;
         state.error = "";
     },
+
+    getSelectedUserSuccessAfterEdit: (state, { payload }) => { 
+        state.isLoading = false;
+        state.selectedUserAfterEdit = payload;
+        state.error = "";
+    },
     getUserFail: (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
@@ -35,7 +42,8 @@ export const {
     getUserPending,
     getUserSuccess,
     getUserFail,
-    getSelectedUserSuccess
+    getSelectedUserSuccess,
+    getSelectedUserSuccessAfterEdit
 } = userSlice.actions;
 
 export default userSlice.reducer;

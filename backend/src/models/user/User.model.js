@@ -244,16 +244,13 @@ const EdiUserDataById = async ( req, res) =>{
           isAdmin:isAdmin,
           isVerified:isVerified,
         }
-      }
-      
-
-        );
+      } );
 
         !findUser && res.status(404).json({ message: "User not found" });
 
         // const {name, company, address, phone, email, isVerified, isAdmin, department, id} = findUser
           
-        return res.json({ status: "success", user: findUser, })
+        return res.json({ status: "success", message:"User's profile is updated successfully", })
       }
 
       return res.status(404).json({ message: "You are not allowed to access User details" });
