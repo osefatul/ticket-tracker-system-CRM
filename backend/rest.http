@@ -43,13 +43,13 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tY
 
 ### Update user profile endpoint, using URL params.
 PUT http://localhost:5000/v1/user/user_details/62d781504937acf95b9fcb16
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDcxODA4MCwiZXhwIjoxNjYwNzE5ODgwfQ.8NJt3O4rw8weJjyKM1eM2MEELBgguqTfxKpBUA3zZW4
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDcxOTM2MiwiZXhwIjoxNjYwNzIxMTYyfQ.mN6sr_cTUjlAaazvjFkCxJD8b2rpA_WQT48aJehLPYw
 Content-Type: application/json
 
 {"name": "Omid", 
 "company":"Amazon",
 "address":"6220skaha", 
-"phone":"888651789",
+"phone":888651789,
 "email":"omid@amazon.com", 
 "department":"Operations",
 "isAdmin":false,

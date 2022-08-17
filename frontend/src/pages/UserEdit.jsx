@@ -7,6 +7,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getUserInfoOnEdit, UpdateUserInfoOnEdit } from '../features/SpecificUerSlice/userAction'
 import PageBreadCrumbs from '../components/PageBreadCrumbs'
+import moment from 'moment'
 
 
 
@@ -34,7 +35,7 @@ function UserEdit() {
 
     useEffect(() => {
         dispatch(getUserInfoOnEdit(uid))
-    },[dispatch, selectedUserAfterEdit])
+    },[dispatch, selectedUserAfterEdit, formData])
 
 
     useEffect(()=>{
@@ -86,7 +87,7 @@ return (
             
             
             <form action="" onSubmit={handleOnSubmit} >
-                <div className='grid grid-cols-2 sm:grid-cols-3 gap-2 text-slate-800'>
+                <div className='grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-4 text-slate-800'>
 
                 <div className="text-[11px]">
                     <label
@@ -95,7 +96,7 @@ return (
                     Username
                     </label>
                     <input
-                    className={` placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    className={` w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="name"
@@ -113,7 +114,7 @@ return (
                     Email
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    className={`w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="email"
@@ -131,7 +132,7 @@ return (
                     Department
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    className={`w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="department"
@@ -149,7 +150,7 @@ return (
                     Company
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    className={`w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="company"
@@ -169,7 +170,7 @@ return (
                     Address
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    className={`w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="address"
@@ -181,22 +182,26 @@ return (
                 </div>
 
                 <div className="text-[11px]">
+                    <div className='flex space-x-1'>
                     <label
                     htmlFor="dob"
                     >
-                    Date of Birth
+                    Date of Birth:
                     </label>
+                    <p className='font-bold'>
+                    {moment(selectedUser.dob).format("l")}
+                    </p>
+                    </div>
                     <input
-                    className={` placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    className={`w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="dob"
                     type="date"
                     onChange={handleChange}
-                    // value={formData.dob}
+                    value={formData.dob? new Date(formData.dob).toLocaleString() : ""}
                     />
                 </div>
-
 
                 <div className="text-[11px]">
                     <label
@@ -205,7 +210,7 @@ return (
                     Phone
                     </label>
                     <input
-                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    className={`w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     name="phone"
@@ -224,7 +229,7 @@ return (
                     id="isVerified" 
                     defaultValue
                     onChange={handleChange}
-                    className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    className={`w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     >
@@ -238,12 +243,12 @@ return (
 
                 <div className="text-[11px]">
                     <label htmlFor="isAdmin">isAdmin?</label>
-                    <select 
+                    <select
                     name="isAdmin" 
                     id="isAdmin"
                     onChange={handleChange}
                     defaultValue 
-                    className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
+                    className={`w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     >

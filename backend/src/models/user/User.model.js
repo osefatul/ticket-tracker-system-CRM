@@ -201,9 +201,9 @@ const getUserDataByIdForEdit = async (paramId, clientId, res) =>{
           });
           !findUser && res.status(404).json({ message: "User not found" });
 
-          const {name, company, address, phone, email, isVerified, isAdmin, department, id} = findUser
+          const {name, company, address, phone, email, isVerified, isAdmin, department, id ,dob} = findUser
             
-          return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id} })
+          return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id, dob} })
       }
 
       res.status(404).json({ message: "You are not allowed to access User details" });
@@ -220,6 +220,7 @@ const getUserDataByIdForEdit = async (paramId, clientId, res) =>{
 
 
 const EdiUserDataById = async ( req, res) =>{
+
   const {name, email, address, company, phone, department, isAdmin, isVerified, dob} = req.body;
   const clientId = req.userId;
   const { id } = req.params;
@@ -228,7 +229,6 @@ const EdiUserDataById = async ( req, res) =>{
 
     //find who is logged in
     const adminUser = await UserSchema.findOne ({_id: clientId})
-
     if(adminUser.isAdmin){
 
       const findUser = await UserSchema.findOneAndUpdate(
@@ -236,19 +236,20 @@ const EdiUserDataById = async ( req, res) =>{
         _id: id
         },
         {
-          $set: {
-          name:name,
-          email:email,
-          address:address,
-          company:company,
-          department:department,
-          phone:phone,
-          isAdmin:isAdmin,
-          isVerified:isVerified,
-          dob:dob 
-        },
-      }, 
-      { new: true}
+          $set:
+          {
+            name:name,
+            email:email,
+            address:address,
+            company:company,
+            department:department,
+            phone:phone,
+            isAdmin:isAdmin,
+            isVerified:isVerified,
+            dob: dob,
+          }
+          },
+          { new: true}
       );
 
         !findUser && res.status(404).json({ message: "User not found" });

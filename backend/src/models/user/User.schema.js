@@ -21,6 +21,16 @@ const UserSchema = new Schema({
     maxlength: 50,
     required: true,
   },
+  dob: {
+    type: Date,
+    maxlength: 50,
+    required: true,
+  },
+  phone:{
+    type:Number,
+    maxlength:10,
+    required: true,
+  },
   address: {
     type: String,
     maxlength: 100,
