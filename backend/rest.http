@@ -45,8 +45,8 @@ Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tY
 
 
 ### Update user profile endpoint, using URL params.
-PUT http://localhost:5000/v1/user/user_details/62d77c6dfb20e2654b8a587b
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDY1MDIyNiwiZXhwIjoxNjYwNjUyMDI2fQ.N9ynyZqpnmx8rrUoiHUBpyogM7R0X9Myg_r5zifU6Bw
+PUT http://localhost:5000/v1/user/user_details/62fc5e9b8a07d1349b268e81
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDcwNTYwMCwiZXhwIjoxNjYwNzA3NDAwfQ.oUOlQ_u8J1Ih-whdgIC1ybEnRPTqf_kYiPRPDHmMh5o
 Content-Type: application/json
 
 {"name": "Omid", 

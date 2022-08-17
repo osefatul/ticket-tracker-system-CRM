@@ -29,7 +29,7 @@ function UserEdit() {
     const dispatch = useDispatch();
 
 
-    console.log(selectedUserAfterEdit)
+    // console.log(selectedUserAfterEdit)
     
 
     useEffect(() => {
@@ -48,7 +48,10 @@ function UserEdit() {
     const handleChange =  (e) =>{
         const {name, value} = e.target;
 
-        setFormData({...formData, [name]:value})
+        setFormData({...formData, 
+            [name]: name ==="isVerified" || name === "isAdmin" ? Boolean(value) : value })
+            console.log(formData)
+
     }
 
 
@@ -59,6 +62,9 @@ function UserEdit() {
         try {
             dispatch(UpdateUserInfoOnEdit(uid, formData))
             setSubmit(true)
+            console.log(formData)
+            console.log(formData)
+
         }catch(error){
             console.log(error.message)
         }
@@ -77,7 +83,7 @@ return (
 
         {submit && <h2 className="flex items-center justify-center text-green-500 text-12px">Profile Updated Successfully</h2>}
 
-        <div className='flex flex-col items-center justify-center space-y-16 '>
+        <div className='flex flex-col items-center justify-center space-y-10 '>
             <h1 className="text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[30px]">Edit User Details</h1>
 
             
@@ -211,14 +217,14 @@ return (
                     name="isVerified" 
                     id="isVerified" 
                     defaultValue
-                    
+                    onChange={handleChange}
                     className={`placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     >
                         <option disabled value> {`${selectedUser.isVerified}`} </option>
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
+                        <option value="" >No</option>
+                        <option value="1">Yes</option>
 
                     </select>
                 </div>
@@ -228,21 +234,22 @@ return (
                     <label htmlFor="isAdmin">isAdmin?</label>
                     <select 
                     name="isAdmin" 
-                    id="isAdmin" 
+                    id="isAdmin"
+                    onChange={handleChange}
                     defaultValue 
                     className={`placeholder:italic border-2 placeholder:text-slate-400 placeholder:pl-2
                     block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
                     focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
                     >
                         <option disabled value>{`${selectedUser.isAdmin}`}</option>
-                        <option value="No">No</option>
-                        <option value="Yes">Yes</option>
+                        <option value="" >No</option>
+                        <option value="1">Yes</option>
 
                     </select>
                 </div>
                 </div>
 
-                <motion.div className="flex items-center justify-center pt-12"
+                <motion.div className="flex items-center justify-center pt-8"
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.9 }}
                 >
