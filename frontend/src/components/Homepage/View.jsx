@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { filterSearchUser, getUsersData } from '../../features/allUsersSlice/allUsersAction';
 import { fetchAllTicketsForAdmin, filterSearchAdminTicket } from '../../features/ticketSlice/ticketAction';
 import AdminPanel from './AdminPanel';
+import Settings from './settings/Settings';
 import AdminTicketsTable from './tickets/AdminTicketsTable';
 import UsersTable from './users/UsersTable';
 
@@ -44,9 +45,11 @@ function View({user}) {
             {tabSelected ?
                 <div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-7">
                     <div className="text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[15px] sm:text-[24px]">
-                    {`${tabSelected}`} Database
+                    {tabSelected === "Users" || tabSelected === "Tickets"? `${tabSelected} Database` : `${tabSelected}`}
                     </div>
                 
+                    {tabSelected !== "Settings" &&
+
                     <div className="text-gray-500 flex items-center justify-center border border-1 h-8 pl-2 space-x-2 cursor-pointer rounded-md">
                         <AiOutlineSearch className />
                         <input
@@ -58,6 +61,7 @@ function View({user}) {
                             className="focus:outline-none flex items-center justify-center text-[13px]"
                             />
                     </div>
+                        }
                 </div>:
 
                 <div className="flex flex-col items-center justify-center ">
@@ -70,10 +74,12 @@ function View({user}) {
             }
 
             {/* Table should be used with height of element */}
+            
             {
                 tabSelected === "Users"?
-                <UsersTable/> : tabSelected === "Tickets" ? <AdminTicketsTable/> :<p>{tabSelected}</p>
+                <UsersTable/> : tabSelected === "Tickets" ? <AdminTicketsTable/> : tabSelected === "Settings" ? <Settings/> : ""
             }
+
         </div>
     )
 }

@@ -203,7 +203,7 @@ const getUserDataByIdForEdit = async (paramId, clientId, res) =>{
 
           const {name, company, address, phone, email, isVerified, isAdmin, department, id} = findUser
             
-          return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id}, })
+          return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id} })
       }
 
       res.status(404).json({ message: "You are not allowed to access User details" });
@@ -220,7 +220,7 @@ const getUserDataByIdForEdit = async (paramId, clientId, res) =>{
 
 
 const EdiUserDataById = async ( req, res) =>{
-  const {name, email, address, company, phone, department, isAdmin, isVerified} = req.body;
+  const {name, email, address, company, phone, department, isAdmin, isVerified, dob} = req.body;
   const clientId = req.userId;
   const { id } = req.params;
 
@@ -230,11 +230,13 @@ const EdiUserDataById = async ( req, res) =>{
     const adminUser = await UserSchema.findOne ({_id: clientId})
 
     if(adminUser.isAdmin){
-      const findUser = await UserSchema.findOneAndUpdate({
+
+      const findUser = await UserSchema.findOneAndUpdate(
+        {
         _id: id
         },
-        
-        {$set: {
+        {
+          $set: {
           name:name,
           email:email,
           address:address,
@@ -243,8 +245,11 @@ const EdiUserDataById = async ( req, res) =>{
           phone:phone,
           isAdmin:isAdmin,
           isVerified:isVerified,
-        }
-      } );
+          dob:dob 
+        },
+      }, 
+      { new: true}
+      );
 
         !findUser && res.status(404).json({ message: "User not found" });
 

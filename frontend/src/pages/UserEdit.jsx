@@ -62,9 +62,6 @@ function UserEdit() {
         try {
             dispatch(UpdateUserInfoOnEdit(uid, formData))
             setSubmit(true)
-            console.log(formData)
-            console.log(formData)
-
         }catch(error){
             console.log(error.message)
         }
@@ -89,11 +86,10 @@ return (
             
             
             <form action="" onSubmit={handleOnSubmit} >
-                <div className='grid grid-cols-2 gap-4 text-slate-800'>
+                <div className='grid grid-cols-2 sm:grid-cols-3 gap-2 text-slate-800'>
 
                 <div className="text-[11px]">
                     <label
-                    // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="name"
                     >
                     Username
@@ -112,7 +108,6 @@ return (
 
                 <div className="text-[11px]">
                     <label
-                    // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="email"
                     >
                     Email
@@ -131,7 +126,6 @@ return (
 
                 <div className="text-[11px]">
                     <label
-                    // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="department"
                     >
                     Department
@@ -143,15 +137,13 @@ return (
                     name="department"
                     type="text"
                     placeholder={`${selectedUser.department}`}
-
                     onChange={handleChange}
-                    // value={selectedUser.department}
+                    value={formData.department}
                     />
                 </div>
 
                 <div className="text-[11px]">
                     <label
-                    // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="company"
                     >
                     Company
@@ -172,7 +164,6 @@ return (
 
                 <div className="text-[11px]">
                     <label
-                    // className={`${resetPassword ? "mb-2" : ""}`}
                     htmlFor="address"
                     >
                     Address
@@ -184,7 +175,6 @@ return (
                     name="address"
                     type="text"
                     placeholder={`${selectedUser.address? selectedUser.address: "Please enter your add"}`}
-
                     onChange={handleChange}
                     value={formData.address}
                     />
@@ -192,7 +182,24 @@ return (
 
                 <div className="text-[11px]">
                     <label
-                    // className={`${resetPassword ? "mb-2" : ""}`}
+                    htmlFor="dob"
+                    >
+                    Date of Birth
+                    </label>
+                    <input
+                    className={` placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+                    focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
+                    name="dob"
+                    type="date"
+                    onChange={handleChange}
+                    // value={formData.dob}
+                    />
+                </div>
+
+
+                <div className="text-[11px]">
+                    <label
                     htmlFor="phone"
                     >
                     Phone
@@ -204,14 +211,13 @@ return (
                     name="phone"
                     type="number"
                     placeholder={`${selectedUser.phone? selectedUser.phone: "Please enter phone#"}`}
-
                     onChange={handleChange}
                     value={formData.phone}
                     />
                 </div>
 
 
-                <div>
+                <div className="text-[11px]">
                     <label htmlFor="isVerified">isVerified?</label>
                     <select 
                     name="isVerified" 
@@ -230,7 +236,7 @@ return (
                 </div>
 
 
-                <div>
+                <div className="text-[11px]">
                     <label htmlFor="isAdmin">isAdmin?</label>
                     <select 
                     name="isAdmin" 

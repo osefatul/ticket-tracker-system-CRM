@@ -35,18 +35,15 @@ Content-Type: application/json
 
 
 
-
 ### Get user profile endpoint, using URL params.
-Get http://localhost:5000/v1/user/user_details/62d77c6dfb20e2654b8a587b
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDYyMjY3NiwiZXhwIjoxNjYwNjI0NDc2fQ.72A1zEiqjAiSqdE2MChd4_GCYwyCY4SC2CSCvwLQVhE
-
-
+Get http://localhost:5000/v1/user/user_details/62d781504937acf95b9fcb16
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDcxNzAzOCwiZXhwIjoxNjYwNzE4ODM4fQ.vFhdTP_6bvaVwtZqcWg_yVnbLu2cn5V6X3BpFXaIxyc
 
 
 
 ### Update user profile endpoint, using URL params.
-PUT http://localhost:5000/v1/user/user_details/62fc5e9b8a07d1349b268e81
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDcwNTYwMCwiZXhwIjoxNjYwNzA3NDAwfQ.oUOlQ_u8J1Ih-whdgIC1ybEnRPTqf_kYiPRPDHmMh5o
+PUT http://localhost:5000/v1/user/user_details/62d781504937acf95b9fcb16
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDcxODA4MCwiZXhwIjoxNjYwNzE5ODgwfQ.8NJt3O4rw8weJjyKM1eM2MEELBgguqTfxKpBUA3zZW4
 Content-Type: application/json
 
 {"name": "Omid", 
@@ -56,17 +53,14 @@ Content-Type: application/json
 "email":"omid@amazon.com", 
 "department":"Operations",
 "isAdmin":false,
-"isVerified":true
+"isVerified":true,
+"dob": "2022-06-16"
 }
-
-
 
 
 ### Get all users profile endpoint, using access token
 Get http://localhost:5000/v1/user/users
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDIwNzU2NywiZXhwIjoxNjYwMjA5MzY3fQ.gsAL89JqsZHHcOukIU3a9HX5aPmjaphQ_gUDCpidfB4
-
-
 
 
 
