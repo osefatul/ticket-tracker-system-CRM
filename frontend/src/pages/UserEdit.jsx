@@ -1,25 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Footer from '../components/Footer'
 import Header from '../components/Header'
-import Sidebar from '../components/Homepage/Sidebar'
 import { motion } from "framer-motion"
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getUserInfoOnEdit, UpdateUserInfoOnEdit } from '../features/SpecificUerSlice/userAction'
 import PageBreadCrumbs from '../components/PageBreadCrumbs'
 import moment from 'moment'
+import { getSelectedUserRefresh } from '../features/SpecificUerSlice/userSlice'
 
-
-
-//for Data submission
-const initialFormData = {
-    name: "",
-    email: "",
-    company: "",
-    department: "",
-    phone: "",
-    address: "",
-};
 
 function UserEdit() {
 
@@ -30,12 +19,9 @@ function UserEdit() {
     const dispatch = useDispatch();
 
 
-    // console.log(selectedUserAfterEdit)
-    
-
     useEffect(() => {
         dispatch(getUserInfoOnEdit(uid))
-    },[dispatch, selectedUserAfterEdit, formData])
+    },[dispatch, selectedUserAfterEdit, formData, uid])
 
 
     useEffect(()=>{
@@ -52,25 +38,25 @@ function UserEdit() {
         setFormData({...formData, 
             [name]: name ==="isVerified" || name === "isAdmin" ? Boolean(value) : value })
             console.log(formData)
-
     }
 
 
 
     const handleOnSubmit = (e)=>{
         e.preventDefault();
-
         try {
             dispatch(UpdateUserInfoOnEdit(uid, formData))
             setSubmit(true)
         }catch(error){
             console.log(error.message)
         }
-
-
     }
 
+
 return (
+
+    
+
     <div>
         <Header />
         <div className="layout w-[80%] text-black ">
@@ -104,6 +90,25 @@ return (
                     placeholder={`${selectedUser.name}`}
                     onChange={handleChange}
                     value={formData.name}
+                    />
+                </div>
+
+
+                <div className="text-[11px]">
+                    <label
+                    htmlFor="fullName"
+                    >
+                    Full Name
+                    </label>
+                    <input
+                    className={` w-28 sm:w-44 placeholder:italic border-2 placeholder:text-slate-800 placeholder:pl-2
+                    block text-slate-700 bg-white rounded-md shadow-sm sm:text-sm
+                    focus:outline-none focus:border-sky-500 focus:ring-sky-500 focus:ring-1`}
+                    name="fullName"
+                    type="text"
+                    placeholder={`${selectedUser.fullName? selectedUser.fullName: "Your Full Name"}`}
+                    onChange={handleChange}
+                    value={formData.fullName}
                     />
                 </div>
 
@@ -279,6 +284,7 @@ return (
         </div>
         <Footer/>
     </div>
+
 )
 }
 

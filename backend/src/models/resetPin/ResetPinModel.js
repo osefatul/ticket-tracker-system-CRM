@@ -17,22 +17,19 @@ const setPasswordResetPin = async (email) => {
 
 
 
-const getPinByEmail = ( email, pin)=>{
-    return new Promise((resolve, reject) => {
+const getPinByEmail = async( email, pin)=>{
         try {
-        ResetPinSchema.findOne({ email, pin }, (error, data) => {
-            if (error) {
-            console.log(error);
-            resolve(false);
+        const pinCode = await ResetPinSchema.findOne({ $and: [ {email:email}, {pin:pin }],});
+
+            if (pinCode) {
+            console.log(pinCode);
+            return pinCode;
             }
-    
-            resolve(data);
-        });
-        } catch (error) {
-        reject(error);
-        console.log(error);
         }
-    });
+        catch (error) {
+        console.log(error);
+        return(error);
+        }
     };
 
 

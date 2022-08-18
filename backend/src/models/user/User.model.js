@@ -92,7 +92,7 @@ const getUserByEmail = async (req, res) => {
   const { email, password } = req.body;
   
   try {
-  //Check if email exist
+  //Check if email exists
   const user = await UserSchema.findOne({ email });
   !user && res.status(404).json({ message: "User not found" });
 
@@ -100,7 +100,7 @@ const getUserByEmail = async (req, res) => {
     res.status(404).json({ message: "Please check your email for verification code..." });
   }
 
-  //Check if password match
+  //Check if passwords match
   const validPassword = await bcrypt.compare(password, user.password);
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
@@ -123,11 +123,11 @@ const getUserById = async (id, res) => {
   const user = await UserSchema.findOne({ _id:id });
 
   !user && res.status(404).json({ message: "User not found" });
-  const {_id, email, name, isAdmin, department, company } = user
+  const {_id, email, name, isAdmin, department, company, address, phone, dob, fullName  } = user
   
   try {
     return res.status(200)
-      .json({ user: {_id, email, name, isAdmin, department, company} } );
+      .json({ user: {_id, email, name, isAdmin, department, company, address, phone, dob, fullName } } );
   } catch (error) {
     console.log(error);
   }
@@ -193,17 +193,23 @@ const getUserDataByIdForEdit = async (paramId, clientId, res) =>{
   try {
       
       //find who is logged in
-      const adminUser = await UserSchema.findOne ({_id: clientId})
+      const CurrentUser = await UserSchema.findOne ({_id: clientId})
 
-      if(adminUser.isAdmin){
+      if(CurrentUser.isAdmin ){
         const findUser = await UserSchema.findOne({
           _id:paramId
           });
           !findUser && res.status(404).json({ message: "User not found" });
 
-          const {name, company, address, phone, email, isVerified, isAdmin, department, id ,dob} = findUser
+          const {name, company, address, phone, email, isVerified, isAdmin, department, id ,dob, fullName} = findUser
             
-          return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id, dob} })
+          return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id, dob, fullName} })
+      }
+
+      if(CurrentUser.isAdmin === false && CurrentUser._id === paramId){
+        const {name, company, address, phone, email, isVerified, isAdmin, department, id ,dob, fullName} = CurrentUser
+            
+        return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id, dob, fullName} })
       }
 
       res.status(404).json({ message: "You are not allowed to access User details" });
@@ -221,7 +227,7 @@ const getUserDataByIdForEdit = async (paramId, clientId, res) =>{
 
 const EdiUserDataById = async ( req, res) =>{
 
-  const {name, email, address, company, phone, department, isAdmin, isVerified, dob} = req.body;
+  const {name, email, address, company, phone, department, isAdmin, isVerified, dob, fullName} = req.body;
   const clientId = req.userId;
   const { id } = req.params;
 
@@ -247,6 +253,7 @@ const EdiUserDataById = async ( req, res) =>{
             isAdmin:isAdmin,
             isVerified:isVerified,
             dob: dob,
+            fullName:fullName
           }
           },
           { new: true}
@@ -345,6 +352,35 @@ const verifyUser = async ( email, res) => {
     }
 };
 
+
+
+const deleteUser = async(req, res) => {
+  try {
+    const {id} = req.params
+    const clientId = req.userId
+
+     //find who is logged in
+    const adminUser = await UserSchema.findOne ({_id: clientId})
+
+    if(adminUser.isAdmin){
+      const findUser = await UserSchema.findOneAndDelete(
+        {
+        _id: id
+        },);
+
+
+        return res.json({ status: "success", message:"User's profile is deleted successfully" })
+      }
+      return res.status(404).json({ message: "You are not allowed to access User details" });
+
+  }catch (error){
+
+  }
+}
+
+
+
+
 //--------------------------------------------------------------------
 
 module.exports = { 
@@ -356,6 +392,7 @@ module.exports = {
   getAllUsers,
   getAllAssignedUsers,
   getUserDataByIdForEdit,
-  EdiUserDataById
+  EdiUserDataById,
+  deleteUser
 };
 

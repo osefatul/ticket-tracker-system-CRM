@@ -10,6 +10,7 @@ const newAccessJWT = rootUrl + "tokens/new-access-jwt";
 const UserVerificationUrl = userProfileUrl + "/verify";
 const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
 const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
+const deleteUserUrl = userProfileUrl + "/delete-user/";
 
 
 
@@ -98,10 +99,8 @@ export const fetchNewAccessJWT = async () => {
         if(res.data.status === "success"){
             sessionStorage.setItem("accessJWT", res.data?.accessJWT?.JwtAccess)
         }
-
         return true;
 
-        
     }catch(error){
         // if (error.message === "Request failed with status code 403") {
         //     localStorage.removeItem("crmSite");
@@ -128,7 +127,7 @@ export const fetchUser = async () =>{
             }
         })
 
-        // console.log(res)
+        console.log(res)
         return res.data
     }catch(error){
         console.log(error);
@@ -248,3 +247,20 @@ export const userLogout = async () => {
 };
 
 //-----------------------------------------------------------------------------
+
+
+
+//use this where the logout option is.
+
+export const userDelete = async (id) => {
+    try {
+        await axios.delete(deleteUserUrl+id, {
+        headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+        },
+    });
+    } catch (error) {
+        console.log(error);
+        return error.message;
+    }
+};

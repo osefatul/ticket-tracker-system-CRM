@@ -6,10 +6,15 @@ const opts = { toJSON: { virtuals: true } };
 
 
 const UserSchema = new Schema({
+
   name: {
     type: String,
     maxlength: 50,
     required: true,
+  },
+  fullName: {
+    type: String,
+    maxlength: 50,
   },
   company: {
     type: String,
@@ -24,12 +29,11 @@ const UserSchema = new Schema({
   dob: {
     type: Date,
     maxlength: 50,
-    required: true,
   },
   phone:{
     type:Number,
     maxlength:10,
-    required: true,
+    
   },
   address: {
     type: String,

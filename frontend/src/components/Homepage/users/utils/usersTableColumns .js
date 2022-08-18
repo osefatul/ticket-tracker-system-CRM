@@ -1,5 +1,10 @@
 import { AiOutlineDelete } from "react-icons/ai";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { getSelectedUserRefresh } from "../../../../features/SpecificUerSlice/userSlice";
+
+
+// const dispatch = useDispatch();
 
 export const columns = [
 
@@ -101,7 +106,8 @@ export const columns = [
     return (
     <>
         <Link to={"/user_details/" + params.row._id}>
-        <button className="bg-green-700 w-[40px] rounded-sm text-slate-200 text-sm">Edit</button>
+        <button
+        className="bg-green-700 w-[40px] rounded-sm text-slate-200 text-sm">Edit</button>
         </Link>
         <AiOutlineDelete
         className="text-red-700 w-[20px] h-[20px] ml-2 cursor-pointer "

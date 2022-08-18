@@ -1,5 +1,6 @@
-import { getUserPending, getUserSuccess, getUserFail, getSelectedUserSuccess, getSelectedUserSuccessAfterEdit } from "./userSlice";
-import { fetchUser, fetchUserInfoEdit, UpdateUserInfoEdit } from "../../api/userApi";
+import { getUserPending, getUserSuccess, getUserFail, getSelectedUserSuccess, getSelectedUserSuccessAfterEdit, getDeletedUserSuccess } from "./userSlice";
+import { fetchUser, fetchUserInfoEdit, UpdateUserInfoEdit, userDelete } from "../../api/userApi";
+import { getUsersData } from "../allUsersSlice/allUsersAction";
 
 
 
@@ -22,9 +23,7 @@ export const getUserProfile = ()=> async dispatch =>{
 
 
 
-
 export const getUserInfoOnEdit = (id)=> async dispatch =>{
-
     try {
         dispatch(getUserPending());
         const result = await fetchUserInfoEdit(id)
@@ -43,11 +42,7 @@ export const getUserInfoOnEdit = (id)=> async dispatch =>{
 
 
 
-
-
-
 export const UpdateUserInfoOnEdit = (id, userInfo)=> async dispatch =>{
-
     try {
         dispatch(getUserPending());
         const result = await UpdateUserInfoEdit(id, userInfo)
@@ -56,6 +51,27 @@ export const UpdateUserInfoOnEdit = (id, userInfo)=> async dispatch =>{
         if (result){
             dispatch(getSelectedUserSuccessAfterEdit(result.message));
             dispatch(getUserInfoOnEdit(id))
+        }
+
+        dispatch(getUserFail("User is not found"));
+        
+    } catch (error) {
+        dispatch(getUserFail(error));
+    }
+};
+
+
+
+
+
+export const DeleteUser = (id)=> async dispatch =>{
+    try {
+        dispatch(getUserPending());
+        const result = await userDelete(id)
+
+        // if (result.user && result.user._id){
+        if (result){
+            dispatch(getDeletedUserSuccess(result.message));
         }
 
         dispatch(getUserFail("User is not found"));

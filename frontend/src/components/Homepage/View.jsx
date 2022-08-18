@@ -12,7 +12,9 @@ function View({user}) {
 
     const dispatch = useDispatch();
     const { tabSelected } = useSelector((state) => state.homeTabs);
-    const {users: {users}} = useSelector ((state) => state.allUsers)
+    const {users: {users, search}} = useSelector ((state) => state.allUsers)
+
+
 
     useEffect(()=>{
 
@@ -26,7 +28,8 @@ function View({user}) {
             dispatch(fetchAllTicketsForAdmin())
         }
 
-    },[users, dispatch, tabSelected]);
+    },[users, dispatch, tabSelected, ]);
+
 
 
     const handleOnChange =(e)=>{
@@ -38,6 +41,8 @@ function View({user}) {
             dispatch(filterSearchAdminTicket(value))
         }
     }
+
+
 
     return (
         <div className="homeHeight w-[80%] sm:w-[85%] text-black">
@@ -57,7 +62,7 @@ function View({user}) {
                             name="searchTicket"
                             onChange={handleOnChange}
                             //value={searchString}
-                            placeholder="Search for user"
+                            placeholder={`Search for ${tabSelected === "Users"? "Users": "Tickets"}`}
                             className="focus:outline-none flex items-center justify-center text-[13px]"
                             />
                     </div>
@@ -77,7 +82,7 @@ function View({user}) {
             
             {
                 tabSelected === "Users"?
-                <UsersTable/> : tabSelected === "Tickets" ? <AdminTicketsTable/> : tabSelected === "Settings" ? <Settings/> : ""
+                <UsersTable /> : tabSelected === "Tickets" ? <AdminTicketsTable/> : tabSelected === "Settings" ? <Settings/> : ""
             }
 
         </div>

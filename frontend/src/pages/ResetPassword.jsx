@@ -78,21 +78,22 @@ function ResetPassword() {
             confirmPassword: form.password === value,//if yes make it true or false.
             });
         }
-        console.log(form)
+        // console.log(form)
     
     };
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
-        const {pin, password, bodyEmail} = form
+        const {pin, password, bodyEmail} = await form
 
         try {
-            
             await dispatch (updatePassword({
             pin, 
             newPassword:password, 
-            email: email || bodyEmail // if somebody use the link.
+            email: email, // bodyEmail - if somebody use the link.
         }))
+
+        // console.log(pin, password, bodyEmail, email)
 
         setMessageAddedAlert(true)//To turn on message alert
         setForm(initialState)

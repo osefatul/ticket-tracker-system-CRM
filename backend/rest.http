@@ -83,9 +83,9 @@ Content-Type: application/json
 PATCH http://localhost:5000/v1/user/reset-password
 Content-Type: application/json
 
-{"email":"sefat1@amazon.com",
-"pin": "116454",
-"newPassword": "password5"
+{"email":"sefaullahomar1@gmail.com",
+"pin": "273627",
+"newPassword": "Password5%"
 }
 
 
@@ -93,6 +93,13 @@ Content-Type: application/json
 ### user logout endpoint
 DELETE http://localhost:5000/v1/user/logout
 Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MTM3Mjg5LCJleHAiOjE2NTgxMzc1ODl9.Udr0kjhwjiZsSyWET56HAolLsjBZ7yk4dg8-8Yatd0E
+
+
+
+### user delete
+DELETE http://localhost:5000/v1/user/delete-user/62fccf625555771bde3a0732
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MDczNTYwMCwiZXhwIjoxNjYwNzM3NDAwfQ.dH0lGaCJYLCHhntaL0TnpN0WLj9dv00zKsJBU8_JzSQ
+
 
 
 

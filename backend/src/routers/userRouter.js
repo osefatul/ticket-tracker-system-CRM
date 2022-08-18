@@ -24,7 +24,8 @@ const {
   getAllUsers,
   getAllAssignedUsers,
   getUserDataByIdForEdit,
-  EdiUserDataById
+  EdiUserDataById,
+  deleteUser
   // storeUserRefreshJWT
 } = require("../models/user/User.model");
 const { verify } = require("jsonwebtoken");
@@ -269,9 +270,18 @@ router.patch ("/reset-password", updatePasswordValidation, async (req, res)=> {
 
 })
 
-
 //-----------------------------------------------------------------------------
 
+
+
+
+router.delete("/delete-user/:id", userAuthorization, async (req, res) => {
+  try {
+    await deleteUser(req, res);
+  }catch(err) {
+    res.json({message: err.message})
+  }
+})
 
 
 //USER LOGOUT

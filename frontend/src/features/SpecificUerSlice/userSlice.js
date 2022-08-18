@@ -5,7 +5,8 @@ const initialState = {
     isLoading: false,
     error: "",
     selectedUser: {},
-    selectedUserAfterEdit: {}
+    selectedUserAfterEdit: {},
+    deletedUser:{}
 };
 
 const userSlice = createSlice({
@@ -23,6 +24,16 @@ const userSlice = createSlice({
     getSelectedUserSuccess: (state, { payload }) => {
         state.isLoading = false;
         state.selectedUser = payload;
+        state.error = "";
+    },
+    getDeletedUserSuccess: (state, { payload }) => {
+        state.isLoading = false;
+        state.deletedUser = payload;
+        state.error = "";
+    },
+    getSelectedUserRefresh: (state) => {
+        state.isLoading = false;
+        state.selectedUser = "";
         state.error = "";
     },
 
@@ -43,7 +54,9 @@ export const {
     getUserSuccess,
     getUserFail,
     getSelectedUserSuccess,
-    getSelectedUserSuccessAfterEdit
+    getSelectedUserSuccessAfterEdit,
+    getSelectedUserRefresh,
+    getDeletedUserSuccess
 } = userSlice.actions;
 
 export default userSlice.reducer;

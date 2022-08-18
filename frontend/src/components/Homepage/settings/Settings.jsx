@@ -1,32 +1,97 @@
 import React from 'react'
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import UserEdit from '../../../pages/UserEdit';
+import { VscAccount, VscCalendar, VscDeviceMobile, VscMail } from "react-icons/vsc";
+import { ImHome } from "react-icons/im";
+import moment from 'moment';
+import { motion } from "framer-motion"
+import { Link } from 'react-router-dom';
+import { getSelectedUserRefresh } from '../../../features/SpecificUerSlice/userSlice';
+
 
 function Settings() {
 
     const {user} = useSelector(state => state.user)
+    const dispatch = useDispatch();
 
 
     return (
-        <div className="flex flex-col sm:flex-row pl-4 pt-4 items-center justify-center sm:items-start sm:justify-start">
-
-            <div className=' text-black text-[12px] flex flex-col items-start justify-start boxShadow w-60 pl-4 pt-2  space-y-6'>
+        <div className="flex flex-col sm:space-y-8 sm:space-x-12
+        items-center justify-center ">
+            
+            {/* Left side */}
+            <div className=' text-black text-[12px] flex flex-col items-start justify-start boxShadow w-60 sm:w-[400px] h-72 pl-6 pt-8 sm:pt-5  space-y-4'>
 
                 <div className='flex '>
-                    <div className="flex items-center justify-center rounded-full bg-slate-300 w-10 h-10 text-[20px]"> {user?.name?.charAt(0).toUpperCase()}</div>
-                    <h1 className='pl-2 text-[13px] font-bold'>{user.name}</h1>
-                </div>
-                
 
-                <h2 className='text-slate-400 text-[14px]'>Account Details</h2>
-                <div>
-                
+                    <div className="flex items-center justify-center rounded-full bg-slate-300 w-10 h-10 text-[25px]"> {user?.name?.charAt(0).toUpperCase()}</div>
+
+                    <div className='pl-2 flex flex-col'>
+                        <h1 className=' text-[13px] font-bold'>{user.fullName}</h1>
+                        <p>{user.department}</p>
+                    </div>
+
                 </div>
+                
+                
+                <div className="space-y-5">
+
+                    <div className='space-y-2'>
+                        <h2 className='text-slate-400 text-[12px]'>Account Details</h2>
+                        
+                        <div className='space-y-2'>
+                            <p className='flex space-x-2 items-center'>
+                                <VscAccount/>
+                                <span>{user.name}</span>
+                            </p>
+
+                            <p className='flex space-x-2 items-center'>
+                                <VscCalendar/>
+                                <span>{moment(user.dob).format("l")}</span>
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div className='space-y-2'>
+                        <h2 className='text-slate-400 text-[12px]'>Contact Details</h2>
+
+                        <div className='space-y-2'>
+                            <p className='flex space-x-2 items-center'>
+                                <VscDeviceMobile/>
+                                <span>+1 {user.phone}</span>
+                            </p>
+
+                            <p className='flex space-x-2 items-center'>
+                                <VscMail/>
+                                <span>{user.email}</span>
+                            </p>
+
+                            <p className='flex space-x-2 items-center'>
+                                <ImHome/>
+                                <span>{user.email}</span>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
             </div>
+
+
+            <motion.div
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.9 }}
+            onClick = {dispatch(getSelectedUserRefresh())}
+            >
+                <Link to={`/user_details/${user._id}`}>
+                <button className='w-48 h-10 text-sm rounded-md bg-green-800 text-slate-200 shadow-lg'>
+                    Want to Edit your profile ?
+                </button>
+                </Link>
+            </motion.div>
             
-            <div>
 
-            </div>
         </div>
             
 
