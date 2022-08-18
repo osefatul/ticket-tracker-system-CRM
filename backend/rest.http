@@ -5,9 +5,9 @@ POST http://localhost:5000/v1/user/
 Content-Type: application/json
 
 {"name": "ravinder", "company":"Amazon",
-"address":"6320skaha", "phone":"688651789",
+"department":"Operations",
 "email":"ravinder@amazon.com",
-"password":"password5"  }
+"password":"Password5%" }
 
 
 

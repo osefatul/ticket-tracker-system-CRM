@@ -13,24 +13,26 @@ function UsersTable() {
     
     const dispatch = useDispatch();
     const{searchUsersList, isLoading, error} = useSelector( state => state.allUsers);
-
-
+    const [data , setData] = useState(searchUsersList)
     
-    // const handleDelete = (id) =>{
-    //     try {
-    //         dispatch(DeleteUser(id));
-    //         setData(dispatch(getUsersData()))
+    const handleDelete = async (id) =>{
 
-    //     }catch(e) {
-    //         console.log(e)
-    //     }
-    // }
+            const deleteUser = await (searchUsersList.filter((item)=> item._id !==id)) //wait and delete once it is done then
+            await dispatch(DeleteUser(id));//delete user from the db
+            await (dispatch(getUsersData())) //fetch users back
+            await setData(deleteUser)//Set data with the rest of lists
+    }
 
     //Run this every time I visit this page. Reason for this is that sometimes the home page Main Icon doesn't remove the selectedUser value even though I have run the same code.
+
     useEffect(()=>{
-        // dispatch(getSelectedUserRefresh())
+
+        
+        setData(searchUsersList)
+        dispatch(getSelectedUserRefresh())
         // dispatch(getUsersData())
-    },[])
+
+    },[searchUsersList])
 
     if (isLoading) { return  <h3>Loading...</h3>}
 
@@ -141,7 +143,7 @@ function UsersTable() {
             </Link>
             <AiOutlineDelete
             className="text-red-700 w-[20px] h-[20px] ml-2 cursor-pointer "
-            // onClick={ handleDelete(params.row._id)}
+            onClick={() => handleDelete(params.row._id)}
             />
         </>
         );
@@ -166,7 +168,7 @@ function UsersTable() {
         p: 2,
         minWidth: 200,
         }}
-        rows={searchUsersList}
+        rows={data}
         getRowId = {(row) => row._id}
         disableSelectionOnClick
         columns={columns}

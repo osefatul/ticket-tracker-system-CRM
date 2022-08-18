@@ -72,6 +72,7 @@ export const DeleteUser = (id)=> async dispatch =>{
         // if (result.user && result.user._id){
         if (result){
             dispatch(getDeletedUserSuccess(result.message));
+            dispatch(getUsersData())
         }
 
         dispatch(getUserFail("User is not found"));

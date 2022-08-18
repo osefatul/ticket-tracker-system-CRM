@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { AiOutlineSearch } from 'react-icons/ai';
 import { useDispatch, useSelector } from 'react-redux';
 import { filterSearchUser, getUsersData } from '../../features/allUsersSlice/allUsersAction';
+import { DeleteUser } from '../../features/SpecificUerSlice/userAction';
 import { fetchAllTicketsForAdmin, filterSearchAdminTicket } from '../../features/ticketSlice/ticketAction';
 import AdminPanel from './AdminPanel';
 import Settings from './settings/Settings';
@@ -13,6 +14,7 @@ function View({user}) {
     const dispatch = useDispatch();
     const { tabSelected } = useSelector((state) => state.homeTabs);
     const {users: {users, search}} = useSelector ((state) => state.allUsers)
+    
 
 
 
@@ -28,7 +30,7 @@ function View({user}) {
             dispatch(fetchAllTicketsForAdmin())
         }
 
-    },[users, dispatch, tabSelected, ]);
+    },[users, dispatch, tabSelected,]);
 
 
 

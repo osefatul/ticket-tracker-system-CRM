@@ -106,7 +106,7 @@ function Auth() {
         confirmPassword: form.password === value,//if yes make it true or false.
       });
     }
-    console.log(form)
+    // console.log(form)
   };
 
 
