@@ -3,10 +3,17 @@ import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogout } from "../api/userApi";
 import { motion } from "framer-motion"
+import { useDispatch, useSelector } from "react-redux";
+import { getTabsSuccess } from "../features/selectedHomeTabs/tabsSlice";
 
 function Header() {
+  const {user} =useSelector(state => state.user)
+  const dispatch = useDispatch();
+
+
   const [toggle, setToggle] = useState(false);
-  const linkList = ["dashboard", "new_ticket", "/"];
+  const AdminLinkList = ["dashboard", "new_ticket", "/"];
+  const commonUserLinkList =["new_ticket","Settings", "/"];
 	const navigate = useNavigate ();
 
 
@@ -21,6 +28,9 @@ function Header() {
   return (
     <div className=" bg-slate-900 flex items-center justify-between px-6 h-[50px] fixed w-full top-0 z-50">
       {/* TOP BAR */}
+      
+
+      {/* TopBar Icon */}
       <div>
       <Link to="/">
         <motion.div
@@ -31,25 +41,47 @@ function Header() {
       </Link>
       </div>
 
+
+      {/* TopBar list */}
       <div className="">
         <ul className="hidden sm:flex items-center justify-center text-white space-x-3 text-[12px] px-10 ">
-          {["Dashboard", "new_ticket", "Logout"].map((item, index) => (
 
+
+          {user.isAdmin? ["Dashboard", "new_ticket", "Logout"].map((item, index) => (
             <motion.li 
             className="px-1 hoverText" key={`link-${item}`}
             whileHover={{ scale: 1.07 }}
             whileTap={{ scale: 0.9 }}
             >
               <div className=" hover:border" />
-              <Link to={`/${linkList[index]}`}>
+              <Link to={`/${user.isAdmin? AdminLinkList[index]: commonUserLinkList[index] }`}>
                 <div className="flex items-center justify-center"  
-                onClick = {item ==="Logout"? clickOnItem : () => setToggle(false) }>
+                onClick = {
+                  item ==="Logout"? clickOnItem : item === "Settings"? dispatch(getTabsSuccess(item)) :() => setToggle(false) }>
+                    { item === "new_ticket"? "New Ticket" :  item }
+                </div>
+              </Link>
+            </motion.li> 
+            ))
+            
+            : ["new_ticket", "Settings", "Logout"].map((item, index) => (
+            <motion.li 
+            className="px-1 hoverText" key={`link-${item}`}
+            whileHover={{ scale: 1.07 }}
+            whileTap={{ scale: 0.9 }}
+            >
+              <div className=" hover:border" />
+              <Link to={`/${user.isAdmin? AdminLinkList[index]: commonUserLinkList[index] }`}>
+                <div className="flex items-center justify-center"  
+                onClick = {
+                  item ==="Logout"? clickOnItem :() => setToggle(false) }>
                     { item === "new_ticket"? "New Ticket" :  item }
                 </div>
               </Link>
             </motion.li>
           ))}
         </ul>
+
 
 
         {/* SIDE BAR ICON & X  */}
@@ -83,7 +115,7 @@ function Header() {
           >
             <ul className="h-[100%] w-full flex flex-col justify-start items-start space-y-5 mt-32 pl-5">
               {["Dashboard", "new_ticket", "Logout"].map((item, index) => (
-                <Link key={item} to={`/${linkList[index]}`}>
+              <Link to={`/${user.isAdmin? AdminLinkList[index]: commonUserLinkList[index] }`}>
                   <motion.li
                     key={item}
                     whileHover={{ scale: 1.07 }}

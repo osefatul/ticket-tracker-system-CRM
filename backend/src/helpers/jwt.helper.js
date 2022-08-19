@@ -10,7 +10,7 @@ const { UserSchema } = require("../models/user/User.schema");
 const createAccessJWT = async (email, _id) => {
   try {
     const accessJWT =  jwt.sign({ email }, process.env.JWT_ACCESS_SECRET, {
-      expiresIn: "30m", //change this to 15m
+      expiresIn: "24hr", //change this to 15m
     });
 
      //Set key and value in the Redis.

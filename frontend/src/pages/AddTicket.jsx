@@ -7,7 +7,7 @@ import PageBreadCrumbs from "../components/PageBreadCrumbs";
 function AddTicket() {
   return (
     <>
-      {/* <Header /> */}
+      <Header />
       <div className="layout ">
         <div>
           <PageBreadCrumbs page="New Ticket" />
@@ -17,7 +17,7 @@ function AddTicket() {
         </div>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

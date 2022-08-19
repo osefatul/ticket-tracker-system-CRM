@@ -23,10 +23,7 @@ function UsersTable() {
             await setData(deleteUser)//Set data with the rest of lists
     }
 
-    //Run this every time I visit this page. Reason for this is that sometimes the home page Main Icon doesn't remove the selectedUser value even though I have run the same code.
-
     useEffect(()=>{
-
         
         setData(searchUsersList)
         dispatch(getSelectedUserRefresh())

@@ -29,6 +29,7 @@ function View({user}) {
         if(tabSelected === "Tickets"){ 
             dispatch(fetchAllTicketsForAdmin())
         }
+        
 
     },[users, dispatch, tabSelected,]);
 

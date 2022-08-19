@@ -3,12 +3,16 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import { motion } from "framer-motion"
 import Footer from '../components/Footer'
+import { useSelector } from 'react-redux'
 
 
 function DashboardUpdated() {
+
+  const {user} = useSelector(state => state.user)
+
   return (
     <div>
-    <Header />
+    {user.isAdmin && <Header />}
       <div className="layout text-white">
 
         <div className='space-y-5 flex flex-col items-center justify-center pt-5 '>
@@ -20,7 +24,7 @@ function DashboardUpdated() {
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
             >
-            <button className=" text-[14px] border border-1 h-10 px-3 rounded-md bg-green-800 hover:border hover:border-blue-500 shadow-lg ">
+            <button className=" text-[12px] border border-1 h-10 px-3 rounded-md bg-green-800 hover:border hover:border-blue-500 shadow-lg ">
               Create New Ticket
             </button>
             </motion.div>

@@ -47,7 +47,7 @@ return (
 
 
         <motion.div
-            onClick={()=> dispatch(getTabsSuccess("Analytics"))}
+            onClick={()=> dispatch(getTabsSuccess("Settings"))}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.9 }}
             className=' cursor-pointer p-2 bg-slate-700 w-36 sm:w-44 h-22 sm:h-40 shadow-lg rounded-lg  flex flex-col items-center justify-center text-center text-white hover:border hover:border-red-500 shadow-lg'>

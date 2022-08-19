@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import UserEdit from '../../../pages/UserEdit';
 import { VscAccount, VscCalendar, VscDeviceMobile, VscMail } from "react-icons/vsc";
@@ -7,19 +7,30 @@ import moment from 'moment';
 import { motion } from "framer-motion"
 import { Link } from 'react-router-dom';
 import { getSelectedUserRefresh } from '../../../features/SpecificUerSlice/userSlice';
+import Header from '../../Header';
 
 
-function Settings() {
+function NotAdminUsersSettings() {
 
     const {user} = useSelector(state => state.user)
+    const {selectedUser, selectedUserAfterEdit} = useSelector(state => state.user)
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+    },[])
 
 
     return (
+        <div>
+            <Header />
+        <div className="flex
+        items-center justify-center pt-24 ">
+
         <div className="flex flex-col sm:space-y-8 sm:space-x-12
         items-center justify-center ">
+            <h1 className="text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[16px] sm:text-[30px] ">Settings</h1>
             
-            {/* Left side */}
+            {/* Info */}
             <div className=' text-black text-[12px] flex flex-col items-start justify-start boxShadow w-60 sm:w-[400px] h-72 pl-6 pt-8 sm:pt-5  space-y-4'>
 
                 <div className='flex '>
@@ -78,7 +89,7 @@ function Settings() {
 
             </div>
 
-
+            {/* Button */}
             <motion.div
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.9 }}
@@ -86,12 +97,14 @@ function Settings() {
             >
                 <Link to={`/user_details/${user._id}`}>
                 <button className='w-48 h-10 text-sm rounded-md bg-green-800 text-slate-200 shadow-lg'>
-                    Want to Edit your profile ?
+                    Edit your profile ?
                 </button>
                 </Link>
             </motion.div>
             
 
+        </div>
+        </div>
         </div>
             
 
@@ -99,4 +112,4 @@ function Settings() {
         );
 }
 
-export default Settings
+export default NotAdminUsersSettings

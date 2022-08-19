@@ -191,26 +191,32 @@ const getAllUsers = async (req, res) => {
 // Get a specific ticket  
 const getUserDataByIdForEdit = async (paramId, clientId, res) =>{
   try {
-      
-      //find who is logged in
-      const CurrentUser = await UserSchema.findOne ({_id: clientId})
+    //find who is logged in
+    const CurrentUser = await UserSchema.findOne ({_id: clientId})
 
-      if(CurrentUser.isAdmin ){
-        const findUser = await UserSchema.findOne({
-          _id:paramId
-          });
-          !findUser && res.status(404).json({ message: "User not found" });
+    // console.log(paramId)
+    const currentUserId = CurrentUser._id.toString() // in the mongodb the id is an object.
+    
+    //if user is and ADMIN
+    if(CurrentUser.isAdmin || (currentUserId === paramId)){
+      const findUser = await UserSchema.findOne({
+        _id:paramId
+        });
+        !findUser && res.status(404).json({ message: "User not found" });
 
-          const {name, company, address, phone, email, isVerified, isAdmin, department, id ,dob, fullName} = findUser
-            
-          return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id, dob, fullName} })
-      }
-
-      if(CurrentUser.isAdmin === false && CurrentUser._id === paramId){
-        const {name, company, address, phone, email, isVerified, isAdmin, department, id ,dob, fullName} = CurrentUser
-            
+        const {name, company, address, phone, email, isVerified, isAdmin, department, id ,dob, fullName} = findUser
+          
         return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id, dob, fullName} })
-      }
+    }
+
+    // //If any user wants to get his own page.
+    // if(currentUserId === paramId){
+    //   const {name, company, address, phone, email, isVerified, isAdmin, department, id ,dob, fullName} = CurrentUser
+          
+    //   return res.json({ status: "success", user: {name, company, address, phone, email, isVerified, isAdmin, department, id, dob, fullName} })
+    // }
+
+
 
       res.status(404).json({ message: "You are not allowed to access User details" });
   }
@@ -234,9 +240,10 @@ const EdiUserDataById = async ( req, res) =>{
     try {
 
     //find who is logged in
-    const adminUser = await UserSchema.findOne ({_id: clientId})
-    if(adminUser.isAdmin){
-
+    const CurrentUser = await UserSchema.findOne ({_id: clientId})
+    const currentUserId = CurrentUser._id.toString() // in the mongodb the id is an object.
+    
+    if(CurrentUser.isAdmin || (currentUserId === id)){
       const findUser = await UserSchema.findOneAndUpdate(
         {
         _id: id

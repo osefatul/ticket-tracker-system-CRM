@@ -14,6 +14,7 @@ import ResetPassword from "./pages/ResetPassword";
 import DepTicketList from "./pages/TicketsList/DepTicketList";
 import CreatedByMeTicketList from "./pages/TicketsList/CreatedByMeTicketList";
 import UserEdit from "./pages/UserEdit";
+import NotAdminUsersSettings from "./components/Homepage/settings/NotAdminUsersSettings";
 
 function App() {
 
@@ -39,6 +40,7 @@ function App() {
           <Route path="dept-ticket-lists" element={<DepTicketList />} />
           <Route path="creator-ticket-lists" element={<CreatedByMeTicketList />} />
           <Route path="ticket_communication/:tid" element={<TicketPage />} />
+          <Route path="Settings" element={<NotAdminUsersSettings />} />
           <Route path="user_details/:uid" element={<UserEdit />} />
 
         </Route>
