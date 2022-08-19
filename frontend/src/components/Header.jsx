@@ -47,6 +47,7 @@ function Header() {
         <ul className="hidden sm:flex items-center justify-center text-white space-x-3 text-[12px] px-10 ">
 
 
+          {/*For Admins  */}
           {user.isAdmin? ["Dashboard", "new_ticket", "Logout"].map((item, index) => (
             <motion.li 
             className="px-1 hoverText" key={`link-${item}`}
@@ -64,6 +65,7 @@ function Header() {
             </motion.li> 
             ))
             
+            // For Common Users
             : ["new_ticket", "Settings", "Logout"].map((item, index) => (
             <motion.li 
             className="px-1 hoverText" key={`link-${item}`}
@@ -114,7 +116,9 @@ function Header() {
             } ease-out duration-700  shadow-2xl`}
           >
             <ul className="h-[100%] w-full flex flex-col justify-start items-start space-y-5 mt-32 pl-5">
-              {["Dashboard", "new_ticket", "Logout"].map((item, index) => (
+
+              {/* For Admin */}
+              {user.isAdmin? ["Dashboard", "new_ticket", "Logout"].map((item, index) => (
               <Link to={`/${user.isAdmin? AdminLinkList[index]: commonUserLinkList[index] }`}>
                   <motion.li
                     key={item}
@@ -126,6 +130,22 @@ function Header() {
                     { item === "new_ticket"? "New Ticket" :  item }
                   </motion.li>
                 </Link>
+            ))
+
+            // For Common Users
+              : ["new_ticket", "Settings", "Logout"].map((item, index) => (
+                <Link to={`/${user.isAdmin? AdminLinkList[index]: commonUserLinkList[index] }`}>
+                <motion.li
+                  key={item}
+                  whileHover={{ scale: 1.07 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="hoverText w-full flex items-start justify-center"
+                  onClick = {item ==="Logout"? clickOnItem : () => setToggle(false) }
+                >
+                  { item === "new_ticket"? "New Ticket" :  item }
+                </motion.li>
+              </Link>
+              
               ))}
             </ul>
           </div>

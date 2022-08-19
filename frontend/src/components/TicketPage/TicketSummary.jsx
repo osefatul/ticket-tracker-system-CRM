@@ -38,15 +38,17 @@ function TicketSummary({ details }) {
       <hr className="flex items-start justify-start mx-auto bg-slate-500 w-[100%] my-1" />
       <div className="p-5 boxShadow rounded-md">
         <div className="flex items-start space-x-2">
-          <img
+          {/* <img
             className="w-[35px] h-[35px] object contain rounded-full"
             src="https://avatars.githubusercontent.com/u/67508976?v=4"
             alt=""
-          />
+          /> */}
+          <div className="flex items-center justify-center rounded-full bg-slate-300 w-10 h-10 text-[25px]"> {details?.creator?.charAt(0).toUpperCase()}</div>
 
-          <div className="flex flex-col items-start justify-start text-[12px]">
-            <p>@{details.creator}</p>
-            <p className=" text-[10px] pb-4">
+          <div className="flex flex-col  items-start justify-start text-[12px]">
+            <p className="font-bold" >@{details.creator}</p>
+            <p className="text-[9px]">{details.department}- department </p>
+            <p className=" text-[10px] py-4">
 
             </p>
             <p>{details.description}</p>

@@ -21,11 +21,12 @@ function TicketConversation({ details }) {
       {detailsReversed.map((cmnt, index) => (
         <div key={index + cmnt.msgAt} className="space-y-3 mb-3">
           <div key={index + cmnt.msgAt} className="flex items-start space-x-2">
-            <img
+            {/* <img
               className="w-[35px] h-[35px] object contain rounded-full"
               src="https://avatars.githubusercontent.com/u/67508976?v=4"
               alt=""
-            />
+            /> */}
+            <div className="flex items-center justify-center rounded-full bg-slate-300 w-10 h-10 text-[25px]"> {cmnt?.sender?.charAt(0).toUpperCase()}</div>
 
             <div className="flex flex-col items-start justify-start text-[12px]">
               <p className="">{cmnt.sender}</p>

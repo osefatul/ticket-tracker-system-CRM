@@ -112,7 +112,7 @@ function AddTicketForm() {
         className="text-black space-y-2 flex flex-col sm:items-center justify-center sm:justify-center boxShadow p-2 pb-5 rounded-lg "
         onSubmit={handleOnSubmit}
       >
-        <div className="flex items-center justify-center text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[20px] mb-4">
+        <div className="flex items-center justify-center text-slate-800 font-bold sm:border-b border-amber-600 sm:shadow-lg text-[20px] mb-4">
           <h1>Create a Ticket</h1>
         </div>
         
