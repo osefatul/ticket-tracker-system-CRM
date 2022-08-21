@@ -86,7 +86,7 @@ function Settings() {
             >
                 <Link to={`/user_details/${user._id}`}>
                 <button className='w-48 h-10 text-sm rounded-md bg-green-800 text-slate-200 shadow-lg'>
-                    Want to Edit your profile ?
+                    Edit your profile
                 </button>
                 </Link>
             </motion.div>

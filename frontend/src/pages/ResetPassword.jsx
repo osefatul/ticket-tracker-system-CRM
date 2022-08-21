@@ -43,7 +43,7 @@ function ResetPassword() {
     useEffect(()=>{
     setTimeout(()=>{
         setMessageAddedAlert(false);
-    },5000)
+    },3000)
     },[MessageAddedAlert])
 
 
