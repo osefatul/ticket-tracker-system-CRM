@@ -1,9 +1,14 @@
 import axios from "axios";
 
-const rootUrl = "http://localhost:5000/v1/";
+// Before hosting
+// const rootUrl = "http://localhost:5000/v1/";
+// const otpReqUrl = rootUrl + "user/reset-password";
+// const updatePassUrl = rootUrl + "user/reset-password";
+
+// After Hosting
+const rootUrl = "https://ticketing-crm.herokuapp.com/v1/";
 const otpReqUrl = rootUrl + "user/reset-password";
 const updatePassUrl = rootUrl + "user/reset-password";
-
 
 
 export const requestPasswordOTP = async (email) =>{

@@ -23,6 +23,11 @@ const registrationSlice = createSlice({
             state.status = "error";
             state.message = payload;
         },
+        EraseRegistrationError: (state, ) => {
+            state.isLoading = false;
+            state.status = "";
+            state.message = " ";
+        },
     }
 })
 
@@ -32,6 +37,7 @@ export const {
 registrationPending,
 registrationSuccess,
 registrationError,
+EraseRegistrationError
 } = actions;
 
 export default reducer;

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate  } from "react-router-dom";
 import { userLogin, userRegistration } from "../api/userApi";
-import { loginFail, loginSuccess, loginPending} from "../features/authSlice/loginSlice";
-import { registrationPending, registrationSuccess, registrationError} from "../features/authSlice/registrationSlice";
+import { loginFail, loginSuccess, loginPending, EraseLoginError} from "../features/authSlice/loginSlice";
+import { registrationPending, registrationSuccess, registrationError, EraseRegistrationError} from "../features/authSlice/registrationSlice";
 // Spinner
 import Spinner from "../utils/spinner"
 import { getUserProfile } from "../features/SpecificUerSlice/userAction";
@@ -32,6 +32,7 @@ function Auth() {
   //Redux states
   const {isLoading, isAuth, error,} = useSelector(state => state.login)
   const {isLoading:regLoading, status, message,} = useSelector(state => state.registration)
+
   const {
     isLoading:resetLoading, 
     status:resetPasswordStatus, 
@@ -63,8 +64,9 @@ function Auth() {
   useEffect(()=>{
   setTimeout(()=>{
     setMessageAddedAlert(false);
+    dispatch(EraseRegistrationError())// erase registration message after clicking on signup
   },5000)
-  },[MessageAddedAlert])
+  },[MessageAddedAlert, EraseRegistrationError, message ,isSignup])
 
 
 
@@ -130,6 +132,7 @@ function Auth() {
           //Error
         if (AuthResponse){
           // console.log(AuthResponse)
+          dispatch(EraseRegistrationError())
           setMessageAddedAlert(true)//To turn on message alert
           return dispatch(loginFail(AuthResponse))
         }
@@ -155,8 +158,9 @@ function Auth() {
         }
 
         setPasswordError(passwordVerificationError)
+        dispatch(EraseLoginError())//delete login error if there is any.
         setMessageAddedAlert(true)//To turn on message alert
-        setForm(initialState)
+        setForm(initialState) //erase form data back
         setIsSignup(!isSignup) //To return to sign in
 
         return dispatch(registrationSuccess(isRegistered));
@@ -206,8 +210,9 @@ function Auth() {
     <div className=" h-screen flex flex-col items-center justify-center bg-slate-800 space-x-2">
 
       {/*Registration Form post submission  */}
-      {MessageAddedAlert && <div className=" bg-green-800 w-[80%] text-white text-small rounded flex items-center justify-center m-3">{message}</div>}
-      {status ==="error" ? <div className=" bg-red-400 w-[80%] text-white text-small rounded flex items-center justify-center m-2">{message}</div> : ""}
+      {isSignup && message === "New user created"? "": <div className=" bg-green-800 w-[80%] text-white text-small rounded flex items-center justify-center m-3">{message}</div> }
+
+      {status ==="error" ? <div className=" bg-red-400 w-[80%] text-white text-small rounded flex items-center justify-center m-2">{error}</div> : ""}
 
 
        {/*Password Rest Form post submission  */}
@@ -448,7 +453,7 @@ function Auth() {
 
 
         {!resetPassword && (
-          <div className="text-[13px]">
+          <div className="text-[13px] flex items-center justify-center">
             <p>
               {isSignup ? "Already have an account?" : "Don't have an account?"}
               <span

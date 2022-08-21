@@ -11,7 +11,7 @@ const {
 
 
 //--------------------------------------------------------------------
-const verificationURL = "http://localhost:3000/verification/";
+const verificationURL = "https://advanced-ticketing-system.netlify.app/verification/";
 //--------------------------------------------------------------------
 
 //REGISTRATION

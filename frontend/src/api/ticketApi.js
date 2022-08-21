@@ -1,12 +1,22 @@
 import axios from "axios";
 
-const rootUrl = "http://localhost:5000/v1";
+// Before hosting
+// const rootUrl = "http://localhost:5000/v1";
+// const ticketUlr = rootUrl + "/ticket/"
+// const closeTicketUrl = ticketUlr + "status-update/";
+// const reassignTicketUrl = ticketUlr + "assign-ticket/"
+// const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
+// const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
+// const getAllTicketsToaSpecificUserUrl = ticketUlr 
+
+
+const rootUrl = "https://ticketing-crm.herokuapp.com/v1";
 const ticketUlr = rootUrl + "/ticket/"
 const closeTicketUrl = ticketUlr + "status-update/";
 const reassignTicketUrl = ticketUlr + "assign-ticket/"
 const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
 const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
-
+const getAllTicketsToaSpecificUserUrl = ticketUlr 
 
 
 
@@ -46,7 +56,8 @@ export const getAllTicketsForAdmin = async ()=>{
 //Get all tickets Assigned to a specific users
 export const getAllTicketsToaSpecificUser = async ()=>{
     try{
-        const result = await axios.get("http://localhost:5000/v1/ticket", {
+        // const result = await axios.get("http://localhost:5000/v1/ticket", {
+        const result = await axios.get(getAllTicketsToaSpecificUserUrl, {
             headers: {
                 Authorization: sessionStorage.getItem("accessJWT"),
                 },
@@ -76,8 +87,6 @@ export const getAllTicketsToaDepartment = async ()=>{
 
 
 
-
-
 // Get all tickets created by a user,
 export const getAllTicketsCreatedByAUser = async ()=>{
     try {
@@ -92,8 +101,6 @@ export const getAllTicketsCreatedByAUser = async ()=>{
             return e;
         }
 }
-
-
 
 
 

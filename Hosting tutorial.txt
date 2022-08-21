@@ -1,0 +1,22 @@
+1- Go to Heroku and create an application.
+2- create a file called procfile and add:
+	web:node index.js
+2- Go to Resources : https://dashboard.heroku.com/apps/ticketing-crm/resources
+3- search for "Heroku Data for Redis" and install it.
+4- go to heroku data for redis settings and copy URL, 
+5- Paste URL in to the backend/.env file.
+
+6- got to redis.helper.js and follow this : https://devcenter.heroku.com/articles/connecting-heroku-redis#connecting-in-node-js
+7- host file using heroku commands:
+	git init
+	git add .
+	git commit -am "deployin"
+	git push origin master:main
+
+
+
+Note:
+Watch this video for deploying reddis:
+https://www.youtube.com/watch?v=fvYo6LBZUh8&t=223s
+
+
