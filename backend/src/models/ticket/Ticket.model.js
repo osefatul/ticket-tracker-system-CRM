@@ -231,24 +231,19 @@ const updatedStatus = async(paramId, req)=>{
 //Delete a ticket
 const deleteTicket = async (paramId, clientId, res) => {
     try {
-        //first find ticket
-        const findTicket =  await TicketSchema.findOne({
-            $and: [{_id:paramId}, { clientId: clientId}],
-        });
+        
+        //find who is logged in
+        const adminUser = await UserSchema.findOne ({_id: clientId})
 
-        //if ticket is found in the DB then delete
-        if(findTicket){
-        const deleteTicket = await findTicket.deleteOne()
-        return res.json({
-            status: "success",
-            message: "The ticket has been deleted",
-            deleteTicket
-        });
+        if(adminUser.isAdmin){
+            //first find ticket
+            const DeleteTicket =  await TicketSchema.findOneAndDelete({
+            _id:paramId
+            });
+            return res.json({ status: "success", message:"TIcket is deleted successfully" })
         }
-
-        //if ticket not found in the DB then:
-        return res.json({ status: 'error', message:"ticket is not found"}); 
-    
+        
+        return res.status(404).json({ message: "You are not allowed to Delete this ticket" });
 
     }
     catch (error) {

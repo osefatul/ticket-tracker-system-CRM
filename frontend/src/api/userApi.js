@@ -330,8 +330,7 @@ export const userLogout = async () => {
 
 
 
-//use this where the logout option is.
-
+//Delete User
 export const userDelete = async (id) => {
     try {
         await axios.delete(deleteUserUrl+id, {

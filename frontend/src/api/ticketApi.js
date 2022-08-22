@@ -7,7 +7,8 @@ const closeTicketUrl = ticketUlr + "status-update/";
 const reassignTicketUrl = ticketUlr + "assign-ticket/"
 const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
 const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
-const getAllTicketsToaSpecificUserUrl = ticketUlr 
+const getAllTicketsToaSpecificUserUrl = ticketUlr;
+const deleteTicketUrl = ticketUlr;
 
 
 // const rootUrl = "https://ticketing-crm.herokuapp.com/v1";
@@ -140,7 +141,7 @@ export const updateReplyTicket = async (id, msgObj) => {
 
 
 
-//Update Ticket Status
+//Re-assign Ticket 
 export const reAssignTicket = async (id, ticketUpdates) => {
     try {
         const result = await axios.patch(reassignTicketUrl + id, ticketUpdates, {
@@ -174,4 +175,20 @@ export const updateTicketStatus = async (id, ticketUpdates) => {
 };
 
 
+
+
+
+//Delete a Ticket
+export const deleteTicketAPI = async (id) => {
+    try {
+        await axios.delete(deleteTicketUrl+id, {
+        headers: {
+            Authorization: sessionStorage.getItem("accessJWT"),
+        },
+    });
+    } catch (error) {
+        console.log(error);
+        return error.message;
+    }
+};
 

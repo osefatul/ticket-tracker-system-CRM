@@ -223,5 +223,5 @@ Content-Type: application/json
 
 
 ### Delete the ticket
-DELETE  http://localhost:5000/v1/ticket/62d77ae96793fece08c83ac5
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF0MUBhbWF6b24uY29tIiwiaWF0IjoxNjU4MzAyMzcxLCJleHAiOjE2NTgzMDMyNzF9.QNs5oV1_aPFaRTUXoZY75FpGtub3Lq2hpZx9ziX_nGo
+DELETE  http://localhost:5000/v1/ticket/62f73e04c48e90af9ab8fb45
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IkRlbW9AZ21haWwuY29tIiwiaWF0IjoxNjYxMTQ5NzU5LCJleHAiOjE2NjEyMzYxNTl9.KUIXCdwldtFThjE72i2N5Y4zVmOqHwCoGIrjhvaqW4E

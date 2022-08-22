@@ -244,6 +244,7 @@ router.patch("/status-update/:id", userAuthorization, async (req, res) => {
 });
 
 
+
 // DELETE TICKET
 router.delete("/:id", userAuthorization, async (req, res) => {
   try {
@@ -252,11 +253,19 @@ router.delete("/:id", userAuthorization, async (req, res) => {
 
   await deleteTicket( id, clientId, res );
 
-
   } catch (error) {
     res.json({ status: "error", message: error.message });
   }
 });
+
+
+
+
+
+
+
+
+
 
 
 

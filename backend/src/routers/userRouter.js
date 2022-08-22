@@ -294,7 +294,7 @@ router.patch ("/reset-password", updatePasswordValidation, async (req, res)=> {
 
 
 
-
+//DELETE USER
 router.delete("/delete-user/:id", userAuthorization, async (req, res) => {
   try {
     await deleteUser(req, res);
@@ -302,6 +302,10 @@ router.delete("/delete-user/:id", userAuthorization, async (req, res) => {
     res.json({message: err.message})
   }
 })
+
+
+
+
 
 
 //USER LOGOUT

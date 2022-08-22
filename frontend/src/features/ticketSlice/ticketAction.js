@@ -19,6 +19,7 @@ import {
 
 import {
     
+    deleteTicketAPI,
     getAllTicketsCreatedByAUser,
     getAllTicketsForAdmin,
     getAllTicketsToaDepartment,
@@ -86,8 +87,6 @@ export const fetchTicketsCreatedByAUser = () => async (dispatch)=>{
         dispatch(fetchTicketFail(error.message));
     }
 }
-
-
 
 
 
@@ -173,3 +172,20 @@ export const SendTicketStatusUpdate = (id, ticketUpdates) => async (dispatch) =>
     dispatch(closeTicketFail(e.message));
 }}
 
+
+
+
+
+
+//GET API TO Delete TICKET
+export const deleteTicket = (id) => async dispatch => {
+    try {
+        const result = await deleteTicketAPI(id);
+        console.log(result);
+
+        
+    }catch (e) {
+        console.log(e.message);
+    }
+
+}
