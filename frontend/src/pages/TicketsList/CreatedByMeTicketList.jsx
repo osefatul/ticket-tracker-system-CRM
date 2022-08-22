@@ -7,18 +7,21 @@ import { AiOutlineSearch } from "react-icons/ai";
 import TicketsTable from "../../components/TicketsTable";
 
 
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { fetchTicketsCreatedByAUser, filterSearchTicket} from "../../features/ticketSlice/ticketAction";
 import { loginSuccess } from "../../features/authSlice/loginSlice";
 import { fetchNewAccessJWT } from "../../api/userApi";
 import TicketListsStatistics from "../../components/TicketListsStatistics";
 import { resetTicketsList } from "../../features/ticketSlice/ticketSlice";
+import NoTicketsList from "../../components/NoTicketsList";
 
 
 function CreatedByMeTicketList() {
 
 
     const dispatch = useDispatch();
+  const { tickets } = useSelector((state) => state.tickets);
+
 
     //fetch all tickets once when the page is loaded.
     useEffect(() => {
@@ -45,8 +48,7 @@ return (
 
         <PageBreadCrumbs page="Created By Me Tickets List" />
 
-        
-
+    
         <div 
         div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-6 ">
 
@@ -73,7 +75,11 @@ return (
             </div>
         </div>
 
-        <TicketsTable />
+            { tickets.length > 0 ? <TicketsTable /> :
+                <div>
+                <NoTicketsList/>
+                </div>
+            }
     </div>
 
     <Footer />

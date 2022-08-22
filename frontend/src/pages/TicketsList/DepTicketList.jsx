@@ -6,17 +6,20 @@ import { AiOutlineSearch } from "react-icons/ai";
 import TicketsTable from "../../components/TicketsTable";
 import { Link } from "react-router-dom";
 
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { fetchTicketsAssignedToADepartment, filterSearchTicket} from "../../features/ticketSlice/ticketAction";
 import { loginSuccess } from "../../features/authSlice/loginSlice";
 import { fetchNewAccessJWT } from "../../api/userApi";
 import TicketListsStatistics from "../../components/TicketListsStatistics";
 import { resetTicketsList } from "../../features/ticketSlice/ticketSlice";
+import NoTicketsList from "../../components/NoTicketsList";
 
 
 function DepTicketList() {
 
     const dispatch = useDispatch();
+  const { tickets } = useSelector((state) => state.tickets);
+
 
     //fetch all tickets once when the page is loaded.
     useEffect(() => {
@@ -71,7 +74,11 @@ function DepTicketList() {
 
             </div>
     
-            <TicketsTable />
+            { tickets.length > 0 ? <TicketsTable /> :
+                <div>
+                <NoTicketsList/>
+                </div>
+            }
         </div>
     
         <Footer />

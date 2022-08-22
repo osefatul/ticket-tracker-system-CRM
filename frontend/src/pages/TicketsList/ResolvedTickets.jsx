@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { fetchNewAccessJWT } from '../../api/userApi';
 import Footer from '../../components/Footer';
 import Header from '../../components/Header';
+import NoTicketsList from '../../components/NoTicketsList';
 import PageBreadCrumbs from '../../components/PageBreadCrumbs';
 import TicketListsStatistics from '../../components/TicketListsStatistics';
 import TicketsTable from '../../components/TicketsTable';
@@ -75,8 +76,13 @@ function ResolvedTickets() {
               </div>
 
           </div>
+
+          { tickets.length > 0 ? <TicketsTable /> :
+          <div>
+          <NoTicketsList/>
+          </div>
+          }
   
-          <TicketsTable />
       </div>
   
       <Footer />
