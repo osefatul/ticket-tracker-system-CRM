@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useLocation, useNavigate  } from "react-router-dom";
-import { DemoAdminLogin, userLogin, userRegistration } from "../api/userApi";
-import { loginFail, loginSuccess, loginPending, EraseLoginError, DemoLoginPending} from "../features/authSlice/loginSlice";
+import { DemoAdminLogin, DemoNonAdminLogin, userLogin, userRegistration } from "../api/userApi";
+import { loginFail, loginSuccess, loginPending, EraseLoginError, DemoLoginPending, DemoAdminLoginPending, DemoUserLoginPending} from "../features/authSlice/loginSlice";
 import { registrationPending, registrationSuccess, registrationError, EraseRegistrationError} from "../features/authSlice/registrationSlice";
 // Spinner
 import Spinner from "../utils/spinner"
@@ -30,7 +30,7 @@ function Auth() {
   const from = location.state?.from?.pathname || "/"
 
   //Redux states
-  const {isLoading, isAuth, error, demoLogin} = useSelector(state => state.login)
+  const {isLoading, isAuth, error, demoAdminLogin, demoUserLogin} = useSelector(state => state.login)
   const {isLoading:regLoading, status, message,} = useSelector(state => state.registration)
 
   const {
@@ -187,10 +187,11 @@ function Auth() {
 
 
 
-
+// ----------------------------------------
+  //DEMO ADMIN LOGIN
   const DemoAdmin = async ()=> {
 
-    dispatch(DemoLoginPending())
+    dispatch(DemoAdminLoginPending())
 
     const isAuth = await DemoAdminLogin()
     // if we receive unsuccessful response then
@@ -204,9 +205,23 @@ function Auth() {
 
 
 
+// ----------------------------------------
+  //DEMO NON-ADMIN LOGIN
+
+  const DemoNonAdmin =  async ()=> {
+    dispatch(DemoUserLoginPending())
+
+    const isAuth = await DemoNonAdminLogin()
+    // if we receive unsuccessful response then
+    const AuthResponse = isAuth?.message
+
+    // console.log(isAuth)
+    dispatch(loginSuccess());
+    dispatch(getUserProfile())
+    navigate("/")
+  }
 
 
-  const DemoNonAdmin = async()=>{}
 
 
 
@@ -498,16 +513,17 @@ function Auth() {
 
             {/* Demo */}
           { !resetPassword && <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-2" >
-            <button className={`mx-auto flex items-center justify-center border w-36 h-6 bg-green-800 rounded-md text-[11px] sm:text-[13px] `} onClick={() => DemoAdmin()} >
+            <button className={`mx-auto flex items-center justify-center border ${demoAdminLogin? "w-44":"w-36"} h-6 bg-green-800 rounded-md text-[11px] sm:text-[13px] `} onClick={() => DemoAdmin()} >
             Demo Admin User  {
-                  demoLogin ? (
+                  demoAdminLogin ? (
                       < Spinner />
                     ): " "}
             </button>
 
-            <button className={`mx-auto flex items-center justify-center border w-36 bg-green-800 h-6 rounded-md text-[11px] sm:text-[13px]`} onClick={DemoNonAdmin} >
+            <button className={`mx-auto flex items-center justify-center border 
+            ${demoUserLogin? "w-44":"w-36"}  bg-green-800 h-6 rounded-md text-[11px] sm:text-[13px]`} onClick={DemoNonAdmin} >
             Demo Non-admin User  {
-                  demoLogin ? (
+                  demoUserLogin ? (
                       < Spinner />
                     ): " "}
             </button>

@@ -1,22 +1,22 @@
 import axios from "axios";
 
 // Before hosting
-// const rootUrl = "http://localhost:5000/v1";
-// const ticketUlr = rootUrl + "/ticket/"
-// const closeTicketUrl = ticketUlr + "status-update/";
-// const reassignTicketUrl = ticketUlr + "assign-ticket/"
-// const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
-// const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
-// const getAllTicketsToaSpecificUserUrl = ticketUlr 
-
-
-const rootUrl = "https://ticketing-crm.herokuapp.com/v1";
+const rootUrl = "http://localhost:5000/v1";
 const ticketUlr = rootUrl + "/ticket/"
 const closeTicketUrl = ticketUlr + "status-update/";
 const reassignTicketUrl = ticketUlr + "assign-ticket/"
 const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
 const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
 const getAllTicketsToaSpecificUserUrl = ticketUlr 
+
+
+// const rootUrl = "https://ticketing-crm.herokuapp.com/v1";
+// const ticketUlr = rootUrl + "/ticket/"
+// const closeTicketUrl = ticketUlr + "status-update/";
+// const reassignTicketUrl = ticketUlr + "assign-ticket/"
+// const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
+// const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
+// const getAllTicketsToaSpecificUserUrl = ticketUlr 
 
 
 

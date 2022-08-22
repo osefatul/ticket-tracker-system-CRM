@@ -30,7 +30,7 @@ const fetchUsersDept = userProfileUrl + "/assigned-user/"
 // const deleteUserUrl = userProfileUrl + "/delete-user/";
 
 const DemoAdminUrl = "http://localhost:5000/v1/user/demo-admin/";
-const DemoUserUrl = "http://localhost:5000/v1/user/demo-admin/"
+const DemoUserUrl = "http://localhost:5000/v1/user/demo-non-admin/"
 
 
 
@@ -147,7 +147,7 @@ export const DemoNonAdminLogin = async () =>{
         }
     
     // if there is an error we will send the whole response.
-    return res
+    return res.data
     
     }catch(error){
         console.log(error);
