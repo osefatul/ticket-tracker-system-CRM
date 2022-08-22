@@ -25,7 +25,9 @@ const {
   getAllAssignedUsers,
   getUserDataByIdForEdit,
   EdiUserDataById,
-  deleteUser
+  deleteUser,
+  getDemoAdminUserByEmail,
+  getDemoNonAdminUserByEmail
   // storeUserRefreshJWT
 } = require("../models/user/User.model");
 const { verify } = require("jsonwebtoken");
@@ -88,6 +90,32 @@ router.post("/login", async (req, res) => {
 
 
 
+//Demo Admin USER
+router.post("/demo-admin", async (req, res) => {
+
+  try {
+    await getDemoAdminUserByEmail(req, res);
+  } catch (err) {
+    console.log(err);
+    res.json({ status: "error", message: err.message });
+  }
+});
+
+//-----------------------------------------------------------------------------
+
+
+//Demo Non-Admin USER
+router.post("/demo-non-admin", async (req, res) => {
+
+  try {
+    await getDemoNonAdminUserByEmail(req, res);
+  } catch (err) {
+    console.log(err);
+    res.json({ status: "error", message: err.message });
+  }
+});
+
+//-----------------------------------------------------------------------------
 
 
 

@@ -35,7 +35,7 @@ const userSlice = createSlice({
         state.searchUsersList = state.users.filter((row) => {
         if (!payload) return row;
 
-        return row.name.toLowerCase().includes(payload.toLowerCase());
+        return (row.name.toLowerCase().includes(payload.toLowerCase()) || row.department.toLowerCase().includes(payload.toLowerCase()) || row.email.toLowerCase().includes(payload.toLowerCase()) );
         });
     },
 },

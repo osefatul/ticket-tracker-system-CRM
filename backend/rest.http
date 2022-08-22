@@ -11,11 +11,27 @@ Content-Type: application/json
 
 
 
-### User sign in endpoint
+### User Sign in endpoint
 POST http://localhost:5000/v1/user/login
 Content-Type: application/json
 
-{"email":"sefat1@amazon.com", "password":"password5" }
+{"email":"Demo@gmail.com", "password":"Password5%" }
+
+
+
+### Demo Admin Sign in
+POST http://localhost:5000/v1/user/demo-admin/
+Content-Type: application/json
+
+
+
+
+
+### Demo non Admin Sign in
+POST http://localhost:5000/v1/user/demo-non-admin/
+Content-Type: application/json
+
+
 
 
 

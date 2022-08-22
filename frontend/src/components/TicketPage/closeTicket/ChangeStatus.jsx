@@ -154,9 +154,7 @@ function ChangeStatus() {
             }
 
 
-        <div className="
-              flex justify-center sm:justify-between 
-              sm:w-[80%] space-x-5">
+        <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-10 sm:space-x-5">
             <label
               className=" flex justify-start w-[20%] text-[12px]"
               htmlFor="title"
@@ -167,8 +165,8 @@ function ChangeStatus() {
             <select
               className={`pl-1 border-stone-400  border border-1 w-[60%] sm:w-[80%]
               bg-white rounded-sm shadow-sm sm:text-sm
-                focus:outline-none focus:ring-1
-                }`}
+              focus:outline-none focus:ring-1
+              }`}
               name="severity"
               onChange={handleOnChange}
               defaultValue
@@ -180,7 +178,7 @@ function ChangeStatus() {
               <option value="4">Sev-4: Individual productivity affected</option>
               <option value="5">Sev-5: productivity not immediately affected</option>
             </select>
-          </div>
+        </div>
 
 
         <div className="flex justify-center sm:justify-between  sm:w-[80%] space-x-10 sm:space-x-5">

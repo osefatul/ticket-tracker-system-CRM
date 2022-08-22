@@ -12,7 +12,7 @@ function AdminPanel() {
 return (
 <div>
 
-<div className='space-y-5 flex flex-col items-center justify-center pt-5 '>
+<div className='space-y-5 flex flex-col items-center justify-center '>
 
 
     <div className='pt-10 sm:pt-16 space-y-4 sm:space-x-4 flex flex-col sm:flex-row items-center justify-center'>

@@ -16,7 +16,7 @@ function TicketListsStatistics({fetchFunction}) {
 
 
     
-    const pendingTickets = tickets.filter((row) => row.status !== "Resolved");
+    const pendingTickets = tickets.filter((row) => row.status === "Pending");
     const totalTickets = tickets.length;
     
     const recentlyAddedTickets = tickets.filter((row) => {

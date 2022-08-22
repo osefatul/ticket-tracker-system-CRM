@@ -116,6 +116,81 @@ const getUserByEmail = async (req, res) => {
 };
 
 
+
+//--------------------------------------------------------------------
+
+
+// Get user data from database using its email - PURPOSE: Demo LOGIN
+const getDemoAdminUserByEmail = async (req, res) => {
+  const email = "Demo@gmail.com";
+  const password = "Password5%"
+  
+  // const { email, password } = req.body;
+  
+  try {
+  //Check if email exists
+  const user = await UserSchema.findOne({ email });
+  !user && res.status(404).json({ message: "User not found" });
+
+  if(!user.isVerified){
+    res.status(404).json({ message: "Please check your email for verification code..." });
+  }
+
+  //Check if passwords match
+  const validPassword = await bcrypt.compare(password, user.password);
+  !validPassword && res.status(404).json({ message: "Wrong Password" });
+
+    //Redis storing JWT authentication credentials.
+    const accessJwtToken = await createAccessJWT(email, `${user._id}`);
+    const refreshJwtToken = await createRefreshJWT(email, `${user._id}`);
+
+    return res.status(200)
+      .json({ message: "Login successfully", accessJwtToken, refreshJwtToken } );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+
+//--------------------------------------------------------------------
+
+
+// Get user data from database using its email - PURPOSE: Demo LOGIN
+const getDemoNonAdminUserByEmail = async (req, res) => {
+  const email = "DemoUser@gmail.com";
+  const password = "Password5%"
+  
+  // const { email, password } = req.body;
+  
+  try {
+  //Check if email exists
+  const user = await UserSchema.findOne({ email });
+  !user && res.status(404).json({ message: "User not found" });
+
+  if(!user.isVerified){
+    res.status(404).json({ message: "Please check your email for verification code..." });
+  }
+
+  //Check if passwords match
+  const validPassword = await bcrypt.compare(password, user.password);
+  !validPassword && res.status(404).json({ message: "Wrong Password" });
+
+    //Redis storing JWT authentication credentials.
+    const accessJwtToken = await createAccessJWT(email, `${user._id}`);
+    const refreshJwtToken = await createRefreshJWT(email, `${user._id}`);
+
+    return res.status(200)
+      .json({ message: "Login successfully", accessJwtToken, refreshJwtToken } );
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+
+
+
 //--------------------------------------------------------------------
 
 // Get user data from database using its id - PURPOSE: GET USER DATA AFTER LOGIN
@@ -400,6 +475,9 @@ module.exports = {
   getAllAssignedUsers,
   getUserDataByIdForEdit,
   EdiUserDataById,
-  deleteUser
+  deleteUser,
+  getDemoAdminUserByEmail,
+  getDemoNonAdminUserByEmail
+  
 };
 

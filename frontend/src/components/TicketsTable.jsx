@@ -63,11 +63,50 @@ function TicketsTable() {
         );
       },
     },
+    
+    {
+      field: "creatorDepartment",
+      headerName: "Assigner Department",
+      width: 180,
+      renderCell: (params) => {
+        return (
+          <Link to={`/ticket_communication/${params.row._id}`}>
+            <div>{params.row.creatorDepartment}</div>
+          </Link>
+        );
+      },
+    },
+
+    {
+      field: "assignee",
+      headerName: "Assignee",
+      width: 100,
+      renderCell: (params) => {
+        return (
+          <Link to={`/ticket_communication/${params.row._id}`}>
+            <div>{params.row.assignee}</div>
+          </Link>
+        );
+      },
+    },
+    
+    {
+      field: "assigneeDepartment",
+      headerName: "Assignee Department",
+      width: 180,
+      renderCell: (params) => {
+        return (
+          <Link to={`/ticket_communication/${params.row._id}`}>
+            <div>{params.row.department}</div>
+          </Link>
+        );
+      },
+    },
 
     {
       field: "status",
       headerName: "Status",
-      width: 200,
+      width: 150,
       renderCell: (params) => {
         return (
           <Link to={`/ticket_communication/${params.row._id}`}>

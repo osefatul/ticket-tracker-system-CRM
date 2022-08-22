@@ -3,7 +3,8 @@ import {createSlice} from "@reduxjs/toolkit"
 const initialState = {
     isLoading: false,
     isAuth: false,
-    error: ""
+    error: "",
+    demoLogin: false
 }
 
 const loginSlice = createSlice ({
@@ -12,6 +13,9 @@ const loginSlice = createSlice ({
     reducers: {
         loginPending: (state, action)=>{
             state.isLoading = true
+        },
+        DemoLoginPending: (state, action)=>{
+            state.demoLogin = true
         },
         loginSuccess: (state)=>{
             state.isLoading = false
@@ -32,6 +36,6 @@ const loginSlice = createSlice ({
 const { reducer, actions} = loginSlice
 
 
-export const  {loginPending, loginSuccess, loginFail, EraseLoginError} = actions
+export const  {loginPending, loginSuccess, loginFail, EraseLoginError, DemoLoginPending} = actions
 export default reducer;
 

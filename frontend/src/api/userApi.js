@@ -2,32 +2,36 @@ import axios from "axios"
 import UserVerification from "../pages/UserVerification";
 
 // Before hosting
-// const rootUrl = "http://localhost:5000/v1/";
-// const loginUrl = rootUrl + "user/login";
-// const userProfileUrl = rootUrl + "user";
-// const allUsersProfileUrl = rootUrl + "user/users";
-// const logoutUrl = rootUrl + "user/logout";
-// const newAccessJWT = rootUrl + "tokens/new-access-jwt";
-// const UserVerificationUrl = userProfileUrl + "/verify";
-// const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
-// const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
-// const deleteUserUrl = userProfileUrl + "/delete-user/";
-// const fetchUsersDept = userProfileUrl + "/assigned-user/"
-
-
-
-// After Hosting
-const rootUrl = "https://ticketing-crm.herokuapp.com/v1/";
+const rootUrl = "http://localhost:5000/v1/";
 const loginUrl = rootUrl + "user/login";
 const userProfileUrl = rootUrl + "user";
 const allUsersProfileUrl = rootUrl + "user/users";
 const logoutUrl = rootUrl + "user/logout";
 const newAccessJWT = rootUrl + "tokens/new-access-jwt";
 const UserVerificationUrl = userProfileUrl + "/verify";
-const fetchUsersDept = userProfileUrl + "/assigned-user/"
 const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
 const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
 const deleteUserUrl = userProfileUrl + "/delete-user/";
+const fetchUsersDept = userProfileUrl + "/assigned-user/"
+
+
+
+// After Hosting
+// const rootUrl = "https://ticketing-crm.herokuapp.com/v1/";
+// const loginUrl = rootUrl + "user/login";
+// const userProfileUrl = rootUrl + "user";
+// const allUsersProfileUrl = rootUrl + "user/users";
+// const logoutUrl = rootUrl + "user/logout";
+// const newAccessJWT = rootUrl + "tokens/new-access-jwt";
+// const UserVerificationUrl = userProfileUrl + "/verify";
+// const fetchUsersDept = userProfileUrl + "/assigned-user/"
+// const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
+// const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
+// const deleteUserUrl = userProfileUrl + "/delete-user/";
+
+const DemoAdminUrl = "http://localhost:5000/v1/user/demo-admin/";
+const DemoUserUrl = "http://localhost:5000/v1/user/demo-admin/"
+
 
 
 
@@ -95,6 +99,64 @@ export const userLogin = async (formData) =>{
         return error
     }
 }
+
+
+
+
+
+//-----------------------------------------------------------------------------
+
+//Demo Admin user
+export const DemoAdminLogin = async () =>{
+    try {
+    const res = await axios.post(DemoAdminUrl,);
+
+    
+    // console.log(res)
+    if(res.status === 200){
+        sessionStorage.setItem("accessJWT", res.data.accessJwtToken.JwtAccess);
+
+        localStorage.setItem("crmSite", JSON.stringify({refreshJWT:res.data.refreshJwtToken.NewRefreshToken}))
+        return res.data;
+        }
+    
+    // if there is an error we will send the whole response.
+    return res.data
+    
+    }catch(error){
+        console.log(error);
+        return error
+    }
+}
+
+
+
+//-----------------------------------------------------------------------------
+
+//Demo Non-Admin user
+export const DemoNonAdminLogin = async () =>{
+    try {
+    const res = await axios.post(DemoUserUrl,);
+    
+    // console.log(res)
+    if(res.status === 200){
+        sessionStorage.setItem("accessJWT", res.data.accessJwtToken.JwtAccess);
+
+        localStorage.setItem("crmSite", JSON.stringify({refreshJWT:res.data.refreshJwtToken.NewRefreshToken}))
+        return res.data;
+        }
+    
+    // if there is an error we will send the whole response.
+    return res
+    
+    }catch(error){
+        console.log(error);
+        return error
+    }
+}
+
+
+
 
 //-----------------------------------------------------------------------------
 
