@@ -11,6 +11,7 @@ import { fetchTicketsAssignedToADepartment, filterSearchTicket} from "../../feat
 import { loginSuccess } from "../../features/authSlice/loginSlice";
 import { fetchNewAccessJWT } from "../../api/userApi";
 import TicketListsStatistics from "../../components/TicketListsStatistics";
+import { resetTicketsList } from "../../features/ticketSlice/ticketSlice";
 
 
 function DepTicketList() {
@@ -19,6 +20,8 @@ function DepTicketList() {
 
     //fetch all tickets once when the page is loaded.
     useEffect(() => {
+    dispatch(resetTicketsList());
+
     const updateAccessJWT = async () => {
     const result = await fetchNewAccessJWT();
     result && dispatch(loginSuccess());

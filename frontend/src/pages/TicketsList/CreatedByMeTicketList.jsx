@@ -12,6 +12,7 @@ import { fetchTicketsCreatedByAUser, filterSearchTicket} from "../../features/ti
 import { loginSuccess } from "../../features/authSlice/loginSlice";
 import { fetchNewAccessJWT } from "../../api/userApi";
 import TicketListsStatistics from "../../components/TicketListsStatistics";
+import { resetTicketsList } from "../../features/ticketSlice/ticketSlice";
 
 
 function CreatedByMeTicketList() {
@@ -21,6 +22,8 @@ function CreatedByMeTicketList() {
 
     //fetch all tickets once when the page is loaded.
     useEffect(() => {
+    dispatch(resetTicketsList());
+
     const updateAccessJWT = async () => {
     const result = await fetchNewAccessJWT();
     result && dispatch(loginSuccess());

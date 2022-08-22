@@ -24,6 +24,7 @@ import {
     getAllTicketsForAdmin,
     getAllTicketsToaDepartment,
     getAllTicketsToaSpecificUser,
+    getResolvedTickets,
     getSingleTicket,
     reAssignTicket,
     updateReplyTicket,
@@ -62,7 +63,7 @@ export const fetchAllTicketsAssignedToAUser = () => async (dispatch)=>{
 }
 
 
-//GET TICKETS ASSIGNED TO A USER
+//GET TICKETS ASSIGNED TO A DEPARTMENT
 export const fetchTicketsAssignedToADepartment = () => async (dispatch)=>{
     dispatch(fetchTicketLoading());
     try {
@@ -76,12 +77,26 @@ export const fetchTicketsAssignedToADepartment = () => async (dispatch)=>{
 
 
 
-//GET TICKETS ASSIGNED TO A USER
+//GET TICKETS CREATED TO A USER
 export const fetchTicketsCreatedByAUser = () => async (dispatch)=>{
     dispatch(fetchTicketLoading());
     try {
         const result = await getAllTicketsCreatedByAUser();
         result.data.result.length && dispatch(fetchTicketSuccess(result.data.result));
+    
+    }catch(error) {
+        dispatch(fetchTicketFail(error.message));
+    }
+}
+
+
+
+//GET RESOLVED TICKETS
+export const fetchResolvedTickets = () => async (dispatch)=>{
+    dispatch(fetchTicketLoading());
+    try {
+        const result = await getResolvedTickets();
+        return result.data?.result?.length && dispatch(fetchTicketSuccess(result.data.result));
     
     }catch(error) {
         dispatch(fetchTicketFail(error.message));

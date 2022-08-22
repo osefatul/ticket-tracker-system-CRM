@@ -17,7 +17,8 @@ const closeTicketUrl = ticketUlr + "status-update/";
 const reassignTicketUrl = ticketUlr + "assign-ticket/"
 const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
 const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
-const getAllTicketsToaSpecificUserUrl = ticketUlr 
+const getAllTicketsToaSpecificUserUrl = ticketUlr;
+const getResolvedTicketsUrl = ticketUlr + "resolved-tickets"
 const deleteTicketUrl = ticketUlr;
 
 
@@ -104,6 +105,25 @@ export const getAllTicketsCreatedByAUser = async ()=>{
             return e;
         }
 }
+
+
+
+
+// Get all tickets created by a user,
+export const getResolvedTickets = async ()=>{
+    try {
+        const result = await axios.get(getResolvedTicketsUrl ,
+            {
+                headers: {
+                    Authorization: sessionStorage.getItem("accessJWT"),
+                    },
+            })
+            return result;
+        }catch(e){
+            return e;
+        }
+}
+
 
 
 

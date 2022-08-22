@@ -48,7 +48,10 @@ const ticketListSlice = createSlice({
         state.searchTicketList = state.adminTickets.filter((row) => {
         if (!payload) return row;
 
-        return (row.title.toLowerCase().includes(payload.toLowerCase()) || row.department.toLowerCase().includes(payload.toLowerCase()));
+        return (row.title.toLowerCase().includes(payload.toLowerCase()) 
+        || row.department.toLowerCase().includes(payload.toLowerCase())
+        || row.status.toLowerCase().includes(payload.toLowerCase())
+        );
         });
     },
     fetchSingleTicketLoading: (state) => {
@@ -92,6 +95,13 @@ const ticketListSlice = createSlice({
         state.replyTicketError = "";
         state.replyMsg = "";
     },
+    resetTicketsList: (state) => {
+        state.isLoading = false;
+        state.replyTicketError = "";
+        state.replyMsg = "";
+        state.tickets= [];
+        state.searchTicketList = []
+    },
     },
 });
 
@@ -116,6 +126,7 @@ export const {
     searchTickets,
     searchAdminTickets,
     resetResponseMsg,
+    resetTicketsList
 } = actions;
 
 

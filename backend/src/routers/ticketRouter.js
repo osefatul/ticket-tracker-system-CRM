@@ -12,7 +12,8 @@ const {
   getAllTicketsOfAllDepartments, 
   reAssignTicket,
   getTicketsCreator,
-  getTicketsForDepartment
+  getTicketsForDepartment,
+  getResolvedTicketsForDepartment
 } = require("../models/ticket/Ticket.model")
 
 const {
