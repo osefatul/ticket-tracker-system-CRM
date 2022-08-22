@@ -45,7 +45,7 @@ function DepTicketList() {
                 div className="flex flex-col md:flex-row items-center justify-center md:justify-between space-y-2 md:space-y-0 px-0 md:px-6 ">
 
                 <div className="text-slate-800 font-bold border-b border-amber-600 shadow-lg text-[16px] sm:text-[21px]">
-                    Tickets Assigned to Your Dept
+                    Tickets assigned to your department
                 </div>
         
                 <div className="flex flex-col pb-2 pt-2">

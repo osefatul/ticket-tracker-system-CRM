@@ -27,7 +27,7 @@ function Sidebar() {
     return (
     <div>
 
-
+            {/* ICONS */}
         <div className=" sm:hidden h-[40px] relative flex items-center justify-center ]">
             {!toggle ? (
             <HiMenuAlt4
@@ -37,7 +37,7 @@ function Sidebar() {
             ) : (
             <div className="container z-50">
                 <HiX
-                className="hoverText ml-20 w-[20px] h-[20px] cursor-pointer text-slate-700"
+                className="hoverText ml-12 w-[20px] h-[20px] cursor-pointer text-slate-700"
                 onClick={() => setToggle(false)}
                 />
             </div>

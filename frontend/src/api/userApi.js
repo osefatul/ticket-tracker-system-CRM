@@ -2,35 +2,35 @@ import axios from "axios"
 import UserVerification from "../pages/UserVerification";
 
 // Before hosting
-const rootUrl = "http://localhost:5000/v1/";
-const loginUrl = rootUrl + "user/login";
-const userProfileUrl = rootUrl + "user";
-const allUsersProfileUrl = rootUrl + "user/users";
-const logoutUrl = rootUrl + "user/logout";
-const newAccessJWT = rootUrl + "tokens/new-access-jwt";
-const UserVerificationUrl = userProfileUrl + "/verify";
-const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
-const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
-const deleteUserUrl = userProfileUrl + "/delete-user/";
-const fetchUsersDept = userProfileUrl + "/assigned-user/"
-
-
-
-// After Hosting
-// const rootUrl = "https://ticketing-crm.herokuapp.com/v1/";
+// const rootUrl = "http://localhost:5000/v1/";
 // const loginUrl = rootUrl + "user/login";
 // const userProfileUrl = rootUrl + "user";
 // const allUsersProfileUrl = rootUrl + "user/users";
 // const logoutUrl = rootUrl + "user/logout";
 // const newAccessJWT = rootUrl + "tokens/new-access-jwt";
 // const UserVerificationUrl = userProfileUrl + "/verify";
-// const fetchUsersDept = userProfileUrl + "/assigned-user/"
 // const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
 // const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
 // const deleteUserUrl = userProfileUrl + "/delete-user/";
+// const fetchUsersDept = userProfileUrl + "/assigned-user/"
+// const DemoAdminUrl = "http://localhost:5000/v1/user/demo-admin/";
+// const DemoUserUrl = "http://localhost:5000/v1/user/demo-non-admin/"
 
-const DemoAdminUrl = "http://localhost:5000/v1/user/demo-admin/";
-const DemoUserUrl = "http://localhost:5000/v1/user/demo-non-admin/"
+
+// After Hosting
+const rootUrl = "https://ticketing-crm.herokuapp.com/v1/";
+const loginUrl = rootUrl + "user/login";
+const userProfileUrl = rootUrl + "user";
+const allUsersProfileUrl = rootUrl + "user/users";
+const logoutUrl = rootUrl + "user/logout";
+const newAccessJWT = rootUrl + "tokens/new-access-jwt";
+const UserVerificationUrl = userProfileUrl + "/verify";
+const fetchUsersDept = userProfileUrl + "/assigned-user/"
+const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
+const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
+const deleteUserUrl = userProfileUrl + "/delete-user/";
+const DemoAdminUrl = "https://ticketing-crm.herokuapp.com/v1/user/demo-admin/";
+const DemoUserUrl = "https://ticketing-crm.herokuapp.com/v1/user/demo-non-admin/"
 
 
 

@@ -15,9 +15,9 @@ function AdminTicketsTable() {
 
     const handleDelete = async (id) =>{
         const deleteUser = await (searchTicketList.filter((item)=> item._id !==id)) //wait and delete once it is done then
-        dispatch(deleteTicket(id));//delete user from the db
-        dispatch(fetchAllTicketsForAdmin())
-        setData(deleteUser)//Set data with the rest of lists
+        await dispatch(deleteTicket(id));//delete user from the db
+        await dispatch(fetchAllTicketsForAdmin())
+        await setData(deleteUser)//Set data with the rest of lists
     }
 
     useEffect(()=>{

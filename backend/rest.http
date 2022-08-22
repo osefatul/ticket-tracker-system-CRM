@@ -156,7 +156,7 @@ Content-Type: application/json
 
 ###Get all the tickets Assigned to a user Department
 GET http://localhost:5000/v1/ticket/department-tickets
-Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9taWRAYW1hem9uLmNvbSIsImlhdCI6MTY2MDU0MTM0NCwiZXhwIjoxNjYwNTQzMTQ0fQ.7rVG141vtGYNFAmrqbAX928h2w5yPIOP0SKsooyOe8o
+Authorization:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InNlZmF1bGxhaG9tYXIxQGdtYWlsLmNvbSIsImlhdCI6MTY2MTE1NDAxMSwiZXhwIjoxNjYxMjQwNDExfQ.wmaK0FQ-0iUSu8QmE764ECc7N1UkxjLJsBSozEK26mE
 Content-Type: application/json
 
 

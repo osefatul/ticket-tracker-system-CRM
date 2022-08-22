@@ -34,17 +34,26 @@ function Header() {
       <div>
       <Link to="/">
         <motion.div
-          className="font-bold text-[15px] hover:text-[]"
-          whileHover={{ scale: 1.1 }}
+          className=" text-[12px] sm:text-[15px] hover:text-amber-500"
+          whileHover={{ scale: 1.07 }}
           whileTap={{ scale: 0.9 }}
-          >Tickets-CRM</motion.div>
+          >Home</motion.div>
+      </Link>
+      </div>
+
+      {/* fixed left-40 sm:left-[45%] */}
+      <div className="flex items-center justify-center pl-2 sm:pl-40 ">
+      <Link to="#">
+        <motion.div
+          className="font-bold text-[12px] sm:text-[15px] border-b border-amber-600 shadow-lg"
+          >Ticketing System</motion.div>
       </Link>
       </div>
 
 
       {/* TopBar list */}
       <div className="">
-        <ul className="hidden sm:flex items-center justify-center text-white space-x-3 text-[12px] px-10 ">
+        <ul className="hidden sm:flex items-center justify-center text-white space-x-3 text-[12px]  ">
 
 
           {/*For Admins  */}
@@ -56,7 +65,7 @@ function Header() {
             >
               <div className=" hover:border" />
               <Link to={`/${user.isAdmin? AdminLinkList[index]: commonUserLinkList[index] }`}>
-                <div className="flex items-center justify-center"  
+                <div className="flex items-center justify-center  hover:text-amber-500"  
                 onClick = {
                   item ==="Logout"? clickOnItem : item === "Settings"? dispatch(getTabsSuccess(item)) :() => setToggle(false) }>
                     { item === "new_ticket"? "New Ticket" :  item }
@@ -74,7 +83,7 @@ function Header() {
             >
               <div className=" hover:border" />
               <Link to={`/${user.isAdmin? AdminLinkList[index]: commonUserLinkList[index] }`}>
-                <div className="flex items-center justify-center"  
+                <div className="flex items-center justify-center  hover:text-amber-500"  
                 onClick = {
                   item ==="Logout"? clickOnItem :() => setToggle(false) }>
                     { item === "new_ticket"? "New Ticket" :  item }
@@ -90,7 +99,7 @@ function Header() {
         <div className=" sm:hidden h-[40px] relative flex items-center justify-center ]">
           {!toggle ? (
             <HiMenuAlt4
-              className=" text-[#dde1e7] hover:text-[#519f8d] cursor-pointer mr-8 h-8 w-8"
+              className=" text-[#dde1e7] hover:text-[#519f8d] cursor-pointer mr-2 sm:mr-8 h-8 w-8"
               onClick={() => setToggle(!toggle)}
             />
           ) : (
@@ -124,7 +133,7 @@ function Header() {
                     key={item}
                     whileHover={{ scale: 1.07 }}
                     whileTap={{ scale: 0.9 }}
-                    className="hoverText w-full flex items-start justify-center"
+                    className="hoverText w-full flex items-start justify-center  hover:text-amber-500"
                     onClick = {item ==="Logout"? clickOnItem : () => setToggle(false) }
                   >
                     { item === "new_ticket"? "New Ticket" :  item }
@@ -139,7 +148,7 @@ function Header() {
                   key={item}
                   whileHover={{ scale: 1.07 }}
                   whileTap={{ scale: 0.9 }}
-                  className="hoverText w-full flex items-start justify-center"
+                  className="hoverText w-full flex items-start justify-center  hover:text-amber-500"
                   onClick = {item ==="Logout"? clickOnItem : () => setToggle(false) }
                 >
                   { item === "new_ticket"? "New Ticket" :  item }

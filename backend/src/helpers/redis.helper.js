@@ -1,10 +1,9 @@
 const redis = require("redis");
 const client = redis.createClient({url: process.env.REDIS_URL, 
-//   socket: {
-//   tls: true,
-//   rejectUnauthorized: false
-// }
-
+  socket: {
+  tls: true,
+  rejectUnauthorized: false
+}
 });
 
 (async () => {
@@ -30,7 +29,7 @@ const client = redis.createClient({url: process.env.REDIS_URL,
 //       });
 //     } catch (error) {
 //       console.log(error)
-//       return(error);
+//       return(error);s
 //     }
 // };
 

@@ -192,7 +192,6 @@ function Auth() {
   const DemoAdmin = async ()=> {
 
     dispatch(DemoAdminLoginPending())
-
     const isAuth = await DemoAdminLogin()
     // if we receive unsuccessful response then
     const AuthResponse = isAuth?.message

@@ -24,6 +24,8 @@ const loginSlice = createSlice ({
         },
         loginSuccess: (state)=>{
             state.isLoading = false
+            state.demoAdminLogin= false
+            state.demoUserLogin= false
             state.isAuth = true
             state.error = ""
         },
