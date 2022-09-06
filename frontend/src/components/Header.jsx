@@ -41,7 +41,7 @@ function Header() {
       </Link>
       </div>
 
-      {/* fixed left-40 sm:left-[45%] */}
+
       <div className="flex items-center justify-center pl-2 sm:pl-40 ">
       <Link to="#">
         <motion.div
@@ -97,6 +97,7 @@ function Header() {
 
         {/* SIDE BAR ICON & X  */}
         <div className=" sm:hidden h-[40px] relative flex items-center justify-center ]">
+          
           {!toggle ? (
             <HiMenuAlt4
               className=" text-[#dde1e7] hover:text-[#519f8d] cursor-pointer mr-2 sm:mr-8 h-8 w-8"

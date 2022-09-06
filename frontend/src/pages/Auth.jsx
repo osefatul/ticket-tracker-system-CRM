@@ -26,7 +26,7 @@ function Auth() {
 	const navigate = useNavigate ();
   const location = useLocation ();
 
-  //When we want to access a page, but is restricted by login, we will be redirected to login page, once we loge in then we will be redirected back to where we wanted to go.
+  //When we want to access a page, but is restricted by login, so we will be directed to login page, once we log in then we will be redirected back to where we wanted to go.
   const from = location.state?.from?.pathname || "/"
 
   //Redux states
@@ -272,6 +272,7 @@ function Auth() {
           >
             {resetPassword ? "Reset Password" : isSignup ? "Registration" : "Login"}
           </p>
+          
           {MessageAddedAlert && <div className="flex justify-center items-center text-orange-700">
             {error}
           </div>

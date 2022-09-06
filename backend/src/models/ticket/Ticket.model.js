@@ -140,7 +140,7 @@ const getTicketsCreator= async clientId =>{
         const {name, department} = findUser
 
         const findTickets = await TicketSchema.find({
-            creator: name
+        $and: [{creator: name}, {status: {$ne:"Resolved"}}]
         })
 
         return findTickets;

@@ -192,7 +192,7 @@ export const fetchNewAccessJWT = async () => {
 
 //-----------------------------------------------------------------------------
 
-//Fetch single user -a logged in user data or profile
+//Fetch single user:  logged in user data or profile
 export const fetchUser = async () =>{
     try {
         const accessJWT = sessionStorage.getItem('accessJWT');
