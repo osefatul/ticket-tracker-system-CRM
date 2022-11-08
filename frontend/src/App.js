@@ -27,7 +27,7 @@ function App() {
       <Routes>
 
         <Route path="auth" element={<Auth />} />
-        <Route path="verification/:tid/:email" element={<UserVerification />} />
+        <Route path="verification/:email" element={<UserVerification />} />
         <Route path="update-password" element={<ResetPassword />} />
 
         

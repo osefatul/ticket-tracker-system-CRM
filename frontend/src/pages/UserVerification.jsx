@@ -13,8 +13,8 @@ const initialResponse = {
 
 function UserVerification() {
 
-    const { tid, email } = useParams();
-    const dt = { tid, email };
+    const { email } = useParams();
+    const dt = { email };
 
     const [response, setResponse] = useState(initialResponse);
 

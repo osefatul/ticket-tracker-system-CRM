@@ -12,8 +12,8 @@ const generateAuthToken = require("../../helpers/generateAuthToken");
 
 
 //--------------------------------------------------------------------
-// const verificationURL = "https://advanced-ticketing-system.netlify.app/verification/";
-const verificationURL = "http://localhost:3000/verification/";
+const verificationURL = "https://advanced-ticketing-system.netlify.app/verification/";
+// const verificationURL = "http://localhost:3000/verification/";
 
 //--------------------------------------------------------------------
 
@@ -74,7 +74,7 @@ const createUser = async (req, res) => {
     emailProcessor({
 			email,
 			type: "new-user-confirmation-required",
-			verificationLink: verificationURL + "/" + email,
+			verificationLink: verificationURL + email,
 		});
     
 
