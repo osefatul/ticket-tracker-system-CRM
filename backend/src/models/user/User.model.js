@@ -8,10 +8,13 @@ const {
   createAccessJWT,
   createRefreshJWT,
 } = require("../../helpers/jwt.helper");
+const generateAuthToken = require("../../helpers/generateAuthToken");
 
 
 //--------------------------------------------------------------------
-const verificationURL = "https://advanced-ticketing-system.netlify.app/verification/";
+// const verificationURL = "https://advanced-ticketing-system.netlify.app/verification/";
+const verificationURL = "http://localhost:3000/verification/";
+
 //--------------------------------------------------------------------
 
 //REGISTRATION
@@ -68,10 +71,10 @@ const createUser = async (req, res) => {
     const result = await newUser.save();
 
     //Sending email to verify user.
-    await emailProcessor({
+    emailProcessor({
 			email,
 			type: "new-user-confirmation-required",
-			verificationLink: verificationURL + result._id + "/" + email,
+			verificationLink: verificationURL + "/" + email,
 		});
     
 
@@ -85,11 +88,10 @@ const createUser = async (req, res) => {
 
 //--------------------------------------------------------------------
 
-//
 // Get user data from database using its email - PURPOSE: LOGIN
 const getUserByEmail = async (req, res) => {
   
-  const { email, password } = req.body;
+  const { email } = req.body;
   
   try {
   //Check if email exists
@@ -97,19 +99,18 @@ const getUserByEmail = async (req, res) => {
   !user && res.status(404).json({ message: "User not found" });
 
   if(!user.isVerified){
-    res.status(404).json({ message: "Please check your email for verification code..." });
+    return res.status(404).json({ message: "Please check your email for verification code..." });
   }
 
   //Check if passwords match
-  const validPassword = await bcrypt.compare(password, user.password);
+  const validPassword = await bcrypt.compare(req.body.password, user.password);
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
-    //Redis storing JWT authentication credentials.
-    const accessJwtToken = await createAccessJWT(email, `${user._id}`);
-    const refreshJwtToken = await createRefreshJWT(email, `${user._id}`);
+  const token = generateAuthToken(user)
+  const { password, ...otherDetails } = user._doc;
 
     return res.status(200)
-      .json({ message: "Login successfully", accessJwtToken, refreshJwtToken } );
+      .json({ message: "Login successfully",  user: { ...otherDetails }, accessJwtToken: token} );
   } catch (error) {
     console.log(error);
   }
@@ -123,9 +124,8 @@ const getUserByEmail = async (req, res) => {
 // Get user data from database using its email - PURPOSE: Demo LOGIN
 const getDemoAdminUserByEmail = async (req, res) => {
   const email = "Demo@gmail.com";
-  const password = "Password5%"
+  const bodyPassword = "Password5%"
   
-  // const { email, password } = req.body;
   
   try {
   //Check if email exists
@@ -137,15 +137,14 @@ const getDemoAdminUserByEmail = async (req, res) => {
   }
 
   //Check if passwords match
-  const validPassword = await bcrypt.compare(password, user.password);
+  const validPassword = await bcrypt.compare(bodyPassword, user.password);
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
-    //Redis storing JWT authentication credentials.
-    const accessJwtToken = await createAccessJWT(email, `${user._id}`);
-    const refreshJwtToken = await createRefreshJWT(email, `${user._id}`);
+  const token = generateAuthToken(user)
+  const { password, ...otherDetails } = user._doc;
 
     return res.status(200)
-      .json({ message: "Login successfully", accessJwtToken, refreshJwtToken } );
+      .json({ message: "Login successfully",  user: { ...otherDetails }, accessJwtToken: token} );
   } catch (error) {
     console.log(error);
   }
@@ -160,9 +159,8 @@ const getDemoAdminUserByEmail = async (req, res) => {
 // Get user data from database using its email - PURPOSE: Demo LOGIN
 const getDemoNonAdminUserByEmail = async (req, res) => {
   const email = "DemoUser@gmail.com";
-  const password = "Password5%"
+  const bodyPassword = "Password5%"
   
-  // const { email, password } = req.body;
   
   try {
   //Check if email exists
@@ -174,15 +172,14 @@ const getDemoNonAdminUserByEmail = async (req, res) => {
   }
 
   //Check if passwords match
-  const validPassword = await bcrypt.compare(password, user.password);
+  const validPassword = await bcrypt.compare(bodyPassword, user.password);
   !validPassword && res.status(404).json({ message: "Wrong Password" });
 
-    //Redis storing JWT authentication credentials.
-    const accessJwtToken = await createAccessJWT(email, `${user._id}`);
-    const refreshJwtToken = await createRefreshJWT(email, `${user._id}`);
+    const token = generateAuthToken(user)
+  const { password, ...otherDetails } = user._doc;
 
     return res.status(200)
-      .json({ message: "Login successfully", accessJwtToken, refreshJwtToken } );
+      .json({ message: "Login successfully",  user: { ...otherDetails }, accessJwtToken: token} );
   } catch (error) {
     console.log(error);
   }
@@ -398,22 +395,22 @@ const updatePassword = async (res, email, newHashedPassword) => {
 const verifyUser = async ( email, res) => {
     try {
 
-        //first find ticket
-        const findTicket =  await UserSchema.findOne({
+        //first find User
+        const findUser =  await UserSchema.findOne({
           $and: [{email:email}, {isVerified: false}],
       });
 
 
-      const result =  await findTicket.update(
+      const result =  await findUser.update(
         {
           $set: { isVerified: true },
         },
         { new: true }
       )
 
-      console.log(findTicket)
+      console.log(findUser)
       
-      if(findTicket && findTicket._id){
+      if(findUser && findUser._id){
         return res.json({
           status : "success",
           message: "Your account has been verified, you may sign in now"

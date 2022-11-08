@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { HiMenuAlt4, HiX } from "react-icons/hi";
 import { Link, useNavigate } from "react-router-dom";
 import { userLogout } from "../api/userApi";
@@ -7,8 +7,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTabsSuccess } from "../features/selectedHomeTabs/tabsSlice";
 
 function Header() {
-  const {user} =useSelector(state => state.user)
+
   const dispatch = useDispatch();
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
+  useEffect(()=>{
+    !user._id && setUser(JSON.parse(localStorage.getItem('user')));
+  },[])
 
 
   const [toggle, setToggle] = useState(false);
@@ -18,15 +23,16 @@ function Header() {
 
 
   const clickOnItem = ()=>{
-    sessionStorage.removeItem("accessJWT");
-    localStorage.removeItem("crmSite");
+    localStorage.removeItem("accessJWT");
+    localStorage.removeItem("user");
+    
     userLogout();
     setToggle(false)
     navigate("/auth")
   }
 
   return (
-    <div className=" bg-slate-900 flex items-center justify-between px-6 h-[50px] fixed w-full top-0 z-50">
+    <div className="bg-slate-900 flex items-center justify-between px-6 h-[50px] fixed w-full top-0 z-50">
       {/* TOP BAR */}
       
 

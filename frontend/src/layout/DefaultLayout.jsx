@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { fetchNewAccessJWT } from "../api/userApi";
@@ -9,43 +9,28 @@ import { getUserProfile } from "../features/SpecificUerSlice/userAction";
 export const DefaultLayout = ({ children }) => {
 
 
-  const dispatch = useDispatch();
-  const {isAuth} = useSelector(state=> state.login)
-  const {user} = useSelector(state=> state.user)
   const location = useLocation()
+  const dispatch = useDispatch();
+  
+  const {isAuth} = useSelector(state=> state.login)
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const [userToken, setUserToken] = useState(localStorage.getItem('accessJWT'));
+  
+  useEffect(() => {
+      if(user && userToken) dispatch(loginSuccess(user));
 
-  useEffect(()=>{
-
-  const updateAccessJWT = async () => {
-    const result =  await fetchNewAccessJWT();
-    result && dispatch(loginSuccess());
-  };
-
-  if(!user._id) {
-    dispatch(getUserProfile());
-    // dispatch(updateAccessJWT()); 
-  }
-
-
-  !sessionStorage.getItem("accessJWT") &&
-    localStorage.getItem("crmSite") &&
-    updateAccessJWT();
-  !isAuth && sessionStorage.getItem("accessJWT") && dispatch(loginSuccess());
-
-}, [dispatch, isAuth, user._id]);
+  },[user, userToken])
 
 
   return (
-    <div className="default-layout">
-    
-      {isAuth? (
-      // h-main flex items-center justify-center mx-auto w-[80%]
-      <main className="">
-        {/* Outlet means the child of DefaultLayout Route */}
-        <Outlet />
-        {/* state: able to go back where we come from to this page. */}
-      </main>): <Navigate to="auth" state={{from: location}} replace/>
+    <div>
+    {user? (
+        <main>
+            <Outlet/>
+        </main>
+    ):
+    <Navigate to="auth" state={{from:location}} replace/>
     }
-    </div>
+</div>
   );
 };

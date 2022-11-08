@@ -182,9 +182,7 @@ router.get('/user_details/:id', userAuthorization,  async (req, res) => {
 })
 
 
-
 //-------------------------------------------------------
-
 
 
 //GET A SPECIFIC TICKET FOR A SPECIFIC USER
@@ -237,9 +235,6 @@ router.post ("/reset-password", resetPasswordReqValidation, async (req, res)=> {
 
 
 //-----------------------------------------------------------------------------
-
-
-
 
 
 //B: UPDATE RESET PASSWORD
@@ -316,7 +311,7 @@ router.delete("/logout", userAuthorization, async (req, res) => {
   const id = req.userId;
 
   //delete accessJWT from redis database
-  authorization && client.del(authorization);
+  // authorization && client.del(authorization);
 
   //delete refreshJWT from mongoDB
   const result = await storeUserRefreshJWT(id, "");

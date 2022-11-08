@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import UserEdit from '../../../pages/UserEdit';
 import { VscAccount, VscCalendar, VscDeviceMobile, VscMail } from "react-icons/vsc";
@@ -11,7 +11,8 @@ import { getSelectedUserRefresh } from '../../../features/SpecificUerSlice/userS
 
 function Settings() {
 
-    const {user} = useSelector(state => state.user)
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
     const dispatch = useDispatch();
 
 

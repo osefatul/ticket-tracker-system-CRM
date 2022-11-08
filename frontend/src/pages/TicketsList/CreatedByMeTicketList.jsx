@@ -20,18 +20,20 @@ function CreatedByMeTicketList() {
 
 
     const dispatch = useDispatch();
-  const { tickets } = useSelector((state) => state.tickets);
+    const { tickets } = useSelector((state) => state.tickets);
 
 
     //fetch all tickets once when the page is loaded.
     useEffect(() => {
     dispatch(resetTicketsList());
 
-    const updateAccessJWT = async () => {
-    const result = await fetchNewAccessJWT();
-    result && dispatch(loginSuccess());
-    }
-    updateAccessJWT && dispatch (fetchTicketsCreatedByAUser())
+    // const updateAccessJWT = async () => {
+    // const result = await fetchNewAccessJWT();
+    // result && dispatch(loginSuccess());
+    // }
+    // updateAccessJWT && 
+    
+    dispatch (fetchTicketsCreatedByAUser())
     }, [dispatch]);
 
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header'
 import { motion } from "framer-motion"
@@ -8,7 +8,12 @@ import { useSelector } from 'react-redux'
 
 function DashboardUpdated() {
 
-  const {user} = useSelector(state => state.user)
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
+  useEffect(()=>{
+    !user._id && setUser(JSON.parse(localStorage.getItem('user')));
+  },[])
+
 
   return (
     <div>
@@ -76,7 +81,7 @@ function DashboardUpdated() {
                 <img className='w-[44px] h-[42px] sm:w-20 sm:h-20 bg-slate-700' src="https://cdn4.iconfinder.com/data/icons/social-media-1-1/66/54-512.png" alt="" />
                 
                 <p className='mt-1 text-slate-200 text-[12px] sm:text-[14px]'>
-                Tickets created by me
+                Tickets created by you
                 </p>
             </motion.div>
             </Link>

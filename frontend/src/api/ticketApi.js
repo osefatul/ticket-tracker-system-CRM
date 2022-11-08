@@ -1,25 +1,27 @@
 import axios from "axios";
 
 // Before hosting
-// const rootUrl = "http://localhost:5000/v1";
-// const ticketUlr = rootUrl + "/ticket/"
-// const closeTicketUrl = ticketUlr + "status-update/";
-// const reassignTicketUrl = ticketUlr + "assign-ticket/"
-// const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
-// const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
-// const getAllTicketsToaSpecificUserUrl = ticketUlr;
-// const deleteTicketUrl = ticketUlr;
-
-
-const rootUrl = "https://ticketing-crm.herokuapp.com/v1";
+const rootUrl = "http://localhost:5000/v1";
 const ticketUlr = rootUrl + "/ticket/"
 const closeTicketUrl = ticketUlr + "status-update/";
 const reassignTicketUrl = ticketUlr + "assign-ticket/"
 const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
 const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
 const getAllTicketsToaSpecificUserUrl = ticketUlr;
-const getResolvedTicketsUrl = ticketUlr + "resolved-tickets"
 const deleteTicketUrl = ticketUlr;
+const getResolvedTicketsUrl = ticketUlr + "resolved-tickets"
+
+
+
+// const rootUrl = "https://ticketing-crm.herokuapp.com/v1";
+// const ticketUlr = rootUrl + "/ticket/"
+// const closeTicketUrl = ticketUlr + "status-update/";
+// const reassignTicketUrl = ticketUlr + "assign-ticket/"
+// const createdByAUserTicketUrl = ticketUlr + "tickets-creator/";
+// const assignedToADeptTicketsUrl = ticketUlr + "department-tickets/";
+// const getAllTicketsToaSpecificUserUrl = ticketUlr;
+// const getResolvedTicketsUrl = ticketUlr + "resolved-tickets"
+// const deleteTicketUrl = ticketUlr;
 
 
 
@@ -30,7 +32,7 @@ export const createNewTicket  = async (formData)=>{
     try{
         const result =await axios.post(ticketUlr, formData, {
             headers: {
-            Authorization: sessionStorage.getItem("accessJWT"),
+            Authorization: localStorage.getItem("accessJWT"),
             },
         });
         console.log("ticket post", result)
@@ -46,7 +48,7 @@ export const getAllTicketsForAdmin = async ()=>{
     try{
         const result = await axios.get(ticketUlr + "tickets" , {
             headers: {
-                Authorization: sessionStorage.getItem("accessJWT"),
+                Authorization: localStorage.getItem("accessJWT"),
                 },
         })
         return result;
@@ -63,7 +65,7 @@ export const getAllTicketsToaSpecificUser = async ()=>{
         // const result = await axios.get("http://localhost:5000/v1/ticket", {
         const result = await axios.get(getAllTicketsToaSpecificUserUrl, {
             headers: {
-                Authorization: sessionStorage.getItem("accessJWT"),
+                Authorization: localStorage.getItem("accessJWT"),
                 },
         })
         return result;
@@ -79,7 +81,7 @@ export const getAllTicketsToaDepartment = async ()=>{
     try{
         const result = await axios.get(assignedToADeptTicketsUrl, {
             headers: {
-                Authorization: sessionStorage.getItem("accessJWT"),
+                Authorization: localStorage.getItem("accessJWT"),
                 },
         })
         return result;
@@ -97,7 +99,7 @@ export const getAllTicketsCreatedByAUser = async ()=>{
         const result = await axios.get(createdByAUserTicketUrl ,
             {
                 headers: {
-                    Authorization: sessionStorage.getItem("accessJWT"),
+                    Authorization: localStorage.getItem("accessJWT"),
                     },
             })
             return result;
@@ -115,7 +117,7 @@ export const getResolvedTickets = async ()=>{
         const result = await axios.get(getResolvedTicketsUrl ,
             {
                 headers: {
-                    Authorization: sessionStorage.getItem("accessJWT"),
+                    Authorization: localStorage.getItem("accessJWT"),
                     },
             })
             return result;
@@ -133,7 +135,7 @@ export const getSingleTicket = async (id) => {
     try {
         const result = await axios.get(ticketUlr + id, {
         headers: {
-            Authorization: sessionStorage.getItem("accessJWT"),
+            Authorization: localStorage.getItem("accessJWT"),
         },
         });
         return (result);
@@ -151,7 +153,7 @@ export const updateReplyTicket = async (id, msgObj) => {
     try {
         const result = await axios.put(ticketUlr + id, msgObj, {
         headers: {
-            Authorization: sessionStorage.getItem("accessJWT"),
+            Authorization: localStorage.getItem("accessJWT"),
         },
         });
         return (result);
@@ -168,7 +170,7 @@ export const reAssignTicket = async (id, ticketUpdates) => {
     try {
         const result = await axios.patch(reassignTicketUrl + id, ticketUpdates, {
         headers: {
-            Authorization: sessionStorage.getItem("accessJWT"),
+            Authorization: localStorage.getItem("accessJWT"),
         },
         });
         return result;
@@ -186,7 +188,7 @@ export const updateTicketStatus = async (id, ticketUpdates) => {
     try {
         const result = await axios.patch(closeTicketUrl + id, ticketUpdates, {
         headers: {
-            Authorization: sessionStorage.getItem("accessJWT"),
+            Authorization: localStorage.getItem("accessJWT"),
         },
         });
         return result;
@@ -205,7 +207,7 @@ export const deleteTicketAPI = async (id) => {
     try {
         await axios.delete(deleteTicketUrl+id, {
         headers: {
-            Authorization: sessionStorage.getItem("accessJWT"),
+            Authorization: localStorage.getItem("accessJWT"),
         },
     });
     } catch (error) {

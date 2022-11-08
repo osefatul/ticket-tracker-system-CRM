@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -8,8 +9,12 @@ import DashboardUpdated from "./DashboardUpdated";
 
 
 function Home() {
-  const {user} = useSelector(state => state.user)
 
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
+  useEffect(()=>{
+    !user._id && setUser(JSON.parse(localStorage.getItem('user')));
+  },[])
 
   return (
     <>

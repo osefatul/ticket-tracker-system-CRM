@@ -20,6 +20,11 @@ const tabsSlice = createSlice({
         state.tabSelected = payload;
         state.error = "";
     },
+    refreshTabSuccess: (state, { payload }) => {
+        state.isLoading = false;
+        state.tabSelected = "";
+        state.error = "";
+    },
     getTabsFail: (state, { payload }) => {
         state.isLoading = false;
         state.error = payload;
@@ -32,6 +37,7 @@ const tabsSlice = createSlice({
 export const {
     getTabsPending,
     getTabsSuccess,
+    refreshTabSuccess,
     getTabsFail
 } = tabsSlice.actions
 

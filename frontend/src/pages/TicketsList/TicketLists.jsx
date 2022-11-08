@@ -25,12 +25,14 @@ function TicketLists() {
   useEffect(() => {
     dispatch(resetTicketsList());
     
-    const updateAccessJWT = async () => {
-      const result = await fetchNewAccessJWT();
-      result && dispatch(loginSuccess());
-    }
+    // const updateAccessJWT = async () => {
+    //   const result = await fetchNewAccessJWT();
+    //   result && dispatch(loginSuccess());
+    // }
     
-    updateAccessJWT && dispatch (fetchAllTicketsAssignedToAUser())
+    // updateAccessJWT && 
+    
+    dispatch (fetchAllTicketsAssignedToAUser())
   }, [dispatch]);
 
   

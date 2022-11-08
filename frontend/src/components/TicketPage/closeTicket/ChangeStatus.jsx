@@ -10,9 +10,13 @@ const initialFormData = {
   message: "",
 };
 
-const pendingReason = ["Awaiting customer response", "Schedule", "Pending Approval", "Awaiting staff", "Awaiting Delivery", "Awaiting Confirmation",]
-
-
+const pendingReason = [
+  "Awaiting customer response", 
+  "Schedule", 
+  "Pending approval", 
+  "Awaiting staff", 
+  "Awaiting delivery", 
+  "Awaiting confirmation",]
 
 
 function ChangeStatus() {

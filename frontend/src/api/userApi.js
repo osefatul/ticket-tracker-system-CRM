@@ -2,35 +2,35 @@ import axios from "axios"
 import UserVerification from "../pages/UserVerification";
 
 // Before hosting
-// const rootUrl = "http://localhost:5000/v1/";
-// const loginUrl = rootUrl + "user/login";
-// const userProfileUrl = rootUrl + "user";
-// const allUsersProfileUrl = rootUrl + "user/users";
-// const logoutUrl = rootUrl + "user/logout";
-// const newAccessJWT = rootUrl + "tokens/new-access-jwt";
-// const UserVerificationUrl = userProfileUrl + "/verify";
-// const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
-// const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
-// const deleteUserUrl = userProfileUrl + "/delete-user/";
-// const fetchUsersDept = userProfileUrl + "/assigned-user/"
-// const DemoAdminUrl = "http://localhost:5000/v1/user/demo-admin/";
-// const DemoUserUrl = "http://localhost:5000/v1/user/demo-non-admin/"
-
-
-// After Hosting
-const rootUrl = "https://ticketing-crm.herokuapp.com/v1/";
+const rootUrl = "http://localhost:5000/v1/";
 const loginUrl = rootUrl + "user/login";
 const userProfileUrl = rootUrl + "user";
 const allUsersProfileUrl = rootUrl + "user/users";
 const logoutUrl = rootUrl + "user/logout";
 const newAccessJWT = rootUrl + "tokens/new-access-jwt";
 const UserVerificationUrl = userProfileUrl + "/verify";
-const fetchUsersDept = userProfileUrl + "/assigned-user/"
 const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
 const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
 const deleteUserUrl = userProfileUrl + "/delete-user/";
-const DemoAdminUrl = "https://ticketing-crm.herokuapp.com/v1/user/demo-admin/";
-const DemoUserUrl = "https://ticketing-crm.herokuapp.com/v1/user/demo-non-admin/"
+const fetchUsersDept = userProfileUrl + "/assigned-user/"
+const DemoAdminUrl = "http://localhost:5000/v1/user/demo-admin/";
+const DemoUserUrl = "http://localhost:5000/v1/user/demo-non-admin/"
+
+
+// After Hosting
+// const rootUrl = "https://ticketing-crm.herokuapp.com/v1/";
+// const loginUrl = rootUrl + "user/login";
+// const userProfileUrl = rootUrl + "user";
+// const allUsersProfileUrl = rootUrl + "user/users";
+// const logoutUrl = rootUrl + "user/logout";
+// const newAccessJWT = rootUrl + "tokens/new-access-jwt";
+// const UserVerificationUrl = userProfileUrl + "/verify";
+// const fetchUsersDept = userProfileUrl + "/assigned-user/"
+// const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
+// const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
+// const deleteUserUrl = userProfileUrl + "/delete-user/";
+// const DemoAdminUrl = "https://ticketing-crm.herokuapp.com/v1/user/demo-admin/";
+// const DemoUserUrl = "https://ticketing-crm.herokuapp.com/v1/user/demo-non-admin/"
 
 
 
@@ -83,11 +83,13 @@ export const userLogin = async (formData) =>{
     try {
     const res = await axios.post(loginUrl, formData);
     
-    // console.log(res)
-    if(res.status === 200){
-        sessionStorage.setItem("accessJWT", res.data.accessJwtToken.JwtAccess);
+    console.log(res)
 
-        localStorage.setItem("crmSite", JSON.stringify({refreshJWT:res.data.refreshJwtToken.NewRefreshToken}))
+    if(res.status === 200){
+        localStorage.setItem("accessJWT", res.data.accessJwtToken);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+
+        // localStorage.setItem("crmSite", JSON.stringify({refreshJWT:res.data.refreshJwtToken.NewRefreshToken}))
         return res.data;
         }
     
@@ -111,12 +113,15 @@ export const DemoAdminLogin = async () =>{
     try {
     const res = await axios.post(DemoAdminUrl,);
 
+    console.log(res)
     
     // console.log(res)
     if(res.status === 200){
-        sessionStorage.setItem("accessJWT", res.data.accessJwtToken.JwtAccess);
+        localStorage.setItem("accessJWT", res.data.accessJwtToken);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
 
-        localStorage.setItem("crmSite", JSON.stringify({refreshJWT:res.data.refreshJwtToken.NewRefreshToken}))
+
+        // localStorage.setItem("crmSite", JSON.stringify({refreshJWT:res.data.refreshJwtToken.NewRefreshToken}))
         return res.data;
         }
     
@@ -138,11 +143,12 @@ export const DemoNonAdminLogin = async () =>{
     try {
     const res = await axios.post(DemoUserUrl,);
     
-    // console.log(res)
+    console.log(res)
     if(res.status === 200){
-        sessionStorage.setItem("accessJWT", res.data.accessJwtToken.JwtAccess);
+        localStorage.setItem("accessJWT", res.data.accessJwtToken);
+        localStorage.setItem("user", JSON.stringify(res.data.user));
 
-        localStorage.setItem("crmSite", JSON.stringify({refreshJWT:res.data.refreshJwtToken.NewRefreshToken}))
+        // localStorage.setItem("crmSite", JSON.stringify({refreshJWT:res.data.refreshJwtToken.NewRefreshToken}))
         return res.data;
         }
     
@@ -195,7 +201,7 @@ export const fetchNewAccessJWT = async () => {
 //Fetch single user:  logged in user data or profile
 export const fetchUser = async () =>{
     try {
-        const accessJWT = sessionStorage.getItem('accessJWT');
+        const accessJWT = localStorage.getItem('accessJWT');
 
         if(!accessJWT){
             return "Token not found";
@@ -221,7 +227,7 @@ export const fetchUser = async () =>{
 //Fetch User information on the Edit page.
 export const fetchUserInfoEdit = async (id) =>{
     try {
-        const accessJWT = sessionStorage.getItem('accessJWT');
+        const accessJWT = localStorage.getItem('accessJWT');
 
         if(!accessJWT){
             return "Token not found";
@@ -248,7 +254,7 @@ export const fetchUserInfoEdit = async (id) =>{
 //Fetch User information on the Edit page.
 export const UpdateUserInfoEdit = async (id, userInfo) =>{
     try {
-        const accessJWT = sessionStorage.getItem('accessJWT');
+        const accessJWT = localStorage.getItem('accessJWT');
 
         if(!accessJWT){
             return "Token not found";
@@ -273,7 +279,8 @@ export const UpdateUserInfoEdit = async (id, userInfo) =>{
 
 export const fetchAllUsers = async () =>{
     try {
-        const accessJWT = sessionStorage.getItem('accessJWT');
+        const accessJWT = localStorage.getItem('accessJWT');
+
 
         if(!accessJWT){
             return "Token not found";
@@ -317,7 +324,7 @@ export const userLogout = async () => {
     try {
         await axios.delete(logoutUrl, {
         headers: {
-            Authorization: sessionStorage.getItem("accessJWT"),
+            Authorization: localStorage.getItem("accessJWT"),
         },
     });
     } catch (error) {
@@ -335,7 +342,7 @@ export const userDelete = async (id) => {
     try {
         await axios.delete(deleteUserUrl+id, {
         headers: {
-            Authorization: sessionStorage.getItem("accessJWT"),
+            Authorization: localStorage.getItem("accessJWT"),
         },
     });
     } catch (error) {

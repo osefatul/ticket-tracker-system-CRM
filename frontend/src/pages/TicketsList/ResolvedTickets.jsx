@@ -23,11 +23,13 @@ function ResolvedTickets() {
     useEffect(() => {
     dispatch(resetTicketsList());
     
-    const updateAccessJWT = async () => {
-    const result = await fetchNewAccessJWT();
-    result && dispatch(loginSuccess());
-    }
-    updateAccessJWT && dispatch (fetchResolvedTickets())
+    // const updateAccessJWT = async () => {
+    // const result = await fetchNewAccessJWT();
+    // result && dispatch(loginSuccess());
+    // }
+    // updateAccessJWT && 
+    
+    dispatch (fetchResolvedTickets())
     }, [dispatch]);
 
 

@@ -31,7 +31,7 @@ function UsersTable() {
         setData(searchUsersList)
         dispatch(getSelectedUserRefresh())
         // dispatch(getUsersData())
-
+        
     },[searchUsersList])
 
     if (isLoading) { return  <h3>Loading...</h3>}

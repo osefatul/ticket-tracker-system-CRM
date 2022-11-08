@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from "react-redux";
 import UserEdit from '../../../pages/UserEdit';
 import { VscAccount, VscCalendar, VscDeviceMobile, VscMail } from "react-icons/vsc";
@@ -12,11 +12,13 @@ import Header from '../../Header';
 
 function NotAdminUsersSettings() {
 
-    const {user} = useSelector(state => state.user)
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+
     const {selectedUser, selectedUserAfterEdit} = useSelector(state => state.user)
     const dispatch = useDispatch();
 
     useEffect(()=>{
+        setUser(JSON.parse(localStorage.getItem('user')))
     },[])
 
 
@@ -94,7 +96,7 @@ function NotAdminUsersSettings() {
                     className='pt-2 sm:pt-0'
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.9 }}
-                    onClick = {dispatch(getSelectedUserRefresh())}
+                    onClick = {() => dispatch(getSelectedUserRefresh())}
                     >
                         <Link to={`/user_details/${user._id}`}>
                         <button className='w-48 h-10 text-sm rounded-md bg-green-800 text-slate-200 shadow-lg'>

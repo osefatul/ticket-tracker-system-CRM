@@ -76,7 +76,7 @@ function TicketOverviewAndSummary() {
       <div>
         <div className="flex items-center justify-between p1-2 pb-2">
           <div className="flex space-x-3 flex justify-center items-center">
-            <span className="bg-gray-300 w-6 rounded flex justify-center items-center">{selectedTicket.severity}</span>
+            <span className={`${selectedTicket.severity>3? "bg-gray-300" : "bg-red-600 text-white"} w-6 rounded flex justify-center items-center`}>{selectedTicket.severity}</span>
           <h1 className="flex items-start justify-start font-semibold text-[18px]">
           {selectedTicket.title}
           </h1>

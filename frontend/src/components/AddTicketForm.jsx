@@ -34,7 +34,10 @@ function AddTicketForm() {
 
 
   const dispatch = useDispatch();
-  const {user:{name, department}} = useSelector((state)=> state.user)
+  // const {user:{name, department}} = useSelector((state)=> state.user)
+  const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+  const {name, department} = user
+
   const {isLoading, error, successMsg} = useSelector(state => state.openTicket)
   const {usersAndDepartments} = useSelector(state => state.allUsers)
 
@@ -97,7 +100,7 @@ function AddTicketForm() {
     setTimeout(()=>{
       dispatch(resetSuccessMSg())
     },5000)
-  },[resetSuccessMSg,error,isLoading,successMsg,formDataError])
+  },[resetSuccessMSg,error,successMsg,formDataError])
 
 
   return (
@@ -113,7 +116,7 @@ function AddTicketForm() {
         onSubmit={handleOnSubmit}
       >
         <div className="flex items-center justify-center text-slate-800 font-bold sm:border-b border-amber-600 sm:shadow-lg text-[20px] mb-4">
-          <h1>Create a Ticket</h1>
+          <h1>Create a ticket</h1>
         </div>
         
         <div className="flex justify-center sm:justify-between sm:w-[80%] space-x-5">

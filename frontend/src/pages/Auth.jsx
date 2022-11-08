@@ -72,7 +72,7 @@ function Auth() {
 
 //When the auth page renders check for accessJWT
   useEffect(() => {
-		sessionStorage.getItem("accessJWT") && navigate(from , {replace:true})
+		localStorage.getItem("accessJWT") && navigate(from , {replace:true})
 	}, [navigate, isAuth]);
 
 
