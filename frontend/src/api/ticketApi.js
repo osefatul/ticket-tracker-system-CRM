@@ -28,7 +28,7 @@ const deleteTicketUrl = ticketUlr;
 
 //Create new ticket
 export const createNewTicket  = async (formData)=>{
-    console.log("from api", formData)
+    // console.log("from api", formData)
     try{
         const result =await axios.post(ticketUlr, formData, {
             headers: {

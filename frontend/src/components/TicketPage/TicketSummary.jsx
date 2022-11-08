@@ -26,7 +26,7 @@ function TicketSummary({ details }) {
               {details.openAt && new Date(details.openAt).toLocaleString()}
             </p>
             <p className=" text-[11px]">
-              <span className="font-medium"> Assigner Department: </span>
+              <span className="font-medium"> Requestor Department: </span>
               {details.creatorDepartment}
             </p>
             <p className=" text-[11px]">

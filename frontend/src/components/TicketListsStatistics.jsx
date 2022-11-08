@@ -19,17 +19,21 @@ function TicketListsStatistics({fetchFunction}) {
     const pendingTickets = tickets.filter((row) => row.status === "Pending");
     const totalTickets = tickets.length;
     
+
     const recentlyAddedTickets = tickets.filter((row) => {
-    //Change the format to only hours and days
-    const today = new Date();
-    const todayHours = moment(today).format("HH")
-    const todayDay = moment(today).format("DDD");
 
-    const ticketHours =moment(row.openAt).format("HH")
-    const ticketsDay = moment(row.openAt).format("DDD");
+        //Change the format to only hours and days
+        const today = new Date();
+        const todayHours = moment(today).format("HH")
+        // const todayDay = moment(today).format("DDD");
+        const todayDay = new Date().toLocaleDateString()
 
-    return (todayDay === ticketsDay) && (todayHours - ticketHours< 2) 
-    })
+        const ticketHours =moment(row.openAt).format("HH")
+        // const ticketsDay = moment(row.openAt).format("DDD");
+        const ticketsDay = new Date(row.openAt).toLocaleDateString()
+    
+        return (todayDay === ticketsDay) && (todayHours - ticketHours <= 2)
+        })
 
 
 
@@ -38,7 +42,7 @@ function TicketListsStatistics({fetchFunction}) {
 
         <div className="text-black w-52 flex flex-col text-sm">
 
-        <div className="flex items-center justify-between  ">
+            <div className="flex items-center justify-between  ">
             <p className="">
             Total tickets:
             </p>
@@ -57,7 +61,7 @@ function TicketListsStatistics({fetchFunction}) {
                 Recently added Tickets:
             </p>
             <span className="text-orange-400" > {recentlyAddedTickets.length}</span>
-        </div>
+            </div>
 
         </div>
 

@@ -53,7 +53,7 @@ function TicketsTable() {
 
     {
       field: "creator",
-      headerName: "Assigner",
+      headerName: "Requestor",
       width: 100,
       renderCell: (params) => {
         return (
@@ -66,7 +66,7 @@ function TicketsTable() {
     
     {
       field: "creatorDepartment",
-      headerName: "Assigner Department",
+      headerName: "Requestor Department",
       width: 180,
       renderCell: (params) => {
         return (
