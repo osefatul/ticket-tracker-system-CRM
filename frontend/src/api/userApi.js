@@ -18,7 +18,10 @@ import UserVerification from "../pages/UserVerification";
 
 
 // After Hosting
-const rootUrl = "https://ticketing-crm.herokuapp.com/v1/";
+const rootUrl = "https://ticketing-crm-mern.herokuapp.com/v1/";
+const DemoAdminUrl = "https://ticketing-crm-mern.herokuapp.com/v1/user/demo-admin/";
+const DemoUserUrl = "https://ticketing-crm-mern.herokuapp.com/v1/user/demo-non-admin/"
+
 const loginUrl = rootUrl + "user/login";
 const userProfileUrl = rootUrl + "user";
 const allUsersProfileUrl = rootUrl + "user/users";
@@ -29,8 +32,6 @@ const fetchUsersDept = userProfileUrl + "/assigned-user/"
 const UserInfoOnEditUrl = userProfileUrl + "/user_details/"
 const EditUserInfoOnUrl = userProfileUrl + "/user_details/"
 const deleteUserUrl = userProfileUrl + "/delete-user/";
-const DemoAdminUrl = "https://ticketing-crm.herokuapp.com/v1/user/demo-admin/";
-const DemoUserUrl = "https://ticketing-crm.herokuapp.com/v1/user/demo-non-admin/"
 
 
 

@@ -6,7 +6,7 @@ import axios from "axios";
 // const updatePassUrl = rootUrl + "user/reset-password";
 
 // After Hosting
-const rootUrl = "https://ticketing-crm.herokuapp.com/v1/";
+const rootUrl = "https://ticketing-crm-mern.herokuapp.com/v1/";
 const otpReqUrl = rootUrl + "user/reset-password";
 const updatePassUrl = rootUrl + "user/reset-password";
 

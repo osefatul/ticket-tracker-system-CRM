@@ -13,7 +13,7 @@ import axios from "axios";
 
 
 
-const rootUrl = "https://ticketing-crm.herokuapp.com/v1";
+const rootUrl = "https://ticketing-crm-mern.herokuapp.com/v1";
 const ticketUlr = rootUrl + "/ticket/"
 const closeTicketUrl = ticketUlr + "status-update/";
 const reassignTicketUrl = ticketUlr + "assign-ticket/"
@@ -125,7 +125,6 @@ export const getResolvedTickets = async ()=>{
             return e;
         }
 }
-
 
 
 
